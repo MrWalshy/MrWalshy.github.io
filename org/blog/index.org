@@ -1,0 +1,5 @@
+#+TITLE: Sitemap for project org-blog
+
+- [[file:index.org][Sitemap for project org-blog]]
+- posts
+  - [[file:posts/post1.org][This is a dummy post]]
