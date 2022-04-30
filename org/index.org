@@ -7,5 +7,5 @@ Please see the Blog for interesting posts...
 
 ** Site plans
 
-- Flesh out blog
-- Host on GitHub pages
+- [ ] Flesh out blog
+- [X] Host on GitHub pages

@@ -33,6 +33,8 @@ Built with %c.
 (defvar my/website-html-head
   "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
 
+;; remove default css
+(setq org-html-head-include-default-style nil)
 
 ;; Use C-c C-l (org-insert-link) for links between files
 (setq org-publish-project-alist
