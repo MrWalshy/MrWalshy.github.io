@@ -5,8 +5,7 @@ Welcome to my website.
 
 Please feel free to peruse at your leisure.
 
-** Stuff todo
+** Who am I?
 
-- [ ] Flesh out blog
-- [X] Host on GitHub pages
-- [X] Find appropriate CSS library
+I am a learning specialist (fancy name for a trainer) who teaches software development bootcamps in the UK, this site will act 
+as a repository of information that I have gathered.

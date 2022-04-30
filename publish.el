@@ -19,16 +19,16 @@
 <ul>
 <li><a href='/'>Home</a></li>
 <li><a href='/blog'>Blog</a></li>
-<li><a href='http://github.com/MrWalshyType2'>GitHub</a></li>
+<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
 </ul>
 </nav>")
 
 (defvar my/website-html-postamble 
-  "<footer>
-Copyright 2022 %a (%v HTML).<br>
+  "<footer><small>
+Copyright 2022 %a.<br>
 Last updated %C. <br>
 Built with %c.
-</footer>")
+</small></footer>")
 
 (defvar my/website-html-head
   "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
