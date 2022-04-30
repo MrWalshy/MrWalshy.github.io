@@ -1,5 +1,5 @@
 #+title: Your first Java program
-#+DATE: <2022-04-30 18:47>
+#+DATE: <2022-04-30 19:45>
 #+SUBTITLE: Introducing Java programming with the canonical 'Hello World' example
 
 A commonality amongst programmers is that in any new language we meet, we write a ~“Hello World!”~ program – a simple application which will output those exact words to the screen. 
@@ -85,6 +85,6 @@ A method is a self-contained, reusable block of code that can be called/invoked 
 
 Complete instructions of code in Java, aside from blocks of curly brackets, must end with a semi-colon to be valid. The semi-colon used to terminate a programming statement is known as a delimiter.
 
-To invoke a method, we specify the name of the method followed by a set of parentheses. In the previous example, we use a special method called ~println()~, accessible via a field (a piece of memory storing data) on the `System` class, to print output to the console. If we called that method without any input, it would look like: `System.out.println();` 
+To invoke a method, we specify the name of the method followed by a set of parentheses. In the previous example, we use a special method called ~println()~, accessible via a field (a piece of memory storing data) on the ~System~ class, to print output to the console. If we called that method without any input, it would look like: ~System.out.println();~ 
 
-- An empty `println()` statement would print a new line character to the console (an empty line) as we have not passed it any input inside its parenthesis.
+- An empty ~println()~ statement would print a new line character to the console (an empty line) as we have not passed it any input inside its parenthesis.
