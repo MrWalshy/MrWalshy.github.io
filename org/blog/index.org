@@ -3,3 +3,5 @@
 - [[file:index.org][Sitemap for project org-blog]]
 - General
   - [[file:General/2022-04-30-its-alive.org][The site is up]]
+- Java-Beginner
+  - [[file:Java-Beginner/2022-04-30-what-is-java.org][What is Java?]]
