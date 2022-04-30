@@ -51,7 +51,7 @@ Built with %c.
          :html-preamble ,my/website-html-preamble
          :html-postamble ,my/website-html-postamble
 
-         :with-toc t ;; table of contents
+         :with-toc nil ;; table of contents
          :section-numbers nil
          :headline-levels 4
 
@@ -75,7 +75,7 @@ Built with %c.
          :html-postamble ,my/website-html-postamble
          ;;:auto-preamble t
 
-         :with-toc t ;; table of contents
+         :with-toc nil ;; table of contents
          :section-numbers nil
          :headline-levels 4
 
@@ -107,7 +107,7 @@ Built with %c.
           :html-preamble ,my/website-html-preamble
           :html-postamble ,my/website-html-postamble
           
-          :with-toc t
+          :with-toc nil
           :section-numbers nil
           :headline-levels 4
 

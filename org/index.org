@@ -1,11 +1,12 @@
 #+TITLE: Home page
 #+DATE: <2022-04-30 13:34>
 
-Welcome to my website. This site is in active development, thus the interface is subject to change.
+Welcome to my website.
 
-Please see the Blog for interesting posts...
+Please feel free to peruse at your leisure.
 
-** Site plans
+** Stuff todo
 
 - [ ] Flesh out blog
 - [X] Host on GitHub pages
+- [X] Find appropriate CSS library
