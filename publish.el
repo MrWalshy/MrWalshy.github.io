@@ -17,16 +17,9 @@
 (defvar my/website-html-preamble 
   "<nav>
 <ul>
-<li><a href='/pages'>Home</a></li>
+<li><a href='/'>Home</a></li>
 <li><a href='/blog'>Blog</a></li>
 <li><a href='http://github.com/MrWalshyType2'>GitHub</a></li>
-</ul>
-</nav>")
-
-(defvar my/website-blog-preamble 
-  "<nav>
-<ul>
-<li><a href='/pages'>Home</a></li>
 </ul>
 </nav>")
 
@@ -43,7 +36,30 @@ Built with %c.
 
 ;; Use C-c C-l (org-insert-link) for links between files
 (setq org-publish-project-alist
-      `(("org-pages"
+      `(("org-index"
+         :base-directory "./org/"
+         :base-extension "org"
+         :recursive nil
+         :publishing-directory "./" ;; export location
+         :publishing-function org-html-publish-to-html
+
+         :html-doctype "html5" ;; html 5 doctype
+         :html-html5-fancy t
+         :html-head ,my/website-html-head
+         :html-preamble ,my/website-html-preamble
+         :html-postamble ,my/website-html-postamble
+
+         :with-toc t ;; table of contents
+         :section-numbers nil
+         :headline-levels 4
+
+         :author "Morgan Walsh"
+         :with-author t
+         :language "en"
+         :time-stamp-file nil
+         :with-creator t ;; Emacs and Org version in footer
+         )
+        ("org-pages"
          :base-directory "./org/pages" ;; source files
          :base-extension "org" ;; type of file
          :recursive nil
@@ -81,12 +97,12 @@ Built with %c.
           :base-directory "./org/blog"
           :base-extension: "org"
           :recursive t
-          :publishing-directory "./html/blog/"
+          :publishing-directory "./blog/"
           :publishing-function org-html-publish-to-html
           :html-doctype "html5"
           :html-html5-fancy t
           :html-head ,my/website-html-head
-          :html-preamble ,my/website-blog-preamble
+          :html-preamble ,my/website-html-preamble
           :html-postamble ,my/website-html-postamble
           
           :with-toc t
@@ -101,9 +117,9 @@ Built with %c.
           :base-directory "./org/"
           :base-extension "js\\|css\\|txt\\|jpg\\|gif\\|png"
           :recursive t
-          :publishing-directory "./html/"
+          :publishing-directory "./"
           :publishing-function org-publish-attachment) ;; copy verbatim, no modification
-         ("org" :components ("org-pages" "org-static" "org-blog"))))
+         ("org" :components ("org-pages" "org-static" "org-blog" "org-index"))))
 
 (setq org-html-validation-link nil) ;; disable verify link
 

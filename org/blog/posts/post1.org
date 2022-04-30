@@ -8,7 +8,7 @@
 
 * Heading
 
-This is a post of dummy text. (modified here).
+This is a post of dummy text. (modified here). Another modification.
 
 ** Subheading
 
