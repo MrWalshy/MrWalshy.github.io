@@ -10,6 +10,9 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+;; Install dependencies
+(package-install 'htmlize)
+
 ;; load org and publishing system
 (require 'org)
 (require 'ox-publish)

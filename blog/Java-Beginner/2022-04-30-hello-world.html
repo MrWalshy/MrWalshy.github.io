@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-04-30 Sat 19:45 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your first Java program</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
+<link rel="stylesheet" href="/css/style.css" type="text/css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<nav>
+<ul>
+<li><a href='/'>Home</a></li>
+<li><a href='/blog'>Blog</a></li>
+<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
+</ul>
+</nav>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Your first Java program</h1>
+<p class="subtitle">Introducing Java programming with the canonical 'Hello World' example</p>
+</header><p>
+A commonality amongst programmers is that in any new language we meet, we write a <code>“Hello World!”</code> program – a simple application which will output those exact words to the screen. 
+</p>
+
+<p>
+To follow along, first create a new file called <code>Runner.java</code>: 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir hello-world 
+<span style="color: #FF80F4;">cd</span> hello-world 
+touch Runner.java 
+</pre>
+</div>
+
+<p>
+The above is using Linux style commands, please ensure if on Windows you are using Git Bash.
+</p>
+
+<p>
+Once we have created the file, type <code>notepad Runner.java</code> to open the file in the Notepad application on Windows or use <code>nano Runner.java</code> to use the nano text editor in the console (Git Bash on Windows only, usually preinstalled on Linux/GNU based systems). Then type in the following code: 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Runner</span> { 
+
+    <span style="color: #F92672;">public</span> <span style="color: #F92672;">static</span> <span style="color: #66D9EF;">void</span> <span style="color: #A6E22E;">main</span>(<span style="color: #66D9EF;">String</span>[] <span style="color: #FD971F;">args</span>) { 
+        System.out.println(&#8220;Hello world&#8221;); 
+    } 
+}
+</pre>
+</div>
+
+<p>
+Once you have entered the code, save, and exit back to the console. Then type the following commands (except comments starting with a hash symbol) to compile and run our code:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">compile the Runner.java file as a class file using the javac tool </span>
+javac Runner.java 
+<span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">run the compiled class file (which is in the same directory) using the java tool </span>
+<span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">- do not specify .class or the compiled file will not be executed </span>
+java Runner
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Adding <code>.class</code> to the java Runner command will produce a class loader error, where the JVM was not able to load the specified class file.</li>
+</ul>
+
+<p>
+If done correctly, you will see something like the following outputted in the console window:
+</p>
+
+<pre class="example">
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
+$ javac Runner.java
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
+$ java Runner Hello world
+</pre>
+
+<div id="outline-container-org5955cee" class="outline-2">
+<h2 id="org5955cee">Program breakdown</h2>
+<div class="outline-text-2" id="text-org5955cee">
+<p>
+A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs. 
+</p>
+
+<p>
+Java is an object-oriented language, it uses the construct of a class to represent a component in a software system – a component could be the representation of physical things like a customer, an animal, a tree or even non-tangible logical things like mathematical formula or graphs. 
+</p>
+
+<ul class="org-ul">
+<li>A class is a blueprint which defines the data and behaviours that describe some object.</li>
+</ul>
+
+<p>
+In the Hello World example, we create a class called `Runner`: 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Runner</span> {
+
+} 
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>The first line declaring the class, <code>public class Runner</code>, is known as the class header.</li>
+<li><code>public</code> is a special Java keyword known as an access modifier, just know that for now it means that any other class can use the class called <code>Runner</code>.</li>
+<li><code>class</code> is another Java keyword used to signify that we are creating a class, a blueprint.</li>
+<li><code>Runner</code> is the name of the class, we can choose a name other than <code>Runner</code> if we would like.</li>
+<li>The curly braces signify the body of the class, this contains code that belongs to the class.</li>
+<li>Code outside of a class is an error in Java, Java code must live inside a class aside from package declarations, imports, and class declarations.</li>
+</ul>
+
+<p>
+Inside the class body, there is a special unit of code known as a method: 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">static</span> <span style="color: #66D9EF;">void</span> <span style="color: #A6E22E;">main</span>(<span style="color: #66D9EF;">String</span>[] <span style="color: #FD971F;">args</span>) { 
+    System.out.println(&#8220;Hello world&#8221;);
+}
+</pre>
+</div>
+
+<p>
+A method is a self-contained, reusable block of code that can be called/invoked by another method. The main method shown above is a special type of method that indicates to the JVM that the program should start here. 
+</p>
+
+<ul class="org-ul">
+<li><code>public static void main(String[] args)</code> is the method header, this identifies the methods accessibility, output, name, and inputs.</li>
+<li>All of the code between the curly braces after the method header is in the method body, this is the code that is executed when a method is invoked and belongs only to that method.</li>
+</ul>
+
+<p>
+Complete instructions of code in Java, aside from blocks of curly brackets, must end with a semi-colon to be valid. The semi-colon used to terminate a programming statement is known as a delimiter.
+</p>
+
+<p>
+To invoke a method, we specify the name of the method followed by a set of parentheses. In the previous example, we use a special method called <code>println()</code>, accessible via a field (a piece of memory storing data) on the <code>System</code> class, to print output to the console. If we called that method without any input, it would look like: <code>System.out.println();</code> 
+</p>
+
+<ul class="org-ul">
+<li>An empty <code>println()</code> statement would print a new line character to the console (an empty line) as we have not passed it any input inside its parenthesis.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer><small>
+Copyright 2022 Morgan Walsh.<br>
+Last updated 2022-04-30 Sat 19:45. <br>
+Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
+</small></footer>
+</div>
+</body>
+</html>
