@@ -1,5 +1,5 @@
 #+TITLE: Sitemap for project org-blog
 
 - [[file:index.org][Sitemap for project org-blog]]
-- posts
-  - [[file:posts/post1.org][This is a dummy post]]
+- General
+  - [[file:General/2022-04-30-its-alive.org][The site is up]]

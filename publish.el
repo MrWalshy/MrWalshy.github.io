@@ -19,20 +19,22 @@
 <ul>
 <li><a href='/'>Home</a></li>
 <li><a href='/blog'>Blog</a></li>
-<li><a href='http://github.com/MrWalshyType2'>GitHub</a></li>
+<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
 </ul>
 </nav>")
 
 (defvar my/website-html-postamble 
-  "<footer>
-Copyright 2022 %a (%v HTML).<br>
+  "<footer><small>
+Copyright 2022 %a.<br>
 Last updated %C. <br>
 Built with %c.
-</footer>")
+</small></footer>")
 
 (defvar my/website-html-head
   "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
 
+;; remove default css
+(setq org-html-head-include-default-style nil)
 
 ;; Use C-c C-l (org-insert-link) for links between files
 (setq org-publish-project-alist
@@ -49,7 +51,7 @@ Built with %c.
          :html-preamble ,my/website-html-preamble
          :html-postamble ,my/website-html-postamble
 
-         :with-toc t ;; table of contents
+         :with-toc nil ;; table of contents
          :section-numbers nil
          :headline-levels 4
 
@@ -73,7 +75,7 @@ Built with %c.
          :html-postamble ,my/website-html-postamble
          ;;:auto-preamble t
 
-         :with-toc t ;; table of contents
+         :with-toc nil ;; table of contents
          :section-numbers nil
          :headline-levels 4
 
@@ -105,7 +107,7 @@ Built with %c.
           :html-preamble ,my/website-html-preamble
           :html-postamble ,my/website-html-postamble
           
-          :with-toc t
+          :with-toc nil
           :section-numbers nil
           :headline-levels 4
 
