@@ -1,0 +1,27 @@
+#+title: This is a dummy post
+#+SUBTITLE: This page also has a subtitle
+#+AUTHOR: Morgan Walsh
+#+DESCRIPTION: This is the pages description (meta)
+#+KEYWORDS: page keywords
+#+LANGUAGE: en
+#+TEXT: Some descriptive text...
+
+* Heading
+
+This is a post of dummy text. (modified here).
+
+** Subheading
+
+This is more dummy text.
+
+I added some more text here.
+
+#+BEGIN_aside
+Lorem ipsum dolet.
+#+END_aside
+
+#+HTML: <strong>Literal code</strong>
+
+#+BEGIN_EXPORT html
+<p><i>this is text</i></p>
+#+END_EXPORT
