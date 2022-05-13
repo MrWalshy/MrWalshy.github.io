@@ -34,7 +34,7 @@ Built with %c.
 </small></footer>")
 
 (defvar my/website-html-head
-  "<link rel=\"stylesheet\" href=\"css/style.css\" type=\"text/css\" />\n")
+  "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
 
 ;; remove default css
 (setq org-html-head-include-default-style nil)
