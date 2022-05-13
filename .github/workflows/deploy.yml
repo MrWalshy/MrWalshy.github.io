@@ -27,9 +27,9 @@ jobs:
 
       - name: install emacs
         run: |
-          apt update
-          apt upgrade
-          apt install emacs
+          sudo apt update
+          sudo apt upgrade -y
+          sudo apt install emacs -y
 
       # Runs a set of commands using the runners shell
       - name: build site
