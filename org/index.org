@@ -1,11 +1,15 @@
-#+TITLE: Home page
-#+DATE: <2022-04-30 13:34>
+#+title: Home page
+#+date: <2022-05-13 Fri>
+#+author: Morgan Walsh
+#+language: en
+#+creator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.5.3)
 
-Welcome to my website.
 
-Please feel free to peruse at your leisure.
+Welcome to my personal website, this site is going to mainly act as a static wiki of knowledge gained over time.
 
-** Who am I?
-
-I am a learning specialist (fancy name for a trainer) who teaches software development bootcamps in the UK, this site will act 
-as a repository of information that I have gathered.
+** Languages covered
+- Java
+- HTML
+- CSS
+- JavaScript
+- SQL
