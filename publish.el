@@ -139,8 +139,8 @@ Built with %c.
 
 ;; build files
 ;;(org-publish-all t)
-;;(org-publish-project "org" t)
+(org-publish-project "org" t)
 
 
-;;(message "Build complete")
+(message "Build complete")
 
