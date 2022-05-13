@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-13 Fri 16:33 -->
+<!-- 2022-04-30 Sat 19:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What is Java?</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
 <script type="text/javascript">
 /*
@@ -72,9 +73,9 @@ for the JavaScript code in this tag.
 Java is a general-purpose, object oriented, platform independent, simple, and robust programming language. You may have heard the motto write once, run anywhere, or something similar, meaning that a Java program can be written once and compiled once to run on all platforms that support Java.
 </p>
 
-<div id="outline-container-org441bf83" class="outline-2">
-<h2 id="org441bf83">Benefits of using Java</h2>
-<div class="outline-text-2" id="text-org441bf83">
+<div id="outline-container-orgd762d52" class="outline-2">
+<h2 id="orgd762d52">Benefits of using Java</h2>
+<div class="outline-text-2" id="text-orgd762d52">
 <ul class="org-ul">
 <li>Encapsulation: Java includes keywords for protecting data from unintended access or modification.</li>
 <li>Platform independence: Java’s compilation and interpretation models allow for it to run on a wide array of platforms; essentially any platform that a Java Virtual Machine (JVM) exists for.</li>
@@ -87,9 +88,9 @@ Java is a general-purpose, object oriented, platform independent, simple, and ro
 </div>
 </div>
 
-<div id="outline-container-org2e8860e" class="outline-2">
-<h2 id="org2e8860e">Compilers and interpreters</h2>
-<div class="outline-text-2" id="text-org2e8860e">
+<div id="outline-container-orgbcd9849" class="outline-2">
+<h2 id="orgbcd9849">Compilers and interpreters</h2>
+<div class="outline-text-2" id="text-orgbcd9849">
 <p>
 To understand how Java works, we need to understand what compilation and interpretation mean in the context of software development. Compilation is a process in which the work of converting source code, the code written in the programming language, to the machine language which can be understood by a digital processor – the name for this machine language is binary, a simple language consisting of 0s and 1s that is notoriously complex to work with directly.
 </p>
@@ -140,9 +141,9 @@ Here, the source code is converted into binary machine code, 0's and 1's.
 </div>
 </div>
 
-<div id="outline-container-org79d1c6c" class="outline-2">
-<h2 id="org79d1c6c">How do compilers and interpreters fit into Java?</h2>
-<div class="outline-text-2" id="text-org79d1c6c">
+<div id="outline-container-org184a24a" class="outline-2">
+<h2 id="org184a24a">How do compilers and interpreters fit into Java?</h2>
+<div class="outline-text-2" id="text-org184a24a">
 <p>
 Java is a language which goes through both compilation and interpretation, that is Java is traditionally known as a compiled language but does also include interpretation at a lower level.
 </p>
@@ -193,8 +194,8 @@ Just-in-time compilation is a process the JVM carries out to optimise code at ru
 </div>
 <div id="postamble" class="status">
 <footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-13 Fri 16:31. <br>
+Copyright 2022 Morgan Walsh.<br>
+Last updated 2022-04-30 Sat 19:13. <br>
 Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
 </small></footer>
 </div>

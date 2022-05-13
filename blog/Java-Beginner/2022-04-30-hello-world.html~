@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-13 Fri 16:33 -->
+<!-- 2022-04-30 Sat 19:45 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your first Java program</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
 <script type="text/javascript">
 /*
@@ -78,7 +79,7 @@ To follow along, first create a new file called <code>Runner.java</code>:
 
 <div class="org-src-container">
 <pre class="src src-sh">mkdir hello-world 
-<span style="font-weight: bold;">cd</span> hello-world 
+<span style="color: #FF80F4;">cd</span> hello-world 
 touch Runner.java 
 </pre>
 </div>
@@ -92,9 +93,9 @@ Once we have created the file, type <code>notepad Runner.java</code> to open the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Runner</span> { 
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Runner</span> { 
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold;">static</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">main</span>(<span style="font-weight: bold; text-decoration: underline;">String</span>[] <span style="font-weight: bold; font-style: italic;">args</span>) { 
+    <span style="color: #F92672;">public</span> <span style="color: #F92672;">static</span> <span style="color: #66D9EF;">void</span> <span style="color: #A6E22E;">main</span>(<span style="color: #66D9EF;">String</span>[] <span style="color: #FD971F;">args</span>) { 
         System.out.println(&#8220;Hello world&#8221;); 
     } 
 }
@@ -106,10 +107,10 @@ Once you have entered the code, save, and exit back to the console. Then type th
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compile the Runner.java file as a class file using the javac tool </span>
+<pre class="src src-sh"><span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">compile the Runner.java file as a class file using the javac tool </span>
 javac Runner.java 
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">run the compiled class file (which is in the same directory) using the java tool </span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">- do not specify .class or the compiled file will not be executed </span>
+<span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">run the compiled class file (which is in the same directory) using the java tool </span>
+<span style="color: #8C8C8C;"># </span><span style="color: #8C8C8C;">- do not specify .class or the compiled file will not be executed </span>
 java Runner
 </pre>
 </div>
@@ -130,9 +131,9 @@ Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world
 $ java Runner Hello world
 </pre>
 
-<div id="outline-container-org65551da" class="outline-2">
-<h2 id="org65551da">Program breakdown</h2>
-<div class="outline-text-2" id="text-org65551da">
+<div id="outline-container-org5955cee" class="outline-2">
+<h2 id="org5955cee">Program breakdown</h2>
+<div class="outline-text-2" id="text-org5955cee">
 <p>
 A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs. 
 </p>
@@ -150,7 +151,7 @@ In the Hello World example, we create a class called `Runner`:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Runner</span> {
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Runner</span> {
 
 } 
 </pre>
@@ -170,7 +171,7 @@ Inside the class body, there is a special unit of code known as a method:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold;">public</span> <span style="font-weight: bold;">static</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">main</span>(<span style="font-weight: bold; text-decoration: underline;">String</span>[] <span style="font-weight: bold; font-style: italic;">args</span>) { 
+<pre class="src src-java"><span style="color: #F92672;">public</span> <span style="color: #F92672;">static</span> <span style="color: #66D9EF;">void</span> <span style="color: #A6E22E;">main</span>(<span style="color: #66D9EF;">String</span>[] <span style="color: #FD971F;">args</span>) { 
     System.out.println(&#8220;Hello world&#8221;);
 }
 </pre>
@@ -201,8 +202,8 @@ To invoke a method, we specify the name of the method followed by a set of paren
 </div>
 <div id="postamble" class="status">
 <footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-13 Fri 16:31. <br>
+Copyright 2022 Morgan Walsh.<br>
+Last updated 2022-04-30 Sat 19:45. <br>
 Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
 </small></footer>
 </div>

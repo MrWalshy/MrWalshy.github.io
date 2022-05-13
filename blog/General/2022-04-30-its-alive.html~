@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-13 Fri 16:33 -->
+<!-- 2022-04-30 Sat 18:27 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sitemap for project org-blog</title>
+<title>The site is up</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
+<meta name="description" content="A simple article"
+>
+<meta name="keywords" content="org-mode emacs static-site">
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
 <script type="text/javascript">
 /*
@@ -60,32 +64,35 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href='/'>Home</a></li>
 <li><a href='/blog'>Blog</a></li>
-<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
+<li><a href='http://github.com/MrWalshyType2'>GitHub</a></li>
 </ul>
 </nav>
 </div>
 <div id="content">
 <header>
-<h1 class="title">Sitemap for project org-blog</h1>
-</header><ul class="org-ul">
-<li><a href="index.html">Sitemap for project org-blog</a></li>
-<li>General
-<ul class="org-ul">
-<li><a href="General/2022-04-30-its-alive.html">The site is up</a></li>
-</ul></li>
-<li>Java-Beginner
-<ul class="org-ul">
-<li><a href="Java-Beginner/2022-04-30-what-is-java.html">What is Java?</a></li>
-<li><a href="Java-Beginner/2022-04-30-hello-world.html">Your first Java program</a></li>
-</ul></li>
-</ul>
+<h1 class="title">The site is up</h1>
+<p class="subtitle">Even static sites are a PITA</p>
+</header>
+<div id="outline-container-orgecbf12a" class="outline-2">
+<h2 id="orgecbf12a">It's alive!</h2>
+<div class="outline-text-2" id="text-orgecbf12a">
+<p>
+After lots of head scratching, the site is alive! The site has been created using Emacs (via the Portacle package) and the built-in org-mode, the 
+publishing utility of org-mode has been utilised to generate static HTML files from <code>org</code> files.
+</p>
+
+<p>
+Keep an eye out for more posts surrounding setting up this blog with Emacs and org-mode. 
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-13 Fri 16:33. <br>
+<footer>
+Copyright 2022 Morgan Walsh ( HTML).<br>
+Last updated 2022-04-30 Sat 18:26. <br>
 Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
-</small></footer>
+</footer>
 </div>
 </body>
 </html>

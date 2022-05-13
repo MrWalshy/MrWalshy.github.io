@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-13 Fri 16:33 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sitemap for project org-blog</title>
+<title>Home page</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
 <link rel="stylesheet" href="/css/style.css" type="text/css" />
 <script type="text/javascript">
 /*
@@ -60,32 +60,36 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href='/'>Home</a></li>
 <li><a href='/blog'>Blog</a></li>
-<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
+<li><a href='http://github.com/MrWalshyType2'>GitHub</a></li>
 </ul>
 </nav>
 </div>
 <div id="content">
 <header>
-<h1 class="title">Sitemap for project org-blog</h1>
-</header><ul class="org-ul">
-<li><a href="index.html">Sitemap for project org-blog</a></li>
-<li>General
-<ul class="org-ul">
-<li><a href="General/2022-04-30-its-alive.html">The site is up</a></li>
-</ul></li>
-<li>Java-Beginner
-<ul class="org-ul">
-<li><a href="Java-Beginner/2022-04-30-what-is-java.html">What is Java?</a></li>
-<li><a href="Java-Beginner/2022-04-30-hello-world.html">Your first Java program</a></li>
-</ul></li>
-</ul>
+<h1 class="title">Home page</h1>
+</header><p>
+Welcome to my website.
+</p>
+
+<p>
+Please feel free to peruse at your leisure.
+</p>
+
+<div id="outline-container-org6cf9292" class="outline-2">
+<h2 id="org6cf9292">Who am I?</h2>
+<div class="outline-text-2" id="text-org6cf9292">
+<p>
+I am a learning specialist (fancy name for a trainer) who teaches software development bootcamps in the UK, this site will act 
+as a repository of information that I have gathered.</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-13 Fri 16:33. <br>
+<footer>
+Copyright 2022 Morgan Walsh ( HTML).<br>
+Last updated 2022-04-30 Sat 18:24. <br>
 Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
-</small></footer>
+</footer>
 </div>
 </body>
 </html>
