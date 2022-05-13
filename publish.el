@@ -11,7 +11,8 @@
   (package-refresh-contents))
 
 ;; Install dependencies
-(package-install 'htmlize)
+(unless (package-installed-p 'htmlize)
+  (package-install 'htmlize))
 
 ;; load org and publishing system
 (require 'org)
@@ -19,11 +20,10 @@
 
 (defvar my/website-html-preamble 
   "<nav>
-<ul>
-<li><a href='/'>Home</a></li>
-<li><a href='/blog'>Blog</a></li>
-<li><a href='http://github.com/MrWalshy'>GitHub</a></li>
-</ul>
+<a id='toggle'>&equiv;</a>
+<a class='nav-link' href='/'>Home</a>
+<a class='nav-link' href='/blog'>Blog</a>
+<a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
 </nav>")
 
 (defvar my/website-html-postamble 
@@ -31,13 +31,15 @@
 Copyright 2022 %a.<br>
 Last updated %C. <br>
 Built with %c.
-</small></footer>")
+</small></footer>
+<script src='/js/navbar.js'></script>")
 
 (defvar my/website-html-head
   "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
 
 ;; remove default css
-(setq org-html-head-include-default-style nil)
+(setq org-html-head-include-default-style nil
+      org-html-head-include-scripts nil)
 
 ;; Use C-c C-l (org-insert-link) for links between files
 (setq org-publish-project-alist
@@ -100,7 +102,8 @@ Built with %c.
          ) ;; export type, to html
          ("org-blog"
           :base-directory "./org/blog"
-          :base-extension: "org"
+          :base-extension: "org" ;; only org files
+	  :exclude "*.draft.org" ;; drafts
           :recursive t
           :publishing-directory "./blog/"
           :publishing-function org-html-publish-to-html
@@ -112,19 +115,26 @@ Built with %c.
           
           :with-toc nil
           :section-numbers nil
-          :headline-levels 4
+          :headline-levels 6
 
           :auto-sitemap t
           :sitemap-filename "./index.org"
           :sitemap-style tree
+	  :sitemap-sort-files anti-chronologically
           :sitemap-file-entry-format "%d - %t") ;; entry format being ignored?
+
+	  :author "Morgan Walsh"
+          :with-author t
+          :language "en"
+          :time-stamp-file t
+          :with-creator t ;; Emacs and Org version in footer
          ("org-static"
           :base-directory "./org/"
           :base-extension "js\\|css\\|txt\\|jpg\\|gif\\|png"
           :recursive t
           :publishing-directory "./"
           :publishing-function org-publish-attachment) ;; copy verbatim, no modification
-         ("org" :components ("org-pages" "org-static" "org-blog" "org-index"))))
+         ("org" :components ("org-static" "org-index" "org-pages" "org-blog"))))
 
 (setq org-html-validation-link nil) ;; disable verify link
 
