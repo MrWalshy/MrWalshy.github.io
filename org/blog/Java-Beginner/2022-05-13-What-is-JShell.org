@@ -1,6 +1,7 @@
-#+title: What is JShell?
+#+TITLE: What is JShell?
 #+DATE: <2022-05-13>
 #+SUBTITLE: A short introduction to the Java REPL tool - Java 11 tutorials
+#+AUTHOR: Morgan Walsh
 
 JShell is a REPL tool, Read-Eval-Print-Loop, for experimenting with Java code to get immediate results.
 

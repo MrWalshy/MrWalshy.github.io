@@ -85,16 +85,6 @@
          :language "en"
          :time-stamp-file nil
          :with-creator t ;; Emacs and Org version in footer
-         
-         
-         ;; :auto-sitemap t
-         ;; :sitemap-filename "./index.org"
-         ;; :sitemap-title "Blog index"
-         ;; :sitemap-sort-folders "first"
-         ;; :sitemap-sort-files anti-chronologically
-         ;; :sitemap-file-entry-format: "%d - %t"
-         ;; :sitemap-function m/org-publish-org-sitemap-format-entry
-         ;; :sitemap-format-entry my/org-sitemap-date-entry-format
          ) ;; export type, to html
          ("org-blog"
           :base-directory "./org/blog"
@@ -114,7 +104,7 @@
           :headline-levels 6
 
           :auto-sitemap t
-          :sitemap-filename "./index.org"
+          ;;:sitemap-filename "./index.org" ;; use to set location for sitemap, file must exist
           :sitemap-style tree
 	  :sitemap-sort-files anti-chronologically
           :sitemap-file-entry-format "%d - %t") ;; entry format being ignored?

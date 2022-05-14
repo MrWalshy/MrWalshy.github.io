@@ -1,6 +1,7 @@
-#+title: Operators
+#+TITLE: Operators
 #+DATE: <2022-05-13>
 #+SUBTITLE: An overview of the operators available in Java - Java 11 tutorials
+#+AUTHOR: Morgan Walsh
 
 The Java language contain *operators* (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its *operands*. For example, in {3 – 4}, {3} is the left operand, {-} is the operator and {4} is the right operand.
 
