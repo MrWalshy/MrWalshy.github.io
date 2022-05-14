@@ -1,0 +1,71 @@
+#+TITLE: Report a bug
+#+DATE: <2022-04-30 19:45>
+#+SUBTITLE: Use this page to report bugs with the site or content
+#+AUTHOR: Morgan Walsh
+
+The following form will open the GitHub issues page for this website in a new tab, with the information provided here filled out.
+
+#+BEGIN_EXPORT html
+<style>
+  form {
+    background-color: inherit;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    display: block;
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    padding: 0.5rem;
+  }
+
+  #bug-body {
+    height: 320px;
+  }
+</style>
+<form method="GET"
+      action="https://github.com/MrWalshy/MrWalshy.github.io/issues/new"
+      target="_blank"
+      autocomplete="on"
+      name="bug-report">
+  <!-- max 2048 characters in URL -->
+    <input type="hidden" name="labels" value="bug" />
+    
+    <label for="bug-title">Title:</label>
+    <input type="text"
+           id="bug-title"
+           name="title"
+           style="width: 100%"
+           maxlength="64"
+           autofocus required />
+
+    <label for="bug-body">Description:</label>
+    <textarea name="body"
+              id="bug-body"
+              style="width: 100%; height: 240px"
+              maxlength="1600"
+              required >
+What is the bug:
+
+What page is the bug on:
+
+What triggers the bug:  
+    </textarea>
+    
+    <button type="reset">Reset fields</button>
+    <button type="submit">Submit</button>
+</form>
+#+END_EXPORT
