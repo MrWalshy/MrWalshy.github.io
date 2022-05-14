@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-14 Sat 00:23 -->
+<!-- 2022-05-14 Sat 10:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What is JShell?</title>
 <meta name="generator" content="Org mode">
-<link rel="stylesheet" href="/css/style.css" type="text/css" />
+<meta name="author" content="Morgan Walsh">
+<link rel='stylesheet' href='/css/style.css' type='text/css' />
 </head>
 <body>
 <div id="preamble" class="status">
 <nav>
-<a id='toggle'>&equiv;</a>
-<a class='nav-link' href='/'>Home</a>
-<a class='nav-link' href='/blog'>Blog</a>
-<a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
+  <a id='toggle'>&equiv;</a>
+  <a class='nav-link' href='/'>Home</a>
+  <a class='nav-link' href='/blog'>Blog</a>
+  <a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
 </nav>
 </div>
 <div id="content">
@@ -25,9 +26,9 @@
 JShell is a REPL tool, Read-Eval-Print-Loop, for experimenting with Java code to get immediate results.
 </p>
 
-<div id="outline-container-org420daca" class="outline-2">
-<h2 id="org420daca">Opening JShell</h2>
-<div class="outline-text-2" id="text-org420daca">
+<div id="outline-container-orga17e9ee" class="outline-2">
+<h2 id="orga17e9ee">Opening JShell</h2>
+<div class="outline-text-2" id="text-orga17e9ee">
 <p>
 To open the JShell tool, ensure you have Java on your system path and enter jshell into the console. 
 You should see something like the following if JShell opened correctly:
@@ -43,9 +44,9 @@ jshell&gt;
 </div>
 </div>
 
-<div id="outline-container-org164df37" class="outline-2">
-<h2 id="org164df37">Useful commands</h2>
-<div class="outline-text-2" id="text-org164df37">
+<div id="outline-container-org6e1eec2" class="outline-2">
+<h2 id="org6e1eec2">Useful commands</h2>
+<div class="outline-text-2" id="text-org6e1eec2">
 <p>
 The following commands will be useful for interacting with JShell:
 </p>
@@ -103,11 +104,11 @@ The following commands will be useful for interacting with JShell:
 </div>
 </div>
 
-<div id="outline-container-org4d4bd1b" class="outline-2">
-<h2 id="org4d4bd1b">Exploratory programming</h2>
-<div class="outline-text-2" id="text-org4d4bd1b">
+<div id="outline-container-orga05aaf8" class="outline-2">
+<h2 id="orga05aaf8">Exploratory programming</h2>
+<div class="outline-text-2" id="text-orga05aaf8">
 <p>
-In Java, we can perform the standard Arithmetic operations like addition, subtraction, multiplication, and division. If I enter 3 + 3; into JShell for example, I will get the following result:
+In Java, we can perform the standard Arithmetic operations like addition, subtraction, multiplication, and division. If I enter <code>3 + 3;</code> into JShell for example, I will get the following result:
 </p>
 
 <pre class="example">
@@ -116,7 +117,7 @@ $1 ==&gt; 6
 </pre>
 
 <p>
-What has happened here is that the Java code has been executed and a temporary variable has been created to store the result of the addition, a <b>variable</b> stores data for us and has an associated name. If I enter the name of the new variable, {$1}, into the console it will return {$1 ==&gt; 6} – this is informing us that the variable named {$1} points to the value of {6}. We can also pass a variable as input to a method, where a <b>method</b> is just a reusable block of code with a name, such as with the {println()} method:
+What has happened here is that the Java code has been executed and a temporary variable has been created to store the result of the addition, a <b>variable</b> stores data for us and has an associated name. If I enter the name of the new variable, <code>$1</code>, into the console it will return <code>$1 ==&gt; 6</code> – this is informing us that the variable named <code>$1</code> points to the value of <code>6</code>. We can also pass a variable as input to a method, where a <b>method</b> is just a reusable block of code with a name, such as with the <code>println()</code> method:
 </p>
 
 <pre class="example">
@@ -129,22 +130,24 @@ Try entering the following expressions into JShell and noting their results:
 </p>
 
 <ul class="org-ul">
-<li>{3 * 3}</li>
-<li>{3 / 3}</li>
-<li>{3 / 0}</li>
-<li>{3 - 3}</li>
-<li>{(3 + 3) * 3}</li>
-<li>{3 + 3 * 3}</li>
+<li><code>3 * 3</code></li>
+<li><code>3 / 3</code></li>
+<li><code>3 / 0</code></li>
+<li><code>3 - 3</code></li>
+<li><code>(3 + 3) * 3</code></li>
+<li><code>3 + 3 * 3</code></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-14 Sat 00:21. <br>
-Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
-</small></footer>
+<footer>
+  <small>
+    Copyright 2022 Morgan Walsh.<br>
+    Last updated 2022-05-14 Sat 10:39. <br>
+    Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
+  </small>
+</footer>
 <script src='/js/navbar.js'></script>
 </div>
 </body>

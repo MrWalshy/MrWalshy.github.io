@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-14 Sat 00:23 -->
+<!-- 2022-05-14 Sat 10:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operators</title>
 <meta name="generator" content="Org mode">
-<link rel="stylesheet" href="/css/style.css" type="text/css" />
+<meta name="author" content="Morgan Walsh">
+<link rel='stylesheet' href='/css/style.css' type='text/css' />
 </head>
 <body>
 <div id="preamble" class="status">
 <nav>
-<a id='toggle'>&equiv;</a>
-<a class='nav-link' href='/'>Home</a>
-<a class='nav-link' href='/blog'>Blog</a>
-<a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
+  <a id='toggle'>&equiv;</a>
+  <a class='nav-link' href='/'>Home</a>
+  <a class='nav-link' href='/blog'>Blog</a>
+  <a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
 </nav>
 </div>
 <div id="content">
@@ -22,7 +23,7 @@
 <h1 class="title">Operators</h1>
 <p class="subtitle">An overview of the operators available in Java - Java 11 tutorials</p>
 </header><p>
-The Java language contain <b>operators</b> (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its <b>operands</b>. For example, in {3 – 4}, {3} is the left operand, {-} is the operator and {4} is the right operand.
+The Java language contain <b>operators</b> (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its <b>operands</b>. For example, in <code>3 – 4</code>, <code>3</code> is the left operand, <code>-</code> is the operator and <code>4</code> is the right operand.
 </p>
 
 <p>
@@ -35,9 +36,9 @@ Java has three types of operation:
 <li>Ternary: Ternary operators have three operands</li>
 </ul>
 
-<div id="outline-container-org1cb4663" class="outline-2">
-<h2 id="org1cb4663">Operator precedence and associativity</h2>
-<div class="outline-text-2" id="text-org1cb4663">
+<div id="outline-container-org6416130" class="outline-2">
+<h2 id="org6416130">Operator precedence and associativity</h2>
+<div class="outline-text-2" id="text-org6416130">
 <p>
 Operators, like in Maths, have a <b>precedence</b> – that is, we perform multiplication before addition for example. Java follows the <b>BIDMAS</b> / <b>BODMAS</b> rules for arithmetic operators but does also include additional operators for additional functionality.
 </p>
@@ -47,16 +48,16 @@ Operators, like in Maths, have a <b>precedence</b> – that is, we perform multi
 </p>
 
 <ul class="org-ul">
-<li>int <b>age = 30</b>;</li>
-<li>String <b>name = “Bob”</b>;</li>
-<li>System.out.println(<b>name + “ is “ + age + “ years old.”</b>);</li>
-<li>System.out.println(<b>name.toUpperCase()</b>);</li>
-<li>int <b>mathExpression = 3 + 3</b>;</li>
-<li><b>3 + 3</b></li>
+<li><code>int *age = 30*;</code></li>
+<li><code>String *name = “Bob”*;</code></li>
+<li><code>System.out.println(*name + “ is “ + age + “ years old.”*);</code></li>
+<li><code>System.out.println(*name.toUpperCase()*);</code></li>
+<li><code>int *mathExpression = 3 + 3*;</code></li>
+<li><code>(*3 + 3*)</code></li>
 </ul>
 
 <p>
-What we can see is that assignments are expressions, the value {30} is assigned to the {age} variable for example. <b><b>Arithmetic operations</b></b> are also expressions, the result of the right is assigned to the variable on the left.
+What we can see is that assignments are expressions, the value <code>30</code> is assigned to the <code>age</code> variable for example. <b><b>Arithmetic operations</b></b> are also expressions, the result of the right is assigned to the variable on the left.
 </p>
 
 <p>
@@ -173,13 +174,13 @@ The following table lists the operators from highest to lowest precedence with t
 </div>
 </div>
 
-<div id="outline-container-org2d71c0c" class="outline-2">
-<h2 id="org2d71c0c">Applying different operator types</h2>
-<div class="outline-text-2" id="text-org2d71c0c">
+<div id="outline-container-org6ca3d11" class="outline-2">
+<h2 id="org6ca3d11">Applying different operator types</h2>
+<div class="outline-text-2" id="text-org6ca3d11">
 </div>
-<div id="outline-container-org33eab2b" class="outline-3">
-<h3 id="org33eab2b">Unary operators</h3>
-<div class="outline-text-3" id="text-org33eab2b">
+<div id="outline-container-org8b7e96f" class="outline-3">
+<h3 id="org8b7e96f">Unary operators</h3>
+<div class="outline-text-3" id="text-org8b7e96f">
 <p>
 Unary operators can only be applied to a single value, the following table lists the unary operators:
 </p>
@@ -242,14 +243,14 @@ You may have noticed that the increment and decrement operators can be prefixed 
 </ul>
 
 <p>
-The {(type)} operator allows us to convert variables of a certain type to a variable of a related type, such as converting a double to an int in the above table, this will be explored further in numeric promotion.
+The <code>(type)</code> operator allows us to convert variables of a certain type to a variable of a related type, such as converting a double to an int in the above table, this will be explored further in numeric promotion.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0b85336" class="outline-3">
-<h3 id="org0b85336">Arithmetic operators</h3>
-<div class="outline-text-3" id="text-org0b85336">
+<div id="outline-container-org32aad5a" class="outline-3">
+<h3 id="org32aad5a">Arithmetic operators</h3>
+<div class="outline-text-3" id="text-org32aad5a">
 <p>
 <b>Arithmetic operators</b> are binary operators, this means an operator is applied to two operands. The following table lists operators:
 </p>
@@ -322,9 +323,9 @@ Adding a set of parentheses around the addition changed the way in which the exp
 </p>
 </div>
 
-<div id="outline-container-org22d1718" class="outline-4">
-<h4 id="org22d1718">Numeric promotion</h4>
-<div class="outline-text-4" id="text-org22d1718">
+<div id="outline-container-orgb64077d" class="outline-4">
+<h4 id="orgb64077d">Numeric promotion</h4>
+<div class="outline-text-4" id="text-orgb64077d">
 <p>
 When performing arithmetic operations upon numeric types, we may mix types like an integer and a double in the same expression:
 </p>
@@ -376,7 +377,7 @@ JShell will give us a warning about <b><b>lossy conversion</b></b>, it is indica
 </ul>
 
 <p>
-If we wanted to put the large {bigNum} variable into a byte variable, we can by explicitly casting {bigNum} to a byte, but we will lose data if the value is too large for the desired narrower type:
+If we wanted to put the large <code>bigNum</code> variable into a byte variable, we can by explicitly casting <code>bigNum</code> to a byte, but we will lose data if the value is too large for the desired narrower type:
 </p>
 
 <pre class="example">
@@ -392,9 +393,9 @@ didNotLoseData ==&gt; 32
 </p>
 
 <ol class="org-ol">
-<li>If the left and right operand are of different types, the smallest type will be promoted to the largest. For example, 78938 + 92374893L contains an integer and a long, the integer 78938 will be promoted to a Long of the form 78938L.</li>
+<li>If the left and right operand are of different types, the smallest type will be promoted to the largest. For example, <code>78938 + 92374893L</code> contains an integer and a long, the integer <code>78938</code> will be promoted to a Long of the form <code>78938L</code>.</li>
 
-<li>If the left or right operand is an integral type and the other a floating-point type, the integral type would be promoted to a floating-point type. For example, 3 + 4.0 contains an integer and a double, the integer 3 will be promoted to a double of the form 3.0.</li>
+<li>If the left or right operand is an integral type and the other a floating-point type, the integral type would be promoted to a floating-point type. For example, <code>3 + 4.0</code> contains an integer and a double, the integer <code>3</code> will be promoted to a double of the form <code>3.0</code>.</li>
 
 <li>The small data types of byte, short, and char are first promoted to an int when used with any arithmetic operator, even if neither operator is an int.</li>
 
@@ -404,9 +405,9 @@ didNotLoseData ==&gt; 32
 </div>
 </div>
 
-<div id="outline-container-orgecd6751" class="outline-3">
-<h3 id="orgecd6751">Assignment operators</h3>
-<div class="outline-text-3" id="text-orgecd6751">
+<div id="outline-container-orgef3d9e7" class="outline-3">
+<h3 id="orgef3d9e7">Assignment operators</h3>
+<div class="outline-text-3" id="text-orgef3d9e7">
 <p>
 <b>Assignment operators</b> are used to assign the result of an expression to a variable. The simplest is the standard assignment operator represented by the equal’s sign:
 </p>
@@ -417,16 +418,8 @@ bigNum ==&gt; 3234254
 </pre>
 
 <p>
-Assignment operators have a right-to-left associativity, this means that the right operand is evaluated before the left. If I was reading and executing the above assignment like the computer, it would go somewhat as follows:
+Assignment operators have a right-to-left associativity, this means that the right operand is evaluated before the left.
 </p>
-
-<ol class="org-ol">
-<li>Statement encountered: int bigNum = 3234254 + 1;</li>
-<li>Evaluate right operand: 3234254 + 1;</li>
-<li>Expression evaluated: 3234255,</li>
-<li>Declare variable of type int called bigNum</li>
-<li>Assign evaluated right operand to declared variable bigNum</li>
-</ol>
 
 <p>
 An assignment is an expression, and thus also can return a result to be used in another assignment: 
@@ -441,9 +434,9 @@ b ==&gt; 9
 </pre>
 </div>
 
-<div id="outline-container-org72af0b8" class="outline-4">
-<h4 id="org72af0b8">Compound assignment operators</h4>
-<div class="outline-text-4" id="text-org72af0b8">
+<div id="outline-container-org4e2f5e9" class="outline-4">
+<h4 id="org4e2f5e9">Compound assignment operators</h4>
+<div class="outline-text-4" id="text-org4e2f5e9">
 <p>
 Compound assignment operators extend the ability of the standard assignment operator and give a short-hand way of writing out simple expressions, the most common compound assignment operators being:
 </p>
@@ -496,23 +489,23 @@ Compound assignment operators extend the ability of the standard assignment oper
 </table>
 
 <p>
-To understand compound assignment operators, you just need to understand how they expand out to a full expression. For example, {num1 += num2;} is the same as writing {num1 = num1 + num2;} and {num1 -= num2;} is the same as writing {num1 = num1 – num2;}.
+To understand compound assignment operators, you just need to understand how they expand out to a full expression. For example, <code>num1 += num2;</code> is the same as writing <code>num1 = num1 + num2;</code> and <code>num1 -= num2;</code> is the same as writing <code>num1 = num1 – num2;</code>.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org46b0046" class="outline-3">
-<h3 id="org46b0046">Comparison operators</h3>
-<div class="outline-text-3" id="text-org46b0046">
+<div id="outline-container-orge79dfc1" class="outline-3">
+<h3 id="orge79dfc1">Comparison operators</h3>
+<div class="outline-text-3" id="text-orge79dfc1">
 <p>
 Java contains many different comparison operators which are used in the creation of Boolean logic expressions, that is an expression using the logic rules originally set out by George Boole in the 19th century. The equality and relational operators are used to produce true or false values from the comparison of numbers whereas boolean logic operators introduce the core Boolean logic.
 </p>
 </div>
 
-<div id="outline-container-org89bb342" class="outline-4">
-<h4 id="org89bb342">Equality operators</h4>
-<div class="outline-text-4" id="text-org89bb342">
+<div id="outline-container-org008877b" class="outline-4">
+<h4 id="org008877b">Equality operators</h4>
+<div class="outline-text-4" id="text-org008877b">
 <p>
 There are two equality operators in Java, one for comparing if two values or objects are equal and another for comparing if they are not equal:
 </p>
@@ -565,9 +558,9 @@ isNotEqual = (num1 != num2); <span style="font-weight: bold; font-style: italic;
 </div>
 </div>
 
-<div id="outline-container-org8f8daa0" class="outline-3">
-<h3 id="org8f8daa0">Relational operators</h3>
-<div class="outline-text-3" id="text-org8f8daa0">
+<div id="outline-container-orge31510f" class="outline-3">
+<h3 id="orge31510f">Relational operators</h3>
+<div class="outline-text-3" id="text-orge31510f">
 <p>
 Relational operators compare two numeric operands, aside from the instanceof operator:
 </p>
@@ -616,17 +609,17 @@ Relational operators compare two numeric operands, aside from the instanceof ope
 </div>
 </div>
 
-<div id="outline-container-orgba47350" class="outline-3">
-<h3 id="orgba47350">Boolean logic operators</h3>
-<div class="outline-text-3" id="text-orgba47350">
+<div id="outline-container-org20fe2ef" class="outline-3">
+<h3 id="org20fe2ef">Boolean logic operators</h3>
+<div class="outline-text-3" id="text-org20fe2ef">
 <p>
 <b>Boolean logic operators</b> are applied to the boolean data type, these are useful for creating conditions in our software and creating logic. There are three boolean operators in Java, but these three operators may be applied in a variety of ways – even to numbers in when using bitwise operators. The three common operations are AND, OR and XOR.
 </p>
 </div>
 
-<div id="outline-container-org05a4d65" class="outline-4">
-<h4 id="org05a4d65">Logical operators</h4>
-<div class="outline-text-4" id="text-org05a4d65">
+<div id="outline-container-orgaaecb25" class="outline-4">
+<h4 id="orgaaecb25">Logical operators</h4>
+<div class="outline-text-4" id="text-orgaaecb25">
 <p>
 <b>Logical operators</b> may be applied to both numeric and boolean data types, they are known as a bitwise operator when applied to numbers and perform different logic then next described. The logical operators are as follows:
 </p>
@@ -669,9 +662,9 @@ In a logical expression, both operands will always be checked unlike short-circu
 </div>
 </div>
 
-<div id="outline-container-org21fc615" class="outline-4">
-<h4 id="org21fc615">Short-circuit operators</h4>
-<div class="outline-text-4" id="text-org21fc615">
+<div id="outline-container-orgcf57618" class="outline-4">
+<h4 id="orgcf57618">Short-circuit operators</h4>
+<div class="outline-text-4" id="text-orgcf57618">
 <p>
 <b>Short-circuit operators</b> are a special kind of boolean operator that can only be applied to the boolean data type, the following table describes the short-circuit operators:
 </p>
@@ -729,9 +722,9 @@ result = false || false; // false, both checked
 </div>
 </div>
 
-<div id="outline-container-org7c0fa99" class="outline-3">
-<h3 id="org7c0fa99">Ternary operator</h3>
-<div class="outline-text-3" id="text-org7c0fa99">
+<div id="outline-container-org6314f60" class="outline-3">
+<h3 id="org6314f60">Ternary operator</h3>
+<div class="outline-text-3" id="text-org6314f60">
 <p>
 The <b>ternary operator</b> is a special operator that is used for short conditional statements that return one of two specified values, the ternary operator has three operands and takes the form:
 </p>
@@ -742,7 +735,7 @@ The <b>ternary operator</b> is a special operator that is used for short conditi
 </div>
 
 <p>
-A special rule about ternary expressions is that they always return a value, hence why there is an assignment occurring to the boolean result. The {(boolean<sub>expression</sub>)} is exactly that, a set of values combined with the boolean logic operators, comparison operators, relational operators, or a mix.
+A special rule about ternary expressions is that they always return a value, hence why there is an assignment occurring to the boolean result. The <code>(boolean_expression)</code> is exactly that, a set of values combined with the boolean logic operators, comparison operators, relational operators, or a mix.
 </p>
 
 <p>
@@ -758,7 +751,7 @@ isRaining ==&gt; false
 </pre>
 
 <p>
-If we wanted to get a string that states, {“It is too hot”} when the temperature is above 30 or {“It is just right for me”} otherwise, we can plug the expression {(temp &gt; 30)} into the first operand of the ternary expression. This gives us:
+If we wanted to get a string that states, <code>“It is too hot”</code> when the temperature is above 30 or <code>“It is just right for me”</code> otherwise, we can plug the expression <code>(temp &gt; 30)</code> into the first operand of the ternary expression. This gives us:
 </p>
 
 <div class="org-src-container">
@@ -767,7 +760,7 @@ If we wanted to get a string that states, {“It is too hot”} when the tempera
 </div>
 
 <p>
-We now have a semi-complete statement; the next two operands are what values should be returned if the boolean expression is true or false. All we must do is put in the string literals containing the values we want in this case:
+We now have a semi-complete statement; the next two operands are what values should be returned if the boolean expression is <code>true</code> or <code>false</code> respectively. All we must do is put in the string literals containing the values we want in this case:
 </p>
 
 <pre class="example">
@@ -779,15 +772,15 @@ s ==&gt; "It is just right for me"
 </pre>
 
 <p>
-We could then print the {statement} string to the console or use it somewhere else.
+We could then print the <code>statement</code> string to the console or use it somewhere else.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org137bf9d" class="outline-2">
-<h2 id="org137bf9d">Exercises</h2>
-<div class="outline-text-2" id="text-org137bf9d">
+<div id="outline-container-org30019a0" class="outline-2">
+<h2 id="org30019a0">Exercises</h2>
+<div class="outline-text-2" id="text-org30019a0">
 <ol class="org-ol">
 <li>Use 1 of each of the arithmetic operators and assign the result of the expression you make to a variable.</li>
 
@@ -807,7 +800,7 @@ Boolean expressions can be compounded, that is they can have multiple conditions
 </ol>
 
 <p>
-In the above expression, the {isRaining &amp;&amp; isSunny} expression is executed first, which results in {false}. The expression then becomes {false || isCloudy}. This then returns {true}, which is the correct result, but the logic of the expression is wrong. If we change {isRaining} to {false}, we will still get true back.
+In the above expression, the <code>isRaining &amp;&amp; isSunny</code> expression is executed first, which results in <code>false</code>. The expression then becomes <code>false || isCloudy</code>. This then returns <code>true</code>, which is the correct result, but the logic of the expression is wrong. If we change <code>isRaining</code> to <code>false</code>, we will still get <code>true</code> back.
 </p>
 
 <p>
@@ -815,7 +808,7 @@ Insert parenthesis to make the boolean expression evaluate correctly.
 </p>
 
 <ol class="org-ol">
-<li>Given the integer {age} and double {hourlyRate}, create a boolean expression that checks if the age is greater than 18 but less than 21 and their hourly rate is greater than or equal to £6.83, i.e., that they are earning at least minimum wage for their age range:</li>
+<li>Given the integer <code>age</code> and double <code>hourlyRate</code>, create a boolean expression that checks if the age is greater than 18 but less than 21 and their hourly rate is greater than or equal to £6.83, i.e., that they are earning at least minimum wage for their age range in the UK at the time of writing (early 2022):</li>
 </ol>
 
 <p>
@@ -837,18 +830,20 @@ isOdd ==&gt; true
 </pre>
 
 <p>
-The above expression can be used to check if a number is odd, replace 31 with other values to check if they are odd and then create a boolean expression to check if a number is even.
+The above expression can be used to check if a number is odd, replace <code>31</code> with other values to check if they are odd and then create a boolean expression to check if a number is even.
 </p></li>
 </ol>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<footer><small>
-Copyright 2022 .<br>
-Last updated 2022-05-14 Sat 00:21. <br>
-Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
-</small></footer>
+<footer>
+  <small>
+    Copyright 2022 Morgan Walsh.<br>
+    Last updated 2022-05-14 Sat 10:39. <br>
+    Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9).
+  </small>
+</footer>
 <script src='/js/navbar.js'></script>
 </div>
 </body>
