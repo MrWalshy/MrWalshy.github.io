@@ -1,6 +1,7 @@
-#+title: Your first Java program
+#+TITLE: Your first Java program
 #+DATE: <2022-04-30 19:45>
 #+SUBTITLE: Introducing Java programming with the canonical 'Hello World' example
+#+AUTHOR: Morgan Walsh
 
 A commonality amongst programmers is that in any new language we meet, we write a ~“Hello World!”~ program – a simple application which will output those exact words to the screen. 
 

@@ -18,24 +18,20 @@
 (require 'org)
 (require 'ox-publish)
 
+(defun file-to-string (file)
+  "Loads a file from the specified path and returns a string representing its contents."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))
+
 (defvar my/website-html-preamble 
-  "<nav>
-<a id='toggle'>&equiv;</a>
-<a class='nav-link' href='/'>Home</a>
-<a class='nav-link' href='/blog'>Blog</a>
-<a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
-</nav>")
+  (file-to-string "./org/html/preamble.html"))
 
 (defvar my/website-html-postamble 
-  "<footer><small>
-Copyright 2022 %a.<br>
-Last updated %C. <br>
-Built with %c.
-</small></footer>
-<script src='/js/navbar.js'></script>")
+  (file-to-string "./org/html/postamble.html"))
 
 (defvar my/website-html-head
-  "<link rel=\"stylesheet\" href=\"/css/style.css\" type=\"text/css\" />\n")
+  "<link rel='stylesheet' href='/css/style.css' type='text/css' />")
 
 ;; remove default css
 (setq org-html-head-include-default-style nil
@@ -89,16 +85,6 @@ Built with %c.
          :language "en"
          :time-stamp-file nil
          :with-creator t ;; Emacs and Org version in footer
-         
-         
-         ;; :auto-sitemap t
-         ;; :sitemap-filename "./index.org"
-         ;; :sitemap-title "Blog index"
-         ;; :sitemap-sort-folders "first"
-         ;; :sitemap-sort-files anti-chronologically
-         ;; :sitemap-file-entry-format: "%d - %t"
-         ;; :sitemap-function m/org-publish-org-sitemap-format-entry
-         ;; :sitemap-format-entry my/org-sitemap-date-entry-format
          ) ;; export type, to html
          ("org-blog"
           :base-directory "./org/blog"
@@ -118,7 +104,7 @@ Built with %c.
           :headline-levels 6
 
           :auto-sitemap t
-          :sitemap-filename "./index.org"
+          ;;:sitemap-filename "./index.org" ;; use to set location for sitemap, file must exist
           :sitemap-style tree
 	  :sitemap-sort-files anti-chronologically
           :sitemap-file-entry-format "%d - %t") ;; entry format being ignored?

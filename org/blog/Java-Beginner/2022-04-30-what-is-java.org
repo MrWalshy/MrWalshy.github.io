@@ -1,6 +1,7 @@
-#+title: What is Java?
+#+TITLE: What is Java?
 #+DATE: <2022-04-30 18:47>
 #+SUBTITLE: Background knowledge concerning Java programming
+#+AUTHOR: Morgan Walsh
 
 Java is a general-purpose, object oriented, platform independent, simple, and robust programming language. You may have heard the motto write once, run anywhere, or something similar, meaning that a Java program can be written once and compiled once to run on all platforms that support Java.
 
