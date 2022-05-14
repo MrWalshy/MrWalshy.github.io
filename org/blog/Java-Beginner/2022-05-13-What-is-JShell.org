@@ -33,14 +33,14 @@ The following commands will be useful for interacting with JShell:
 
 ** Exploratory programming
 
-In Java, we can perform the standard Arithmetic operations like addition, subtraction, multiplication, and division. If I enter 3 + 3; into JShell for example, I will get the following result:
+In Java, we can perform the standard Arithmetic operations like addition, subtraction, multiplication, and division. If I enter ~3 + 3;~ into JShell for example, I will get the following result:
 
 #+BEGIN_EXAMPLE
 jshell> 3 + 3; 
 $1 ==> 6 
 #+END_EXAMPLE
 
-What has happened here is that the Java code has been executed and a temporary variable has been created to store the result of the addition, a *variable* stores data for us and has an associated name. If I enter the name of the new variable, {$1}, into the console it will return {$1 ==> 6} – this is informing us that the variable named {$1} points to the value of {6}. We can also pass a variable as input to a method, where a *method* is just a reusable block of code with a name, such as with the {println()} method:
+What has happened here is that the Java code has been executed and a temporary variable has been created to store the result of the addition, a *variable* stores data for us and has an associated name. If I enter the name of the new variable, ~$1~, into the console it will return ~$1 ==> 6~ – this is informing us that the variable named ~$1~ points to the value of ~6~. We can also pass a variable as input to a method, where a *method* is just a reusable block of code with a name, such as with the ~println()~ method:
 
 #+BEGIN_EXAMPLE
 jshell> System.out.println($1); 
@@ -49,9 +49,9 @@ jshell> System.out.println($1);
 
 Try entering the following expressions into JShell and noting their results:
 
-- {3 * 3}
-- {3 / 3}
-- {3 / 0}
-- {3 - 3}
-- {(3 + 3) * 3}
-- {3 + 3 * 3}
+- ~3 * 3~
+- ~3 / 3~
+- ~3 / 0~
+- ~3 - 3~
+- ~(3 + 3) * 3~
+- ~3 + 3 * 3~

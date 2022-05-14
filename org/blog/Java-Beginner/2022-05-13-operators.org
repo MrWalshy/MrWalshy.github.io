@@ -3,7 +3,7 @@
 #+SUBTITLE: An overview of the operators available in Java - Java 11 tutorials
 #+AUTHOR: Morgan Walsh
 
-The Java language contain *operators* (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its *operands*. For example, in {3 – 4}, {3} is the left operand, {-} is the operator and {4} is the right operand.
+The Java language contain *operators* (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its *operands*. For example, in ~3 – 4~, ~3~ is the left operand, ~-~ is the operator and ~4~ is the right operand.
 
 Java has three types of operation:
 
@@ -17,14 +17,14 @@ Operators, like in Maths, have a *precedence* – that is, we perform multiplica
 
 *Associativity* is the way in which an expression is evaluated, an *expression* is made up of variables, operators and method invocations and returns a single value, whether that value is nothing or something. In the following examples, the parts highlighted in bold are expressions:
 
-- int *age = 30*;
-- String *name = “Bob”*; 
-- System.out.println(*name + “ is “ + age + “ years old.”*); 
-- System.out.println(*name.toUpperCase()*); 
-- int *mathExpression = 3 + 3*;
-- *3 + 3*
+- ~int *age = 30*;~
+- ~String *name = “Bob”*;~ 
+- ~System.out.println(*name + “ is “ + age + “ years old.”*);~ 
+- ~System.out.println(*name.toUpperCase()*);~
+- ~int *mathExpression = 3 + 3*;~
+- ~(*3 + 3*)~
   
-What we can see is that assignments are expressions, the value {30} is assigned to the {age} variable for example. **Arithmetic operations** are also expressions, the result of the right is assigned to the variable on the left.
+What we can see is that assignments are expressions, the value ~30~ is assigned to the ~age~ variable for example. **Arithmetic operations** are also expressions, the result of the right is assigned to the variable on the left.
 
 Onto **associativity** though, all it means is that an operation is carried out in a certain direction: left-to-right or vice-versa.
 
@@ -56,6 +56,7 @@ The following table lists the operators from highest to lowest precedence with t
 
 Unary operators can only be applied to a single value, the following table lists the unary operators:
 
+|----------+--------------------------------------------------------------------------------|
 | Operator | Description                                                                    |
 |----------+--------------------------------------------------------------------------------|
 | \!       | The logical complement operator flips the value of a boolean expression.       |
@@ -64,6 +65,7 @@ Unary operators can only be applied to a single value, the following table lists
 | ++       | The increment operator increments a value by 1.                                |
 | --       | The decrement operator decrements a value by 1.                                |
 | (type)   | The cast operator casts a value to the specified type.                         |
+|----------+--------------------------------------------------------------------------------|
 
 You may have noticed that the increment and decrement operators can be prefixed or suffixed to a variable:
 
@@ -71,19 +73,21 @@ You may have noticed that the increment and decrement operators can be prefixed 
   
 - *Prefix-increment* and *prefix-decrement* will first increment or decrement the current value of the variable by 1, and then return the value of the variable.
    
-The {(type)} operator allows us to convert variables of a certain type to a variable of a related type, such as converting a double to an int in the above table, this will be explored further in numeric promotion.
+The ~(type)~ operator allows us to convert variables of a certain type to a variable of a related type, such as converting a double to an int in the above table, this will be explored further in numeric promotion.
 
 *** Arithmetic operators
 
 *Arithmetic operators* are binary operators, this means an operator is applied to two operands. The following table lists operators:
 
-| Operator | Description                                                                                                         |
-|----------+---------------------------------------------------------------------------------------------------------------------|
-| \plus        | The additive addition operator returns the sum of two numeric values.                                               |
-| \minus        | The subtraction operator returns the difference of two numeric values.                                              |
-| \ast        | The multiplication operator returns the product of two numeric values.                                              |
-| \slash        | The division operator returns the quotient of the dividend and the divisor (numerator and denominator in fractions) |
-| %        | The modulus operator returns the remainder after dividing the dividend by the divisor. The returned value is always a whole number, this means it will truncate any values after the decimal point.   |
+|----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Operator | Description                                                                                                                                                                                         |
+|----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| \plus        | The additive addition operator returns the sum of two numeric values.                                                                                                                               |
+| \minus        | The subtraction operator returns the difference of two numeric values.                                                                                                                              |
+| \ast        | The multiplication operator returns the product of two numeric values.                                                                                                                              |
+| \slash        | The division operator returns the quotient of the dividend and the divisor (numerator and denominator in fractions)                                                                                 |
+| %        | The modulus operator returns the remainder after dividing the dividend by the divisor. The returned value is always a whole number, this means it will truncate any values after the decimal point. |
+|----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 The default order of operations for arithmetic operators follows that of BIDMAS/BODMAS: 
 
@@ -139,7 +143,7 @@ JShell will give us a warning about **lossy conversion**, it is indicating that 
   
 - *Narrowing* the type means making a type smaller, i.e., assigning an int to a byte variable
   
-If we wanted to put the large {bigNum} variable into a byte variable, we can by explicitly casting {bigNum} to a byte, but we will lose data if the value is too large for the desired narrower type:
+If we wanted to put the large ~bigNum~ variable into a byte variable, we can by explicitly casting ~bigNum~ to a byte, but we will lose data if the value is too large for the desired narrower type:
 
 #+BEGIN_EXAMPLE
 jshell> byte lostMaData = (byte) bigNum; 
@@ -151,9 +155,9 @@ didNotLoseData ==> 32
 
 *Rules of numeric promotion*:
 
-1. If the left and right operand are of different types, the smallest type will be promoted to the largest. For example, 78938 + 92374893L contains an integer and a long, the integer 78938 will be promoted to a Long of the form 78938L.
+1. If the left and right operand are of different types, the smallest type will be promoted to the largest. For example, ~78938 + 92374893L~ contains an integer and a long, the integer ~78938~ will be promoted to a Long of the form ~78938L~.
    
-2. If the left or right operand is an integral type and the other a floating-point type, the integral type would be promoted to a floating-point type. For example, 3 + 4.0 contains an integer and a double, the integer 3 will be promoted to a double of the form 3.0.
+2. If the left or right operand is an integral type and the other a floating-point type, the integral type would be promoted to a floating-point type. For example, ~3 + 4.0~ contains an integer and a double, the integer ~3~ will be promoted to a double of the form ~3.0~.
    
 3. The small data types of byte, short, and char are first promoted to an int when used with any arithmetic operator, even if neither operator is an int.
    
@@ -168,13 +172,7 @@ shell> int bigNum = 3234254 + 1;
 bigNum ==> 3234254
 #+END_EXAMPLE
 
-Assignment operators have a right-to-left associativity, this means that the right operand is evaluated before the left. If I was reading and executing the above assignment like the computer, it would go somewhat as follows:
-
-1. Statement encountered: int bigNum = 3234254 + 1; 
-2. Evaluate right operand: 3234254 + 1; 
-3. Expression evaluated: 3234255, 
-4. Declare variable of type int called bigNum 
-5. Assign evaluated right operand to declared variable bigNum 
+Assignment operators have a right-to-left associativity, this means that the right operand is evaluated before the left.
 
 An assignment is an expression, and thus also can return a result to be used in another assignment: 
 
@@ -199,7 +197,7 @@ Compound assignment operators extend the ability of the standard assignment oper
 | \slash\equal       | The division compound assignment operator returns the quotient of the dividend and the divisor (numerator and denominator in fractions)                                                                                 |
 | %\equal       | The modulus compound assignment operator returns the remainder after dividing the dividend by the divisor. The returned value is always a whole number, this means it will truncate any values after the decimal point. |
 
-To understand compound assignment operators, you just need to understand how they expand out to a full expression. For example, {num1 += num2;} is the same as writing {num1 = num1 + num2;} and {num1 -= num2;} is the same as writing {num1 = num1 – num2;}.
+To understand compound assignment operators, you just need to understand how they expand out to a full expression. For example, ~num1 += num2;~ is the same as writing ~num1 = num1 + num2;~ and ~num1 -= num2;~ is the same as writing ~num1 = num1 – num2;~.
 
 *** Comparison operators
 
@@ -285,7 +283,7 @@ The *ternary operator* is a special operator that is used for short conditional 
 boolean result = (boolean_expression) ? result_if_true : result_if_false;
 #+END_SRC
 
-A special rule about ternary expressions is that they always return a value, hence why there is an assignment occurring to the boolean result. The {(boolean_expression)} is exactly that, a set of values combined with the boolean logic operators, comparison operators, relational operators, or a mix.
+A special rule about ternary expressions is that they always return a value, hence why there is an assignment occurring to the boolean result. The ~(boolean_expression)~ is exactly that, a set of values combined with the boolean logic operators, comparison operators, relational operators, or a mix.
 
 A boolean expression that checks if the temperature is above 30 is demonstrated below: 
 
@@ -297,13 +295,13 @@ jshell> boolean isRaining = (temp > 30); // false
 isRaining ==> false
 #+END_EXAMPLE
 
-If we wanted to get a string that states, {“It is too hot”} when the temperature is above 30 or {“It is just right for me”} otherwise, we can plug the expression {(temp > 30)} into the first operand of the ternary expression. This gives us:
+If we wanted to get a string that states, ~“It is too hot”~ when the temperature is above 30 or ~“It is just right for me”~ otherwise, we can plug the expression ~(temp > 30)~ into the first operand of the ternary expression. This gives us:
 
 #+BEGIN_SRC java
 String statement = (temp > 30) ? result_if_true : result_if_false;
 #+END_SRC
 
-We now have a semi-complete statement; the next two operands are what values should be returned if the boolean expression is true or false. All we must do is put in the string literals containing the values we want in this case:
+We now have a semi-complete statement; the next two operands are what values should be returned if the boolean expression is ~true~ or ~false~ respectively. All we must do is put in the string literals containing the values we want in this case:
 
 #+BEGIN_EXAMPLE
 jshell> int temp = 28; 
@@ -313,7 +311,7 @@ jshell> String statement = temp > 30 ? "It is too hot" : "It is just right for m
 s ==> "It is just right for me"
 #+END_EXAMPLE
 
-We could then print the {statement} string to the console or use it somewhere else.
+We could then print the ~statement~ string to the console or use it somewhere else.
 
 ** Exercises
 
@@ -330,11 +328,11 @@ We could then print the {statement} string to the console or use it somewhere el
      boolean isRainingAndSunnyOrCloudy = isRaining && isSunny || isCloudy;
 #+END_SRC
 
-In the above expression, the {isRaining && isSunny} expression is executed first, which results in {false}. The expression then becomes {false || isCloudy}. This then returns {true}, which is the correct result, but the logic of the expression is wrong. If we change {isRaining} to {false}, we will still get true back.
+In the above expression, the ~isRaining && isSunny~ expression is executed first, which results in ~false~. The expression then becomes ~false || isCloudy~. This then returns ~true~, which is the correct result, but the logic of the expression is wrong. If we change ~isRaining~ to ~false~, we will still get ~true~ back.
 
 Insert parenthesis to make the boolean expression evaluate correctly.
 
-4. Given the integer {age} and double {hourlyRate}, create a boolean expression that checks if the age is greater than 18 but less than 21 and their hourly rate is greater than or equal to £6.83, i.e., that they are earning at least minimum wage for their age range:
+4. Given the integer ~age~ and double ~hourlyRate~, create a boolean expression that checks if the age is greater than 18 but less than 21 and their hourly rate is greater than or equal to £6.83, i.e., that they are earning at least minimum wage for their age range in the UK at the time of writing (early 2022):
 
 #+BEGIN_SRC java
    int age = 18; 
@@ -349,4 +347,4 @@ Insert parenthesis to make the boolean expression evaluate correctly.
    isOdd ==> true
  #+END_EXAMPLE
 
-   The above expression can be used to check if a number is odd, replace 31 with other values to check if they are odd and then create a boolean expression to check if a number is even.
+   The above expression can be used to check if a number is odd, replace ~31~ with other values to check if they are odd and then create a boolean expression to check if a number is even.
