@@ -66,7 +66,7 @@
          :base-directory "./org/pages" ;; source files
          :base-extension "org" ;; type of file
          :recursive nil
-         :publishing-directory "./html/pages/" ;; export location
+         :publishing-directory "./html/" ;; export location
          :publishing-function org-html-publish-to-html
          
          :html-doctype "html5" ;; html 5 doctype
@@ -104,7 +104,7 @@
           :headline-levels 6
 
           :auto-sitemap t
-          ;;:sitemap-filename "./index.org" ;; use to set location for sitemap, file must exist
+          ;; :sitemap-filename "./index.org" ;; use to set location for sitemap, file must exist
           :sitemap-style tree
 	  :sitemap-sort-files anti-chronologically
           :sitemap-file-entry-format "%d - %t") ;; entry format being ignored?

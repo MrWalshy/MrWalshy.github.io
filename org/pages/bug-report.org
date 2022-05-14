@@ -9,6 +9,7 @@ The following form will open the GitHub issues page for this website in a new ta
 <style>
   form {
     background-color: inherit;
+    margin-bottom: 1rem;
   }
 
   label {
@@ -41,8 +42,6 @@ The following form will open the GitHub issues page for this website in a new ta
       autocomplete="on"
       name="bug-report">
   <!-- max 2048 characters in URL -->
-  <fieldset>
-    <legend>Bug report:</legend>
     <input type="hidden" name="labels" value="bug" />
     
     <label for="bug-title">Title:</label>
