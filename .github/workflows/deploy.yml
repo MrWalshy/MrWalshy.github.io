@@ -24,12 +24,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v3
-
-      - name: install emacs
+        
+      - name: install node
         run: |
+          cd ~
+          sudo curl -sL https://deb.nodesource.com/setup_16.x
           sudo apt update
           sudo apt upgrade -y
-          sudo apt install emacs -y
+          sudo apt install -y --no-install-recommends nodejs
+          
+      - name: configure global babel support (es6) with npm
+        run: |
+          sudo npm i -g babel-cli babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-preset-stage-3 babel-preset-react
+          sudo ln -s /lib/node_modules/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
+
+      - name: configure global react support with npm
+        run: sudo npm i -g react react-dom react-router-dom
+
+      - name: install emacs
+        run: sudo apt install emacs -y
 
       # Runs a set of commands using the runners shell
       - name: build site
