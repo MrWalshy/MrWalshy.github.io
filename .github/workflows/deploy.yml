@@ -24,14 +24,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v3
+      
+      - name: setup node.js env
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: 16
         
-      - name: install node
-        run: |
-          cd ~
-          sudo curl -s https://deb.nodesource.com/setup_16.x | sudo bash
-          sudo apt update
-          sudo apt upgrade -y
-          sudo apt install -y --no-install-recommends nodejs
+#      - name: install node
+#        run: |
+#          cd ~
+#          sudo curl -s https://deb.nodesource.com/setup_16.x | sudo bash
+#          sudo apt update
+#          sudo apt upgrade -y
+#          sudo apt install -y --no-install-recommends nodejs
           
       - name: change default npm directory
         run: |
@@ -44,6 +49,10 @@ jobs:
         run: |
           sudo npm i -g babel-cli babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-preset-stage-3 babel-preset-react
           sudo ln -s ~/npm-global/babel-cli/bin/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
+          
+      - name: check directory
+          ls ~/npm-global
+          ls ~/npm-global/babel-cli
 
       - name: configure global react support with npm
         run: sudo npm i -g react react-dom react-router-dom
