@@ -113,7 +113,7 @@ was passed as a prop to the edit form component, it would render the following H
 : </form>
 
 #+name: render-user-edit-form
-#+begin_src js :results output :exports results :noweb yes :cmd "org-babel-node --presets react"
+#+begin_src js :results output :exports results :noweb yes :cmd "org-babel-node --presets react" :eval no-export
   const React = require('react');
   const useState = React.useState;
   const ReactDOMServer = require('react-dom/server');
