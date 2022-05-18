@@ -28,7 +28,7 @@ jobs:
       - name: install node
         run: |
           cd ~
-          sudo curl -sL https://deb.nodesource.com/setup_16.x
+          sudo curl -s https://deb.nodesource.com/setup_16.x | sudo bash
           sudo apt update
           sudo apt upgrade -y
           sudo apt install -y --no-install-recommends nodejs
