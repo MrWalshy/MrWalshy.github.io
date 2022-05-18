@@ -51,9 +51,7 @@ jobs:
           sudo ln -s ~/npm-global/babel-cli/bin/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
           
       - name: check directory
-        run: |
-          ls ~/npm-global
-          npm root -g | ls
+        run: npm root -g
 
       - name: configure global react support with npm
         run: sudo npm i -g react react-dom react-router-dom
