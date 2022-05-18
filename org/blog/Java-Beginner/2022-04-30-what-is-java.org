@@ -3,6 +3,8 @@
 #+SUBTITLE: Background knowledge concerning Java programming
 #+AUTHOR: Morgan Walsh
 
+---------------------------------------
+
 Java is a general-purpose, object oriented, platform independent, simple, and robust programming language. You may have heard the motto write once, run anywhere, or something similar, meaning that a Java program can be written once and compiled once to run on all platforms that support Java.
 
 ** Benefits of using Java
@@ -17,7 +19,11 @@ Java is a general-purpose, object oriented, platform independent, simple, and ro
 
 ** Compilers and interpreters
 
-To understand how Java works, we need to understand what compilation and interpretation mean in the context of software development. Compilation is a process in which the work of converting source code, the code written in the programming language, to the machine language which can be understood by a digital processor – the name for this machine language is binary, a simple language consisting of 0s and 1s that is notoriously complex to work with directly.
+To understand how Java works, we need to understand what compilation and interpretation mean in the context of software development.
+
+-------------------------------------
+
+Compilation is a process in which the work of converting source code, the code written in the programming language, to the machine language which can be understood by a digital processor – the name for this machine language is binary, a simple language consisting of 0s and 1s that is notoriously complex to work with directly.
 
 - Compilation models often have an intermediary language of some form to act as an abstraction between the source code and the machine code, this can be a language called assembly which works directly with the hardware to produce the required sequences of 0s and 1s or a bytecode style language which operates similarly to assembly, bytecode languages are then usually translated into machine-level assembly code.
 - Compiling source code to intermediary languages often benefits the development of the language itself as developers can use pre-existing tools that are simpler to use than raw binary code 
@@ -44,6 +50,8 @@ Here, the source code is converted into binary machine code, 0's and 1's.
 ** How do compilers and interpreters fit into Java?
 
 Java is a language which goes through both compilation and interpretation, that is Java is traditionally known as a compiled language but does also include interpretation at a lower level.
+
+-----------------------------------------------------------------
 
 Java applications run using a special piece of software called the Java Virtual Machine (JVM), this software contains an interpreter and a just-in-time compiler (JIT compiler) which enables platform independence as all we need to run the code is a JVM on our machine. To run a Java app, we first must compile its source code into an intermediary language called bytecode; we can compile Java source code into bytecode using the Java Compiler (javac), a tool included in the Java Development Kit – a set of software required for developing Java applications:
 

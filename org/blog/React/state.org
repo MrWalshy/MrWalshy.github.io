@@ -5,6 +5,10 @@
 #+keywords: React JavaScript HTML
 #+subtitle: An introduction to component state
 
+If you haven't read [[./what_are_components_and_jsx.org][Components, JSX and props]] or [[./what-is-react.org][What is React?]] yet, it could be useful :)
+
+------------------------------
+
 In React, we often want to create dynamic components where the data inside them could change. Using props, we cannot do this unless we re-render the whole component manually. React components have a built-in ~state~ object for managing data that is subject to change, when this object changes the component will be re-rendered.
 
 ** Adding state to a component

@@ -5,6 +5,8 @@
 #+keywords: React JavaScript HTML
 #+subtitle: An introduction to what React is, finishing with a short example of bootstrapping a project.
 
+--------------------------------
+
 React is a user interface (UI) component library written and used in JavaScript by Facebook/Meta, it is used for building single-page applications for the web using reusable components.
 
 ** Requirements
@@ -15,30 +17,30 @@ React is a user interface (UI) component library written and used in JavaScript 
 
 Not required, but recommended, is a code editor for creating React applications. A commonly employed tool is [[https://code.visualstudio.com/][VS Code]] - a cross-platform code editor developed by Microsoft. You may also use a standard text editor if you wish...
 
-Another choice of editor is [[https://github.com/gitpod-io/openvscode-server][OpenVSCode]] Server by Gitpod, a direct fork of the open-source base for VS Code by Microsoft with minimal changes. OpenVSCode Server can be used to access VS Code in the browser, something I am currently doing with my home server.
+Another choice of editor is [[https://github.com/gitpod-io/openvscode-server][OpenVSCode]] Server by Gitpod, a direct fork of the open-source base for VS Code by Microsoft with minimal changes. OpenVSCode Server can be used to access VS Code in the browser, something I am currently /trialling/ with my home server.
 
 *** Setting up OpenVSCode Server with Docker
 
 A quick and easy route to setup OpenVSCode Server, without affecting your host machine for the server, is to use Docker. Run the following command to start an OpenVSCode Server on port 3000:
 
-#+BEGIN_SRC docker
-docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" gitpod/openvscode-server
+#+BEGIN_SRC shell
+  docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" gitpod/openvscode-server
 #+END_SRC
 
 My preference is to set it up using a Dockerfile instead, my setup is as follows:
 
-#+BEGIN_SRC dockerfile
-FROM gitpod/openvscode-server:latest
-# get permissions to install packages
-USER root
-# install nodejs 16, which includes npm 8
-RUN cd ~ \
-    && curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - \
-	  && apt-get update \
-	  && apt-get install -y --no-install-recommends nodejs
-# restore permissions for web interface
-USER "openvscode-server" 
-EXPOSE 3000 5500
+#+BEGIN_SRC shell
+  FROM gitpod/openvscode-server:latest
+  # get permissions to install packages
+  USER root
+  # install nodejs 16, which includes npm 8
+  RUN cd ~ \
+      && curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - \
+      && apt-get update \
+      && apt-get install -y --no-install-recommends nodejs
+  # restore permissions for web interface
+  USER "openvscode-server" 
+  EXPOSE 3000 5500
 #+END_SRC
 
 The above dockerfile will retrieve the latest openvscode-server image, install Node 16 and then expose some ports:
@@ -48,17 +50,17 @@ The above dockerfile will retrieve the latest openvscode-server image, install N
 
 Ensure you are are in the same directory as the ~Dockerfile~ and enter the following to build an image for the container:
 
-#+BEGIN_EXAMPLE
-sudo docker build -t openvscode-server-image .
-#+END_EXAMPLE
+#+begin_src shell
+  sudo docker build -t openvscode-server-image .
+#+end_src
 
 - this image is tagged as ~openvscode-server-image~
 
 A container can be created from the new image with the following ~docker run~ command, which exposes ports 3000 and 5500, and specifies a volume in the home directory for persisting changes to the hosts rather than the containers filesystem:
 
-#+BEGIN_EXAMPLE
-docker run -d --init -p 3000:3000 -p 5500:5500 -v "$(pwd):/home/workspace:cached" --name my-openvscode-server openvscode-server-image
-#+END_EXAMPLE
+#+begin_src shell
+  docker run -d --init -p 3000:3000 -p 5500:5500 -v "$(pwd):/home/workspace:cached" --name my-openvscode-server openvscode-server-image
+#+end_src
 
 The container created by this command is called ~my-opnvscode-server~ and is built from the previous image.
 
@@ -74,15 +76,17 @@ Other useful commands include:
 
 React came about in 2011 when Facebook created it for their own use, it was open-sourced in 2013 to allow the wider developer community to use it. This doesn't explain why it is used though...
 
+-----------------------
+
 React is often used as it offers a different model of developing dynamic web applications, traditionally a web application would consist of multiple HTML, CSS and JavaScript files scattered about - the particular problem is HTML and JavaScript files would start to explode in number and size, thus creating a maintainability nightmare. React takes a different approach by combining markup syntax with JavaScript syntax, using something known as JSX. The combination of markup and JavaScript in one file allows for specialised and reusable components to be created, which can be plugged together to create a website.
 
 This approach of modelling components requires us to think about our design ahead of time, for example consider a todo list on a web page. The todo list itself is a component:
 
 #+BEGIN_SRC html
-<ul id="todolist">
-  <li class="todoitem">Todo item 1</li>
-  <li class="todoitem">Todo item 2</li>
-</ul>
+  <ul id="todolist">
+    <li class="todoitem">Todo item 1</li>
+    <li class="todoitem">Todo item 2</li>
+  </ul>
 #+END_SRC
 
 Each list item inside the todo list can also be considered a component, as it is representing an element of the todo list.
@@ -90,9 +94,9 @@ Each list item inside the todo list can also be considered a component, as it is
 React's JSX takes a more pragmatic approach in which we combine markup and code, an example of the above todo list in React might look like:
 
 #+BEGIN_SRC js
-const data = ["item1", "item2"];
+  const data = ["item1", "item2"];
 
-<TodoList items={data} />
+  <TodoList items={data} />
 #+END_SRC
 
 - It should be noted that we would have to create the TodoList component ourselves, it does not exist by default
@@ -152,9 +156,13 @@ At the time of writing (May 2022), ~create-react-app~ generates React version 18
 
 ** Running a React application
 
-To run a React application, we must call an npm script that was created by the ~create-react-app~ tool. To run the project, navigate to the root of the project and run: ~npm run start~
+To run a React application, we must call an npm script that was created by the ~create-react-app~ tool - see the scripts section in ~package.json~.
 
-This will start up the React application that was generated by the tool and open it in your default browser, this is hosted on your local machine and is not accessible to the internet.
+-----------------
+
+To run the project, navigate to the root of the project and run: ~npm run start~
+
+This will start up the React application that was generated by the tool and open it in your default browser, this is hosted on your local machine and is not accessible to the internet /unless the ports have been forwarded by your router or firewall/.
 
 #+BEGIN_QUOTE
 If a browser was not opened, ensure no errors where printed in the console when you ran the npm command and navigate to ~localhost:3000~ in your browser - note that ~127.0.0.1~ (local loopback address) can be used instead of ~localhost~ if wanted.
@@ -165,14 +173,16 @@ If everything went okay, your terminal output and browser should look like the f
 #+CAPTION: Successful compilation output example
 [[./img/successful-react-compilation-example.png]]
 
+- In my example, my port is 3001 as I already something running on port 3000. If this is the case for you, you will be prompted upon running the app with ~npm run start~ whether you want to choose a new port or not.
+
 #+CAPTION: Default generated page for create-react-app projects
 [[./img/react-app-default-browser.png]]
 
-- In my example, my port is 3001 as I already something running on port 3000. If this is the case for you, you will be prompted upon running the app with ~npm run start~ whether you want to choose a new port or not.
+By default, the generated React app includes some source code inside ~src/App.js~ which is rendered into ~public/index.html~.
 
 ** Where next?
 
-A good next step would be to look inside the ~src~ folder, specifically at the ~App.js~ file which acts as the entry point of the application. The next post will be looking at how we can create our own simple components using both HTML and JavaScript together.
+A good next step would be to look inside the ~src~ folder, specifically at the ~App.js~ file which acts as the entry point of the application. The next post will be looking at how we can create our own simple components using both HTML and JavaScript together - [[./what_are_components_and_jsx.org]]
 
 The maintainers of React have developed some amazing documentation, alongside tutorials and guides for getting started: https://reactjs.org/
 

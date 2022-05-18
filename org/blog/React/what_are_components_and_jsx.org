@@ -5,6 +5,8 @@
 #+keywords: React JavaScript HTML
 #+subtitle: An introduction to components and JSX in React 18
 
+-------------------------------------------
+
 React is a user-interface (UI) library for building components, these components represent the markup rendered to the browser display and the logic applied to said markup.
 
 #+BEGIN_QUOTE
@@ -14,7 +16,7 @@ User interfaces can be *composed* of many reusable components for presenting dat
 There are two ways of creating components in React:
 
 - Class based ES6 components
-- Function components
+- Function components (this article focuses on function components)
 
 ** [[https://reactjs.org/docs/thinking-in-react.html][Thinking in React]]
 
@@ -23,6 +25,8 @@ React is known for its abilities to create dynamic websites, but it requires us 
 1. Start with a mock
 
    A *mock* is a design (often a wireframe), possibly with accompanying data for an existing or planned API. Usually, this will be created by designers but if it is a solo project you will be responsible for creating the mocks.
+
+   ------------------
 
 2. Break the UI into a component hierarchy
 
@@ -66,6 +70,8 @@ React is known for its abilities to create dynamic websites, but it requires us 
 
      - TodoItem
 
+   --------------------
+
 3. Build a *static version* in React
 
    Once the component hierarchy is identified, a *static version* of the web application can be created which takes a data model and renders the UI but does not have any dynamic interactivity... yet!
@@ -84,6 +90,8 @@ React is known for its abilities to create dynamic websites, but it requires us 
 
    - Bottom-up approach: Start the the components lower in the hierarchy and work your way up.
 
+   -------------------------------------------------------------
+
 4. Identify the minimal (but complete) representation of UI state
 
    To make UI's interactive, React uses *state*. State is used to manage the data that changes in our components. There are three questions you can ask about some data to identify whether it is state or not:
@@ -95,6 +103,8 @@ React is known for its abilities to create dynamic websites, but it requires us 
    3. Can you compute it based on any other state or props in your component? (probably not state if so)
 
    In the todo list example, the only data is the original list of todo items on which no modifications are made. This would not be stateful in its current form, but would be if we required the ability to add or remove todos from the list.
+
+   -------------------------------------
 
 5. Identify where state should live
 
@@ -109,6 +119,8 @@ React is known for its abilities to create dynamic websites, but it requires us 
    - Either the common owner or another higher up component should own the state.
 
    - If none of the current components make sense holding the piece of state, create a new component for holding the state and add it in the hierarchy above the commmon owner component.
+
+   ---------------------------------------
 
 6. Add inverse data flow
 
@@ -320,7 +332,7 @@ We could map the username list to different elements if we wanted as well:
                                       <form key={user.username}>
                                           <h3>{user.username} | Edit profile</h3>
                                           <label htmlFor="age">Age: </label>
-                                          <input type="number" id="age" style="display: block;" defaultValue={user.age} />
+                                          <input type="number" id="age" defaultValue={user.age} />
                                       </form>
       );
 
@@ -358,7 +370,7 @@ We will use the form from the previous rendering arrays example to illustrate ho
                  The input is data that changes during the lifecycle of the component, this represents state and will be explored in a different article.
               */}
               <label htmlFor="age">Age: </label>
-              <input type="number" id="age" style="display: block;" defaultValue={props.user.age} />
+              <input type="number" id="age" defaultValue={props.user.age} />
           </form>
   );
 #+END_SRC

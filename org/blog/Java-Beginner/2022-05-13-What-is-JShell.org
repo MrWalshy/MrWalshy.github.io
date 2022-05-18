@@ -5,6 +5,8 @@
 
 JShell is a REPL tool, Read-Eval-Print-Loop, for experimenting with Java code to get immediate results.
 
+-------------------------------
+
 ** Opening JShell
 
 To open the JShell tool, ensure you have Java on your system path and enter jshell into the console. 

@@ -3,17 +3,21 @@
 #+SUBTITLE: An overview of the operators available in Java - Java 11 tutorials
 #+AUTHOR: Morgan Walsh
 
+----------------------------------------------------
+
 The Java language contain *operators* (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its *operands*. For example, in ~3 – 4~, ~3~ is the left operand, ~-~ is the operator and ~4~ is the right operand.
 
 Java has three types of operation:
 
-- Unary: Unary operators have one operand 
-- Binary: Binary operators have two operands 
-- Ternary: Ternary operators have three operands
+- *Unary*: Unary operators have one operand 
+- *Binary*: Binary operators have two operands 
+- *Ternary*: Ternary operators have three operands
 
 ** Operator precedence and associativity
 
 Operators, like in Maths, have a *precedence* – that is, we perform multiplication before addition for example. Java follows the *BIDMAS* / *BODMAS* rules for arithmetic operators but does also include additional operators for additional functionality.
+
+-------------------------------------
 
 *Associativity* is the way in which an expression is evaluated, an *expression* is made up of variables, operators and method invocations and returns a single value, whether that value is nothing or something. In the following examples, the parts highlighted in bold are expressions:
 
@@ -262,18 +266,18 @@ In a logical expression, both operands will always be checked unlike short-circu
 Short-circuit AND:
 
 #+BEGIN_SRC java
-bool result = true && true; // true, both checked 
-result = true && false; // false, both checked 
-result = false && false; // false, right operand never gets checked
+  bool result = true && true; // true, both checked 
+  result = true && false; // false, both checked 
+  result = false && false; // false, right operand never gets checked
 #+END_SRC
 
 Short-circuit OR:
 
 #+BEGIN_SRC java
-bool result = true || false; // true, only left checked 
-result = true || true; // true, only left checked 
-result = false || false; // false, both checked 
-#+END_SRC java
+  bool result = true || false; // true, only left checked 
+  result = true || true; // true, only left checked 
+  result = false || false; // false, both checked
+#+END_SRC
 
 *** Ternary operator
 
@@ -320,17 +324,17 @@ We could then print the ~statement~ string to the console or use it somewhere el
 2. Use 1 of each of the compound assignment operators and assign the result of the expression you make to a variable. 
 
 3. Boolean expressions can be compounded, that is they can have multiple conditions in them:
-   
- #+BEGIN_SRC java
-     boolean isRaining = true; 
-     boolean isSunny = false; 
-     boolean isCloudy = true; 
-     boolean isRainingAndSunnyOrCloudy = isRaining && isSunny || isCloudy;
+
+#+BEGIN_SRC java
+  boolean isRaining = true; 
+  boolean isSunny = false; 
+  boolean isCloudy = true; 
+  boolean isRainingAndSunnyOrCloudy = isRaining && isSunny || isCloudy;
 #+END_SRC
 
 In the above expression, the ~isRaining && isSunny~ expression is executed first, which results in ~false~. The expression then becomes ~false || isCloudy~. This then returns ~true~, which is the correct result, but the logic of the expression is wrong. If we change ~isRaining~ to ~false~, we will still get ~true~ back.
 
-Insert parenthesis to make the boolean expression evaluate correctly.
+Task: Insert parenthesis to make the boolean expression evaluate correctly.
 
 4. Given the integer ~age~ and double ~hourlyRate~, create a boolean expression that checks if the age is greater than 18 but less than 21 and their hourly rate is greater than or equal to £6.83, i.e., that they are earning at least minimum wage for their age range in the UK at the time of writing (early 2022):
 
@@ -338,7 +342,7 @@ Insert parenthesis to make the boolean expression evaluate correctly.
    int age = 18; 
    double hourlyRate = 7.00; 
    double minWageEighteenToTwenty = 6.83;
-#+END_SRC java
+#+END_SRC
 
 5. Boolean expressions can be created to check if a number is even or odd by using the modulus operator, for example:
 
