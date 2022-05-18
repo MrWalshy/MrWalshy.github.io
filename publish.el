@@ -137,7 +137,7 @@
 
 ;; path to global node modules
 (setenv "NODE_PATH"
-        (concat "/lib/node_modules/" ":" (getenv "NODE_PATH")))
+        (concat "/opt/hostedtoolcache/node/16.15.0/x64/lib/node_modules/" ":" (getenv "NODE_PATH")))
 
 ;; allow js to run without prompts
 (defun my-org-confirm-babel-evaluate (lang body)
