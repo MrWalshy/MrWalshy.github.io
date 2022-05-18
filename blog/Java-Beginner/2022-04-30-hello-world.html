@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-18 Wed 21:29 -->
+<!-- 2022-05-18 Wed 22:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your first Java program</title>
@@ -23,22 +23,24 @@
 <h1 class="title">Your first Java program</h1>
 <p class="subtitle">Introducing Java programming with the canonical 'Hello World' example</p>
 </header><p>
-A commonality amongst programmers is that in any new language we meet, we write a <code>“Hello World!”</code> program – a simple application which will output those exact words to the screen. 
+A commonality amongst programmers is that in any new language we meet, we write a <code>“Hello World!”</code> program – a simple application which will output those exact words to the screen.
 </p>
 
+<hr>
+
 <p>
-To follow along, first create a new file called <code>Runner.java</code>: 
+To follow along, first create a new file called <code>Runner.java</code> in a directory of your choice: 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">mkdir hello-world 
+<pre class="src src-shell">mkdir hello-world 
 <span style="font-weight: bold;">cd</span> hello-world 
 touch Runner.java 
 </pre>
 </div>
 
 <p>
-The above is using Linux style commands, please ensure if on Windows you are using Git Bash.
+The above <code>touch</code> command is not available on WIndows by default, please ensure if on Windows you are using Git Bash or the Windows Subsystem for Linux (WSL)&#x2026; Or you could just use <code>echo</code> with the redirection operator like so: <code>echo &gt; Runner.java</code> :)
 </p>
 
 <p>
@@ -60,7 +62,7 @@ Once you have entered the code, save, and exit back to the console. Then type th
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compile the Runner.java file as a class file using the javac tool </span>
+<pre class="src src-shell"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">compile the Runner.java file as a class file using the javac tool </span>
 javac Runner.java 
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">run the compiled class file (which is in the same directory) using the java tool </span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">- do not specify .class or the compiled file will not be executed </span>
@@ -76,20 +78,23 @@ java Runner
 If done correctly, you will see something like the following outputted in the console window:
 </p>
 
-<pre class="example">
-Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
+<div class="org-src-container">
+<pre class="src src-shell">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
 $ javac Runner.java
 
 Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
 $ java Runner Hello world
 </pre>
+</div>
 
-<div id="outline-container-org9c499b8" class="outline-2">
-<h2 id="org9c499b8">Program breakdown</h2>
-<div class="outline-text-2" id="text-org9c499b8">
+<div id="outline-container-org964507d" class="outline-2">
+<h2 id="org964507d">Program breakdown</h2>
+<div class="outline-text-2" id="text-org964507d">
 <p>
-A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs. 
+A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs.
 </p>
+
+<hr>
 
 <p>
 Java is an object-oriented language, it uses the construct of a class to represent a component in a software system – a component could be the representation of physical things like a customer, an animal, a tree or even non-tangible logical things like mathematical formula or graphs. 
@@ -106,7 +111,7 @@ In the Hello World example, we create a class called `Runner`:
 <div class="org-src-container">
 <pre class="src src-java"><span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Runner</span> {
 
-} 
+}
 </pre>
 </div>
 
@@ -157,7 +162,7 @@ To invoke a method, we specify the name of the method followed by a set of paren
 <footer>
   <small>
     Copyright 2022 Morgan Walsh.<br />
-    Last updated 2022-05-18 Wed 21:28. <br />
+    Last updated 2022-05-18 Wed 22:25. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </small>

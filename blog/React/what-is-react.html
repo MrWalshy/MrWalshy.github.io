@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-18 Wed 21:29 -->
+<!-- 2022-05-18 Wed 22:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What is React?</title>
@@ -25,13 +25,15 @@
 <header>
 <h1 class="title">What is React?</h1>
 <p class="subtitle">An introduction to what React is, finishing with a short example of bootstrapping a project.</p>
-</header><p>
+</header><hr>
+
+<p>
 React is a user interface (UI) component library written and used in JavaScript by Facebook/Meta, it is used for building single-page applications for the web using reusable components.
 </p>
 
-<div id="outline-container-orgf1d2eca" class="outline-2">
-<h2 id="orgf1d2eca">Requirements</h2>
-<div class="outline-text-2" id="text-orgf1d2eca">
+<div id="outline-container-org1cab29c" class="outline-2">
+<h2 id="org1cab29c">Requirements</h2>
+<div class="outline-text-2" id="text-org1cab29c">
 <ul class="org-ul">
 <li>Node.js: v16</li>
 <li>npm: v8</li>
@@ -43,19 +45,19 @@ Not required, but recommended, is a code editor for creating React applications.
 </p>
 
 <p>
-Another choice of editor is <a href="https://github.com/gitpod-io/openvscode-server">OpenVSCode</a> Server by Gitpod, a direct fork of the open-source base for VS Code by Microsoft with minimal changes. OpenVSCode Server can be used to access VS Code in the browser, something I am currently doing with my home server.
+Another choice of editor is <a href="https://github.com/gitpod-io/openvscode-server">OpenVSCode</a> Server by Gitpod, a direct fork of the open-source base for VS Code by Microsoft with minimal changes. OpenVSCode Server can be used to access VS Code in the browser, something I am currently <i>trialling</i> with my home server.
 </p>
 </div>
 
-<div id="outline-container-org1e5951e" class="outline-3">
-<h3 id="org1e5951e">Setting up OpenVSCode Server with Docker</h3>
-<div class="outline-text-3" id="text-org1e5951e">
+<div id="outline-container-org9ee0e79" class="outline-3">
+<h3 id="org9ee0e79">Setting up OpenVSCode Server with Docker</h3>
+<div class="outline-text-3" id="text-org9ee0e79">
 <p>
 A quick and easy route to setup OpenVSCode Server, without affecting your host machine for the server, is to use Docker. Run the following command to start an OpenVSCode Server on port 3000:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-docker">docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" gitpod/openvscode-server
+<pre class="src src-shell">docker run -it --init -p 3000:3000 -v <span style="font-style: italic;">"$(pwd):/home/workspace:cached"</span> gitpod/openvscode-server
 </pre>
 </div>
 
@@ -64,16 +66,16 @@ My preference is to set it up using a Dockerfile instead, my setup is as follows
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile">FROM gitpod/openvscode-server:latest
-# get permissions to install packages
+<pre class="src src-shell">FROM gitpod/openvscode-server:latest
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">get permissions to install packages</span>
 USER root
-# install nodejs 16, which includes npm 8
-RUN cd ~ \
-    &amp;&amp; curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - \
-	  &amp;&amp; apt-get update \
-	  &amp;&amp; apt-get install -y --no-install-recommends nodejs
-# restore permissions for web interface
-USER "openvscode-server" 
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">install nodejs 16, which includes npm 8</span>
+RUN cd ~ <span style="font-style: italic;">\</span>
+    &amp;&amp; curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - <span style="font-style: italic;">\</span>
+    &amp;&amp; apt-get update <span style="font-style: italic;">\</span>
+    &amp;&amp; apt-get install -y --no-install-recommends nodejs
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">restore permissions for web interface</span>
+USER <span style="font-style: italic;">"openvscode-server"</span> 
 EXPOSE 3000 5500
 </pre>
 </div>
@@ -91,9 +93,10 @@ The above dockerfile will retrieve the latest openvscode-server image, install N
 Ensure you are are in the same directory as the <code>Dockerfile</code> and enter the following to build an image for the container:
 </p>
 
-<pre class="example">
-sudo docker build -t openvscode-server-image .
+<div class="org-src-container">
+<pre class="src src-shell">sudo docker build -t openvscode-server-image .
 </pre>
+</div>
 
 <ul class="org-ul">
 <li>this image is tagged as <code>openvscode-server-image</code></li>
@@ -103,9 +106,10 @@ sudo docker build -t openvscode-server-image .
 A container can be created from the new image with the following <code>docker run</code> command, which exposes ports 3000 and 5500, and specifies a volume in the home directory for persisting changes to the hosts rather than the containers filesystem:
 </p>
 
-<pre class="example">
-docker run -d --init -p 3000:3000 -p 5500:5500 -v "$(pwd):/home/workspace:cached" --name my-openvscode-server openvscode-server-image
+<div class="org-src-container">
+<pre class="src src-shell">docker run -d --init -p 3000:3000 -p 5500:5500 -v <span style="font-style: italic;">"$(pwd):/home/workspace:cached"</span> --name my-openvscode-server openvscode-server-image
 </pre>
+</div>
 
 <p>
 The container created by this command is called <code>my-opnvscode-server</code> and is built from the previous image.
@@ -126,12 +130,14 @@ Other useful commands include:
 </div>
 </div>
 
-<div id="outline-container-orgcc4c04c" class="outline-2">
-<h2 id="orgcc4c04c">Why is React used?</h2>
-<div class="outline-text-2" id="text-orgcc4c04c">
+<div id="outline-container-orgf8bc7d4" class="outline-2">
+<h2 id="orgf8bc7d4">Why is React used?</h2>
+<div class="outline-text-2" id="text-orgf8bc7d4">
 <p>
 React came about in 2011 when Facebook created it for their own use, it was open-sourced in 2013 to allow the wider developer community to use it. This doesn't explain why it is used though&#x2026;
 </p>
+
+<hr>
 
 <p>
 React is often used as it offers a different model of developing dynamic web applications, traditionally a web application would consist of multiple HTML, CSS and JavaScript files scattered about - the particular problem is HTML and JavaScript files would start to explode in number and size, thus creating a maintainability nightmare. React takes a different approach by combining markup syntax with JavaScript syntax, using something known as JSX. The combination of markup and JavaScript in one file allows for specialised and reusable components to be created, which can be plugged together to create a website.
@@ -200,9 +206,9 @@ The React browser tools are available on multiple platforms as a plugin/extensio
 </div>
 </div>
 
-<div id="outline-container-org17e72e3" class="outline-2">
-<h2 id="org17e72e3">Creating a React project using create-react-app</h2>
-<div class="outline-text-2" id="text-org17e72e3">
+<div id="outline-container-org471e801" class="outline-2">
+<h2 id="org471e801">Creating a React project using create-react-app</h2>
+<div class="outline-text-2" id="text-org471e801">
 <p>
 The <code>create-react-app</code> tool is developed by Facebook to allow React applications to be quickly bootstrapped with an optimal setup which includes:
 </p>
@@ -296,15 +302,21 @@ At the time of writing (May 2022), <code>create-react-app</code> generates React
 </div>
 </div>
 
-<div id="outline-container-org268d0bb" class="outline-2">
-<h2 id="org268d0bb">Running a React application</h2>
-<div class="outline-text-2" id="text-org268d0bb">
+<div id="outline-container-org6e571da" class="outline-2">
+<h2 id="org6e571da">Running a React application</h2>
+<div class="outline-text-2" id="text-org6e571da">
 <p>
-To run a React application, we must call an npm script that was created by the <code>create-react-app</code> tool. To run the project, navigate to the root of the project and run: <code>npm run start</code>
+To run a React application, we must call an npm script that was created by the <code>create-react-app</code> tool - see the scripts section in <code>package.json</code>.
+</p>
+
+<hr>
+
+<p>
+To run the project, navigate to the root of the project and run: <code>npm run start</code>
 </p>
 
 <p>
-This will start up the React application that was generated by the tool and open it in your default browser, this is hosted on your local machine and is not accessible to the internet.
+This will start up the React application that was generated by the tool and open it in your default browser, this is hosted on your local machine and is not accessible to the internet <i>unless the ports have been forwarded by your router or firewall</i>.
 </p>
 
 <blockquote>
@@ -324,6 +336,10 @@ If everything went okay, your terminal output and browser should look like the f
 <figcaption><span class="figure-number">Figure 2: </span>Successful compilation output example</figcaption>
 </figure>
 
+<ul class="org-ul">
+<li>In my example, my port is 3001 as I already something running on port 3000. If this is the case for you, you will be prompted upon running the app with <code>npm run start</code> whether you want to choose a new port or not.</li>
+</ul>
+
 
 <figure>
 <img src="./img/react-app-default-browser.png" alt="react-app-default-browser.png">
@@ -331,17 +347,17 @@ If everything went okay, your terminal output and browser should look like the f
 <figcaption><span class="figure-number">Figure 3: </span>Default generated page for create-react-app projects</figcaption>
 </figure>
 
-<ul class="org-ul">
-<li>In my example, my port is 3001 as I already something running on port 3000. If this is the case for you, you will be prompted upon running the app with <code>npm run start</code> whether you want to choose a new port or not.</li>
-</ul>
+<p>
+By default, the generated React app includes some source code inside <code>src/App.js</code> which is rendered into <code>public/index.html</code>.
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgcb50fba" class="outline-2">
-<h2 id="orgcb50fba">Where next?</h2>
-<div class="outline-text-2" id="text-orgcb50fba">
+<div id="outline-container-org103bd86" class="outline-2">
+<h2 id="org103bd86">Where next?</h2>
+<div class="outline-text-2" id="text-org103bd86">
 <p>
-A good next step would be to look inside the <code>src</code> folder, specifically at the <code>App.js</code> file which acts as the entry point of the application. The next post will be looking at how we can create our own simple components using both HTML and JavaScript together.
+A good next step would be to look inside the <code>src</code> folder, specifically at the <code>App.js</code> file which acts as the entry point of the application. The next post will be looking at how we can create our own simple components using both HTML and JavaScript together - <a href="./what_are_components_and_jsx.html">./what_are_components_and_jsx.html</a>
 </p>
 
 <p>
@@ -354,7 +370,7 @@ The maintainers of React have developed some amazing documentation, alongside tu
 <footer>
   <small>
     Copyright 2022 Morgan Walsh.<br />
-    Last updated 2022-05-18 Wed 21:28. <br />
+    Last updated 2022-05-18 Wed 22:25. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </small>

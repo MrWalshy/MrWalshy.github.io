@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-18 Wed 21:29 -->
+<!-- 2022-05-18 Wed 22:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>State with React hooks</title>
@@ -26,12 +26,18 @@
 <h1 class="title">State with React hooks</h1>
 <p class="subtitle">An introduction to component state</p>
 </header><p>
+If you haven't read <a href="./what_are_components_and_jsx.html">Components, JSX and props</a> or <a href="./what-is-react.html">What is React?</a> yet, it could be useful :)
+</p>
+
+<hr>
+
+<p>
 In React, we often want to create dynamic components where the data inside them could change. Using props, we cannot do this unless we re-render the whole component manually. React components have a built-in <code>state</code> object for managing data that is subject to change, when this object changes the component will be re-rendered.
 </p>
 
-<div id="outline-container-orgd92f994" class="outline-2">
-<h2 id="orgd92f994">Adding state to a component</h2>
-<div class="outline-text-2" id="text-orgd92f994">
+<div id="outline-container-orge491420" class="outline-2">
+<h2 id="orge491420">Adding state to a component</h2>
+<div class="outline-text-2" id="text-orge491420">
 <p>
 Hooks were added to React in version 16.8, these allow function components to access their state and lifecycle.
 </p>
@@ -113,15 +119,15 @@ Once the state is initialised, it can be used anywhere in the component.
 </div>
 </div>
 
-<div id="outline-container-org4767a2d" class="outline-2">
-<h2 id="org4767a2d">Updating state</h2>
-<div class="outline-text-2" id="text-org4767a2d">
+<div id="outline-container-orgbee31ca" class="outline-2">
+<h2 id="orgbee31ca">Updating state</h2>
+<div class="outline-text-2" id="text-orgbee31ca">
 <p>
 To update state, we must not access the variable directly. Instead, we should use the mutator function provided by the <code>useState</code> hook.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js" id="orga57da59"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">UserEditForm</span> = (props) =&gt; {
+<pre class="src src-js" id="orgaaf5ac4"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">UserEditForm</span> = (props) =&gt; {
 
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">age</span>, <span style="font-weight: bold; font-style: italic;">setAge</span>] = useState(props.user.age);
 
@@ -150,7 +156,7 @@ with the ability to modify the value of age. Given the following object:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js" id="org29f2a6b"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">user</span> = {
+<pre class="src src-js" id="org2c8ec50"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">user</span> = {
   username: <span style="font-style: italic;">"Fred"</span>,
   age: 32
 };
@@ -176,7 +182,7 @@ was passed as a prop to the edit form component, it would render the following H
 <footer>
   <small>
     Copyright 2022 Morgan Walsh.<br />
-    Last updated 2022-05-18 Wed 21:28. <br />
+    Last updated 2022-05-18 Wed 22:25. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </small>
