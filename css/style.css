@@ -1,0 +1,225 @@
+html {
+    font-size: 10px;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    font-size: inherit;
+}
+
+/* Base */
+html,
+body {
+    background-color: #222;
+    min-height: 100%;
+    line-height: 1.5;
+}
+
+body {
+    color: #fafafa;
+    font-family: "Courier New";
+}
+
+::selection {
+    background-color:  #2ecc40;
+    color: white;
+}
+
+/* Responsive content positioning */
+@media only screen and (min-width: 1020px) /* Large screens */
+{
+    body{
+        padding: 10vh 25vw;
+    }
+}
+
+@media only screen and (max-width: 1020px) and (min-width: 750px) /* Small screens */
+{
+    body{
+        padding: 5vh 10vw;
+    }
+}
+
+@media only screen and (max-width: 750px) /* Small screens */
+{
+    body{
+        padding: 2vh 5vw;
+    }
+}
+
+/* Headers */
+h1{font-size: 4.8rem;}
+h2{font-size: 4.0rem;}
+h1 > .subtitle, h3, h4, h5, h6{font-size: 3.2rem;}
+
+.title{
+    margin-bottom: 2.5rem;
+}
+
+/* Padding & Margin */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+pre, blockquote, ul, ol, p, table{
+    margin: 1.6rem 0;
+}
+
+h1, h2 {
+    margin-top: 3.2rem; 
+    line-height: 3.2rem;
+}
+
+h3, h4, h5, h6 {
+    margin-top: 1.6rem;
+}
+
+/* Links  */
+p, a, li {
+    font-size: 1.6rem;
+}
+
+a, a:visited {
+    color: #01ff70;
+    text-decoration: underline;
+}
+
+a:hover, a:focus, a:active {
+    color: #2ecc40;
+}
+
+/* Code */
+pre {
+    font-family: "Courier New";
+    background-color: #333;
+    padding: 0.8rem;
+    border-radius: 0.6rem;
+    font-size: 1.5rem;
+    color: #EEE;
+    overflow-x: auto;
+}
+
+.org-keyword{
+    color: #01ff70;
+}
+
+.org-rainbow-delimiters-depth-1{
+    color: #2ecc40;
+}
+
+.org-rainbow-delimiters-depth-2{
+    color: #01ff70;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 3px solid #01ff70;
+    padding-left: 1rem;
+}
+
+li{
+    list-style-position: inside;
+}
+
+/* Tags */
+.tag{
+    margin-top: 0.8rem;
+    display: block;
+    color: white;
+    font-size: var(--font-size-xsmall);
+}
+
+.tag > span{
+    font-weight: 400;
+    font-size: 1.3rem;
+    background-color: #444;
+    text-transform: uppercase;
+    border-radius: 2px;
+    width: fit-content;
+    height: auto;
+    padding: 1px 5px;
+}
+
+/* Keywords */
+.todo{
+    color: #2ecc40;
+}
+
+.done{
+    color: #444;
+}
+
+/* Overflows */
+.outline-text-2, .outline-text-3, .outline-text-4{
+	  max-width: 100%;
+	  overflow-x: auto;
+}
+
+/* Table */
+tr:nth-child(even) {
+    background-color: #333;
+}
+
+th, td{
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* Nested lists, aids the sitemap */
+li > ul {
+    padding-left: 24px;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+}
+
+.nav-link, #toggle {
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inherit;
+}
+
+.nav-link:hover, #toggle:hover {
+    background-color: whitesmoke;
+}
+
+#toggle {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    
+    nav {
+        flex-direction: column;
+    	padding-left: 0px;
+    }
+
+    .nav-link {
+        display: none;
+    }
+
+    #toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 3.2rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+}
+
+.show {
+    display: inherit;
+}
