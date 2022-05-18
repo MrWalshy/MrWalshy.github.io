@@ -139,6 +139,11 @@
 (setenv "NODE_PATH"
         (concat "/lib/node_modules/" ":" (getenv "NODE_PATH")))
 
+;; allow js to run without prompts
+(defun my-org-confirm-babel-evaluate (lang body)
+  (not (string= lang "js")))  ;don't ask for js
+(setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
+
 ;; load desired languages
 (org-babel-do-load-languages
    'org-babel-load-languages
