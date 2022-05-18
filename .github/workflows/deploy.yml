@@ -53,7 +53,7 @@ jobs:
       - name: check directory
         run: |
           ls ~/npm-global
-          ls ~/npm-global/babel-cli
+          npm root -g | ls
 
       - name: configure global react support with npm
         run: sudo npm i -g react react-dom react-router-dom
