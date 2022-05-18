@@ -1,6 +1,10 @@
 #+TITLE: Sitemap for project org-blog
 
 - [[file:index.org][Blog]]
+- React
+  - [[file:React/state.org][State with React hooks]]
+  - [[file:React/what_are_components_and_jsx.org][Components, JSX and props]]
+  - [[file:React/what-is-react.org][What is React?]]
 - Java-Beginner
   - [[file:Java-Beginner/2022-05-13-What-is-JShell.org][What is JShell?]]
   - [[file:Java-Beginner/2022-05-13-operators.org][Operators]]
@@ -8,6 +12,3 @@
   - [[file:Java-Beginner/2022-04-30-what-is-java.org][What is Java?]]
 - General
   - [[file:General/2022-04-30-its-alive.org][The site is up]]
-- React
-  - [[file:React/what_are_components_and_jsx.org][Components, JSX and props]]
-  - [[file:React/what-is-react.org][What is React?]]
