@@ -33,16 +33,16 @@ jobs:
           sudo apt upgrade -y
           sudo apt install -y --no-install-recommends nodejs
           
-      - name: configure global babel support (es6) with npm
-        run: |
-          sudo npm i -g babel-cli babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-preset-stage-3 babel-preset-react
-
-      - name: create link to babel and change default npm directory
+      - name: change default npm directory
         run: |
           sudo mkdir ~/npm-global
           sudo npm config set prefix '~/npm-global'
           sudo echo 'PATH=~/npm-global/bin:$PATH' > ~/.profile
           source ~/.profile
+          
+      - name: configure global babel support (es6) with npm
+        run: |
+          sudo npm i -g babel-cli babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-preset-stage-3 babel-preset-react
           sudo ln -s ~/npm-global/babel-cli/bin/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
 
       - name: configure global react support with npm
