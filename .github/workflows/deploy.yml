@@ -24,22 +24,34 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout
         uses: actions/checkout@v3
+      
+      - name: setup node.js env
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: 16
         
-      - name: install node
-        run: |
-          cd ~
-          sudo curl -sL https://deb.nodesource.com/setup_16.x
-          sudo apt update
-          sudo apt upgrade -y
-          sudo apt install -y --no-install-recommends nodejs
+#      - name: install node
+#        run: |
+#          cd ~
+#          sudo curl -s https://deb.nodesource.com/setup_16.x | sudo bash
+#          sudo apt update
+#          sudo apt upgrade -y
+#          sudo apt install -y --no-install-recommends nodejs
           
       - name: configure global babel support (es6) with npm
         run: |
           sudo npm i -g babel-cli babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-preset-stage-3 babel-preset-react
-          sudo ln -s /lib/node_modules/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
+          DIR=$(npm root -g)
+          sudo ln -s "$DIR/babel-cli/bin/babel-cli/bin/babel-node.js" /usr/local/bin/org-babel-node
+          
+      - name: check directory
+        run: npm root -g
 
       - name: configure global react support with npm
         run: sudo npm i -g react react-dom react-router-dom
+        
+      - name: configure global html prettifier
+        run: sudo npm i -g simply-beautiful
 
       - name: install emacs
         run: sudo apt install emacs -y
