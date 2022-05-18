@@ -3,32 +3,34 @@
 #+SUBTITLE: Introducing Java programming with the canonical 'Hello World' example
 #+AUTHOR: Morgan Walsh
 
-A commonality amongst programmers is that in any new language we meet, we write a ~“Hello World!”~ program – a simple application which will output those exact words to the screen. 
+A commonality amongst programmers is that in any new language we meet, we write a ~“Hello World!”~ program – a simple application which will output those exact words to the screen.
 
-To follow along, first create a new file called ~Runner.java~: 
+------------------------------------
 
-#+BEGIN_SRC sh
-mkdir hello-world 
-cd hello-world 
-touch Runner.java 
+To follow along, first create a new file called ~Runner.java~ in a directory of your choice: 
+
+#+BEGIN_SRC shell
+  mkdir hello-world 
+  cd hello-world 
+  touch Runner.java 
 #+END_SRC
 
-The above is using Linux style commands, please ensure if on Windows you are using Git Bash.
+The above ~touch~ command is not available on WIndows by default, please ensure if on Windows you are using Git Bash or the Windows Subsystem for Linux (WSL)... Or you could just use ~echo~ with the redirection operator like so: ~echo > Runner.java~ :)
 
 Once we have created the file, type ~notepad Runner.java~ to open the file in the Notepad application on Windows or use ~nano Runner.java~ to use the nano text editor in the console (Git Bash on Windows only, usually preinstalled on Linux/GNU based systems). Then type in the following code: 
 
 #+BEGIN_SRC java
-public class Runner { 
+  public class Runner { 
 
-    public static void main(String[] args) { 
-        System.out.println(“Hello world”); 
-    } 
-}
+      public static void main(String[] args) { 
+          System.out.println(“Hello world”); 
+      } 
+  }
 #+END_SRC
 
 Once you have entered the code, save, and exit back to the console. Then type the following commands (except comments starting with a hash symbol) to compile and run our code:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 # compile the Runner.java file as a class file using the javac tool 
 javac Runner.java 
 # run the compiled class file (which is in the same directory) using the java tool 
@@ -40,17 +42,19 @@ java Runner
 
 If done correctly, you will see something like the following outputted in the console window:
 
-#+BEGIN_SRC
-Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
-$ javac Runner.java
+#+BEGIN_SRC shell
+  Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
+  $ javac Runner.java
 
-Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
-$ java Runner Hello world
+  Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
+  $ java Runner Hello world
 #+END_SRC
 
 ** Program breakdown
 
-A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs. 
+A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs.
+
+--------------------------
 
 Java is an object-oriented language, it uses the construct of a class to represent a component in a software system – a component could be the representation of physical things like a customer, an animal, a tree or even non-tangible logical things like mathematical formula or graphs. 
 
@@ -59,9 +63,9 @@ Java is an object-oriented language, it uses the construct of a class to represe
 In the Hello World example, we create a class called `Runner`: 
 
 #+BEGIN_SRC java
-public class Runner {
+  public class Runner {
 
-} 
+  }
 #+END_SRC
 
 - The first line declaring the class, ~public class Runner~, is known as the class header.
@@ -74,9 +78,9 @@ public class Runner {
 Inside the class body, there is a special unit of code known as a method: 
 
 #+BEGIN_SRC java
-public static void main(String[] args) { 
-    System.out.println(“Hello world”);
-}
+  public static void main(String[] args) { 
+      System.out.println(“Hello world”);
+  }
 #+END_SRC
  
 A method is a self-contained, reusable block of code that can be called/invoked by another method. The main method shown above is a special type of method that indicates to the JVM that the program should start here. 

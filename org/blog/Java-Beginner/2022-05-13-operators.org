@@ -3,6 +3,8 @@
 #+SUBTITLE: An overview of the operators available in Java - Java 11 tutorials
 #+AUTHOR: Morgan Walsh
 
+----------------------------------------------------
+
 The Java language contain *operators* (characters which apply an operation) which can be applied to variables, values, or literals. The values used with an operator are known as its *operands*. For example, in ~3 – 4~, ~3~ is the left operand, ~-~ is the operator and ~4~ is the right operand.
 
 Java has three types of operation:
@@ -14,6 +16,8 @@ Java has three types of operation:
 ** Operator precedence and associativity
 
 Operators, like in Maths, have a *precedence* – that is, we perform multiplication before addition for example. Java follows the *BIDMAS* / *BODMAS* rules for arithmetic operators but does also include additional operators for additional functionality.
+
+-------------------------------------
 
 *Associativity* is the way in which an expression is evaluated, an *expression* is made up of variables, operators and method invocations and returns a single value, whether that value is nothing or something. In the following examples, the parts highlighted in bold are expressions:
 
