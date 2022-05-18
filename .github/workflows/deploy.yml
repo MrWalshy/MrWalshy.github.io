@@ -42,7 +42,7 @@ jobs:
           sudo mkdir ~/npm-global
           sudo npm config set prefix '~/npm-global'
           sudo echo 'PATH=~/npm-global/bin:$PATH' > ~/.profile
-          sudo source ~/.profile
+          source ~/.profile
           sudo ln -s ~/npm-global/babel-cli/bin/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
 
       - name: configure global react support with npm
