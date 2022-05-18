@@ -51,6 +51,7 @@ jobs:
           sudo ln -s ~/npm-global/babel-cli/bin/babel-cli/bin/babel-node.js /usr/local/bin/org-babel-node
           
       - name: check directory
+        run: |
           ls ~/npm-global
           ls ~/npm-global/babel-cli
 
