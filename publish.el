@@ -132,6 +132,20 @@
 ;;   (org-publish "morganwalsh.dev" t)
 ;; - t arg is optional, forces every file to re-export even if file has not changed
 
+;; alternate command for python3
+(setq org-babel-python-command "python3")
+
+;; path to global node modules
+(setenv "NODE_PATH"
+        (concat "/lib/node_modules/" ":" (getenv "NODE_PATH")))
+
+;; load desired languages
+(org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t) ;; enabled by default
+     (python . t)
+     (shell . t)
+     (js . t)))
 
 ;; build files
 ;;(org-publish-all t)
