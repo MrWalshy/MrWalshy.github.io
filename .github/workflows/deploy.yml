@@ -40,6 +40,9 @@ jobs:
 
       - name: configure global react support with npm
         run: sudo npm i -g react react-dom react-router-dom
+        
+      - name: configure global html prettifier
+        run: sudo npm i -g simply-beautiful
 
       - name: install emacs
         run: sudo apt install emacs -y
