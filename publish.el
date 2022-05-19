@@ -141,7 +141,7 @@
 
 ;; allow js to run without prompts
 (defun my-org-confirm-babel-evaluate (lang body)
-  (not (string= lang "js")))  ;don't ask for js
+  (not (string= lang "elisp")))  ;don't ask for elisp
 (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
 
 ;; load desired languages
