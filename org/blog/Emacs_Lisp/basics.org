@@ -1,0 +1,502 @@
+#+title: Emacs Lisp - Basics
+#+date: <2022-05-18 Wed>
+#+author: Morgan Walsh
+#+description: Some notes from researching Elisp
+#+keywords: emacs elisp lisp
+#+subtitle: Some notes from researching Elisp
+
+** Sources
+
+- [[https://benwindsorcode.github.io/Getting-Started-With-Emacs-Lisp/][Getting Started With Emacs Lisp Hands On - A Practical Beginners Tutorial (#1)]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/List-Processing.html#List-Processing][List Processing - GNU (#2)]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Writing-Defuns.html#Writing-Defuns][How To Write Function Definitions (#3)]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Practicing-Evaluation.html#Practicing-Evaluation][Practicing Evaluation (#4)]] - Getting and switching buffers
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/car-cdr-_0026-cons.html#car-cdr-_0026-cons][Fundamental Functions (#5)]] - List operations
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Loops-_0026-Recursion.html#Loops-_0026-Recursion][Loops and Recursion (#6)]]
+- [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs (#7)]]
+
+** Notes from source #1
+
+Emacs Lisp is a programming language used for interacting, customising and extending Emacs functionality.
+
+--------------------------------
+
+*** Running Elisp in a buffer
+
+In empty buffers, Elisp can be written and executed by placing the cursor over the end of a line and typing ~C-x C-e~:
+
+#+caption: Adding two numbers with reverse polish notation
+#+name: add-two-numbers
+#+begin_src elisp :results value :exports both :eval yes
+  (+ 2 2)
+#+end_src
+
+This will result in:
+
+#+results: add-two-numbers
+
+ELisp, and other Lisp dialects, often use Reverse Polish Notation (RPN) where the operator is specified before the operands rather than between.
+
+Functions can also be called by surrounding them with parenthesis and making them the first element:
+
+#+caption: The describe-bindings function
+#+name: call-describe-bindings
+#+begin_src elisp :exports code :eval no
+  (describe-bindings)
+#+end_src
+
+The ~describe-bindings~ function outputs a help buffer with a list of key bindings.
+
+- Note: If in a org file, run with ~C-c C-c~ instead
+
+*** Flow control (if statement)
+
+The if/else statement has the following structure:
+
+#+caption if-else statement example
+#+begin_src elisp :exports code :eval no
+  (if (condition)
+      (execute if true)
+      (execute if false))
+#+end_src
+
+*** Get current line number
+
+Use ~what-line~ to get the line number of the cursors position:
+
+#+caption what-line examples
+#+name: what-line-example
+#+begin_src elisp :results output :exports both :eval yes
+  (if (eq (what-line) "Line 1")
+      (princ "Is line 1")
+      (princ "Not line 1"))
+#+end_src
+
+The output of this is as follows:
+
+#+RESULTS: what-line-example
+: Not line 1
+
+The ~princ~ function will print a string to standard output, the ~eq~ function returns true if two inputs are equal, false otherwise.
+
+*** Writing functions
+
+The ~defun~ keyword is used to define a function:
+
+#+caption function declaration example
+#+begin_src elisp :exports code :eval no
+  (defun function-name (parameter1 parameter2 etc...)
+      (body))
+#+end_src
+
+The code to execute is placed in the body, inputs are passed as parameters.
+
+The following example is a function definition for adding two numbers:
+
+#+caption A function to add two numbers
+#+name: add-two-numbers
+#+begin_src elisp :results silent :exports code :eval yes :session basics
+  (defun add-numbers (num1 num2)
+      (+ num1 num2))
+#+end_src
+
+This can then be invoked like so:
+
+#+caption Invoking the add-numbers function
+#+name: invoke-add-two-numbers
+#+begin_src elisp :results value :exports both :eval yes :session basics
+  (add-numbers 3 2)
+#+end_src
+
+This outputs the result:
+
+#+results: invoke-add-two-numbers
+: 5
+
+*** Interacting with emacs
+
+**** Moving around the buffer
+
+The ~search-forward~ function accepts a string to search for in some text, this will jump the cursor to the line with the first match on it, ~search-backward does the reverse.
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (search-forward "hello")
+  some text
+  hello
+#+end_src
+
+The ~goto-char~ function accepts a character number to jump the cursor to:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (goto-char 0)
+#+end_src
+
+Pass the ~point-max~ function to get the number of the last character in the document and jump to it:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (goto-char (point-max))
+#+end_src
+
+Use ~point-min~ for the first character:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (goto-char (point-min))
+#+end_src
+
+The ~next-line~ and ~previous-line~ functions are used for moving the cursor forwards or backwards one line respectively.
+
+**** Inserting text
+
+Insert text into a buffer with the ~insert~ function followed by either:
+
+- a string
+- a set of space separated strings and string variables
+
+Inserting text looks as follows:
+
+#+name: insert-text
+#+begin_src elisp :results silent :exports code :eval no-export
+  (next-line)
+  (next-line)
+  (insert "This text was inserted :D")
+#+end_src
+
+#+call: insert-text()
+
+
+**** Moving the cursor back to where it started
+
+After moving the cursor, it is often desirable to return it to where it started. The ~save-excursion~ function can be used to wrap Elisp statements that may modify the cursors position and return it to its original position:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (save-excursion
+      (previous-line)
+      (insert "Inserted this above ya")) 
+#+end_src
+
+*** Exposing functions to Emacs
+
+To make functions callable from within Emacs via ~M-x~, use the ~interactive~ keyword in a function:
+
+#+name: greet-function
+#+begin_src elisp :results silent :exports code :eval yes :session basics
+  (defun greet (name)
+      "This function prints a Hello <name> greeting to stdout."
+      (interactive "MName:")
+      (princ name))
+#+end_src
+
+When called, this will output:
+
+#+name: greet-call
+#+begin_src elisp :results output :exports both :eval yes :session basics
+  (greet "Morgan")
+#+end_src
+
+This will output:
+
+#+results: greet-call
+: Morgan
+
+The string passed to ~interactive~ accepts special character codes followed by text to display in the buffer. The following function will insert a name at the end of the document if called using ~M-x~:
+
+#+name: insert-name-at-end
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun insert-name-at-end (name)
+      "This function inserts a name at the end of the document."
+      (interactive "MName:")
+      (goto-char (point-max))
+      (insert name))
+#+end_src
+
+When ~interactive~ is used, it will supply parameters in the order they appear from the prompts as they appear. Use the newline, ~\n~ character to supply multiple parameters:
+
+#+name: insert-info-at-end
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun insert-info-at-end (name age)
+      "This function inserts a name at the end of the document."
+      (interactive "MName:\nMAge")
+      (goto-char (point-max))
+      (insert name " is aged " age))
+#+end_src
+
+Many character codes exist that can be used in the special string supplied to ~interactive~: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html][Interactive Codes - GNU]]
+
+*** Adding key bindings
+
+The ~global-set-key~ function can be used to bind keyboard shortcuts to functions:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key (kbd "C-c C-c") 'org-capture)
+#+end_src
+
+This will bind the keyboard key sequence to the ~org-capture~ function globally. To bind only to a specific mode, use the ~define-key~ function and pass it a mode's key map by taking the name of a mode and appending ~-map~ to it to get the object that the specified mode stores its key bindings in.
+
+The following example sets ~org-capture~ to only be a key binding when already in org mode:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key (kbd "C-c C-c") 'org-capture)
+#+end_src
+
+- Hint: Global is better for this, be a bit of a pain to keep having to switch to org mode before capturing
+
+** Notes from source #2
+
+*** Lisp lists
+
+A list in Lisp is preceeded by a single apostrophe followed by a set of parenthesis containing elements separated by white space:
+
+#+name: simple-list
+#+begin_src elisp :results silent :exports code :eval no-export
+  '(this is a list of strings)
+#+end_src
+
+**** Numbers, Lists inside of Lists
+
+Lists can have numbers in them as well as strings. Lisp represents both data and programs in the same way, using lists of words, numbers, or other lists, separated by whitespace and surrounded with parentheses.
+
+#+name: nested-list
+#+begin_src elisp :results silent :exports code :eval no-export
+  '("this is" ("nested"))
+#+end_src
+
+**** Lisp Atoms
+
+Lisp refers to the words in lists as *atoms*, meaning these elements cannot be divided any further than they already are - a list on the other hand can be split into parts.
+
+Atoms are separated by whitespace in lists, but can be touching outer parentheses.
+
+A list can have no atoms in it, ~()~, which is known as the *empty list*. Unlike anything else in Lisp, empty lists can be considered both an atom and a list at the same time.
+
+- Atoms and lists are called *symbolic expressions* / *s-expressions*, the word /expression/ can refer to either the printed representation, or to the atom or list as is held by the computer internally.
+- /form/ is often used as a synonym for expression
+- a string inside quotation marks is considered an atom
+
+*** Run a program
+
+A list, without a quotation mark before it, is a ready to run program which can be /evaluated/. The computer does one of three things:
+
+- return the list itself
+- send an error message
+- treat the first symbol in the list as a command
+
+The *quote*, a single apostrophe before a list, is used to tell Lisp to do nothing with the list. If no quote precedes a list, Lisp will treat the first symbol as a function to execute.
+
+Lisp can also evaluate atoms that are not part of a list as well.
+
+*** Symbol Names and Function Definitions
+
+The first symbol in a list, such as ~+~, acts as a way to locate the definition/set of instructions associated with it.
+
+- A symbol may only have one definition
+
+It is customary in Emacs Lisp to name symbols in a way that identifies which part of Emacs the function belongs to. For example, commands for reading mail start with ~rmail-~.
+
+*** The Lisp Interpreter
+
+The Lisp interpreter will return a list if there is a quote before, or look at the first element in the list to see if it is a function definition to carry out if no quote is before the list.
+
+**** Complications
+
+*Complication 1*: The Lisp interpreter can evaluate symbols which are not quoted, nor with parentheses around them. The interpeter attempts to determine the symbol's value as a /variable/.
+
+*Complication 2*: Some functions are unusual and don't work in the usual way, these are known as *special forms* and are used for special jobs like defining a function.
+
+*Macros* are another construct alongside special forms, macros translate a Lisp expression into another expression to be evaluated in place of the original expression.
+
+- ~if~ is a special form, ~when~ is a macro, ~defun~ was a special form in early versions of Emacs, but is a macro in later versions
+
+*Complication 3*: If the function a Lisp interpreter is looking at is not a special form and is part of a list, the Lisp interpreter looks to see if there is a nested list. If there is, the interpreter figures out what to do with the nested list and then works on the outer list.
+
+If no nested lists are present in a list, the interpreter works from left to right, one expression to the next.
+
+*** Evaluation
+
+*Evaluation* is the process through which the Lisp interpreter executes an expression.
+
+-------------------------
+
+**** How the Lisp Interpreter Acts
+
+In most normal circumstances, the Lisp interpreter returns a value produced by evaluating an expression. It may also produce instead:
+
+- error messages
+- an infinite loop
+- etc...
+
+As well as returning a value, a *side effect* may occur such as moving the cursor or copying a file.
+
+#+caption: https://www.gnu.org/software/emacs/manual/html_node/eintr/How-the-Interpreter-Acts.html
+#+begin_quote
+In summary, evaluating a symbolic expression most commonly causes the Lisp interpreter to return a value and perhaps carry out a side effect; or else produce an error. 
+#+end_quote
+
+**** Evaluating inner lists
+
+When a inner list is present, the value returned by it can be used as information when the outer list is evaluated - this is why inner expressions are evaluated before outer expressions:
+
+#+name: simple-math
+#+begin_src elisp :results value :exports both :eval yes
+  (+ 2 (* 3 3))
+#+end_src
+
+Running this s-expression will result in the inner expression, ~3 * 3~, being executed first with its result passed to the addition operation resulting in the value of:
+
+#+results: simple-math
+: 11
+
+When ~C-x C-e~ is ran, it executes ~eval-last-sexp~ to evaluate the last symbol expression.
+
+- ~sexp~ abbreviates symbol expression
+- ~eval~ is an abbreviation for evaluate
+
+  
+*** Variables
+
+A symbol can have a value attached to instead of a function definition as well. The value of a symbol can be any expression in Lisp, such as a symbol, number, list or string.
+
+- A symbol may have both a function definition and a value attached to it at the same time, or just one or the other.
+
+**** Setting the value of a variable
+
+[[https://www.gnu.org/software/emacs/manual/html_node/eintr/set-_0026-setq.html]]
+
+The function ~set~ or the special form ~setq~ can be used to set variables, ~let~ can also be used. This process is known as a binding a variable to a value.
+
+***** Using ~set~
+
+To set a variable, write ~set~ followed by two quoted arguments unless you want the symbol name and its value to be evaluated:
+
+#+name: set-example
+#+begin_src elisp :results output :exports both :eval yes
+  (set 'ingredients '(rice chicken eggs peppers))
+  (set 'name 'fred)
+
+  (princ ingredients)
+  (princ "\n")
+  (princ name)
+#+end_src
+
+This would output:
+
+#+RESULTS: set-example
+: (rice chicken eggs peppers)
+: fred
+
+***** Using ~setq~
+
+With ~set~, the first argument must almost alway be quoted unless it evaluates to a string. The special form ~setq~ is designed to handle the common combination of ~set~ and a quoted first argument - ~setq~ quotes the first argument automatically :)
+
+~setq~ can also be used to set several variables in one expression:
+
+#+name: setq-example
+#+begin_src elisp :results output :exports both :eval yes
+  (setq name 'Morgan)
+  (setq age '23
+        likes 'Pizza)
+
+  (princ "Name: ")
+  (princ name)
+  (princ "\n")
+  (princ "Age: ")5
+  (princ age)
+#+end_src
+
+This would output:
+
+#+RESULTS: setq-example
+: Name: Morgan
+: Age: 23
+
+*** Arguments
+
+Inputs passed to a function are known as its *arguments*, these arguments are atoms or lists and the values returned (outputs) may also be atoms or lists.
+
+**** Arguments' Data Types
+
+The type of data passed to a function matter, ~+~ for example requires numbers.
+
+~concat~ is used to link two or more strings of text together:
+
+#+name: concat example
+#+begin_src elisp :results value :exports both :eval yes
+  (setq name "Bob")
+  (concat "Hello " name)
+#+end_src
+
+This will concatenate the two strings together:
+
+#+RESULTS: concat example
+: Hello Bob
+
+~substring~ accepts a string and numbers as input, returning a substring of its first argument:
+
+- the first argument takes a string
+- the second and third take numbers indicating the beginning (inclusive) and end (exclusive) of the substring
+
+For example:
+
+#+name: substring-example
+#+begin_src elisp :results value :exports both :eval yes
+  (substring "Morgan" 0 4)
+#+end_src
+
+would output:
+
+#+RESULTS: substring-example
+: Morg
+
+It is important to remember that computers are zero-based in most forms of counting, this includes the positions of characters in a string.
+
+**** An argument as the Value of a Variable or List
+
+Arguments can also be symbols that return values when evaluated. Arguments can also be a list that returns a value when it is evaluated. The following example demonstrates using a list as input to the ~concat~ function:
+
+#+name: list-as-argument-example
+#+begin_src elisp :results value :exports both :eval yes
+  (defun author ()
+      "Morgan Walsh")
+
+  (defun age ()
+      (23))
+
+  (concat "Written by " (author) ", aged " (number-to-string age) ".")
+#+end_src
+
+In this block, we specify two lists which make calls to functions. Below is the output:
+
+#+RESULTS: list-as-argument-example
+: Written by Morgan Walsh, aged 23.
+
+**** Variable Number of Arguments
+
+Some functions can take a variable number of arguments, ~concat~, ~+~, and ~*~ being some of them.
+
+**** The ~message~ function
+
+The ~message~ function takes a variable number of arguments and sends messages in the echo area:
+
+#+name: message-example
+#+begin_src elisp :results value :exports both :eval yes
+  (message "Hello reader")
+#+end_src
+
+This will output:
+
+#+RESULTS: message-example
+: Hello reader
+
+A format specifier can be specified to insert arguments into a string:
+
+#+name: format-specifier-example
+#+begin_src elisp :results value :exports both :eval yes
+  (setq name "Morgan")
+  (message "Hello %s" name)
+#+end_src
+
+This will output:
+
+#+RESULTS: format-specifier-example
+: Hello Morgan
+
+The ~%s~ specifier can be used to print numbers as well, ~%d~ will only print numbers left of the decimal point (whole numbers).
