@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-05-26 Thu 22:27 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Middleware in Express 4</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
+<meta name="description" content="Introduction to middleware in Express 4"
+>
+<meta name="keywords" content="Express JavaScript webserver middleware">
+<link rel='stylesheet' href='/css/style.css' type='text/css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<nav>
+  <a id='toggle'>&equiv;</a>
+  <a class='nav-link' href='/'>Home</a>
+  <a class='nav-link' href='/blog'>Blog</a>
+  <a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
+</nav>
+</div>
+<div id="content">
+<header>
+<h1 class="title">Middleware in Express 4</h1>
+<p class="subtitle">An introduction to middleware in Express</p>
+</header><p>
+<b>Middleware</b> is some software module that facilitates some operations and/or communication between other software modules. In Express, middleware functions are commonly used which have access to:
+</p>
+
+<ul class="org-ul">
+<li>the request object</li>
+<li>the response object</li>
+<li>the next middleware function in the app's request-response cycle</li>
+</ul>
+
+<hr>
+<div id="outline-container-org4c2968a" class="outline-2">
+<h2 id="org4c2968a">Applying middleware in Express</h2>
+<div class="outline-text-2" id="text-org4c2968a">
+<p>
+Express applications are built up using a series of middleware function calls to handle the request-response cycle. This middleware may be of any of the following:
+</p>
+
+<ul class="org-ul">
+<li>application-level</li>
+<li>router-level</li>
+<li>error-handling</li>
+<li>built-in</li>
+<li>third-party</li>
+</ul>
+</div>
+
+<div id="outline-container-orgcec85b4" class="outline-3">
+<h3 id="orgcec85b4">Application-level middleware</h3>
+<div class="outline-text-3" id="text-orgcec85b4">
+<p>
+Application-level middleware is bound to an express application instance using the <code>app.use()</code> and <code>app.METHOD()</code> functions.
+</p>
+
+<p>
+When creating a route in the application, a callback is specified as middleware to the relevant <code>app.METHOD()</code> function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js">app.get(<span style="font-style: italic;">'/'</span>, (req, res) =&gt; {
+  res.send(<span style="font-style: italic;">'GET'</span>);
+});
+</pre>
+</div>
+
+<p>
+This piece of middleware is called when a request is sent to the root path, <code>'/'</code>.
+</p>
+
+<p>
+Usually, we also specify a third parameter in middleware functions, <code>next</code>, which represents a callback function of middleware to call after this function is done. For example, to create a piece of middleware which logs every request and information about it, we could create the following function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">logger</span>(<span style="font-weight: bold; font-style: italic;">req</span>, <span style="font-weight: bold; font-style: italic;">res</span>, <span style="font-weight: bold; font-style: italic;">next</span>) {
+  console.log(<span style="font-style: italic;">`${req.method} ${req.path}`</span>);
+  next();
+};
+</pre>
+</div>
+
+<blockquote>
+<p>
+The <code>next</code> parameter must be specified and called in this instance as we do not terminate the request, this accepts the next piece of middleware to run in the request-response cycle to prevent the request hanging.
+</p>
+</blockquote>
+
+<p>
+The callback function can then be passed to <code>app.use()</code> to specify this is middleware to run on every inbound request:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">express</span> = require(<span style="font-style: italic;">'express'</span>);
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">port</span> = 3000;
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">app</span> = express();
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">logger</span>(<span style="font-weight: bold; font-style: italic;">req</span>, <span style="font-weight: bold; font-style: italic;">res</span>, <span style="font-weight: bold; font-style: italic;">next</span>) {
+    console.log(<span style="font-style: italic;">`${req.method} ${req.path}`</span>);
+    next();
+}
+
+app.use(logger);
+</pre>
+</div>
+
+<p>
+It is important to consider the order of how middleware is added as middleware added first will run first.
+</p>
+
+<p>
+Middleware can also be specified to run on a specified route using <code>app.use()</code> as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js">app.use(<span style="font-style: italic;">'/user'</span>, logger);
+</pre>
+</div>
+
+<p>
+This example specifies the <code>'/user'</code> path as the first parameter to <code>app.use()</code>, the logger is the handler function acting as middleware. The logger function will now only be called on requests to the <code>/user</code> route.
+</p>
+
+<p>
+We can also specify multiple callback functions to the <code>app.use()</code> and <code>app.METHOD()</code> functions, for example the following specifies the logger function on the <code>/user</code> route and a callback for what to do:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js">app.get(<span style="font-style: italic;">'/user'</span>, logger, (req, res, next) =&gt; {
+  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">page</span> = req.query.page;
+  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">pageSize</span> = req.query.pageSize;
+  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">output</span> = <span style="font-style: italic;">`Returning page ${page} consisting of ${pageSize} users`</span>;
+  console.log(output);
+  next();
+}, (req, res, next) =&gt; {
+  res.send([{<span style="font-style: italic;">"name"</span>: <span style="font-style: italic;">"fred123"</span>}]);
+});
+</pre>
+</div>
+
+<p>
+On line 1, the path argument is specified followed by the <code>logger</code> middleware function next. When a request is inbound, the <code>logger</code> middleware will run first, it will then pass control to the callback function (3rd argument) which logs the query parameters for <code>page</code> and <code>pageSize</code> to the Node.js console. The callback then calls <code>next()</code> on line 6 to call the final callback (4th argument) specified on line 7, which sends the response back to the client.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org96d74e9" class="outline-3">
+<h3 id="org96d74e9">Router-level middleware</h3>
+<div class="outline-text-3" id="text-org96d74e9">
+<p>
+<b>Router-level middleware</b> works like application-level middleware, but is instead bound to an instance of <code>express.Router()</code>. Instead of using the <code>app.use()</code> and <code>app.METHOD()</code> methods to apply middleware, <code>router.use()</code> and <code>router.METHOD()</code> methods are used.
+</p>
+
+<p>
+The following example demonstrates using middleware at the router-level:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">express</span> = require(<span style="font-style: italic;">'express'</span>);
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">port</span> = 3000;
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">app</span> = express();
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">router</span> = express.Router();
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">users</span> = [{<span style="font-style: italic;">"id"</span>: 1, <span style="font-style: italic;">"name"</span>: <span style="font-style: italic;">"fred123"</span>}, {<span style="font-style: italic;">"id"</span>: 2, <span style="font-style: italic;">"name"</span>: <span style="font-style: italic;">"fred234"</span>}];
+
+<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">logger</span>(<span style="font-weight: bold; font-style: italic;">req</span>, <span style="font-weight: bold; font-style: italic;">res</span>, <span style="font-weight: bold; font-style: italic;">next</span>) {
+    console.log(<span style="font-style: italic;">`${Date()} - ${req.method} ${req.path}`</span>);
+    next();
+}
+
+<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">no mount path, executed on every request to the router</span>
+router.use(logger);
+
+router.get(<span style="font-style: italic;">'/user'</span>, (req, res) =&gt; {
+    res.status(200).send(users);
+});
+
+router.get(<span style="font-style: italic;">'/user/:id'</span>, (req, res) =&gt; {
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">id</span> = req.params.id;
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">user</span> = users.find(user =&gt; user.id == id);
+    <span style="font-weight: bold;">if</span> (user) {
+        res.status(200).send(user);
+        <span style="font-weight: bold;">return</span>;
+    }
+    res.status(404).send(<span style="font-style: italic;">`User with id ${id} not found.`</span>);
+});
+
+<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mount router</span>
+app.use(<span style="font-style: italic;">'/'</span>, router);
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">server</span> = app.listen(port, () =&gt; {
+    console.log(<span style="font-style: italic;">`Server up on ${server.address().address}:${port}`</span>);
+});
+</pre>
+</div>
+
+<p>
+The example allows either a whole collection of users to be returned, or a single user from that collection. The major differences from the application-level examples are:
+</p>
+
+<ul class="org-ul">
+<li>line 5: creating an instance of <code>express.Router()</code></li>
+<li>line 15,17,21: all use <code>router</code> instead of <code>app</code> to create endpoints</li>
+<li>line 32: mounts the <code>router</code> instance on the express <code>app</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6c0309e" class="outline-3">
+<h3 id="org6c0309e">Error-handling middleware</h3>
+<div class="outline-text-3" id="text-org6c0309e">
+<p>
+<b>Error-handling middleware</b> functions like the other middleware functions seen so far, the major difference being that four arguments are required instead of three in the callback functions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js">app.use((err, req, res, next) =&gt; {
+  console.error(err.stack);
+  res.status(500).send(<span style="font-style: italic;">'Oops, something went wrong...'</span>);
+});
+</pre>
+</div>
+
+<blockquote>
+<p>
+If the <code>err</code> parameter is not specified, the callback will be treated like regular middleware and will not handle errors if used. Ensure the <code>err</code> parameter is specified for error-handling middleware!
+</p>
+</blockquote>
+
+<p>
+Taking lines 31 - 36 from the previous example in <b>Router-level middleware</b>, the above error-handling middleware is usually added to the middleware stack after the router.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mount router</span>
+app.use(<span style="font-style: italic;">'/'</span>, router);
+
+<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">error handling if router bindings can't handle request or something else goes wrong</span>
+app.use((err, req, res, next) =&gt; {
+    console.error(err.stack);
+    res.status(500).send(<span style="font-style: italic;">'Oops, something went wrong...'</span>);
+});
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">server</span> = app.listen(port, () =&gt; {
+    console.log(<span style="font-style: italic;">`Server up on ${server.address().address}:${port}`</span>);
+});
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org04ae48f" class="outline-3">
+<h3 id="org04ae48f">Built-in middleware</h3>
+<div class="outline-text-3" id="text-org04ae48f">
+<p>
+Express includes built-in middleware functions for the most common behaviours in web applications:
+</p>
+
+<ul class="org-ul">
+<li><code>express.static</code>: for serving static assets, i.e., html files, images, etc&#x2026;</li>
+<li><code>express.json</code>: for parsing incoming requests with JSON payloads</li>
+<li><code>express.urlencoded</code>: for parsing incoming requests with URL-encoded payloads</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfa8af3c" class="outline-3">
+<h3 id="orgfa8af3c">Third-party middleware</h3>
+<div class="outline-text-3" id="text-orgfa8af3c">
+<p>
+Third-party middleware functions can also be added to Express servers, a list of common middleware exists here: <code>https://expressjs.com/en/resources/middleware.html</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr />
+<footer>
+  <p>
+    Last updated 2022-05-26 Thu 22:27. <br />
+    Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
+    <a href="/html/bug-report.html">Submit a bug report</a>
+  </p>
+  <p><small>Copyright 2022 Morgan Walsh.</small></p>
+</footer>
+<script src='/js/navbar.js'></script>
+</div>
+</body>
+</html>

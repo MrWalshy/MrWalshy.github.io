@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-26 Thu 20:41 -->
+<!-- 2022-05-26 Thu 22:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NPM - Basics</title>
@@ -29,9 +29,9 @@
 The Node Package Manager can be used to create NodeJS packages, these can be redistributable libraries or full applications that may run desktop or web applications.
 </p>
 
-<div id="outline-container-orga947b1c" class="outline-2">
-<h2 id="orga947b1c">Creating a project with NPM</h2>
-<div class="outline-text-2" id="text-orga947b1c">
+<div id="outline-container-org4805489" class="outline-2">
+<h2 id="org4805489">Creating a project with NPM</h2>
+<div class="outline-text-2" id="text-org4805489">
 <p>
 First, ensure you have the latest version of Node JS installed, this was <code>16.15.0 LTS</code> at the time of writing: <a href="https://nodejs.org/en/">NodeJS | Home page</a>
 </p>
@@ -101,9 +101,9 @@ Fields include:
 </div>
 </div>
 
-<div id="outline-container-org188d4cb" class="outline-2">
-<h2 id="org188d4cb">Semantic versioning (SemVer)</h2>
-<div class="outline-text-2" id="text-org188d4cb">
+<div id="outline-container-orge5f8ee3" class="outline-2">
+<h2 id="orge5f8ee3">Semantic versioning (SemVer)</h2>
+<div class="outline-text-2" id="text-orge5f8ee3">
 <p>
 Semantic Versioning is an industry standard for software versioning to make dependencies easier to manage, SemVer looks as follows:
 </p>
@@ -120,9 +120,9 @@ Semantic Versioning is an industry standard for software versioning to make depe
 </div>
 </div>
 
-<div id="outline-container-orgbd2662a" class="outline-2">
-<h2 id="orgbd2662a">Managing dependency versions</h2>
-<div class="outline-text-2" id="text-orgbd2662a">
+<div id="outline-container-org4998eaf" class="outline-2">
+<h2 id="org4998eaf">Managing dependency versions</h2>
+<div class="outline-text-2" id="text-org4998eaf">
 <p>
 If the tilde character is appended to an npm dependency in the <code>package.json</code> file, it will allow the dependency to update to the latest <code>PATCH</code> version when <code>npm install</code> is ran in the project:
 </p>
@@ -149,9 +149,9 @@ The caret character allows npm to install the latest <code>MINOR</code> and <cod
 </div>
 </div>
 
-<div id="outline-container-orgea7d8f9" class="outline-2">
-<h2 id="orgea7d8f9">Creating a project (in-depth)</h2>
-<div class="outline-text-2" id="text-orgea7d8f9">
+<div id="outline-container-orga01aeaa" class="outline-2">
+<h2 id="orga01aeaa">Creating a project (in-depth)</h2>
+<div class="outline-text-2" id="text-orga01aeaa">
 <p>
 <a href="https://www.npmjs.com/">npmjs</a>
 </p>
@@ -254,9 +254,9 @@ Hello world
 </div>
 </div>
 
-<div id="outline-container-org1c0c35d" class="outline-2">
-<h2 id="org1c0c35d">Installing dependencies</h2>
-<div class="outline-text-2" id="text-org1c0c35d">
+<div id="outline-container-orge954770" class="outline-2">
+<h2 id="orge954770">Installing dependencies</h2>
+<div class="outline-text-2" id="text-orge954770">
 <p>
 If a project has an existing <b>package.json</b> file, run <code>npm install</code> to install all of the projects depdencies into the <b>node<sub>modules</sub></b> folder.
 </p>
@@ -321,9 +321,9 @@ will download the <code>morgan</code> npm package for global usage in any projec
 </p>
 </div>
 
-<div id="outline-container-orgb1bedd7" class="outline-3">
-<h3 id="orgb1bedd7">Applying the morgan logger with a vanilla HTTP server in Node.js</h3>
-<div class="outline-text-3" id="text-orgb1bedd7">
+<div id="outline-container-orgd461f38" class="outline-3">
+<h3 id="orgd461f38">Applying the morgan logger with a vanilla HTTP server in Node.js</h3>
+<div class="outline-text-3" id="text-orgd461f38">
 <div class="org-src-container">
 <pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">http</span> = require(<span style="font-style: italic;">'http'</span>);
 <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">morgan</span> = require(<span style="font-style: italic;">'morgan'</span>);
@@ -361,18 +361,18 @@ The morgan logging function takes in a request, response and a callback for hand
 </div>
 </div>
 
-<div id="outline-container-org734992b" class="outline-2">
-<h2 id="org734992b">Updating dependencies</h2>
-<div class="outline-text-2" id="text-org734992b">
+<div id="outline-container-org61f1859" class="outline-2">
+<h2 id="org61f1859">Updating dependencies</h2>
+<div class="outline-text-2" id="text-org61f1859">
 <p>
 Packages often require updates to keep up with modern features and security, all specified dependencies can be updated using <code>npm update</code>. Specify a specific package to update as follows: <code>npm update &lt;package-name&gt;</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7ccdba2" class="outline-2">
-<h2 id="org7ccdba2">Running tasks</h2>
-<div class="outline-text-2" id="text-org7ccdba2">
+<div id="outline-container-orgc3da27c" class="outline-2">
+<h2 id="orgc3da27c">Running tasks</h2>
+<div class="outline-text-2" id="text-orgc3da27c">
 <p>
 Command-line tasks can be specified in the <b>package.json</b> file in the <code>"scripts"</code> section. The following example adds a <code>start</code> task for starting the server:
 </p>
@@ -427,7 +427,7 @@ To run the custom <code>start:dev</code> task, we must specify <code>npm run sta
 <hr />
 <footer>
   <p>
-    Last updated 2022-05-26 Thu 20:40. <br />
+    Last updated 2022-05-26 Thu 22:27. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </p>
