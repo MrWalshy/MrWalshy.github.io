@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-05-26 Thu 20:41 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NPM - Basics</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Morgan Walsh">
+<meta name="description" content="node package manager"
+>
+<meta name="keywords" content="node js javascript npm">
+<link rel='stylesheet' href='/css/style.css' type='text/css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<nav>
+  <a id='toggle'>&equiv;</a>
+  <a class='nav-link' href='/'>Home</a>
+  <a class='nav-link' href='/blog'>Blog</a>
+  <a class='nav-link' href='http://github.com/MrWalshy'>GitHub</a>
+</nav>
+</div>
+<div id="content">
+<header>
+<h1 class="title">NPM - Basics</h1>
+<p class="subtitle">Notes about Node Package Manager</p>
+</header><p>
+The Node Package Manager can be used to create NodeJS packages, these can be redistributable libraries or full applications that may run desktop or web applications.
+</p>
+
+<div id="outline-container-orga947b1c" class="outline-2">
+<h2 id="orga947b1c">Creating a project with NPM</h2>
+<div class="outline-text-2" id="text-orga947b1c">
+<p>
+First, ensure you have the latest version of Node JS installed, this was <code>16.15.0 LTS</code> at the time of writing: <a href="https://nodejs.org/en/">NodeJS | Home page</a>
+</p>
+
+<p>
+Bundled with Node JS is the NPM.
+</p>
+
+<p>
+To quickly initialise a project using NPM, create a directory for your project and run <code>npm init .</code> inside of the directory.
+</p>
+
+<p>
+This will trigger the legacy interface at which you will be prompted for information, this can be entered or skipped - afterwards a file called <code>package.json</code> will have been created for tracking information about the project, including its dependencies.
+</p>
+
+<p>
+Fields include:
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Field</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>author</code></td>
+<td class="org-left">Specifies who created the project, can be passed a simple string or an object.</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>description</code></td>
+<td class="org-left">A short informative description of the project, useful for selling an idea to a user and summarising a projects functionality. Accepts a string.</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>keywords</code></td>
+<td class="org-left">Accepts an array of double-quoted strings describing the project.</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>license</code></td>
+<td class="org-left">Used to specify the projects license, MIT and BSD are common open source licences. License info is not required, copyright ownership is usually implied in a lot of countries, although this may differ.</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>dependencies</code></td>
+<td class="org-left">Accepts an object of key value pairs of strings representing a dependency to install. The structure is as follows: ~"package-name": "version".</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>version</code></td>
+<td class="org-left">Accepts a string representing the version of the project.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org188d4cb" class="outline-2">
+<h2 id="org188d4cb">Semantic versioning (SemVer)</h2>
+<div class="outline-text-2" id="text-org188d4cb">
+<p>
+Semantic Versioning is an industry standard for software versioning to make dependencies easier to manage, SemVer looks as follows:
+</p>
+
+<pre class="example">
+"package": "MAJOR.MINOR.PATCH"
+</pre>
+
+<ul class="org-ul">
+<li><code>MAJOR</code> signifies changes to the API which are incompatible with previous versions</li>
+<li><code>MINOR</code> indicates backwards-compatible additional functionality.</li>
+<li><code>PATCH</code> indicates backwards-compatible bug fixes.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbd2662a" class="outline-2">
+<h2 id="orgbd2662a">Managing dependency versions</h2>
+<div class="outline-text-2" id="text-orgbd2662a">
+<p>
+If the tilde character is appended to an npm dependency in the <code>package.json</code> file, it will allow the dependency to update to the latest <code>PATCH</code> version when <code>npm install</code> is ran in the project:
+</p>
+
+<pre class="example">
+{
+  "dependencies": {
+    "package": "~1.2.2"
+  }
+}
+</pre>
+
+<p>
+The caret character allows npm to install the latest <code>MINOR</code> and <code>PATCH</code> updates:
+</p>
+
+<pre class="example">
+{
+  "dependencies": {
+    "package": "~1.2.2"
+  }
+}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgea7d8f9" class="outline-2">
+<h2 id="orgea7d8f9">Creating a project (in-depth)</h2>
+<div class="outline-text-2" id="text-orgea7d8f9">
+<p>
+<a href="https://www.npmjs.com/">npmjs</a>
+</p>
+
+<p>
+The <code>npm init</code> command, aliases being <code>npm create</code> and <code>npm init</code>, is used to setup a new or existing npm package.
+</p>
+
+<p>
+The <code>init</code> command is transformed to an <code>npm exec</code> operation, the one for creating a new project in the current directory is as follows: <code>npm init .</code>
+</p>
+
+<p>
+This will initialise a project using legacy init behaviour, questions will be asked at the command-prompt as follows before creating a <b>package.json</b> file for you:
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Creating an NPM project from the command line</label><pre class="src src-shell">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node
+$ mkdir npm-example1
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node
+$ cd npm-example1
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See <span style="font-weight: bold;">`npm help init`</span> <span style="font-weight: bold;">for</span> definitive documentation on these fields
+and exactly what they do.
+
+Use <span style="font-weight: bold;">`npm install &lt;pkg&gt;`</span> afterwards to install a package and
+save it as a dependency<span style="font-weight: bold;"> in</span> the package.json file.
+
+Press ^C at any time to quit.
+package name: (npm-example1)
+version: (1.0.0)
+description: npm Example one
+entry point: (index.js)
+<span style="font-weight: bold;">test</span> command:
+git repository:
+keywords: npm javascript node
+author: Morgan Walsh
+license: (ISC)
+About to write to C:\Users\Morgan Walsh\test\node\npm-example1\package.json:
+
+{
+    <span style="font-style: italic;">"name"</span>: <span style="font-style: italic;">"npm-example1"</span>,
+    <span style="font-style: italic;">"version"</span>: <span style="font-style: italic;">"1.0.0"</span>,
+    <span style="font-style: italic;">"description"</span>: <span style="font-style: italic;">"npm Example one"</span>,
+    <span style="font-style: italic;">"main"</span>: <span style="font-style: italic;">"index.js"</span>,
+    <span style="font-style: italic;">"scripts"</span>: {
+        <span style="font-style: italic;">"test"</span>: <span style="font-style: italic;">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+    },
+    <span style="font-style: italic;">"keywords"</span>: [
+        <span style="font-style: italic;">"npm"</span>,
+        <span style="font-style: italic;">"javascript"</span>,
+        <span style="font-style: italic;">"node"</span>
+    ],
+    <span style="font-style: italic;">"author"</span>: <span style="font-style: italic;">"Morgan Walsh"</span>,
+    <span style="font-style: italic;">"license"</span>: <span style="font-style: italic;">"ISC"</span>
+}
+
+
+Is this OK? (yes)
+</pre>
+</div>
+
+<p>
+First, we navigate into a new directory for the project with <code>mkdir</code> and <code>cd</code>, then the <code>npm init</code> command is run to start initialisation of the package. A set of questions are asked concerning project-related information, these may be skipped by passing a flag: <code>npm init --yes</code>
+</p>
+
+<p>
+An <code>ls</code> of the directory shows that we only have a <b>package.json</b> file present, containing data about the project. We should also add an <b>index.js</b> as we left this as the default entry point for the application in the configuration:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ ls
+package.json
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ touch index.js
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ echo <span style="font-style: italic;">"console.log('Hello world')"</span> &gt; index.js 
+</pre>
+</div>
+
+<p>
+Run the project using <code>node index.js</code> from the project root:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ node index.js 
+Hello world
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1c0c35d" class="outline-2">
+<h2 id="org1c0c35d">Installing dependencies</h2>
+<div class="outline-text-2" id="text-org1c0c35d">
+<p>
+If a project has an existing <b>package.json</b> file, run <code>npm install</code> to install all of the projects depdencies into the <b>node<sub>modules</sub></b> folder.
+</p>
+
+<blockquote>
+<p>
+<b>node<sub>modules</sub></b> will be created if it isn't already by the command
+</p>
+</blockquote>
+
+<p>
+To install a specific package, run <code>npm install &lt;package-name&gt;</code> to add the <code>&lt;package-name&gt;</code> to the <b>package.json</b> files dependencies.
+</p>
+
+<ul class="org-ul">
+<li>Historically, prior to NPM 5, the <code>--save</code> / <code>-S</code> flag was added otherwise the dependency would not be saved to the <b>package.json</b> file</li>
+</ul>
+
+<p>
+There are two types of install available in NPM:
+</p>
+
+<ul class="org-ul">
+<li>local</li>
+<li>global</li>
+</ul>
+
+<p>
+Try <code>npm install morgan</code> to install me locally into your project&#x2026; Just kidding, but it will install a middleware logging utility for Node.js requests and responses. The local dependecy will be added to the <b>package.json</b> file alongside its version number:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+  "dependencies": {
+    "morgan": "^1.10.0"
+  }
+}
+</pre>
+</div>
+
+<p>
+The <code>morgan</code> dependency is of version <code>1.10.0</code>. As it is a local dependency, it will also download the packages code to the <b>node<sub>modules</sub></b> directory - the <b>morgan</b> dependency is just another npm project.
+</p>
+
+<blockquote>
+<p>
+Ensure you do not push the <b>node<sub>modules</sub></b> folder to GitHub, or another repository service, due to its large size. These dependencies can be redownloaded as required.
+</p>
+</blockquote>
+
+<p>
+Global installs are available in every npm project, just add the -g flag to do this. For example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">npm install -g morgan
+</pre>
+</div>
+
+<p>
+will download the <code>morgan</code> npm package for global usage in any project. To see its install location, use <code>npm root -g</code> to find the location - I wouldn't recommend this though.
+</p>
+</div>
+
+<div id="outline-container-orgb1bedd7" class="outline-3">
+<h3 id="orgb1bedd7">Applying the morgan logger with a vanilla HTTP server in Node.js</h3>
+<div class="outline-text-3" id="text-orgb1bedd7">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">http</span> = require(<span style="font-style: italic;">'http'</span>);
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">morgan</span> = require(<span style="font-style: italic;">'morgan'</span>);
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">host</span> = <span style="font-style: italic;">'localhost'</span>;
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">port</span> = 3000;
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">logger</span> = morgan(<span style="font-style: italic;">'dev'</span>);
+
+<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">server</span> = http.createServer((req, res) =&gt; {
+    logger(req, res, err =&gt; {
+
+        res.setHeader(<span style="font-style: italic;">'Content-Type'</span>, <span style="font-style: italic;">'text/plain'</span>);
+        <span style="font-weight: bold;">if</span> (err) {
+            console.log(err);
+            res.statusCode = 500;
+            res.end(<span style="font-style: italic;">'Something went wrong'</span>);
+            <span style="font-weight: bold;">return</span>;
+        }
+        res.statusCode = 200;
+        res.end(<span style="font-style: italic;">'Hello'</span>);
+    });
+});
+
+server.listen(port, host, () =&gt; {
+    console.log(<span style="font-style: italic;">`Server up on ${host}:${port}`</span>);
+});
+</pre>
+</div>
+
+<p>
+The morgan logging function takes in a request, response and a callback for handling the request. The logger wraps around the request-response cycle so that it can print related information to the console. Place this code in a file called <code>index.js</code> and run it with <code>node index.js</code> to start the server, then send a request in the browser to <code>localhost:3000</code> and monitor the console.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org734992b" class="outline-2">
+<h2 id="org734992b">Updating dependencies</h2>
+<div class="outline-text-2" id="text-org734992b">
+<p>
+Packages often require updates to keep up with modern features and security, all specified dependencies can be updated using <code>npm update</code>. Specify a specific package to update as follows: <code>npm update &lt;package-name&gt;</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7ccdba2" class="outline-2">
+<h2 id="org7ccdba2">Running tasks</h2>
+<div class="outline-text-2" id="text-org7ccdba2">
+<p>
+Command-line tasks can be specified in the <b>package.json</b> file in the <code>"scripts"</code> section. The following example adds a <code>start</code> task for starting the server:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  }
+}
+</pre>
+</div>
+
+<p>
+The <code>start</code> task can then be run using <code>npm start</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test/node/npm-example1
+$ npm start
+
+&gt; npm-example1@1.0.0 start
+&gt; node ./index.js
+
+Hello world
+</pre>
+</div>
+
+<p>
+Custom scripts beyond <code>start</code> and <code>test</code> can be defined, for example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-json">{
+  "scripts": {
+    "start": "node ./index.js",
+    "start:dev" "PORT=8080&amp; node index.js"
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  }
+}
+</pre>
+</div>
+
+<p>
+To run the custom <code>start:dev</code> task, we must specify <code>npm run start:dev</code> instead of just the <code>npm</code> command by itself.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<hr />
+<footer>
+  <p>
+    Last updated 2022-05-26 Thu 20:40. <br />
+    Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
+    <a href="/html/bug-report.html">Submit a bug report</a>
+  </p>
+  <p><small>Copyright 2022 Morgan Walsh.</small></p>
+</footer>
+<script src='/js/navbar.js'></script>
+</div>
+</body>
+</html>

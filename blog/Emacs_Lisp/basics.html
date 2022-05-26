@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-26 Thu 10:13 -->
+<!-- 2022-05-26 Thu 20:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emacs Lisp - Basics</title>
@@ -26,9 +26,9 @@
 <h1 class="title">Emacs Lisp - Basics</h1>
 <p class="subtitle">Some notes from researching Elisp</p>
 </header>
-<div id="outline-container-org539c9ec" class="outline-2">
-<h2 id="org539c9ec">Sources</h2>
-<div class="outline-text-2" id="text-org539c9ec">
+<div id="outline-container-orgbb1db87" class="outline-2">
+<h2 id="orgbb1db87">Sources</h2>
+<div class="outline-text-2" id="text-orgbb1db87">
 <ul class="org-ul">
 <li><a href="https://benwindsorcode.github.io/Getting-Started-With-Emacs-Lisp/">Getting Started With Emacs Lisp Hands On - A Practical Beginners Tutorial (#1)</a></li>
 <li><a href="https://www.gnu.org/software/emacs/manual/html_node/eintr/List-Processing.html#List-Processing">List Processing - GNU (#2)</a></li>
@@ -41,9 +41,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd84a310" class="outline-2">
-<h2 id="orgd84a310">Notes from source #1</h2>
-<div class="outline-text-2" id="text-orgd84a310">
+<div id="outline-container-orgb077d34" class="outline-2">
+<h2 id="orgb077d34">Notes from source #1</h2>
+<div class="outline-text-2" id="text-orgb077d34">
 <p>
 Emacs Lisp is a programming language used for interacting, customising and extending Emacs functionality.
 </p>
@@ -51,15 +51,15 @@ Emacs Lisp is a programming language used for interacting, customising and exten
 <hr>
 </div>
 
-<div id="outline-container-org17cdc08" class="outline-3">
-<h3 id="org17cdc08">Running Elisp in a buffer</h3>
-<div class="outline-text-3" id="text-org17cdc08">
+<div id="outline-container-org868961e" class="outline-3">
+<h3 id="org868961e">Running Elisp in a buffer</h3>
+<div class="outline-text-3" id="text-org868961e">
 <p>
 In empty buffers, Elisp can be written and executed by placing the cursor over the end of a line and typing <code>C-x C-e</code>:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>Adding two numbers with reverse polish notation</label><pre class="src src-elisp" id="orgb54f7bf">(+ 2 2)
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Adding two numbers with reverse polish notation</label><pre class="src src-elisp" id="orgdd94ee2">(+ 2 2)
 </pre>
 </div>
 
@@ -76,7 +76,7 @@ Functions can also be called by surrounding them with parenthesis and making the
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>The describe-bindings function</label><pre class="src src-elisp" id="org273193b">(describe-bindings)
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>The describe-bindings function</label><pre class="src src-elisp" id="org0704986">(describe-bindings)
 </pre>
 </div>
 
@@ -90,9 +90,9 @@ The <code>describe-bindings</code> function outputs a help buffer with a list of
 </div>
 </div>
 
-<div id="outline-container-orged2a077" class="outline-3">
-<h3 id="orged2a077">Flow control (if statement)</h3>
-<div class="outline-text-3" id="text-orged2a077">
+<div id="outline-container-org1fda834" class="outline-3">
+<h3 id="org1fda834">Flow control (if statement)</h3>
+<div class="outline-text-3" id="text-org1fda834">
 <p>
 The if/else statement has the following structure:
 </p>
@@ -109,9 +109,9 @@ The if/else statement has the following structure:
 </div>
 </div>
 
-<div id="outline-container-orgfbc6fed" class="outline-3">
-<h3 id="orgfbc6fed">Get current line number</h3>
-<div class="outline-text-3" id="text-orgfbc6fed">
+<div id="outline-container-org0c278e9" class="outline-3">
+<h3 id="org0c278e9">Get current line number</h3>
+<div class="outline-text-3" id="text-org0c278e9">
 <p>
 Use <code>what-line</code> to get the line number of the cursors position:
 </p>
@@ -120,7 +120,7 @@ Use <code>what-line</code> to get the line number of the cursors position:
 #+caption what-line examples
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org3174420">(<span style="font-weight: bold;">if</span> (eq (what-line) <span style="font-style: italic;">"Line 1"</span>)
+<pre class="src src-elisp" id="orga94fc21">(<span style="font-weight: bold;">if</span> (eq (what-line) <span style="font-style: italic;">"Line 1"</span>)
     (princ <span style="font-style: italic;">"Is line 1"</span>)
     (princ <span style="font-style: italic;">"Not line 1"</span>))
 </pre>
@@ -141,9 +141,9 @@ The <code>princ</code> function will print a string to standard output, the <cod
 </div>
 </div>
 
-<div id="outline-container-org5ac4af7" class="outline-3">
-<h3 id="org5ac4af7">Writing functions</h3>
-<div class="outline-text-3" id="text-org5ac4af7">
+<div id="outline-container-org32dda81" class="outline-3">
+<h3 id="org32dda81">Writing functions</h3>
+<div class="outline-text-3" id="text-org32dda81">
 <p>
 The <code>defun</code> keyword is used to define a function:
 </p>
@@ -169,7 +169,7 @@ The following example is a function definition for adding two numbers:
 #+caption A function to add two numbers
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org88a6417">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">add-numbers</span> (num1 num2)
+<pre class="src src-elisp" id="org041ce33">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">add-numbers</span> (num1 num2)
     (+ num1 num2))
 </pre>
 </div>
@@ -182,7 +182,7 @@ This can then be invoked like so:
 #+caption Invoking the add-numbers function
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp" id="org1dd32f2">(add-numbers 3 2)
+<pre class="src src-elisp" id="org66c2824">(add-numbers 3 2)
 </pre>
 </div>
 
@@ -197,13 +197,13 @@ This outputs the result:
 </div>
 </div>
 
-<div id="outline-container-orgfdc4488" class="outline-3">
-<h3 id="orgfdc4488">Interacting with emacs</h3>
-<div class="outline-text-3" id="text-orgfdc4488">
+<div id="outline-container-orge34b15e" class="outline-3">
+<h3 id="orge34b15e">Interacting with emacs</h3>
+<div class="outline-text-3" id="text-orge34b15e">
 </div>
-<div id="outline-container-org610ebf7" class="outline-4">
-<h4 id="org610ebf7">Moving around the buffer</h4>
-<div class="outline-text-4" id="text-org610ebf7">
+<div id="outline-container-orgd5ccf1b" class="outline-4">
+<h4 id="orgd5ccf1b">Moving around the buffer</h4>
+<div class="outline-text-4" id="text-orgd5ccf1b">
 <p>
 The <code>search-forward</code> function accepts a string to search for in some text, this will jump the cursor to the line with the first match on it, ~search-backward does the reverse.
 </p>
@@ -248,9 +248,9 @@ The <code>next-line</code> and <code>previous-line</code> functions are used for
 </div>
 </div>
 
-<div id="outline-container-org643d596" class="outline-4">
-<h4 id="org643d596">Inserting text</h4>
-<div class="outline-text-4" id="text-org643d596">
+<div id="outline-container-orgc07d585" class="outline-4">
+<h4 id="orgc07d585">Inserting text</h4>
+<div class="outline-text-4" id="text-orgc07d585">
 <p>
 Insert text into a buffer with the <code>insert</code> function followed by either:
 </p>
@@ -265,7 +265,7 @@ Inserting text looks as follows:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org2ca9708">(next-line)
+<pre class="src src-elisp" id="org2b79840">(next-line)
 (next-line)
 (insert <span style="font-style: italic;">"This text was inserted :D"</span>)
 </pre>
@@ -273,9 +273,9 @@ Inserting text looks as follows:
 </div>
 </div>
 
-<div id="outline-container-orga572320" class="outline-4">
-<h4 id="orga572320">Moving the cursor back to where it started</h4>
-<div class="outline-text-4" id="text-orga572320">
+<div id="outline-container-org20c9396" class="outline-4">
+<h4 id="org20c9396">Moving the cursor back to where it started</h4>
+<div class="outline-text-4" id="text-org20c9396">
 <p>
 After moving the cursor, it is often desirable to return it to where it started. The <code>save-excursion</code> function can be used to wrap Elisp statements that may modify the cursors position and return it to its original position:
 </p>
@@ -290,15 +290,15 @@ After moving the cursor, it is often desirable to return it to where it started.
 </div>
 </div>
 
-<div id="outline-container-org9111a69" class="outline-3">
-<h3 id="org9111a69">Exposing functions to Emacs</h3>
-<div class="outline-text-3" id="text-org9111a69">
+<div id="outline-container-org85222df" class="outline-3">
+<h3 id="org85222df">Exposing functions to Emacs</h3>
+<div class="outline-text-3" id="text-org85222df">
 <p>
 To make functions callable from within Emacs via <code>M-x</code>, use the <code>interactive</code> keyword in a function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgd300ae8">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">greet</span> (name)
+<pre class="src src-elisp" id="org0da5c6c">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">greet</span> (name)
     <span style="font-style: italic;">"This function prints a Hello &lt;name&gt; greeting to stdout."</span>
     (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"MName:"</span>)
     (princ name))
@@ -310,7 +310,7 @@ When called, this will output:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgee0cec8">(greet <span style="font-style: italic;">"Morgan"</span>)
+<pre class="src src-elisp" id="orgb9772bd">(greet <span style="font-style: italic;">"Morgan"</span>)
 </pre>
 </div>
 
@@ -328,7 +328,7 @@ The string passed to <code>interactive</code> accepts special character codes fo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org451c8b8">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">insert-name-at-end</span> (name)
+<pre class="src src-elisp" id="orgc092749">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">insert-name-at-end</span> (name)
     <span style="font-style: italic;">"This function inserts a name at the end of the document."</span>
     (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"MName:"</span>)
     (goto-char (point-max))
@@ -341,7 +341,7 @@ When <code>interactive</code> is used, it will supply parameters in the order th
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org23ef936">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">insert-info-at-end</span> (name age)
+<pre class="src src-elisp" id="org60f275c">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">insert-info-at-end</span> (name age)
     <span style="font-style: italic;">"This function inserts a name at the end of the document."</span>
     (<span style="font-weight: bold;">interactive</span> <span style="font-style: italic;">"MName:\nMAge"</span>)
     (goto-char (point-max))
@@ -355,9 +355,9 @@ Many character codes exist that can be used in the special string supplied to <c
 </div>
 </div>
 
-<div id="outline-container-org4d6652b" class="outline-3">
-<h3 id="org4d6652b">Adding key bindings</h3>
-<div class="outline-text-3" id="text-org4d6652b">
+<div id="outline-container-orgf46bc69" class="outline-3">
+<h3 id="orgf46bc69">Adding key bindings</h3>
+<div class="outline-text-3" id="text-orgf46bc69">
 <p>
 The <code>global-set-key</code> function can be used to bind keyboard shortcuts to functions:
 </p>
@@ -387,40 +387,40 @@ The following example sets <code>org-capture</code> to only be a key binding whe
 </div>
 </div>
 
-<div id="outline-container-org7e05fb8" class="outline-2">
-<h2 id="org7e05fb8">Notes from source #2</h2>
-<div class="outline-text-2" id="text-org7e05fb8">
+<div id="outline-container-org01f1e2a" class="outline-2">
+<h2 id="org01f1e2a">Notes from source #2</h2>
+<div class="outline-text-2" id="text-org01f1e2a">
 </div>
-<div id="outline-container-org242a092" class="outline-3">
-<h3 id="org242a092">Lisp lists</h3>
-<div class="outline-text-3" id="text-org242a092">
+<div id="outline-container-org9e6f0b9" class="outline-3">
+<h3 id="org9e6f0b9">Lisp lists</h3>
+<div class="outline-text-3" id="text-org9e6f0b9">
 <p>
 A list in Lisp is preceeded by a single apostrophe followed by a set of parenthesis containing elements separated by white space:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org55862e1">'(this is a list of strings)
+<pre class="src src-elisp" id="orge180416">'(this is a list of strings)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org43e3fb6" class="outline-4">
-<h4 id="org43e3fb6">Numbers, Lists inside of Lists</h4>
-<div class="outline-text-4" id="text-org43e3fb6">
+<div id="outline-container-org0ae1d1a" class="outline-4">
+<h4 id="org0ae1d1a">Numbers, Lists inside of Lists</h4>
+<div class="outline-text-4" id="text-org0ae1d1a">
 <p>
 Lists can have numbers in them as well as strings. Lisp represents both data and programs in the same way, using lists of words, numbers, or other lists, separated by whitespace and surrounded with parentheses.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgf39bfb5">'(<span style="font-style: italic;">"this is"</span> (<span style="font-style: italic;">"nested"</span>))
+<pre class="src src-elisp" id="org60044c8">'(<span style="font-style: italic;">"this is"</span> (<span style="font-style: italic;">"nested"</span>))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org89a4faf" class="outline-4">
-<h4 id="org89a4faf">Lisp Atoms</h4>
-<div class="outline-text-4" id="text-org89a4faf">
+<div id="outline-container-org9299b96" class="outline-4">
+<h4 id="org9299b96">Lisp Atoms</h4>
+<div class="outline-text-4" id="text-org9299b96">
 <p>
 Lisp refers to the words in lists as <b>atoms</b>, meaning these elements cannot be divided any further than they already are - a list on the other hand can be split into parts.
 </p>
@@ -442,9 +442,9 @@ A list can have no atoms in it, <code>()</code>, which is known as the <b>empty 
 </div>
 </div>
 
-<div id="outline-container-org63bd3d2" class="outline-3">
-<h3 id="org63bd3d2">Run a program</h3>
-<div class="outline-text-3" id="text-org63bd3d2">
+<div id="outline-container-org11cce92" class="outline-3">
+<h3 id="org11cce92">Run a program</h3>
+<div class="outline-text-3" id="text-org11cce92">
 <p>
 A list, without a quotation mark before it, is a ready to run program which can be <i>evaluated</i>. The computer does one of three things:
 </p>
@@ -465,9 +465,9 @@ Lisp can also evaluate atoms that are not part of a list as well.
 </div>
 </div>
 
-<div id="outline-container-org34645b4" class="outline-3">
-<h3 id="org34645b4">Symbol Names and Function Definitions</h3>
-<div class="outline-text-3" id="text-org34645b4">
+<div id="outline-container-org9f9ad41" class="outline-3">
+<h3 id="org9f9ad41">Symbol Names and Function Definitions</h3>
+<div class="outline-text-3" id="text-org9f9ad41">
 <p>
 The first symbol in a list, such as <code>+</code>, acts as a way to locate the definition/set of instructions associated with it.
 </p>
@@ -482,17 +482,17 @@ It is customary in Emacs Lisp to name symbols in a way that identifies which par
 </div>
 </div>
 
-<div id="outline-container-org60925cf" class="outline-3">
-<h3 id="org60925cf">The Lisp Interpreter</h3>
-<div class="outline-text-3" id="text-org60925cf">
+<div id="outline-container-orgc7fdfd3" class="outline-3">
+<h3 id="orgc7fdfd3">The Lisp Interpreter</h3>
+<div class="outline-text-3" id="text-orgc7fdfd3">
 <p>
 The Lisp interpreter will return a list if there is a quote before, or look at the first element in the list to see if it is a function definition to carry out if no quote is before the list.
 </p>
 </div>
 
-<div id="outline-container-org4903f4d" class="outline-4">
-<h4 id="org4903f4d">Complications</h4>
-<div class="outline-text-4" id="text-org4903f4d">
+<div id="outline-container-org37dd058" class="outline-4">
+<h4 id="org37dd058">Complications</h4>
+<div class="outline-text-4" id="text-org37dd058">
 <p>
 <b>Complication 1</b>: The Lisp interpreter can evaluate symbols which are not quoted, nor with parentheses around them. The interpeter attempts to determine the symbol's value as a <i>variable</i>.
 </p>
@@ -520,9 +520,9 @@ If no nested lists are present in a list, the interpreter works from left to rig
 </div>
 </div>
 
-<div id="outline-container-org551ca08" class="outline-3">
-<h3 id="org551ca08">Evaluation</h3>
-<div class="outline-text-3" id="text-org551ca08">
+<div id="outline-container-orgdc5edbb" class="outline-3">
+<h3 id="orgdc5edbb">Evaluation</h3>
+<div class="outline-text-3" id="text-orgdc5edbb">
 <p>
 <b>Evaluation</b> is the process through which the Lisp interpreter executes an expression.
 </p>
@@ -530,9 +530,9 @@ If no nested lists are present in a list, the interpreter works from left to rig
 <hr>
 </div>
 
-<div id="outline-container-orga3f3b22" class="outline-4">
-<h4 id="orga3f3b22">How the Lisp Interpreter Acts</h4>
-<div class="outline-text-4" id="text-orga3f3b22">
+<div id="outline-container-orgb39bf83" class="outline-4">
+<h4 id="orgb39bf83">How the Lisp Interpreter Acts</h4>
+<div class="outline-text-4" id="text-orgb39bf83">
 <p>
 In most normal circumstances, the Lisp interpreter returns a value produced by evaluating an expression. It may also produce instead:
 </p>
@@ -555,15 +555,15 @@ In summary, evaluating a symbolic expression most commonly causes the Lisp inter
 </div>
 </div>
 
-<div id="outline-container-orgaa6e994" class="outline-4">
-<h4 id="orgaa6e994">Evaluating inner lists</h4>
-<div class="outline-text-4" id="text-orgaa6e994">
+<div id="outline-container-orga434138" class="outline-4">
+<h4 id="orga434138">Evaluating inner lists</h4>
+<div class="outline-text-4" id="text-orga434138">
 <p>
 When a inner list is present, the value returned by it can be used as information when the outer list is evaluated - this is why inner expressions are evaluated before outer expressions:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org5cdc90b">(+ 2 (* 3 3))
+<pre class="src src-elisp" id="org793e363">(+ 2 (* 3 3))
 </pre>
 </div>
 
@@ -589,9 +589,9 @@ When <code>C-x C-e</code> is ran, it executes <code>eval-last-sexp</code> to eva
 </div>
 
 
-<div id="outline-container-org51b4849" class="outline-3">
-<h3 id="org51b4849">Variables</h3>
-<div class="outline-text-3" id="text-org51b4849">
+<div id="outline-container-org9a5652d" class="outline-3">
+<h3 id="org9a5652d">Variables</h3>
+<div class="outline-text-3" id="text-org9a5652d">
 <p>
 A symbol can have a value attached to instead of a function definition as well. The value of a symbol can be any expression in Lisp, such as a symbol, number, list or string.
 </p>
@@ -601,9 +601,9 @@ A symbol can have a value attached to instead of a function definition as well. 
 </ul>
 </div>
 
-<div id="outline-container-orgd4187f2" class="outline-4">
-<h4 id="orgd4187f2">Setting the value of a variable</h4>
-<div class="outline-text-4" id="text-orgd4187f2">
+<div id="outline-container-org3ba11e2" class="outline-4">
+<h4 id="org3ba11e2">Setting the value of a variable</h4>
+<div class="outline-text-4" id="text-org3ba11e2">
 <p>
 <a href="https://www.gnu.org/software/emacs/manual/html_node/eintr/set-_0026-setq.html">https://www.gnu.org/software/emacs/manual/html_node/eintr/set-_0026-setq.html</a>
 </p>
@@ -613,15 +613,15 @@ The function <code>set</code> or the special form <code>setq</code> can be used 
 </p>
 </div>
 
-<div id="outline-container-org250e8a7" class="outline-5">
-<h5 id="org250e8a7">Using <code>set</code></h5>
-<div class="outline-text-5" id="text-org250e8a7">
+<div id="outline-container-org7264f96" class="outline-5">
+<h5 id="org7264f96">Using <code>set</code></h5>
+<div class="outline-text-5" id="text-org7264f96">
 <p>
 To set a variable, write <code>set</code> followed by two quoted arguments unless you want the symbol name and its value to be evaluated:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgf7bf00b">(set 'ingredients '(rice chicken eggs peppers))
+<pre class="src src-elisp" id="orgc6a28a2">(set 'ingredients '(rice chicken eggs peppers))
 (set 'name 'fred)
 
 (princ ingredients)
@@ -642,9 +642,9 @@ fred
 </div>
 </div>
 
-<div id="outline-container-org11441aa" class="outline-5">
-<h5 id="org11441aa">Using <code>setq</code></h5>
-<div class="outline-text-5" id="text-org11441aa">
+<div id="outline-container-org9d53093" class="outline-5">
+<h5 id="org9d53093">Using <code>setq</code></h5>
+<div class="outline-text-5" id="text-org9d53093">
 <p>
 With <code>set</code>, the first argument must almost alway be quoted unless it evaluates to a string. The special form <code>setq</code> is designed to handle the common combination of <code>set</code> and a quoted first argument - <code>setq</code> quotes the first argument automatically :)
 </p>
@@ -654,7 +654,7 @@ With <code>set</code>, the first argument must almost alway be quoted unless it 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orga1b271d">(<span style="font-weight: bold;">setq</span> name 'Morgan)
+<pre class="src src-elisp" id="orgc664e76">(<span style="font-weight: bold;">setq</span> name 'Morgan)
 (<span style="font-weight: bold;">setq</span> age '23
       likes 'Pizza)
 
@@ -680,17 +680,17 @@ Age: 23
 </div>
 </div>
 
-<div id="outline-container-org1d91c2b" class="outline-3">
-<h3 id="org1d91c2b">Arguments</h3>
-<div class="outline-text-3" id="text-org1d91c2b">
+<div id="outline-container-org6011fa3" class="outline-3">
+<h3 id="org6011fa3">Arguments</h3>
+<div class="outline-text-3" id="text-org6011fa3">
 <p>
 Inputs passed to a function are known as its <b>arguments</b>, these arguments are atoms or lists and the values returned (outputs) may also be atoms or lists.
 </p>
 </div>
 
-<div id="outline-container-org45aed78" class="outline-4">
-<h4 id="org45aed78">Arguments' Data Types</h4>
-<div class="outline-text-4" id="text-org45aed78">
+<div id="outline-container-org05f6b45" class="outline-4">
+<h4 id="org05f6b45">Arguments' Data Types</h4>
+<div class="outline-text-4" id="text-org05f6b45">
 <p>
 The type of data passed to a function matter, <code>+</code> for example requires numbers.
 </p>
@@ -700,7 +700,7 @@ The type of data passed to a function matter, <code>+</code> for example require
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org0ac6a27">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Bob"</span>)
+<pre class="src src-elisp" id="org746b6b8">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Bob"</span>)
 (concat <span style="font-style: italic;">"Hello "</span> name)
 </pre>
 </div>
@@ -728,7 +728,7 @@ For example:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org22aefe8">(substring <span style="font-style: italic;">"Morgan"</span> 0 4)
+<pre class="src src-elisp" id="orgc3e69f2">(substring <span style="font-style: italic;">"Morgan"</span> 0 4)
 </pre>
 </div>
 
@@ -747,15 +747,15 @@ It is important to remember that computers are zero-based in most forms of count
 </div>
 </div>
 
-<div id="outline-container-orgd90fecd" class="outline-4">
-<h4 id="orgd90fecd">An argument as the Value of a Variable or List</h4>
-<div class="outline-text-4" id="text-orgd90fecd">
+<div id="outline-container-org6879fa3" class="outline-4">
+<h4 id="org6879fa3">An argument as the Value of a Variable or List</h4>
+<div class="outline-text-4" id="text-org6879fa3">
 <p>
 Arguments can also be symbols that return values when evaluated. Arguments can also be a list that returns a value when it is evaluated. The following example demonstrates using a list as input to the <code>concat</code> function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org1d5fa75">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">author</span> ()
+<pre class="src src-elisp" id="org27ab5ad">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">author</span> ()
     <span style="font-style: italic;">"Morgan Walsh"</span>)
 
 (<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">age</span> ()
@@ -776,24 +776,24 @@ Written by Morgan Walsh, aged 23.
 </div>
 </div>
 
-<div id="outline-container-org87e2449" class="outline-4">
-<h4 id="org87e2449">Variable Number of Arguments</h4>
-<div class="outline-text-4" id="text-org87e2449">
+<div id="outline-container-org1a610d8" class="outline-4">
+<h4 id="org1a610d8">Variable Number of Arguments</h4>
+<div class="outline-text-4" id="text-org1a610d8">
 <p>
 Some functions can take a variable number of arguments, <code>concat</code>, <code>+</code>, and <code>*</code> being some of them.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc58895d" class="outline-4">
-<h4 id="orgc58895d">The <code>message</code> function</h4>
-<div class="outline-text-4" id="text-orgc58895d">
+<div id="outline-container-orga40f091" class="outline-4">
+<h4 id="orga40f091">The <code>message</code> function</h4>
+<div class="outline-text-4" id="text-orga40f091">
 <p>
 The <code>message</code> function takes a variable number of arguments and sends messages in the echo area:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org97c9f9a">(message <span style="font-style: italic;">"Hello reader"</span>)
+<pre class="src src-elisp" id="org4c4997a">(message <span style="font-style: italic;">"Hello reader"</span>)
 </pre>
 </div>
 
@@ -811,7 +811,7 @@ A format specifier can be specified to insert arguments into a string:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgb688170">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Morgan"</span>)
+<pre class="src src-elisp" id="org0b1e739">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Morgan"</span>)
 (message <span style="font-style: italic;">"Hello %s"</span> name)
 </pre>
 </div>
@@ -833,9 +833,9 @@ The <code>%s</code> specifier can be used to print numbers as well, <code>%d</co
 </div>
 </div>
 
-<div id="outline-container-org5f0b4a6" class="outline-2">
-<h2 id="org5f0b4a6">Notes from source #3</h2>
-<div class="outline-text-2" id="text-org5f0b4a6">
+<div id="outline-container-org4ab390a" class="outline-2">
+<h2 id="org4ab390a">Notes from source #3</h2>
+<div class="outline-text-2" id="text-org4ab390a">
 <p>
 When Lisp evaluates a list, it checks whether the firsty symbol has a function definition attached to it, if it does it calls the functions
 definition and executes the instructions inside it.
@@ -846,18 +846,18 @@ definition and executes the instructions inside it.
 </ul>
 </div>
 
-<div id="outline-container-org26f3382" class="outline-3">
-<h3 id="org26f3382">An aside about primitive functions</h3>
-<div class="outline-text-3" id="text-org26f3382">
+<div id="outline-container-orgb97b4e0" class="outline-3">
+<h3 id="orgb97b4e0">An aside about primitive functions</h3>
+<div class="outline-text-3" id="text-orgb97b4e0">
 <p>
 In Lisp, almost all functions are defined in terms of other functions - except primitive functions written in the C language. These primitive functions can be called like normal in Lisp, they are provided as they allow GNU Emacs to run on any computer with sufficient power that can run C - which is most of them :D.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org677b267" class="outline-3">
-<h3 id="org677b267">The <code>defun</code> macro</h3>
-<div class="outline-text-3" id="text-org677b267">
+<div id="outline-container-orge26cce4" class="outline-3">
+<h3 id="orge26cce4">The <code>defun</code> macro</h3>
+<div class="outline-text-3" id="text-orge26cce4">
 <p>
 Function definitions have upto five parts following the <code>defun</code> keyword:
 </p>
@@ -875,7 +875,7 @@ A simple function for multiplying two numbers looks like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org554f30b">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">multiply</span> (num1 num2)
+<pre class="src src-elisp" id="org2e2eaff">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">multiply</span> (num1 num2)
     <span style="font-style: italic;">"This function prints the result of multiplying two numbers to stdout."</span>
     (princ (* num1 num2)))
 </pre>
@@ -886,7 +886,7 @@ The function can then be called as required:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="orgd7f447b">(multiply 10 10)
+<pre class="src src-elisp" id="org5a4ffa6">(multiply 10 10)
 </pre>
 </div>
 
@@ -910,9 +910,9 @@ The string inside the function is printed if <code>C-h f</code> is typed and the
 </div>
 </div>
 
-<div id="outline-container-orga366990" class="outline-3">
-<h3 id="orga366990">Install a function definition into Emacs</h3>
-<div class="outline-text-3" id="text-orga366990">
+<div id="outline-container-orgd707e2f" class="outline-3">
+<h3 id="orgd707e2f">Install a function definition into Emacs</h3>
+<div class="outline-text-3" id="text-orgd707e2f">
 <p>
 To install a function definition into Emacs, place the cursor at the end of the function definition and type
 <code>C-x C-e</code> to execute the source and load it into Emacs - this will be removed when Emacs exits.
@@ -920,9 +920,9 @@ To install a function definition into Emacs, place the cursor at the end of the 
 </div>
 </div>
 
-<div id="outline-container-org8f07aaf" class="outline-3">
-<h3 id="org8f07aaf"><code>let</code></h3>
-<div class="outline-text-3" id="text-org8f07aaf">
+<div id="outline-container-org28a5159" class="outline-3">
+<h3 id="org28a5159"><code>let</code></h3>
+<div class="outline-text-3" id="text-org28a5159">
 <p>
 The <code>let</code> expression is a special form in Lisp that is used to attach or bind a symbol to a value without confusing it with
 a variable of the same name outside of the function it is used in.
@@ -938,9 +938,9 @@ variables at once. <code>let</code> also defaults symbols to <code>nil</code> if
 </p>
 </div>
 
-<div id="outline-container-org4ab6782" class="outline-4">
-<h4 id="org4ab6782">The parts of a <code>let</code> expression</h4>
-<div class="outline-text-4" id="text-org4ab6782">
+<div id="outline-container-orgb88b9f1" class="outline-4">
+<h4 id="orgb88b9f1">The parts of a <code>let</code> expression</h4>
+<div class="outline-text-4" id="text-orgb88b9f1">
 <p>
 It is a list of three parts:
 </p>
@@ -959,7 +959,7 @@ The following block declares a function a which uses <code>let</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org2a2c384">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Emacs Editor"</span>)
+<pre class="src src-elisp" id="org6ec35d2">(<span style="font-weight: bold;">setq</span> name <span style="font-style: italic;">"Emacs Editor"</span>)
 (<span style="font-weight: bold;">setq</span> user-name-prefix <span style="font-style: italic;">"Mr"</span>)
 (<span style="font-weight: bold;">setq</span> user-forename <span style="font-style: italic;">"Morgan"</span>)
 (<span style="font-weight: bold;">setq</span> user-surname <span style="font-style: italic;">"Walsh"</span>)
@@ -985,18 +985,18 @@ Mr Morgan Walsh
 </div>
 </div>
 
-<div id="outline-container-orgc3cdee3" class="outline-3">
-<h3 id="orgc3cdee3">Truth and falsehood in Emacs Lisp</h3>
-<div class="outline-text-3" id="text-orgc3cdee3">
+<div id="outline-container-org3cafaf7" class="outline-3">
+<h3 id="org3cafaf7">Truth and falsehood in Emacs Lisp</h3>
+<div class="outline-text-3" id="text-org3cafaf7">
 <p>
 In Elisp, <code>false</code> is <code>nil</code> or the empty list, <code>()</code>, and everything else is true, represented by <code>t</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc4cf8d1" class="outline-3">
-<h3 id="orgc4cf8d1"><code>save-excursion</code></h3>
-<div class="outline-text-3" id="text-orgc4cf8d1">
+<div id="outline-container-orgc0206f0" class="outline-3">
+<h3 id="orgc0206f0"><code>save-excursion</code></h3>
+<div class="outline-text-3" id="text-orgc0206f0">
 <p>
 This is a special form used to save the location of a point, execute the body of the function, and then restore the point to its previous position.
 </p>
@@ -1014,9 +1014,9 @@ This is a special form used to save the location of a point, execute the body of
 <hr>
 </div>
 
-<div id="outline-container-org5b5b356" class="outline-4">
-<h4 id="org5b5b356">Point and Mark</h4>
-<div class="outline-text-4" id="text-org5b5b356">
+<div id="outline-container-orgba6385e" class="outline-4">
+<h4 id="orgba6385e">Point and Mark</h4>
+<div class="outline-text-4" id="text-orgba6385e">
 <p>
 <b>Point</b> is the current location of the cursor, it is immediately before the character that is being displayed. It is represented by a integer in Emacs. The first character
 in a buffer is number <code>1</code>, then <code>2</code>, etc&#x2026;
@@ -1030,13 +1030,13 @@ in a buffer is number <code>1</code>, then <code>2</code>, etc&#x2026;
 </div>
 </div>
 
-<div id="outline-container-org4ec0dd1" class="outline-2">
-<h2 id="org4ec0dd1">Notes from source #4</h2>
-<div class="outline-text-2" id="text-org4ec0dd1">
+<div id="outline-container-org2605ba0" class="outline-2">
+<h2 id="org2605ba0">Notes from source #4</h2>
+<div class="outline-text-2" id="text-org2605ba0">
 </div>
-<div id="outline-container-orgd07f8bb" class="outline-3">
-<h3 id="orgd07f8bb">Buffer names</h3>
-<div class="outline-text-3" id="text-orgd07f8bb">
+<div id="outline-container-org062094e" class="outline-3">
+<h3 id="org062094e">Buffer names</h3>
+<div class="outline-text-3" id="text-org062094e">
 <p>
 Two functions exist which show the difference between a file and a buffer:
 </p>
@@ -1047,7 +1047,7 @@ Two functions exist which show the difference between a file and a buffer:
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 3: </span>Using buffer-name</label><pre class="src src-elisp" id="org9345cbb">(buffer-name)
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>Using buffer-name</label><pre class="src src-elisp" id="org0b2382b">(buffer-name)
 </pre>
 </div>
 
@@ -1057,7 +1057,7 @@ basics.org
 </pre>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span>Using buffer-file-name</label><pre class="src src-elisp" id="orgc0aae10">(buffer-file-name)
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Using buffer-file-name</label><pre class="src src-elisp" id="orgd487534">(buffer-file-name)
 </pre>
 </div>
 
@@ -1068,15 +1068,15 @@ basics.org
 </div>
 </div>
 
-<div id="outline-container-org27c7bd7" class="outline-3">
-<h3 id="org27c7bd7">Getting buffers</h3>
-<div class="outline-text-3" id="text-org27c7bd7">
+<div id="outline-container-orgc8ed2d8" class="outline-3">
+<h3 id="orgc8ed2d8">Getting buffers</h3>
+<div class="outline-text-3" id="text-orgc8ed2d8">
 <p>
 To get the buffer itself rather than the name, use the <code>current-buffer</code> function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org541bdff">(current-buffer)
+<pre class="src src-elisp" id="orgbfdb938">(current-buffer)
 </pre>
 </div>
 
@@ -1098,7 +1098,7 @@ If you have switched between multiple buffers recently, <code>(other-buffer)</co
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 5: </span>Using other-buffer</label><pre class="src src-elisp" id="org21c60d8">(other-buffer)
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Using other-buffer</label><pre class="src src-elisp" id="org958f8eb">(other-buffer)
 </pre>
 </div>
 
@@ -1109,16 +1109,16 @@ If you have switched between multiple buffers recently, <code>(other-buffer)</co
 </div>
 </div>
 
-<div id="outline-container-org9b89954" class="outline-3">
-<h3 id="org9b89954">Switching buffers</h3>
-<div class="outline-text-3" id="text-org9b89954">
+<div id="outline-container-org45ef575" class="outline-3">
+<h3 id="org45ef575">Switching buffers</h3>
+<div class="outline-text-3" id="text-org45ef575">
 <p>
 <code>switch-to-buffer</code> is the interactive function bound to <code>C-x b</code> in Emacs, this is used to switch to a different buffer. To use
 programmatically:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 6: </span>Switching to a buffer called <b>shell</b></label><pre class="src src-elisp" id="org584e15a">(switch-to-buffer <span style="font-style: italic;">"*shell*"</span>)
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>Switching to a buffer called <b>shell</b></label><pre class="src src-elisp" id="org714924c">(switch-to-buffer <span style="font-style: italic;">"*shell*"</span>)
 </pre>
 </div>
 
@@ -1132,15 +1132,15 @@ This function is for humans, it changes what buffer is displayed in the window. 
 </div>
 </div>
 
-<div id="outline-container-org30914df" class="outline-3">
-<h3 id="org30914df">Buffer size and the Location of Point</h3>
-<div class="outline-text-3" id="text-org30914df">
+<div id="outline-container-orga015888" class="outline-3">
+<h3 id="orga015888">Buffer size and the Location of Point</h3>
+<div class="outline-text-3" id="text-orga015888">
 <p>
 <code>buffer-size</code> returns the size of the current buffer, a count of the number of characters:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 7: </span>Using buffer-size</label><pre class="src src-elisp" id="orgb5e644a">(buffer-size)
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>Using buffer-size</label><pre class="src src-elisp" id="org1c30b12">(buffer-size)
 </pre>
 </div>
 
@@ -1158,7 +1158,7 @@ The current position of the cursor is called <b>point</b>, this returns a number
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 8: </span>Getting the point position</label><pre class="src src-elisp" id="org337eed4">(point)
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>Getting the point position</label><pre class="src src-elisp" id="org08fb703">(point)
 </pre>
 </div>
 
@@ -1174,17 +1174,17 @@ When I executed this, it outputted:
 </div>
 </div>
 
-<div id="outline-container-org4ba8eb0" class="outline-2">
-<h2 id="org4ba8eb0">GNU Emacs Extensions - notes</h2>
-<div class="outline-text-2" id="text-org4ba8eb0">
+<div id="outline-container-org505a61a" class="outline-2">
+<h2 id="org505a61a">GNU Emacs Extensions - notes</h2>
+<div class="outline-text-2" id="text-org505a61a">
 </div>
-<div id="outline-container-org74b3e7e" class="outline-3">
-<h3 id="org74b3e7e">Customising Emacs</h3>
-<div class="outline-text-3" id="text-org74b3e7e">
+<div id="outline-container-org7dfc35c" class="outline-3">
+<h3 id="org7dfc35c">Customising Emacs</h3>
+<div class="outline-text-3" id="text-org7dfc35c">
 </div>
-<div id="outline-container-org2067855" class="outline-4">
-<h4 id="org2067855">Backspace and delete</h4>
-<div class="outline-text-4" id="text-org2067855">
+<div id="outline-container-org6edcf70" class="outline-4">
+<h4 id="org6edcf70">Backspace and delete</h4>
+<div class="outline-text-4" id="text-org6edcf70">
 <p>
 The ASCII <i>backspace</i> code is the decimal <code>8</code>, denoted <code>BS</code>.
 </p>
@@ -1201,13 +1201,13 @@ The ASCII <i>delete</i> code is decimal <code>127</code>, denoted <code>DEL</cod
 </div>
 </div>
 
-<div id="outline-container-orga9204e3" class="outline-4">
-<h4 id="orga9204e3">Keys and Strings</h4>
-<div class="outline-text-4" id="text-orga9204e3">
+<div id="outline-container-org930a489" class="outline-4">
+<h4 id="org930a489">Keys and Strings</h4>
+<div class="outline-text-4" id="text-org930a489">
 </div>
-<div id="outline-container-org34ce517" class="outline-5">
-<h5 id="org34ce517">Binding Keystrokes to Commands</h5>
-<div class="outline-text-5" id="text-org34ce517">
+<div id="outline-container-orgb9f3b07" class="outline-5">
+<h5 id="orgb9f3b07">Binding Keystrokes to Commands</h5>
+<div class="outline-text-5" id="text-orgb9f3b07">
 <p>
 <code>global-set-key</code> function accepts a key sequence and a command to bind to the sequence:
 </p>
@@ -1219,9 +1219,9 @@ The ASCII <i>delete</i> code is decimal <code>127</code>, denoted <code>DEL</cod
 </div>
 </div>
 
-<div id="outline-container-org4eead54" class="outline-5">
-<h5 id="org4eead54">Denoting keys in strings</h5>
-<div class="outline-text-5" id="text-org4eead54">
+<div id="outline-container-org8bdbc22" class="outline-5">
+<h5 id="org8bdbc22">Denoting keys in strings</h5>
+<div class="outline-text-5" id="text-org8bdbc22">
 <p>
 To write a keysequence in Elisp, the simplest is with a string of characters where the characters are surrounded by doouble quotes. To include a double quote in a string, escape it with a backslash:
 </p>
@@ -1257,9 +1257,9 @@ The <code>length</code> function returns the length of a string: <code>(length "
 </div>
 </div>
 
-<div id="outline-container-org522dba8" class="outline-5">
-<h5 id="org522dba8">What is <code>C-h</code> bound to by default</h5>
-<div class="outline-text-5" id="text-org522dba8">
+<div id="outline-container-org3bff0cb" class="outline-5">
+<h5 id="org3bff0cb">What is <code>C-h</code> bound to by default</h5>
+<div class="outline-text-5" id="text-org3bff0cb">
 <p>
 The <code>describe-bindings</code>, <code>C-h b</code>, can be called to present a window listing all keybindings in effect. The <code>C-h</code> command is bound to the <code>help-command</code> function by default for example.
 </p>
@@ -1316,9 +1316,9 @@ The <code>delete-backward-char</code> could be bound to the <code>C-h</code> key
 </div>
 </div>
 
-<div id="outline-container-org354029a" class="outline-5">
-<h5 id="org354029a">Evaluating Lisp Expressions</h5>
-<div class="outline-text-5" id="text-org354029a">
+<div id="outline-container-org369c4c9" class="outline-5">
+<h5 id="org369c4c9">Evaluating Lisp Expressions</h5>
+<div class="outline-text-5" id="text-org369c4c9">
 <ol class="org-ol">
 <li>Use <code>load-file</code> to load an <code>.el</code> file containing Emacs Lisp.</li>
 <li>Use <code>eval-last-sexp</code>, bound to <code>C-x C-e</code>, to evaluate the symbolic expression before the cursor</li>
@@ -1341,9 +1341,9 @@ The <code>delete-backward-char</code> could be bound to the <code>C-h</code> key
 </div>
 </div>
 
-<div id="outline-container-org501852f" class="outline-5">
-<h5 id="org501852f">Apropos</h5>
-<div class="outline-text-5" id="text-org501852f">
+<div id="outline-container-org377b562" class="outline-5">
+<h5 id="org377b562">Apropos</h5>
+<div class="outline-text-5" id="text-org377b562">
 <p>
 The <code>apropos</code> utility in Emacs can be used to search all known variables and functions for a specified pattern.
 </p>
@@ -1382,13 +1382,13 @@ In Emacs, <b>commands</b> are invoked interactively from a keybinding or with <c
 </div>
 </div>
 
-<div id="outline-container-org4f8f21c" class="outline-3">
-<h3 id="org4f8f21c">Simple New Commands</h3>
-<div class="outline-text-3" id="text-org4f8f21c">
+<div id="outline-container-orgcd24bb3" class="outline-3">
+<h3 id="orgcd24bb3">Simple New Commands</h3>
+<div class="outline-text-3" id="text-orgcd24bb3">
 </div>
-<div id="outline-container-orgbe72502" class="outline-4">
-<h4 id="orgbe72502">Traversing windows</h4>
-<div class="outline-text-4" id="text-orgbe72502">
+<div id="outline-container-orgf93fbf3" class="outline-4">
+<h4 id="orgf93fbf3">Traversing windows</h4>
+<div class="outline-text-4" id="text-orgf93fbf3">
 <p>
 <code>C-x o</code> is bound to the <code>other-window</code> function, this moves the cursor from one Emacs window into another. To move back to the previous window, execute <code>other-window</code> with <code>-1</code> as an argument: <code>C-u -1 C-x o</code>.
 </p>
@@ -1398,9 +1398,9 @@ In Emacs, <b>commands</b> are invoked interactively from a keybinding or with <c
 </p>
 </div>
 
-<div id="outline-container-org176532d" class="outline-5">
-<h5 id="org176532d">Defining a key binding to go to the next window</h5>
-<div class="outline-text-5" id="text-org176532d">
+<div id="outline-container-orge6397a3" class="outline-5">
+<h5 id="orge6397a3">Defining a key binding to go to the next window</h5>
+<div class="outline-text-5" id="text-orge6397a3">
 <div class="org-src-container">
 <pre class="src src-elisp">(global-set-key <span style="font-style: italic;">"\C-x\C-n"</span> 'other-window)
 </pre>
@@ -1408,9 +1408,9 @@ In Emacs, <b>commands</b> are invoked interactively from a keybinding or with <c
 </div>
 </div>
 
-<div id="outline-container-org0c9930b" class="outline-5">
-<h5 id="org0c9930b">Define a key binding to go back one window</h5>
-<div class="outline-text-5" id="text-org0c9930b">
+<div id="outline-container-org2046819" class="outline-5">
+<h5 id="org2046819">Define a key binding to go back one window</h5>
+<div class="outline-text-5" id="text-org2046819">
 <p>
 The <code>other-window</code> function accepts a numerical argument to indicate how many windows it should move, a new command can be defined for moving back one window as a function which can be assigned to a key binding:
 </p>
@@ -1445,9 +1445,9 @@ This can then be invoked when multiple windows are open to navigate between them
 </div>
 </div>
 
-<div id="outline-container-org582358c" class="outline-5">
-<h5 id="org582358c">Optional arguments</h5>
-<div class="outline-text-5" id="text-org582358c">
+<div id="outline-container-orgcfc2f2b" class="outline-5">
+<h5 id="orgcfc2f2b">Optional arguments</h5>
+<div class="outline-text-5" id="text-orgcfc2f2b">
 <p>
 Supply <code>&amp;optional</code> in a functions arguments to indicate all following arguments are optional&lt; meaning they do not need to be supplied to call the function:
 </p>
@@ -1470,9 +1470,9 @@ If no value is supplied to <code>n</code>, it will be given the value <code>nil<
 </div>
 </div>
 
-<div id="outline-container-orgfbf4f2c" class="outline-5">
-<h5 id="orgfbf4f2c">Concise if statements</h5>
-<div class="outline-text-5" id="text-orgfbf4f2c">
+<div id="outline-container-orgf9d2a74" class="outline-5">
+<h5 id="orgf9d2a74">Concise if statements</h5>
+<div class="outline-text-5" id="text-orgf9d2a74">
 <p>
 <code>if</code> statements can be verbose for simple tasks, take the previous <code>other-window-backward</code> example. This can be rewritten as:
 </p>
@@ -1512,9 +1512,9 @@ Common subexpressions can also be shortened, <code>(if n (- n) -1)</code> can be
 </div>
 </div>
 
-<div id="outline-container-orga321311" class="outline-5">
-<h5 id="orga321311">Logical Expressions</h5>
-<div class="outline-text-5" id="text-orga321311">
+<div id="outline-container-org13c574c" class="outline-5">
+<h5 id="org13c574c">Logical Expressions</h5>
+<div class="outline-text-5" id="text-org13c574c">
 <p>
 Lisp also has logical expressions for making expressions more concise, for example <code>(if n n 1)</code> becomes <code>(or n 1)</code>.
 </p>
@@ -1587,9 +1587,9 @@ This can be done as if we want to execute something in <code>d</code>, it must b
 </div>
 </div>
 
-<div id="outline-container-orgec01bbb" class="outline-5">
-<h5 id="orgec01bbb">The better <code>other-window-backward</code> function</h5>
-<div class="outline-text-5" id="text-orgec01bbb">
+<div id="outline-container-org4ef57b1" class="outline-5">
+<h5 id="org4ef57b1">The better <code>other-window-backward</code> function</h5>
+<div class="outline-text-5" id="text-org4ef57b1">
 <p>
 Using logical conditions, it could be shortened to:
 </p>
@@ -1624,9 +1624,9 @@ The function <code>prefix-numeric-value</code> interprets the data structure as 
 </div>
 </div>
 
-<div id="outline-container-org92e52c5" class="outline-5">
-<h5 id="org92e52c5">Line-at-a-Time Scrolling</h5>
-<div class="outline-text-5" id="text-org92e52c5">
+<div id="outline-container-org0171ef6" class="outline-5">
+<h5 id="org0171ef6">Line-at-a-Time Scrolling</h5>
+<div class="outline-text-5" id="text-org0171ef6">
 <p>
 Emacs has two functions for scrolling, <code>scroll-up</code> and <code>scroll-down</code>, these are bound to <code>C-v</code> and <code>M-v</code> with each function taking an optional argument telling it how many lines to scroll - the default is a whole windowful at a time.
 </p>
@@ -1685,9 +1685,9 @@ The functions can be made more general with optional arguments:
 </div>
 </div>
 
-<div id="outline-container-org3de5cf1" class="outline-5">
-<h5 id="org3de5cf1">Other cursor and text motion commands</h5>
-<div class="outline-text-5" id="text-org3de5cf1">
+<div id="outline-container-orgfb5ec12" class="outline-5">
+<h5 id="orgfb5ec12">Other cursor and text motion commands</h5>
+<div class="outline-text-5" id="text-orgfb5ec12">
 <p>
 The <i>point</i> is the current cursor position, the following functions move the cursor to the top left and bottom left of the window it is in:
 </p>
@@ -1719,9 +1719,9 @@ The following function uses the <code>recenter</code> function to scroll the cur
 </div>
 </div>
 
-<div id="outline-container-org69984c0" class="outline-5">
-<h5 id="org69984c0">Clobbering Symbol links</h5>
-<div class="outline-text-5" id="text-org69984c0">
+<div id="outline-container-orgd066f61" class="outline-5">
+<h5 id="orgd066f61">Clobbering Symbol links</h5>
+<div class="outline-text-5" id="text-orgd066f61">
 <p>
 A <b>symbolic link</b>, or <i>symlink</i>, is a file referring to another file by name - when asking for the contents of a symlink, the actual contents of the file it refers to are returned.
 </p>
@@ -1743,9 +1743,9 @@ The author has Emacs auto make files visited via symlinks in a buffer read-only,
 </div>
 </div>
 
-<div id="outline-container-org9a1e53f" class="outline-5">
-<h5 id="org9a1e53f">Hooks</h5>
-<div class="outline-text-5" id="text-org9a1e53f">
+<div id="outline-container-orgc72d0a6" class="outline-5">
+<h5 id="orgc72d0a6">Hooks</h5>
+<div class="outline-text-5" id="text-orgc72d0a6">
 <p>
 A <b>hook</b> is a Lisp variable whose value is a list of functions executed under some conditions.
 </p>
@@ -1807,15 +1807,15 @@ The previous function can be hooked in to <code>find-file-hooks</code> to be tri
 </div>
 </div>
 
-<div id="outline-container-org871a802" class="outline-5">
-<h5 id="org871a802">Anonymous functions</h5>
-<div class="outline-text-5" id="text-org871a802">
+<div id="outline-container-org7bbfbc2" class="outline-5">
+<h5 id="org7bbfbc2">Anonymous functions</h5>
+<div class="outline-text-5" id="text-org7bbfbc2">
 <p>
 A <i>lambda</i> is an anonymous function in Lisp which functions like a normal function:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org7e7590d">((<span style="font-weight: bold;">lambda</span> ()
+<pre class="src src-elisp" id="orge7cb44f">((<span style="font-weight: bold;">lambda</span> ()
   (message <span style="font-style: italic;">"Hello"</span>)))
 </pre>
 </div>
@@ -1845,9 +1845,9 @@ The structure is exactly the same as a function, just no name :D
 </div>
 </div>
 
-<div id="outline-container-org4af24ae" class="outline-5">
-<h5 id="org4af24ae">Handling the Symlink</h5>
-<div class="outline-text-5" id="text-org4af24ae">
+<div id="outline-container-org375a1e9" class="outline-5">
+<h5 id="org375a1e9">Handling the Symlink</h5>
+<div class="outline-text-5" id="text-org375a1e9">
 <p>
 Some stuff from this part:
 </p>
@@ -1857,7 +1857,7 @@ Some stuff from this part:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp" id="org00e134b">(<span style="font-weight: bold;">let</span> ((x 10)
+<pre class="src src-elisp" id="orgac1f3e0">(<span style="font-weight: bold;">let</span> ((x 10)
       (y 30))
   (message (format <span style="font-style: italic;">"%d"</span> (+ x y))))
 </pre>
@@ -1910,8 +1910,8 @@ The <code>error</code> function accepts a string to output as an error message i
 </div>
 </div>
 
-<div id="outline-container-orgc45de49" class="outline-3">
-<h3 id="orgc45de49">Cooperating commands</h3>
+<div id="outline-container-orga920ff0" class="outline-3">
+<h3 id="orga920ff0">Cooperating commands</h3>
 </div>
 </div>
 </div>
@@ -1919,7 +1919,7 @@ The <code>error</code> function accepts a string to output as an error message i
 <hr />
 <footer>
   <p>
-    Last updated 2022-05-26 Thu 10:12. <br />
+    Last updated 2022-05-26 Thu 20:40. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </p>
