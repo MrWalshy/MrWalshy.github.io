@@ -162,8 +162,6 @@ Inserting text looks as follows:
 #+end_src
 
 #+call: insert-text()
-
-
 **** Moving the cursor back to where it started
 
 After moving the cursor, it is often desirable to return it to where it started. The ~save-excursion~ function can be used to wrap Elisp statements that may modify the cursors position and return it to its original position:
@@ -500,3 +498,674 @@ This will output:
 : Hello Morgan
 
 The ~%s~ specifier can be used to print numbers as well, ~%d~ will only print numbers left of the decimal point (whole numbers).
+
+** Notes from source #3
+
+When Lisp evaluates a list, it checks whether the firsty symbol has a function definition attached to it, if it does it calls the functions
+definition and executes the instructions inside it.
+
+- A symbol can point to a function definition
+
+*** An aside about primitive functions
+
+In Lisp, almost all functions are defined in terms of other functions - except primitive functions written in the C language. These primitive functions can be called like normal in Lisp, they are provided as they allow GNU Emacs to run on any computer with sufficient power that can run C - which is most of them :D.
+
+*** The ~defun~ macro
+
+Function definitions have upto five parts following the ~defun~ keyword:
+
+1. The name of the symbol to which the function definition is attached
+2. A list of arguments to be passed to the function, if no args are required use an empty list
+3. Documentation string describing the function
+4. An expression to make the function interactive so it can be executed with ~M-x~ [optional]
+5. The body of the function which contains the code to be executed
+
+A simple function for multiplying two numbers looks like:
+
+#+name: multiply-function
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun multiply (num1 num2)
+      "This function prints the result of multiplying two numbers to stdout."
+      (princ (* num1 num2)))
+#+end_src
+
+The function can then be called as required:
+
+#+name: multiply-function-call
+#+begin_src elisp :results output :exports both :eval no-export
+  (multiply 10 10)
+#+end_src
+
+This call would output:
+
+#+RESULTS: multiply-function-call
+: 100
+
+It is important to know that parameters declared in a functions parameter list are scoped
+locally to that function, and are not accessible outside of it.
+
+The string inside the function is printed if ~C-h f~ is typed and the name of a function passed to it.
+
+*** Install a function definition into Emacs
+
+To install a function definition into Emacs, place the cursor at the end of the function definition and type
+~C-x C-e~ to execute the source and load it into Emacs - this will be removed when Emacs exits.
+
+*** ~let~
+
+The ~let~ expression is a special form in Lisp that is used to attach or bind a symbol to a value without confusing it with
+a variable of the same name outside of the function it is used in.
+
+- ~let~ creates a local variable that is only accessible inside the let expression itself
+
+In Emacs Lisp, dynamic scoping is the default but ~let~ uses lexical scoping instead. ~let~ is also capable of creating multiple
+variables at once. ~let~ also defaults symbols to ~nil~ if no value is supplied.
+
+**** The parts of a ~let~ expression
+
+It is a list of three parts:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (let varlist body)
+#+end_src
+
+- each element of /varlist/ is either a symbol by itself, or a two-element list where the first element is a symbol.
+
+The following block declares a function a which uses ~let~:
+
+#+name: using-let-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (setq name "Emacs Editor")
+  (setq user-name-prefix "Mr")
+  (setq user-forename "Morgan")
+  (setq user-surname "Walsh")
+
+  (defun get-full-name ()
+      (let ((name (concat user-forename " " user-surname)))
+        (concat user-name-prefix " " name)))
+
+  (get-full-name)
+#+end_src
+
+This use of ~let~, albeit simple, creates a local variable called ~name~ which hides/shadows the ~name~ variable declared with ~setq~. When the
+~get-full-name~ function is called, it outputs:
+
+#+RESULTS: using-let-example
+: Mr Morgan Walsh
+
+*** Truth and falsehood in Emacs Lisp
+
+In Elisp, ~false~ is ~nil~ or the empty list, ~()~, and everything else is true, represented by ~t~.
+
+*** ~save-excursion~
+
+This is a special form used to save the location of a point, execute the body of the function, and then restore the point to its previous position.
+
+~save-excursion~ is used like so:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (save-excursion
+    body...)
+#+end_src
+
+--------------
+
+**** Point and Mark
+
+*Point* is the current location of the cursor, it is immediately before the character that is being displayed. It is represented by a integer in Emacs. The first character
+in a buffer is number ~1~, then ~2~, etc...
+
+- The function ~point~ returns the current position of the cursor as a number, each buffer has its own value for point.
+
+** Notes from source #4
+
+*** Buffer names
+
+Two functions exist which show the difference between a file and a buffer:
+
+- ~buffer-name~: places the name of the buffer in the echo area
+- ~buffer-file-name~: places the name of the file to which the buffer refers in the echo area
+
+#+caption: Using buffer-name 
+#+name: buffer-names-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (buffer-name)
+#+end_src
+
+#+RESULTS: buffer-names-example
+: basics.org
+
+#+caption: Using buffer-file-name
+#+name: buffer-file-names-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (buffer-file-name)
+#+end_src
+
+#+RESULTS: buffer-file-names-example
+: /home/morgan/MrWalshy.github.io/org/blog/Emacs_Lisp/basics.org
+
+*** Getting buffers
+
+To get the buffer itself rather than the name, use the ~current-buffer~ function:
+
+#+name: getting-buffers-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (current-buffer)
+#+end_src
+
+If executed by itself, a special format is returned indicating that the buffer itself is being returned:
+
+#+RESULTS: getting-buffers-example
+: #<buffer basics.org>
+
+The content is not output as it could potentially be thousands of lines long.
+
+If you have switched between multiple buffers recently, ~(other-buffer)~ returns the previously switched from one:
+
+#+caption: Using other-buffer
+#+name: other-buffer-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (other-buffer)
+#+end_src
+
+#+RESULTS: other-buffer-example
+: #<buffer *shell*>
+
+*** Switching buffers
+
+~switch-to-buffer~ is the interactive function bound to ~C-x b~ in Emacs, this is used to switch to a different buffer. To use
+programmatically:
+
+#+caption: Switching to a buffer called *shell*
+#+name: switch-buffer-example
+#+begin_src elisp :results silent :exports code :eval no-export
+  (switch-to-buffer "*shell*")
+#+end_src
+
+- The buffer must be open
+
+This function is for humans, it changes what buffer is displayed in the window. Use ~set-buffer~ in programming to switch the attention of the computer program to a different buffer.
+
+*** Buffer size and the Location of Point
+
+~buffer-size~ returns the size of the current buffer, a count of the number of characters:
+
+#+caption: Using buffer-size
+#+name: buffer-size-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (buffer-size)
+#+end_src
+
+When I ran this, it output:
+
+#+RESULTS: buffer-size-example
+: 24561
+
+The current position of the cursor is called *point*, this returns a number indicating where the cursor is located in the buffer:
+
+#+caption: Getting the point position
+#+name: point-position-example
+#+begin_src elisp :results value :exports both :eval no-export
+  (point)
+#+end_src
+
+When I executed this, it outputted:
+
+#+RESULTS: point-position-example
+: 24884
+
+** GNU Emacs Extensions - notes
+
+*** Customising Emacs
+
+**** Backspace and delete
+
+The ASCII /backspace/ code is the decimal ~8~, denoted ~BS~.
+
+The ASCII /delete/ code is decimal ~127~, denoted ~DEL~.
+
+- Emacs defaults to only the ~DEL~ code meaning to move left and erase the previous character.
+
+- ~BS~ is the code used by Emacs for invoking the Help utility with ~C-h~.
+
+**** Keys and Strings
+
+***** Binding Keystrokes to Commands
+
+~global-set-key~ function accepts a key sequence and a command to bind to the sequence:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key keysequence command)
+#+end_src
+
+***** Denoting keys in strings
+
+To write a keysequence in Elisp, the simplest is with a string of characters where the characters are surrounded by doouble quotes. To include a double quote in a string, escape it with a backslash:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  "A string with a \"quote\" inside it."
+#+end_src
+
+- Include a backslash by preceeding it with a backslash
+
+Ordinary keys are represented by the character they represent, such as ~c~ would be the string ~"c"~.
+
+Special characters are represented in strings with a special syntax, ~"\M-x"~ is the string representation of ~M-x~ (META-x).
+
+To combine multiple keys, include dashes between them: ~\M-x-c~ means press META, x and c at the same time. To combine two special keys, escape both of them: ~\C-\M-x~ is ~C-M-x~, which means press CONTROL, META and x at the same time in the order they appear.
+
+- ~\e~ denotes the escape character, ~M-x~ is the same as ~ESC x~
+
+The ~length~ function returns the length of a string: ~(length "A string to check")~
+
+***** What is ~C-h~ bound to by default
+
+The ~describe-bindings~, ~C-h b~, can be called to present a window listing all keybindings in effect. The ~C-h~ command is bound to the ~help-command~ function by default for example.
+
+To bind the ~help-command~ to ~M-?~, we could use:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key "\M-?" 'help-command)
+#+end_src
+
+The symbol ~help-command~ is prefixed with a quote to prevent execution of its assigned function definition, this then allows the function to be bound to the keysequence correctly.
+
+The same effect can also be achieved without quoting by setting a quoted symbol to the symbol of the function:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (setq x 'help-command)
+  (global-set-key "\M-?" x)
+#+end_src
+
+Any Lisp expression can be quoted, ~'expression~ is short for:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (quote expr)
+#+end_src
+
+The above s-expression would return ~expr~ the symbol rather than its value, or value of its definition after execution. Strings, numbers, characters and vectors are all self-evaluating - evaluating them results in the same value - and thus quoting them is redundant.
+
+The ~delete-backward-char~ could be bound to the ~C-h~ key like so, allowing the ~DEL~ key and ~C-h~ to do the same action:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key "\M-?" 'help-command)
+  (global-set-key "\C-h" 'delete-backward-char)
+#+end_src
+
+- The ESCAPE key is bound to ~DEL~ code, this makes ~C-h~ do the same as pressing ~ESC~ rather than the ~DELETE~ key.
+
+***** Evaluating Lisp Expressions
+
+1. Use ~load-file~ to load an ~.el~ file containing Emacs Lisp.
+2. Use ~eval-last-sexp~, bound to ~C-x C-e~, to evaluate the symbolic expression before the cursor
+3. Use the ~eval-expression~ command, also bound to ~M-:~, this prompts for a Lisp expression in the minibuffer, evaluates it and then shows the results.
+4. Use the ~*scratch*~ buffer, press ~C-j~ in it to call ~eval-print-last-sexp~ which is like ~eval-last-sexp~, except that it also inserts the result of the evaluation into the buffer at the cursors location. Press ~M-TAB~ to invoke ~lisp-complete-symbol~ in Lisp Interaction mode to commplete partially typed Lisp symbols.
+
+~eval-expression~ is disabled by default, evaluate the following Lisp expression to enable it:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (put 'eval-expression 'disabled nil)
+#+end_src
+
+- replace ~nil~ with ~t~ to re-disable it
+
+***** Apropos
+
+The ~apropos~ utility in Emacs can be used to search all known variables and functions for a specified pattern.
+
+#+begin_src elisp :results output :exports code :eval no-export
+  (apropos "insert")
+#+end_src
+
+Activate ~apropos~ in the minibuffer with: ~M-x apropos RET~ followed by the pattern to use in the search.
+
+The function ~delete-char~ deletes the character at the cursors position and could be set like so:
+
+#+begin_src elisp :results output :exports code :eval no-export
+  (global-set-key "\C-?" 'delete-char)
+#+end_src
+
+- Apparently, for historical reasons the way to write the ~DEL~ character is ~CONTROL-?~.
+
+~apropos~ can also be invoked with a *prefix argument*, pressing ~C-u~ before executing a command is a way to pass extra info to the command. ~C-u 5 C-b~ means move the cursor left 5 characters for example. If ~apropos~ is invoked in this way, ~C-u M-x apropos RET xxxx RET~, it will also show any exisiting keybindings for each command in the list.
+
+In Emacs, *commands* are invoked interactively from a keybinding or with ~M-x~, functions that are not interactive cannot be invoked this way. The scope of a search can be limited by using ~command-apropos~ via ~M-? a~ to search for only Emacs commands instead of variables and functions.
+
+*** Simple New Commands
+
+**** Traversing windows
+
+~C-x o~ is bound to the ~other-window~ function, this moves the cursor from one Emacs window into another. To move back to the previous window, execute ~other-window~ with ~-1~ as an argument: ~C-u -1 C-x o~.
+
+~C-n~ and ~C-p~ are bound to ~next-line~ and ~previous-line~.
+
+***** Defining a key binding to go to the next window
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (global-set-key "\C-x\C-n" 'other-window)
+#+end_src
+
+***** Define a key binding to go back one window
+
+The ~other-window~ function accepts a numerical argument to indicate how many windows it should move, a new command can be defined for moving back one window as a function which can be assigned to a key binding:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward ()
+    "Selects the previous window"
+    (interactive) ; can be invoked via keybindings or M-x
+    (other-window -1))
+
+  (global-set-key "\C-x\C-p" 'other-window-backward)
+#+end_src
+
+The following function definition takes a parameter ~n~ instead, the ~interactive~ declaration now includes ~"p"~ - this means, if there is a prefix argument, interpret it as a number and assign it to ~n~:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward (n)
+    "Selects the previous window"
+    (interactive "p") ; can be invoked via keybindings or M-x
+    (other-window (- n))) ; negate n
+
+  (global-set-key "\C-x\C-p" 'other-window-backward)
+#+end_src
+
+This can then be invoked when multiple windows are open to navigate between them. For example, ~C-u 1 C-x C-p~ will move the cursor back one window. Typing the key ~C-x C-p~ will do the equivalent as ~interactive "p"~ defaults to 1.
+
+***** Optional arguments
+
+Supply ~&optional~ in a functions arguments to indicate all following arguments are optional< meaning they do not need to be supplied to call the function:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward (&optional n)
+    "Selects the n'th previous window"
+    (interactive "p") ; can be invoked via keybindings or M-x
+    (if n
+      (other-window (- n))
+      (other-window -1)))
+
+  (global-set-key "\C-x\C-p" 'other-window-backward)
+#+end_src
+
+If no value is supplied to ~n~, it will be given the value ~nil~ (the false value).
+
+***** Concise if statements
+
+~if~ statements can be verbose for simple tasks, take the previous ~other-window-backward~ example. This can be rewritten as:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward (&optional n)
+    "Selects the n'th previous window"
+    (interactive "p") ; can be invoked via keybindings or M-x
+    (other-window (if n (- n) -1))
+
+  (global-set-key "\C-x\C-p" 'other-window-backward)
+#+end_src
+
+Because Lisp processes nested lists first, and we wanted to call the same function in both branches, we can instead evaluate the condition and pass the result as data directly to the function.
+
+Generally,
+
+#+begin_src elisp :results silent :exports code :eval no
+  (if test
+      (a b)
+    (a c))
+#+end_src
+
+can be shortened to ~(a (if test b c))~.
+
+Common subexpressions can also be shortened, ~(if n (- n) -1)~ can be shortened to ~(- (if n n 1))~. This is because this if statement always returns a negative in this case.
+
+***** Logical Expressions
+
+Lisp also has logical expressions for making expressions more concise, for example ~(if n n 1)~ becomes ~(or n 1)~.
+
+- The ~or~ function in Lisp returns a falsehood if all arguments are false, otherwise it returns truthhood. Lisp evaluates each argument in order until it finds one that's non-~nil~, then it returns that value. If a value isn't found, it returns ~nil~. ~or~ returns either false or the first true value in the list.
+
+With logical expressions, generally:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (if a a b)
+#+end_src
+
+can be shortened to:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (or a b)
+#+end_src
+
+The ~and~ function will return truthhood only if all arguments are true:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (and a b)
+#+end_src
+
+If this was executed, it would return ~nil~ if ~a~ or ~b~ is false, otherwise it returns the value of the last argument. Multiple values can also be passed:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (and a b c d e)
+#+end_src
+
+To do a /if a through z are all true, do this/ with ~and~, write it like:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (if (and a b c) d)
+#+end_src
+
+In this case, if ~a~, ~b~ and ~c~ are all truth, then it executes ~d~.
+
+Some programmers rewrite this as:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (and a b c d)
+#+end_src
+
+This can be done as if we want to execute something in ~d~, it must be truthy. Thus, all we must do is make sure ~a~, ~b~ and ~c~ are truthy, which the ~and~ function handles. Thus if ~a~, ~b~ and ~c~ are truth, it returns the value of ~d~.
+
+***** The better ~other-window-backward~ function
+
+Using logical conditions, it could be shortened to:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward (&optional n)
+    "Select nth previous window."
+    (interactive "p")
+    (other-window (- (or n 1))))
+#+end_src
+
+The expression ~(- (or n 1))~ will return whatever the value of ~n~ is negated if ~n~ is true, otherwise it will return ~1~ negated.
+
+The better definition uses the code letter ~"P"~ to ~interactive~ to indicate that the prefix argument should be in raw form and assigned to n - raw forms of prefix arguments are a data structure used internally by Emacs for recording the prefix info supplied by the user:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun other-window-backward (&optional n)
+    "Select nth previous window."
+    (interactive "P")
+    (other-window (- (prefix-numeric-value n))))
+#+end_src
+
+The function ~prefix-numeric-value~ interprets the data structure as a number like ~interactive "p"~ did. If ~other-window-backward~ is called non-interactively, there is no prefix argument recorded by Emacs in its raw form, and thus ~prefix-numeric-value~ will return ~n~ unchanged if it is a number, otherwise it returns ~1~ if ~n~ is ~nil~.
+
+***** Line-at-a-Time Scrolling
+
+Emacs has two functions for scrolling, ~scroll-up~ and ~scroll-down~, these are bound to ~C-v~ and ~M-v~ with each function taking an optional argument telling it how many lines to scroll - the default is a whole windowful at a time.
+
+- This is different from ~C-n~ and ~C-p~ which scroll to the next and previous line respectively, only scrolling the text if necessary.
+
+~C-u 1 C-v~ and ~C-u 1 M-v~ can be used to scroll up or down one line, but it is tedious to write out.
+
+Function names can be given aliases with ~defalias~ to make them easier to understand if necessary:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defalias 'scroll-ahead 'scroll-up)
+#+end_src
+
+- The author points out ~scroll-ahead~ makes more sense here, essentially because you are proceeding one line forward in the buffer and also scrolling the buffer one line forward too.
+
+The following functions can be used for scrolling up or down one line respectively, only moving the cursor if necessary:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun scroll-up-one ()
+    "Scrolls up one line, i.e, the content on the page is shifted upwards, with the cursor moving one line towards the end of the buffer."
+    (interactive)
+    (scroll-up 1))
+
+  (defun scroll-down-one ()
+    "Scrolls down one line, i.e, the content on the page is shifted downwards, with the cursor moving one line away from the end of the buffer."
+    (interactive)
+    (scroll-down 1))
+#+end_src
+
+The functions can be made more general with optional arguments:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun scroll-up-n (&optional n)
+    "Scroll up n lines (1 by default).
+
+The content on the page is shifted upwards, with the cursor moving n lines towards the end of the buffer."
+    (interactive "P") ; raw value
+    (scroll-up (prefix-numeric-value n))) ; n or 1 if n is false
+#+end_src
+
+***** Other cursor and text motion commands
+
+The /point/ is the current cursor position, the following functions move the cursor to the top left and bottom left of the window it is in:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun point-to-top ()
+    "Put point on top line of window, this does not scroll the buffer."
+    (interactive)
+    (move-to-window-line 0))
+
+  (defun point-to-bottom ()
+    "Put point on bottom line of window, this does not scroll the buffer."
+    (interactive)
+    (move-to-window-line -1))
+#+end_src
+
+The following function uses the ~recenter~ function to scroll the current window so the line the point is on becomes the top line in the window:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun line-to-top ()
+    "Scroll current line to top of window."
+    (interactive)
+    (recenter 0))
+#+end_src
+
+***** Clobbering Symbol links
+
+A *symbolic link*, or /symlink/, is a file referring to another file by name - when asking for the contents of a symlink, the actual contents of the file it refers to are returned.
+
+When visiting a file via symlink in Emacs, what should happen if ~C-x C-s~ is used to save the buffer:
+
+1. Replace symbolic link with the edited version of the file, original is untouched but the symlink is broken.
+2. Overwrite the referenced fiile.
+3. Prompt to choose an above action
+4. Something else
+
+The author has Emacs auto make files visited via symlinks in a buffer read-only, this causes a buffer is read-only error when any changes are made.
+
+***** Hooks
+
+A *hook* is a Lisp variable whose value is a list of functions executed under some conditions.
+
+- ~write-file-hooks~ is a list of functions Emacs executes whenever a buffer is saved
+- ~post-command-hook~ is a list of functions executed after every interactive command
+- ~find-file-hooks~ is a list of functions executed when a new file is visited
+
+Use ~M-x apropos RET hook RET~ to see other available hooks.
+
+The ~add-hook~ function can be used to add a function to the list of hooks:
+
+#+begin_src elisp :results silent :exports code :eval no
+  (add-hook '-hooks 'hook)
+#+end_src
+
+The following function can be used to test if the current buffer is a symlink and make the buffer read-only if so:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (defun read-only-if-symlink ()
+    (if (file-symlink-p buffer-file-name) ; is the current buffers file name a symlink
+        (progn ; execute a block of commands, one after the other
+          (setq buffer-read-only t) ; make the buffer read only
+          (message "File is a symlink - read only"))))
+#+end_src
+
+- In Lisp, predicates traditionally have names ending ~p~ or ~-p~.
+
+~- buffer-file-name~ is a predefined /buffer-local variable/ which refers to the name of the file in the current buffer - this is the new file when ~find-file-hooks~ gets executed.
+
+- The ~progn~ expression allows for multiple subexpressions to be evaluated in order and return the value of the last one, this allows the then branch of an if statement to execute more than one line of code.
+
+- The ~buffer-read-only~ variable is buffer-local too, it is used to control whether a buffer is read only
+
+The previous function can be hooked in to ~find-file-hooks~ to be triggered whenever a new file is visited:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (add-hook 'find-file-hooks 'read-only-if-symlink)
+#+end_src
+
+***** Anonymous functions
+
+A /lambda/ is an anonymous function in Lisp which functions like a normal function:
+
+#+name: anon-func-call
+#+begin_src elisp :results value :exports both :eval no-export
+  ((lambda ()
+    (message "Hello")))
+#+end_src
+
+The lambda above is wrapped in an extra set of parenthesis to trigger its evaluation, this results in the following being output to stdout:
+
+#+RESULTS: anon-func-call
+: Hello
+
+The lambda above, without execution, looks like:
+
+#+begin_src elisp :results silent :exports code :eval no-export
+  (lambda ()
+    (message "Hello"))
+#+end_src
+
+The structure is exactly the same as a function, just no name :D
+
+***** Handling the Symlink
+
+Some stuff from this part:
+
+~let~ can be used to declare variables local to the expression, and then return the result of its body:
+
+#+name: let-example-424432
+#+begin_src elisp :results value :exports both :eval no-export
+  (let ((x 10)
+        (y 30))
+    (message (format "%d" (+ x y))))
+#+end_src
+
+This results in the following printed to the console:
+
+#+RESULTS: let-example-424432
+: 40
+
+If we tried to use ~x~, we would not be able to and would get the message ~Symbol's function definition is void: x~ output to the minibuffer.
+
+----------------------
+
+Use the ~yes-or-no-p~ for a yes or no prompt in the minibuffer.
+
+----------------------
+
+Use ~delete-file "file/name"~ to delete the specified file or ~write-file "file/name"~ to write a file, when used with ~buffer-file-name~ it will write to the file associated with the current buffer.
+
+----------------------
+
+The ~error~ function accepts a string to output as an error message in the minibuffer.
+
+----------------------
+
+~file-symlink-p "file/name"~ to check if a file name is a symlink or not.
+
+----------------------
+
+~find-alternate-file "file/path"~ will replace the current buffer with one visiting the specified file, this also prompts the user first in case of unsaved changes in the original buffer - also reruns the ~find-file-hooks~ function list when the file is visited.
+
+*** Cooperating commands
