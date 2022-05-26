@@ -223,7 +223,7 @@ img{
     list-style-position: initial;
 }
 
-.org-ul, .org-li > li::marker {
+.org-ul > li::marker, .org-li > li::marker {
     color: var(--secondary-color);
 }
 
