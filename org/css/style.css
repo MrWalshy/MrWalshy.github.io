@@ -101,7 +101,7 @@ pre, blockquote, ul, ol, p, table{
 
 h1, h2 {
     margin-top: 3.2rem; 
-    line-height: 3.2rem;
+    line-height: 1.5;
 }
 
 h3, h4, h5, h6 {
