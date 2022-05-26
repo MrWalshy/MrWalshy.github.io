@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-26 Thu 22:27 -->
+<!-- 2022-05-26 Thu 22:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Middleware in Express 4</title>
@@ -36,9 +36,9 @@
 </ul>
 
 <hr>
-<div id="outline-container-org4c2968a" class="outline-2">
-<h2 id="org4c2968a">Applying middleware in Express</h2>
-<div class="outline-text-2" id="text-org4c2968a">
+<div id="outline-container-org9598029" class="outline-2">
+<h2 id="org9598029">Applying middleware in Express</h2>
+<div class="outline-text-2" id="text-org9598029">
 <p>
 Express applications are built up using a series of middleware function calls to handle the request-response cycle. This middleware may be of any of the following:
 </p>
@@ -52,9 +52,9 @@ Express applications are built up using a series of middleware function calls to
 </ul>
 </div>
 
-<div id="outline-container-orgcec85b4" class="outline-3">
-<h3 id="orgcec85b4">Application-level middleware</h3>
-<div class="outline-text-3" id="text-orgcec85b4">
+<div id="outline-container-orgc7f35d9" class="outline-3">
+<h3 id="orgc7f35d9">Application-level middleware</h3>
+<div class="outline-text-3" id="text-orgc7f35d9">
 <p>
 Application-level middleware is bound to an express application instance using the <code>app.use()</code> and <code>app.METHOD()</code> functions.
 </p>
@@ -151,9 +151,9 @@ On line 1, the path argument is specified followed by the <code>logger</code> mi
 </div>
 </div>
 
-<div id="outline-container-org96d74e9" class="outline-3">
-<h3 id="org96d74e9">Router-level middleware</h3>
-<div class="outline-text-3" id="text-org96d74e9">
+<div id="outline-container-org25366a3" class="outline-3">
+<h3 id="org25366a3">Router-level middleware</h3>
+<div class="outline-text-3" id="text-org25366a3">
 <p>
 <b>Router-level middleware</b> works like application-level middleware, but is instead bound to an instance of <code>express.Router()</code>. Instead of using the <code>app.use()</code> and <code>app.METHOD()</code> methods to apply middleware, <code>router.use()</code> and <code>router.METHOD()</code> methods are used.
 </p>
@@ -214,9 +214,9 @@ The example allows either a whole collection of users to be returned, or a singl
 </div>
 </div>
 
-<div id="outline-container-org6c0309e" class="outline-3">
-<h3 id="org6c0309e">Error-handling middleware</h3>
-<div class="outline-text-3" id="text-org6c0309e">
+<div id="outline-container-org8f2de0d" class="outline-3">
+<h3 id="org8f2de0d">Error-handling middleware</h3>
+<div class="outline-text-3" id="text-org8f2de0d">
 <p>
 <b>Error-handling middleware</b> functions like the other middleware functions seen so far, the major difference being that four arguments are required instead of three in the callback functions:
 </p>
@@ -257,9 +257,9 @@ app.use((err, req, res, next) =&gt; {
 </div>
 </div>
 
-<div id="outline-container-org04ae48f" class="outline-3">
-<h3 id="org04ae48f">Built-in middleware</h3>
-<div class="outline-text-3" id="text-org04ae48f">
+<div id="outline-container-org05458b8" class="outline-3">
+<h3 id="org05458b8">Built-in middleware</h3>
+<div class="outline-text-3" id="text-org05458b8">
 <p>
 Express includes built-in middleware functions for the most common behaviours in web applications:
 </p>
@@ -272,9 +272,9 @@ Express includes built-in middleware functions for the most common behaviours in
 </div>
 </div>
 
-<div id="outline-container-orgfa8af3c" class="outline-3">
-<h3 id="orgfa8af3c">Third-party middleware</h3>
-<div class="outline-text-3" id="text-orgfa8af3c">
+<div id="outline-container-org90dceff" class="outline-3">
+<h3 id="org90dceff">Third-party middleware</h3>
+<div class="outline-text-3" id="text-org90dceff">
 <p>
 Third-party middleware functions can also be added to Express servers, a list of common middleware exists here: <code>https://expressjs.com/en/resources/middleware.html</code>
 </p>
@@ -286,7 +286,7 @@ Third-party middleware functions can also be added to Express servers, a list of
 <hr />
 <footer>
   <p>
-    Last updated 2022-05-26 Thu 22:27. <br />
+    Last updated 2022-05-26 Thu 22:42. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-26 Thu 22:28 -->
+<!-- 2022-05-26 Thu 22:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Routing in Express 4</title>
@@ -30,9 +30,9 @@
 </p>
 
 <hr>
-<div id="outline-container-org24a93c8" class="outline-2">
-<h2 id="org24a93c8">Routing requests</h2>
-<div class="outline-text-2" id="text-org24a93c8">
+<div id="outline-container-orgb24455e" class="outline-2">
+<h2 id="orgb24455e">Routing requests</h2>
+<div class="outline-text-2" id="text-orgb24455e">
 <p>
 Incoming requests can be routed using a variety of methods available on the <code>Express</code> instance that we create, these methods take the form: <code>app.HTTP_METHOD(PATH, HANDLER)</code>
 </p>
@@ -44,17 +44,17 @@ Incoming requests can be routed using a variety of methods available on the <cod
 </ul>
 </div>
 
-<div id="outline-container-org3eea5c0" class="outline-3">
-<h3 id="org3eea5c0">Routing requests</h3>
-<div class="outline-text-3" id="text-org3eea5c0">
+<div id="outline-container-orgfbb5d3b" class="outline-3">
+<h3 id="orgfbb5d3b">Routing requests</h3>
+<div class="outline-text-3" id="text-orgfbb5d3b">
 <p>
 The following examples demonstrate creating simple endpoints for the GET, POST, PUT, PATCH and DELETE HTTP methods.
 </p>
 </div>
 
-<div id="outline-container-org728cc70" class="outline-4">
-<h4 id="org728cc70">GET requests</h4>
-<div class="outline-text-4" id="text-org728cc70">
+<div id="outline-container-org97acb26" class="outline-4">
+<h4 id="org97acb26">GET requests</h4>
+<div class="outline-text-4" id="text-org97acb26">
 <div class="org-src-container">
 <pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">express</span> = require(<span style="font-style: italic;">'express'</span>);
 
@@ -100,9 +100,9 @@ Each endpoint returns a unique message.
 </div>
 </div>
 
-<div id="outline-container-org68cf906" class="outline-4">
-<h4 id="org68cf906">Other request methods</h4>
-<div class="outline-text-4" id="text-org68cf906">
+<div id="outline-container-org8840f3c" class="outline-4">
+<h4 id="org8840f3c">Other request methods</h4>
+<div class="outline-text-4" id="text-org8840f3c">
 <div class="org-src-container">
 <pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">express</span> = require(<span style="font-style: italic;">'express'</span>);
 
@@ -167,9 +167,9 @@ DELETE
 </div>
 </div>
 
-<div id="outline-container-orgd0f5305" class="outline-3">
-<h3 id="orgd0f5305">Setting the response code</h3>
-<div class="outline-text-3" id="text-orgd0f5305">
+<div id="outline-container-orgabea427" class="outline-3">
+<h3 id="orgabea427">Setting the response code</h3>
+<div class="outline-text-3" id="text-orgabea427">
 <p>
 The response object has a method <code>status()</code> which can be used to set the status code of the response. By default, a <code>200</code> is applied to signify a HTTP OK response.
 </p>
@@ -192,9 +192,9 @@ The <code>status()</code> method is non-terminal, meaning if <code>send()</code>
 </div>
 </div>
 
-<div id="outline-container-org8fe9a91" class="outline-2">
-<h2 id="org8fe9a91">URL and Query parameters</h2>
-<div class="outline-text-2" id="text-org8fe9a91">
+<div id="outline-container-org16ca98a" class="outline-2">
+<h2 id="org16ca98a">URL and Query parameters</h2>
+<div class="outline-text-2" id="text-org16ca98a">
 <p>
 Often, we will want to submit data to a server as part of the API design of an endpoint. This could be the id of an entity, or even pagination numbers&#x2026; URL and query parameters are not considered safe for transporting confidential or private information, or information which should be kept secure - the body of a HTTP message is more appropriate for this.
 </p>
@@ -202,9 +202,9 @@ Often, we will want to submit data to a server as part of the API design of an e
 <hr>
 </div>
 
-<div id="outline-container-org0f48738" class="outline-3">
-<h3 id="org0f48738">URL parameters</h3>
-<div class="outline-text-3" id="text-org0f48738">
+<div id="outline-container-orgb1abf96" class="outline-3">
+<h3 id="orgb1abf96">URL parameters</h3>
+<div class="outline-text-3" id="text-orgb1abf96">
 <p>
 A <b>URL parameter</b> is data sent as part of the URL itself, for example a request might be sent to <code>http://localhost:3000/user/32</code> as a HTTP GET request to retrieve the <code>user</code> entity with the id of <code>32</code>.
 </p>
@@ -224,9 +224,9 @@ Declare URL parameters in the path using a colon, <code>:</code>, followed by th
 </div>
 </div>
 
-<div id="outline-container-orgdb6e5e8" class="outline-3">
-<h3 id="orgdb6e5e8">Query parameters</h3>
-<div class="outline-text-3" id="text-orgdb6e5e8">
+<div id="outline-container-orgb7d7b8d" class="outline-3">
+<h3 id="orgb7d7b8d">Query parameters</h3>
+<div class="outline-text-3" id="text-orgb7d7b8d">
 <p>
 A <b>query parameter</b> acts similarly to a URL parameter, it is used for passing data to the server. The difference is that query parameters are specified at the end of the URL, after the path and any URL parameters. Query parameters always begin with a question mark, and take a <code>key=value</code> format with each parameter separated by an ampersand:
 </p>
@@ -264,9 +264,9 @@ The first query parameter supplied is <code>page=3</code> indicating that the re
 </div>
 </div>
 
-<div id="outline-container-org1c7a65d" class="outline-2">
-<h2 id="org1c7a65d">Body data</h2>
-<div class="outline-text-2" id="text-org1c7a65d">
+<div id="outline-container-orge072ed3" class="outline-2">
+<h2 id="orge072ed3">Body data</h2>
+<div class="outline-text-2" id="text-orge072ed3">
 <p>
 When data is returned from an endpoint, we can easily return it in the format we want by specifying the <code>Content-Type</code> header and returning the relevant data as such. This is returned in the <b>HTTP Response Body</b>, an area of a HTTP message for transferring large amounts of data in a secure manner (when sent over HTTPS and secured from XSS vulnerabilities that is at the least). The following example demonstrates a typical Express function with a JSON response:
 </p>
@@ -293,9 +293,9 @@ On line 10, the correct media type is set for returning JSON as a header in the 
 </p>
 </div>
 
-<div id="outline-container-org811ad97" class="outline-3">
-<h3 id="org811ad97">Accepting body data in a request</h3>
-<div class="outline-text-3" id="text-org811ad97">
+<div id="outline-container-orgcd38298" class="outline-3">
+<h3 id="orgcd38298">Accepting body data in a request</h3>
+<div class="outline-text-3" id="text-orgcd38298">
 <p>
 Body data doesn't just exist for HTTP responses, it can also be attached to HTTP requests sent to the server. The first thing to do to start accepting body data in the JSON format is to apply the built-in middleware in Express to handle this (middleware is explored in the next section).
 </p>
@@ -473,9 +473,9 @@ $ curl <span style="font-style: italic;">'http://localhost:3000/user'</span> -X 
 </div>
 </div>
 
-<div id="outline-container-org59daf65" class="outline-2">
-<h2 id="org59daf65">Response methods</h2>
-<div class="outline-text-2" id="text-org59daf65">
+<div id="outline-container-org536b3a8" class="outline-2">
+<h2 id="org536b3a8">Response methods</h2>
+<div class="outline-text-2" id="text-org536b3a8">
 <p>
 Response methods exist on the response object, <code>res</code>, and are used to terminate the request-response cycle by sending a response to the client. If a route handler does not call a terminating method, the client request hangs:
 </p>
@@ -492,9 +492,9 @@ Response methods exist on the response object, <code>res</code>, and are used to
 </div>
 </div>
 
-<div id="outline-container-orge8b8d15" class="outline-2">
-<h2 id="orge8b8d15">Modular routes</h2>
-<div class="outline-text-2" id="text-orge8b8d15">
+<div id="outline-container-orga972742" class="outline-2">
+<h2 id="orga972742">Modular routes</h2>
+<div class="outline-text-2" id="text-orga972742">
 <p>
 Chainable route handlers can be created using <code>app.route()</code>, the path for a group of routes then only has to be specified once. For example:
 </p>
@@ -514,9 +514,9 @@ Each of the methods specified, chained as calls onto <code>route()</code>, will 
 </div>
 </div>
 
-<div id="outline-container-org0a86ea4" class="outline-2">
-<h2 id="org0a86ea4">The Express Router</h2>
-<div class="outline-text-2" id="text-org0a86ea4">
+<div id="outline-container-org500439e" class="outline-2">
+<h2 id="org500439e">The Express Router</h2>
+<div class="outline-text-2" id="text-org500439e">
 <p>
 The <code>express.Router</code> class is used to create modular route handlers that can be mounted onto an Express app as middleware.
 </p>
@@ -622,7 +622,7 @@ Line 2 imports the user router, line 8 then adds the router to the middleware st
 <hr />
 <footer>
   <p>
-    Last updated 2022-05-26 Thu 22:27. <br />
+    Last updated 2022-05-26 Thu 22:42. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </p>

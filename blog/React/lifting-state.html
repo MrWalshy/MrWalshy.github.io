@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-05-26 Thu 22:27 -->
+<!-- 2022-05-26 Thu 22:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lifting state in React</title>
@@ -37,32 +37,32 @@ We often add state to components that need it, but what happens if we have multi
 
 <hr>
 
-<div id="outline-container-org33ad3f8" class="outline-2">
-<h2 id="org33ad3f8">The application</h2>
-<div class="outline-text-2" id="text-org33ad3f8">
+<div id="outline-container-org803c339" class="outline-2">
+<h2 id="org803c339">The application</h2>
+<div class="outline-text-2" id="text-org803c339">
 <p>
 This article will build a simple todo list application, without CSS styling, to demonstrate the use of lifting state.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgcf6e771" class="outline-2">
-<h2 id="orgcf6e771">The parts of the application</h2>
-<div class="outline-text-2" id="text-orgcf6e771">
+<div id="outline-container-orgf891313" class="outline-2">
+<h2 id="orgf891313">The parts of the application</h2>
+<div class="outline-text-2" id="text-orgf891313">
 <p>
 In this section, we will explore the different objects and components in the application.
 </p>
 </div>
 
-<div id="outline-container-org6d77a59" class="outline-3">
-<h3 id="org6d77a59">The <code>Todo</code> function</h3>
-<div class="outline-text-3" id="text-org6d77a59">
+<div id="outline-container-org5b30218" class="outline-3">
+<h3 id="org5b30218">The <code>Todo</code> function</h3>
+<div class="outline-text-3" id="text-org5b30218">
 <p>
 The <code>Todo</code> object is represented by a function which initialiases its values:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>The Todo function</label><pre class="src src-js" id="orgf0bf778"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">Todo</span>(<span style="font-weight: bold; font-style: italic;">id</span>, <span style="font-weight: bold; font-style: italic;">task</span>, <span style="font-weight: bold; font-style: italic;">priority</span>) {
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>The Todo function</label><pre class="src src-js" id="org566c388"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">Todo</span>(<span style="font-weight: bold; font-style: italic;">id</span>, <span style="font-weight: bold; font-style: italic;">task</span>, <span style="font-weight: bold; font-style: italic;">priority</span>) {
   <span style="font-weight: bold; text-decoration: underline;">this</span>.id = id;
   <span style="font-weight: bold; text-decoration: underline;">this</span>.task = task;
   <span style="font-weight: bold; text-decoration: underline;">this</span>.priority = priority;
@@ -76,15 +76,15 @@ This function can be used to create <code>Todo</code> objects which have an id, 
 </div>
 </div>
 
-<div id="outline-container-orgd1366d1" class="outline-3">
-<h3 id="orgd1366d1">The <code>TodoItem</code> React component</h3>
-<div class="outline-text-3" id="text-orgd1366d1">
+<div id="outline-container-orgbeb8f4c" class="outline-3">
+<h3 id="orgbeb8f4c">The <code>TodoItem</code> React component</h3>
+<div class="outline-text-3" id="text-orgbeb8f4c">
 <p>
 The <code>TodoItem</code> is a React function component:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>The TodoItem function component</label><pre class="src src-js" id="orgf2403f9"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoItem</span>({ todo }) {
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>The TodoItem function component</label><pre class="src src-js" id="orgcf48d87"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoItem</span>({ todo }) {
   <span style="font-weight: bold;">return</span> (
     &lt;tr&gt;
       &lt;td&gt;{todo.task}&lt;/td&gt;
@@ -97,15 +97,15 @@ The <code>TodoItem</code> is a React function component:
 </div>
 </div>
 
-<div id="outline-container-orge65f29c" class="outline-3">
-<h3 id="orge65f29c">The <code>TodoList</code> React component</h3>
-<div class="outline-text-3" id="text-orge65f29c">
+<div id="outline-container-org9087a97" class="outline-3">
+<h3 id="org9087a97">The <code>TodoList</code> React component</h3>
+<div class="outline-text-3" id="text-org9087a97">
 <p>
 The <code>TodoList</code> component renders a todo list with todo items and an add todo input bar:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 3: </span>The TodoList function component</label><pre class="src src-js" id="org0c73b44"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() { 
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>The TodoList function component</label><pre class="src src-js" id="org0ed6843"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() { 
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">todos</span>, <span style="font-weight: bold; font-style: italic;">setTodos</span>] = React.useState([ 
       <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Todo</span>(1, <span style="font-style: italic;">"Feed dog"</span>, <span style="font-style: italic;">"HIGH"</span>), 
       <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Todo</span>(2, <span style="font-style: italic;">"Cook tea"</span>, <span style="font-style: italic;">"HIGH"</span>), 
@@ -190,7 +190,7 @@ We can refactor the <code>TodoList</code> to use a <code>AddTodo</code> componen
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span>The AddTodoItem function component</label><pre class="src src-js" id="org8464a34"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">AddTodoItem</span>(<span style="font-weight: bold; font-style: italic;">props</span>) {
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>The AddTodoItem function component</label><pre class="src src-js" id="org1309bdd"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">AddTodoItem</span>(<span style="font-weight: bold; font-style: italic;">props</span>) {
 
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">task</span>, <span style="font-weight: bold; font-style: italic;">setTask</span>] = React.useState(<span style="font-weight: bold; text-decoration: underline;">null</span>);
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">priority</span>, <span style="font-weight: bold; font-style: italic;">setPriority</span>] = React.useState(<span style="font-style: italic;">"HIGH"</span>);
@@ -231,7 +231,7 @@ Now that we have this component, we can use it in the <code>TodoList</code> inst
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 5: </span>The TodoList function component, slightly revised</label><pre class="src src-js" id="org9a91c90">  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() {
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>The TodoList function component, slightly revised</label><pre class="src src-js" id="orgc16cbda">  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() {
 
     <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">if multiple components require the same state (values), </span>
     <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">we put the state in the highest parent component which requires that state</span>
@@ -274,7 +274,7 @@ look as follows:
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 6: </span>The TodoList function component revised</label><pre class="src src-js" id="org509b6fe">  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() {
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>The TodoList function component revised</label><pre class="src src-js" id="org3772818">  <span style="font-weight: bold;">function</span> <span style="font-weight: bold;">TodoList</span>() {
 
     <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">if multiple components require the same state (values), </span>
     <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">we put the state in the highest parent component which requires that state</span>
@@ -313,7 +313,7 @@ and create an additional <code>addTodo</code> function which is called when the 
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 7: </span>The AddTodoItem function component</label><pre class="src src-js" id="org8b80d96"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">AddTodoItem</span>({ setTodos }) {
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>The AddTodoItem function component</label><pre class="src src-js" id="org6e3043c"><span style="font-weight: bold;">function</span> <span style="font-weight: bold;">AddTodoItem</span>({ setTodos }) {
 
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">task</span>, <span style="font-weight: bold; font-style: italic;">setTask</span>] = React.useState(<span style="font-weight: bold; text-decoration: underline;">null</span>);
   <span style="font-weight: bold;">const</span> [<span style="font-weight: bold; font-style: italic;">priority</span>, <span style="font-weight: bold; font-style: italic;">setPriority</span>] = React.useState(<span style="font-style: italic;">"HIGH"</span>);
@@ -361,7 +361,7 @@ This will then lift the new state, when the form is submitted, into the <code>To
 <hr />
 <footer>
   <p>
-    Last updated 2022-05-26 Thu 22:27. <br />
+    Last updated 2022-05-26 Thu 22:42. <br />
     Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.1.9). <br />
     <a href="/html/bug-report.html">Submit a bug report</a>
   </p>
