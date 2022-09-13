@@ -1,0 +1,15 @@
+{
+    "directories": [],
+    "files": [
+        {
+            "name": "Markdown for beginners",
+            "rel": "post1.md",
+            "type": "md"
+        },
+        {
+            "name": "Markdown intermediate",
+            "rel": "post2.md",
+            "type": "md"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "directories": [
+        {
+            "rel": "markdown",
+            "name": "Markdown related blog posts"
+        },
+        {
+            "rel": "react",
+            "name": "React related blog posts"
+        }
+    ],
+    "files": [],
+    "location": "blog"
+}

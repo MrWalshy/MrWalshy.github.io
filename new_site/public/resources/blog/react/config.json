@@ -1,0 +1,15 @@
+{
+    "directories": [],
+    "files": [
+        {
+            "name": "React for beginners",
+            "rel": "post1.md",
+            "type": "md"
+        },
+        {
+            "name": "React intermediate",
+            "rel": "post2.md",
+            "type": "md"
+        }
+    ]
+}
