@@ -1,61 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { buildFileTree } from "../../utils/FileTree";
+import { Link, useOutletContext } from "react-router-dom";
+import { buildDirectoryMap, buildFileTree } from "../../utils/FileTree";
 
 export default function BlogHome(props) {
 
-    const [fileTree, setFileTree] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const { isLoaded, loadDirectoryMap, getAllTopics } = useOutletContext();
 
+    const [blogDirMap, setBlogDirMap] = useState(null);
+
+    // load config and root dir map
     useEffect(() => {
-        fetch("./resources/config.json")
-            .then(res => res.json())
-            .then(data => {
-                console.log("Building file tree:");
-                buildFileTree(data).then(ft => {
-                    setFileTree(ft);
-                    setIsLoaded(true);
-                });
-            })
-            .catch(error => console.log(error));
-    }, []);
-
-    const buildTree = (ft) => {
-        return <div>
-            <h3>{"[DIR] " + (ft.name || "root")}</h3>
-            <ul>
-                {ft.directories.map(dir => <li key={dir.rel}>{buildTree(dir)}</li>)}
-                {ft.files.map(file => <li key={file.rel}>{"[FILE] " + file.name}</li>)}
-            </ul>
-        </div>;
-    }
-
-    const BlogLink = ({ name, path }) => {
-        return <a href={path}><h3>{name}</h3></a>;
-    }
-
-    // gets the names of all file trees within the file tree,
-    // recursively
-    function getFileTreeDirectories() {
-        const dirs = [];
-
-        function recurse(ft) {
-            dirs.push({
-                name: ft.name,
-                path: ft.path
-            });
-            for (const dir of ft.directories) recurse(dir);
-        }
-        recurse(fileTree);
-        return dirs;
-    }
-
-    const blogTopicDisplay = () => (
-        <div>
-            {getFileTreeDirectories().map(dir => <BlogLink key={dir.path} name={dir.name} path={`/blog?location=${dir.path}`} />)}
-        </div>
-    );
+        if (isLoaded) setBlogDirMap(loadDirectoryMap("blog"));
+    }, [isLoaded, loadDirectoryMap]);
 
     return <div>
-        {isLoaded && blogTopicDisplay()}
+        {/* Page grid
+            - Row 1: New...
+            - Row 2: Recently updated...
+            - Row 3: Grid of topics
+        */}
+        <div className="container col" style={{
+            display: "flex",
+            flexDirection: "column"
+        }}>
+            {/* TODO: New and recently updated posts carousels */}
+            <div className="carousel">
+                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>New posts....</h3>
+            </div>
+            <div className="carousel">
+                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Recently updated....</h3>
+            </div>
+
+            {/* Grid of topics */}
+            <div>
+                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Topics</h3>
+                <section className="tiles">
+                    {getAllTopics(blogDirMap).map(topic => <Link key={topic.id + Date.now()} to={`/blog/${topic.id}`} className="tile">
+                        <p>{topic.name}</p>
+                    </Link>)}
+                </section>
+            </div>
+        </div>
     </div>;
 }

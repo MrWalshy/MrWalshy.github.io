@@ -7,6 +7,7 @@ import Blog from "./components/blog/Blog";
 import BlogHome from "./components/blog/BlogHome";
 import BlogPost from "./components/blog/BlogPost";
 import BlogBoard from "./components/blog/BlogBoard";
+import BlogPostBoard from "./components/blog/BlogPostBoard";
 
 function AppRouter() {
 
@@ -23,8 +24,9 @@ function AppRouter() {
                             - BlogPost will be markdown pulled from an MD file with fetch() statements
                             - Uses an internal FileTree representation
                         */}
-                        <Route path="topic" element={<BlogBoard />} />
-                        <Route path="post" element={<BlogPost />} />
+                        <Route path=":dirId" element={<BlogBoard />} />
+                        <Route path=":dirId/:fileId" element={<BlogPost />} />
+                        <Route path=":dirId/posts" element={<BlogPostBoard />} />
                     </Route>
                 </Route>
                 <Route path="*" element={<Error />} />

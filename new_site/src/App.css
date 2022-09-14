@@ -5,10 +5,12 @@ html {
 *, *:before, *::after {
   box-sizing: border-box;
   font-size: inherit;
+  color: white;
 }
 
 body {
   margin: 0;
+  background-color: rgb(72, 72, 73);
 }
 
 h1 { font-size: 3.2rem; }
@@ -19,6 +21,7 @@ p, a { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
 #navbar {
   display: flex;
   padding-left: 16px;
+  background-color: white;
 }
 
 .nav-link, #toggle {
@@ -89,6 +92,29 @@ footer {
   display: none;
 }
 
+/* tiles */
+.tiles {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 16px;
+}
+
+.tile {
+  /* flex: shrink grow width */
+  flex: 1 0 calc(10% - 1em);
+  text-align: center;
+  height: 60px;
+  background-color: rgb(72, 72, 73);
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+}
+
+.tile:hover {
+  border: 4px solid white;
+}
+
 /* A media query can be used to change CSS values dependent on various factors, usually a max-width or min-width of the
 viewport (screen).
 
@@ -104,11 +130,19 @@ Media queries always start with `@media target and (properties) {
   }
 
   main {
-      flex: 75%
+      flex: 75%;
+  }
+
+  .tile {
+    flex: 1 0 calc(50% - 1em);
   }
 }
 
 @media screen and (max-width: 768px) {
+  .tile {
+    flex: 1 0 calc(100% - 2em);
+  }
+
   aside {
       display: none;
   }
