@@ -1,0 +1,11 @@
+{
+    "alias": "Root of tree",
+    "createdAt": "2022-09-14",
+    "files": [],
+    "include": [
+        "./img",
+        "./java"
+    ],
+    "exclude": [],
+    "outputLocation": "../public"
+}

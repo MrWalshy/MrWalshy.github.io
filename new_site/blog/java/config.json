@@ -1,0 +1,17 @@
+{
+    "dir": "java",
+    "alias": "The Java section",
+    "createdAt": "2022-09-15",
+    "include": [
+        "beginner"
+    ],
+    "exclude": [],
+    "files": [
+        {
+            "filename": "what_is_java",
+            "createdAt": "2022-09-14",
+            "alias": "What is the Java programming language?",
+            "filetype": "md"
+        }
+    ]
+}
