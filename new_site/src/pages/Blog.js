@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-import { buildDirectoryMap } from "../../utils/FileTree";
+import { buildDirectoryMap } from "../utils/DirectoryMap";
 
 export default function Blog(props) {
 
@@ -53,7 +53,7 @@ export default function Blog(props) {
 
     // load config and root dir map
     useEffect(() => {
-        fetch("/resources/alt_config.json")
+        fetch("/resources/blog_config.json")
             .then(response => response.json())
             .then(data => {
                 setConfig(data);

@@ -28,7 +28,7 @@ export default function BlogPostBoard() {
 
     return (
         <div>
-            <h1 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>{dirId} posts...</h1>
+            <h1 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Posts related to {dirId}</h1>
 
             {/* Tiles with the post names on
                 - poss short descriptions in the future

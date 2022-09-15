@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import Blog from "./components/blog/Blog";
+import Blog from "./pages/Blog";
 import BlogHome from "./components/blog/BlogHome";
 import BlogPost from "./components/blog/BlogPost";
 import BlogBoard from "./components/blog/BlogBoard";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-import { buildDirectoryMap, buildFileTree } from "../../utils/FileTree";
+import { buildDirectoryMap, buildFileTree } from "../../utils/DirectoryMap";
 
 export default function BlogHome(props) {
 
@@ -11,7 +11,7 @@ export default function BlogHome(props) {
     // load config and root dir map
     useEffect(() => {
         if (isLoaded) setBlogDirMap(loadDirectoryMap("blog"));
-    }, [isLoaded, loadDirectoryMap]);
+    }, [isLoaded]);
 
     return <div>
         {/* Page grid
@@ -23,13 +23,16 @@ export default function BlogHome(props) {
             display: "flex",
             flexDirection: "column"
         }}>
+            <div>
+                <h1 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Main blog board</h1>
+            </div>
             {/* TODO: New and recently updated posts carousels */}
-            <div className="carousel">
+            {/* <div className="carousel">
                 <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>New posts....</h3>
             </div>
             <div className="carousel">
                 <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Recently updated....</h3>
-            </div>
+            </div> */}
 
             {/* Grid of topics */}
             <div>

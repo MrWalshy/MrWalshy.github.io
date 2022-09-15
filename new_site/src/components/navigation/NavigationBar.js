@@ -17,6 +17,10 @@ function NavigationBar(props) {
             <Link id='toggle' to="#" onClick={toggleMenu}>MENU</Link>
             <NavigationLink to="/" value="Home" toggled={toggled} />
             <NavigationLink to="/blog" value="Blog" toggled={toggled} />
+            <a className={toggled ? "show nav-link" : "nav-link"}
+               href="https://github.com/MrWalshy" 
+               target="_blank"
+               rel="noreferrer">GitHub</a>
         </nav>
     )
 }

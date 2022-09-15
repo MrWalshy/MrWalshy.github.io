@@ -1,3 +1,10 @@
+:root {
+  /* globally-scoped CSS variables, accessible in any css selector */
+  --font-color: #fafafa;
+  --primary-color: #1b1a1a;
+  --secondary-color: #2ecc40;
+}
+
 html {
   font-size: 10px;
 }
@@ -6,17 +13,97 @@ html {
   box-sizing: border-box;
   font-size: inherit;
   color: white;
+  /* margin: 0;
+  padding: 0; */
 }
 
+html,
 body {
-  margin: 0;
+  line-height: 1.7;
+  min-height: 100vh;
   background-color: rgb(72, 72, 73);
+  font-family: "Courier New", Courier, monospace;
 }
 
-h1 { font-size: 3.2rem; }
-h2 { font-size: 2.4rem; }
-h3 { font-size: 2rem; }
-p, a { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
+hr {
+  border: solid 2px var(--secondary-color);
+  border-radius: 5px;
+}
+
+::selection {
+  background-color:  var(--secondary-color);
+  color: white;
+}
+
+h1 { font-size: 4.8rem; }
+h2 { font-size: 4.0rem; }
+h1, h2 {
+  margin-top: 3.2rem; 
+  line-height: 1.5;
+}
+h3 { font-size: 2.4rem; }
+h4 { font-size: 2.2rem; }
+h5 { font-size: 2.0rem; }
+h6 { font-size: 1.8rem; }
+h3, h4, h5, h6 { margin-top: 1.6rem; }
+p, a, li { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
+
+small { font-size: 1.2rem; }
+
+pre, blockquote, ul, ol, p, table{
+  margin: 1.6rem 0;
+}
+
+/* a, a:visited {
+  color: #01ff70;
+  text-decoration: underline;
+} */
+
+a:hover, a:focus, a:active {
+  color: #2ecc40;
+  text-decoration: none;
+}
+
+/* Code */
+pre {
+  font-family: "Courier New";
+  background-color: #333;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  font-size: 1.6rem;
+  color: #EEE;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "Courier New", monospace;
+  background-color: #333;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  color: #EEE;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 3px solid #01ff70;
+  padding-left: 1rem;
+}
+
+/* Lists */
+li {
+  list-style-position: initial;
+}
+
+li > ul {
+  /* sitemap style */
+  padding-left: 24px;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
 
 #navbar {
   display: flex;
@@ -69,23 +156,6 @@ footer {
   background-color: rgb(72, 72, 73);
   color: white;
   text-align: center;
-}
-
-#data-table, form {
-  width: 100%;
-  text-align: left;
-  overflow: scroll;
-}
-
-#data-table > table {
-  width: 100%;
-  text-align: left;
-  overflow: scroll;
-}
-
-#banner {
-  flex: 100%;
-  padding: 32px;
 }
 
 .hide {

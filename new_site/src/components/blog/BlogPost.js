@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 export default function BlogPost(props) {
 
@@ -30,7 +33,19 @@ export default function BlogPost(props) {
         // console.log(`Rendering post: ${JSON.stringify(file)}`);
         if (!file) return <h1>Loading....</h1>;
         if (hadError) return <h1>Error loading page....</h1>;
-        return <ReactMarkdown children={file.data} />;
+        return (
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+            }}>
+                <div style={{width: "66%"}}>
+                    <ReactMarkdown children={file.data} 
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]} />
+                </div>
+            </div>
+        );
     }
 
     return (
