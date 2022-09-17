@@ -1,127 +1,127 @@
 {
   "directories": {
-    "java_1663286030954_66_7135": {
+    "java_The_Java_image_section": {
       "dir": "java",
       "alias": "The Java image section",
       "createdAt": "2022-09-15",
       "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\img\\java",
-      "id": "java_1663286030954_66_7135",
+      "id": "java_The_Java_image_section",
       "href": "/img/java"
     },
-    "img_1663286030950_61_8643": {
+    "img_The_image_section": {
       "dir": "img",
       "alias": "The image section",
       "createdAt": "2022-09-15",
       "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\img",
-      "id": "img_1663286030950_61_8643",
+      "id": "img_The_image_section",
       "href": "/img"
     },
-    "beginner_1663286031129_71_729": {
+    "beginner_The_Java_beginner_section": {
       "dir": "beginner",
       "alias": "The Java beginner section",
       "createdAt": "2022-09-15",
       "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\java\\beginner",
-      "id": "beginner_1663286031129_71_729",
+      "id": "beginner_The_Java_beginner_section",
       "href": "/java/beginner"
     },
-    "java_1663286031124_62_9933": {
+    "java_The_Java_section": {
       "dir": "java",
       "alias": "The Java section",
       "createdAt": "2022-09-15",
       "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\java",
-      "id": "java_1663286031124_62_9933",
+      "id": "java_The_Java_section",
       "href": "/java"
     },
-    "root_1663286030947_57_1213": {
+    "root_Root_of_tree": {
       "dir": "",
       "alias": "Root of tree",
       "createdAt": "2022-09-14",
       "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public",
-      "id": "root_1663286030947_57_1213",
+      "id": "root_Root_of_tree",
       "href": "/"
     }
   },
   "files": {
-    "java_1826_1663286030958_66": {
+    "java_Compiling_Java_source_code_process": {
       "filename": "compiling-java-src-code",
       "createdAt": "2022-09-15",
       "alias": "Compiling Java source code process",
       "filetype": "png",
-      "id": "java_1826_1663286030958_66",
+      "id": "java_Compiling_Java_source_code_process",
       "href": "/img/java/compiling-java-src-code.png",
-      "directoryId": "img_1663286030950_61_8643"
+      "directoryId": "img_The_image_section"
     },
-    "java_6653_1663286031028_66": {
+    "java_A_simplified_generic_compilation_model": {
       "filename": "cross-platform-compilation-simple",
       "createdAt": "2022-09-15",
       "alias": "A simplified generic compilation model",
       "filetype": "png",
-      "id": "java_6653_1663286031028_66",
+      "id": "java_A_simplified_generic_compilation_model",
       "href": "/img/java/cross-platform-compilation-simple.png",
-      "directoryId": "img_1663286030950_61_8643"
+      "directoryId": "img_The_image_section"
     },
-    "java_2463_1663286031056_66": {
+    "java_Full_compilation_model_of_Java": {
       "filename": "full-compilation-model",
       "createdAt": "2022-09-15",
       "alias": "Full compilation model of Java",
       "filetype": "png",
-      "id": "java_2463_1663286031056_66",
+      "id": "java_Full_compilation_model_of_Java",
       "href": "/img/java/full-compilation-model.png",
-      "directoryId": "img_1663286030950_61_8643"
+      "directoryId": "img_The_image_section"
     },
-    "java_7597_1663286031072_66": {
+    "java_Simplified_compilation_model": {
       "filename": "simplified-compilation-model",
       "createdAt": "2022-09-15",
       "alias": "Simplified compilation model",
       "filetype": "png",
-      "id": "java_7597_1663286031072_66",
+      "id": "java_Simplified_compilation_model",
       "href": "/img/java/simplified-compilation-model.png",
-      "directoryId": "img_1663286030950_61_8643"
+      "directoryId": "img_The_image_section"
     },
-    "java_5799_1663286031092_66": {
+    "java_Simplified_interpretation_model": {
       "filename": "simplified-interpretation-model",
       "createdAt": "2022-09-15",
       "alias": "Simplified interpretation model",
       "filetype": "png",
-      "id": "java_5799_1663286031092_66",
+      "id": "java_Simplified_interpretation_model",
       "href": "/img/java/simplified-interpretation-model.png",
-      "directoryId": "img_1663286030950_61_8643"
+      "directoryId": "img_The_image_section"
     },
-    "beginner_3251_1663286031134_71": {
+    "beginner_Your_first_Java_program": {
       "filename": "hello_world",
       "createdAt": "2022-09-15",
       "alias": "Your first Java program",
       "filetype": "html",
-      "id": "beginner_3251_1663286031134_71",
+      "id": "beginner_Your_first_Java_program",
       "href": "/java/beginner/hello_world.html",
-      "directoryId": "java_1663286031124_62_9933"
+      "directoryId": "java_The_Java_section"
     },
-    "beginner_5321_1663286031263_71": {
+    "beginner_An_introduction_to_interactive_programming_with_JShell": {
       "filename": "what_is_jshell",
       "createdAt": "2022-09-15",
       "alias": "An introduction to interactive programming with JShell",
       "filetype": "html",
-      "id": "beginner_5321_1663286031263_71",
+      "id": "beginner_An_introduction_to_interactive_programming_with_JShell",
       "href": "/java/beginner/what_is_jshell.html",
-      "directoryId": "java_1663286031124_62_9933"
+      "directoryId": "java_The_Java_section"
     },
-    "beginner_9826_1663286031352_71": {
+    "beginner_The_built-in_operators": {
       "filename": "operators",
       "createdAt": "2022-09-15",
       "alias": "The built-in operators",
       "filetype": "html",
-      "id": "beginner_9826_1663286031352_71",
+      "id": "beginner_The_built-in_operators",
       "href": "/java/beginner/operators.html",
-      "directoryId": "java_1663286031124_62_9933"
+      "directoryId": "java_The_Java_section"
     },
-    "java_1178_1663286031626_62": {
+    "java_What_is_the_Java_programming_language?": {
       "filename": "what_is_java",
       "createdAt": "2022-09-14",
       "alias": "What is the Java programming language?",
       "filetype": "html",
-      "id": "java_1178_1663286031626_62",
+      "id": "java_What_is_the_Java_programming_language?",
       "href": "/java/what_is_java.html",
-      "directoryId": "root_1663286030947_57_1213"
+      "directoryId": "root_Root_of_tree"
     }
   }
 }
