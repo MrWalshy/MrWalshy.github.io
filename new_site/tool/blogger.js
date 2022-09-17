@@ -151,7 +151,7 @@ function processFiles(tree, location) {
 
         try {
             // assign file id
-            file.id = `${tree.dir || "root"}_${Math.trunc(Math.random() * 10000)}_${Date.now()}_${location.length}`;
+            file.id = `${tree.dir || "root"}_${file.alias.replace(" ", "_")}`;
             log(`Assigned id: ${file.id}`);
 
             const f = fs.readFileSync(path.resolve(tree.location, `${file.filename}.${file.filetype}`));
@@ -181,7 +181,7 @@ function processDirectoryTree(tree, location) {
     
     try {
         // assign unique identifier
-        tree.id = `${tree.dir || "root"}_${Date.now()}_${location.length}_${Math.trunc(Math.random() * 10000)}`;
+        tree.id = `${tree.dir || "root"}_${tree.alias.replace(" ", "_")}`;
         log(`Assigned id: ${tree.id}`);
         // assign href representing location on static server
         let href = location.substring(location.lastIndexOf("public"));

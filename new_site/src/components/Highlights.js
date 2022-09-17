@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Grid, { LinkCard, CardImageHeader, CardTextBody } from "./Grid";
 
 export default function Highlights({ posts }) {
@@ -15,7 +14,7 @@ export default function Highlights({ posts }) {
             </header>
 
             <Grid>
-                {posts && posts.map(post => <LinkCard to={`/blog/post/${post.id}`}>
+                {posts && posts.map(post => <LinkCard to={`/blog/post/${post.id}`} key={post.id + "highlights"}>
                     <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} />
                     <CardTextBody text={shortLead} />
                 </LinkCard>

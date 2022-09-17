@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useOutletContext } from "react-router-dom";
-import { buildDirectoryMap, buildFileTree } from "../../utils/DirectoryMap";
+import React from "react";
+import { useOutletContext } from "react-router-dom";
 import Grid, { CardImageHeader, CardTextBody, CardTextHeader, LinkCard } from "../Grid";
 import PageHeader from "../header/PageHeader";
 import BlogNavBar from "../navigation/BlogNavBar";
@@ -9,11 +8,9 @@ import BlogNavBar from "../navigation/BlogNavBar";
 export default function BlogHome(props) {
 
     const {
-        idMap, idMapLoaded,
+        idMapLoaded,
         getRecentlyCreatedPosts, getCategories
     } = useOutletContext();
-
-    console.log(idMap);
 
     return (<main>
         <PageHeader value="Blog home" lead="Coffee + Code = <3" />
@@ -21,7 +18,7 @@ export default function BlogHome(props) {
         <div className="centre">
             <h2>Recently posted...</h2>
             <Grid>
-                {idMapLoaded && getRecentlyCreatedPosts().map(post => <LinkCard to={`/blog/post/${post.id}`}>
+                {idMapLoaded && getRecentlyCreatedPosts().map(post => <LinkCard to={`/blog/post/${post.id}`} key={post.id + "bhome"}>
                     <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} />
                     {/* <CardTextBody text={shortLead} /> */}
                 </LinkCard>
@@ -32,7 +29,7 @@ export default function BlogHome(props) {
         <div className="centre">
             <h2>Categories...</h2>
             <Grid>
-                {idMapLoaded && getCategories().map(category => <LinkCard to={`/blog/board/${category.id}`}>
+                {idMapLoaded && getCategories().map(category => <LinkCard to={`/blog/board/${category.id}`} key={category.id + "bhome"}>
                     {/* <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} /> */}
                     <CardTextHeader text={category.name} />
                     <CardTextBody text={category.description} />
