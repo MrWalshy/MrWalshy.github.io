@@ -1,0 +1,74 @@
+
+<h1>What is JShell?</h1>
+<p>#+DATE: &#x3C;2022-05-13></p>
+<p>JShell is a REPL tool, Read-Eval-Print-Loop, for experimenting with Java code to get immediate results.</p>
+<hr>
+<h2>Opening JShell</h2>
+<p>
+  To open the JShell tool, ensure you have Java on your system path and enter jshell into the console.
+  You should see something like the following if JShell opened correctly:
+</p>
+<pre><code>$ jshell 
+| Welcome to JShell -- Version 17.0.1 
+| For an introduction type: /help intro
+
+jshell> 
+</code></pre>
+<h2>Useful commands</h2>
+<p>The following commands will be useful for interacting with JShell:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/exit</code></td>
+      <td>Exits the JShell tool</td>
+    </tr>
+    <tr>
+      <td><code>/list</code></td>
+      <td>Lists a history of executed code snippets</td>
+    </tr>
+    <tr>
+      <td><code>/save snippet.txt</code></td>
+      <td>Saves all entered code snippets in the current session to the specified file</td>
+    </tr>
+    <tr>
+      <td><code>/open snippet.txt</code></td>
+      <td>Opens and loads the code snippets from the specified file</td>
+    </tr>
+    <tr>
+      <td><code>/reset</code></td>
+      <td>Resets the state of the JShell tool, deleting all snippets in its history</td>
+    </tr>
+    <tr>
+      <td><code>/help</code></td>
+      <td>Opens the help menu</td>
+    </tr>
+    <tr>
+      <td><code>/vars</code></td>
+      <td>Lists declared variables</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Exploratory programming</h2>
+<p>In Java, we can perform the standard Arithmetic operations like addition, subtraction, multiplication, and division. If I enter <code>3 + 3;</code> into JShell for example, I will get the following result:</p>
+<pre><code>jshell> 3 + 3; 
+$1 ==> 6 
+</code></pre>
+<p>What has happened here is that the Java code has been executed and a temporary variable has been created to store the result of the addition, a <em>variable</em> stores data for us and has an associated name. If I enter the name of the new variable, <code>$1</code>, into the console it will return <code>$1 ==> 6</code> – this is informing us that the variable named <code>$1</code> points to the value of <code>6</code>. We can also pass a variable as input to a method, where a <em>method</em> is just a reusable block of code with a name, such as with the <code>println()</code> method:</p>
+<pre><code>jshell> System.out.println($1); 
+6
+</code></pre>
+<p>Try entering the following expressions into JShell and noting their results:</p>
+<ul>
+  <li><code>3 * 3</code></li>
+  <li><code>3 / 3</code></li>
+  <li><code>3 / 0</code></li>
+  <li><code>3 - 3</code></li>
+  <li><code>(3 + 3) * 3</code></li>
+  <li><code>3 + 3 * 3</code></li>
+</ul>

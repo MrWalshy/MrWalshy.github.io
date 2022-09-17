@@ -1,48 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { buildDirectoryMap, buildFileTree } from "../../utils/DirectoryMap";
+import Grid, { CardImageHeader, CardTextBody, CardTextHeader, LinkCard } from "../Grid";
+import PageHeader from "../header/PageHeader";
+import BlogNavBar from "../navigation/BlogNavBar";
+// import NavBar from "../navigation/BlogNavBar";
 
 export default function BlogHome(props) {
 
-    const { isLoaded, loadDirectoryMap, getAllTopics } = useOutletContext();
+    const {
+        idMap, idMapLoaded,
+        getRecentlyCreatedPosts, getCategories
+    } = useOutletContext();
 
-    const [blogDirMap, setBlogDirMap] = useState(null);
+    console.log(idMap);
 
-    // load config and root dir map
-    useEffect(() => {
-        if (isLoaded) setBlogDirMap(loadDirectoryMap("blog"));
-    }, [isLoaded]);
-
-    return <div>
-        {/* Page grid
-            - Row 1: New...
-            - Row 2: Recently updated...
-            - Row 3: Grid of topics
-        */}
-        <div className="container col" style={{
-            display: "flex",
-            flexDirection: "column"
-        }}>
-            <div>
-                <h1 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Main blog board</h1>
-            </div>
-            {/* TODO: New and recently updated posts carousels */}
-            {/* <div className="carousel">
-                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>New posts....</h3>
-            </div>
-            <div className="carousel">
-                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Recently updated....</h3>
-            </div> */}
-
-            {/* Grid of topics */}
-            <div>
-                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Topics</h3>
-                <section className="tiles">
-                    {getAllTopics(blogDirMap).map(topic => <Link key={topic.id + Date.now()} to={`/blog/${topic.id}`} className="tile">
-                        <p>{topic.name}</p>
-                    </Link>)}
-                </section>
-            </div>
+    return (<main>
+        <PageHeader value="Blog home" lead="Coffee + Code = <3" />
+        <BlogNavBar />
+        <div className="centre">
+            <h2>Recently posted...</h2>
+            <Grid>
+                {idMapLoaded && getRecentlyCreatedPosts().map(post => <LinkCard to={`/blog/post/${post.id}`}>
+                    <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} />
+                    {/* <CardTextBody text={shortLead} /> */}
+                </LinkCard>
+                )}
+            </Grid>
         </div>
-    </div>;
+
+        <div className="centre">
+            <h2>Categories...</h2>
+            <Grid>
+                {idMapLoaded && getCategories().map(category => <LinkCard to={`/blog/board/${category.id}`}>
+                    {/* <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} /> */}
+                    <CardTextHeader text={category.name} />
+                    <CardTextBody text={category.description} />
+                </LinkCard>
+                )}
+            </Grid>
+        </div>
+    </main>);
 }

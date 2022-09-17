@@ -4,27 +4,52 @@ import { Link } from "react-router-dom";
 
 export default function BlogBoard() {
 
+    const { 
+        config, idMap,
+        configLoaded, idMapLoaded,
+        errorLoadingConfig, errorLoadingIdMap,
+        getDirFromConfig, getRecentlyCreatedPosts
+     } = useOutletContext();
     const { dirId } = useParams();
 
-    const { isLoaded, loadDirectoryMap, getAllTopics } = useOutletContext();
+    function displaySubtopics() {
+        const dir = getDirFromConfig(dirId);
+        console.log(JSON.stringify(dir, null, "  "))
+        return <>
+            {dir.subdirectories.map(dir => (
+                <Link key={dir.id + "subtopic"}
+                      to={`/blog/board/${dir.id}`}
+                      className="tile"
+                ><p>{dir.alias}</p></Link>
+            ))}
+        </>;
+    }
 
-    const [blogDirMap, setBlogDirMap] = useState(null);
-
-    // load config and root dir map
-    useEffect(() => {
-        if (isLoaded) setBlogDirMap(loadDirectoryMap(dirId));
-    }, [isLoaded]);
-
-    console.log(`Directory id was: ${dirId}`);
     return (
-        <div className="container col" style={{
-            display: "flex",
-            flexDirection: "column"
-        }}>
-            <div style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>
-                <h3>Blog board for {dirId}</h3>
-                <Link to={`/blog/${dirId}/posts`}>View all posts for this topic...</Link>
-            </div>
+        <>
+            {idMapLoaded && <div style={{ 
+                backgroundColor: "whitesmoke", 
+                height: "240px", display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                paddingBottom: "32px"
+            }}>
+                <h1 style={{ 
+                    // padding: "8px", paddingLeft: "16px", 
+                    margin: "0 auto", //marginTop: "8px",
+                    // marginLeft: "auto", marginRight: "auto",
+                    padding: "0",
+                    width: "80%",
+                    color: "black"
+                }}>{idMap.directories[dirId].alias}</h1>
+                <p style={{
+                        margin: "0 auto",
+                        padding: "0",
+                        width: "80%"
+                    }}>
+                    <Link style={{color: "black"}} to={`/blog/${dirId}/posts`}>View all posts for this topic...</Link>
+                </p>
+            </div>}
             {/* Display a carousel of recent posts for this topic */}
             {/* <div className="carousel" style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>
                 <h3>New posts....</h3>
@@ -32,15 +57,16 @@ export default function BlogBoard() {
             </div> */}
 
             {/* Display all subtopics */}
-            <div>
-                <h3 style={{ padding: "8px", paddingLeft: "16px", margin: 0, marginTop: "8px" }}>Subtopics</h3>
-                <section className="tiles">
-                    {/* this is gross and needs extracting */}
-                    {blogDirMap && dirId === blogDirMap.id && getAllTopics(blogDirMap).map(topic => <Link key={topic.id + Date.now()} to={`/blog/${topic.id}`} className="tile">
-                        <p>{topic.name}</p>
-                    </Link>)}
+            {configLoaded && idMapLoaded && <div style={{
+                padding: "0",
+                width: "80%",
+                margin: "0 auto"
+            }}>
+                <h3 style={{ padding: "0", margin: 0 }}>Subtopics</h3>
+                <section style={{ padding: "0", margin: 0 }} className="tiles">
+                    {displaySubtopics()}
                 </section>
-            </div>
-        </div>
+            </div>}
+        </>
     );
 }

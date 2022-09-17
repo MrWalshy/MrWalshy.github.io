@@ -13,14 +13,20 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import remarkToc from 'remark-toc';
 import rehypeFormat from 'rehype-format';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const processor = unified()
-    .use(remarkParse) // parse MD into AST
     .use(remarkToc)
+    .use(remarkMath)
+    .use(remarkParse) // parse MD into AST
+    .use(remarkGfm)
     .use(remarkRehype) // parse MD AST into HTML AST I think
+    .use(rehypeKatex)
     .use(rehypeFormat)
     .use(rehypeStringify); // parse HTML AST to HTML
 
@@ -144,9 +150,17 @@ function processFiles(tree, location) {
         log(`File alias: ${file.alias}`);
 
         try {
+            // assign file id
+            file.id = `${tree.dir || "root"}_${Math.trunc(Math.random() * 10000)}_${Date.now()}_${location.length}`;
+            log(`Assigned id: ${file.id}`);
+
             const f = fs.readFileSync(path.resolve(tree.location, `${file.filename}.${file.filetype}`));
             log(`Retrieved '${file.filename}' successfully.`);
             processFile(tree, location, file, f);
+            if (file.filetype === "md") file.filetype = "html";
+
+            // assign href
+            file.href = `${tree.href}/${file.filename}.${file.filetype}`;
         } catch (error) {
             console.error(error.message);
             log(`Error encountered, skipping file: ${file.filename}.${file.filetype}`);
@@ -166,6 +180,16 @@ function processDirectoryTree(tree, location) {
     log(`Received directory tree for output location: ${location}`);
     
     try {
+        // assign unique identifier
+        tree.id = `${tree.dir || "root"}_${Date.now()}_${location.length}_${Math.trunc(Math.random() * 10000)}`;
+        log(`Assigned id: ${tree.id}`);
+        // assign href representing location on static server
+        let href = location.substring(location.lastIndexOf("public"));
+        if (href === "public") href = "/";
+        else href = href.substring(href.indexOf(path.sep)).replaceAll(path.sep, "/");
+        tree.href = `${href}`;
+        log(`Assigned href: ${tree.href}`);
+
         // output location
         createDirectory(location);
 
@@ -188,6 +212,33 @@ function outputDirectoryTree(tree) {
     log(`Outputted directory tree to '${tree.location}' successfully`);
 }
 
+function outputIdMap(rootTree) {
+    log(`Preparing to output directory tree id map for: ${rootTree.location}`);
+    function buildIdMap(tree, parentId, maps={"directories": {}, "files": {}}) {
+        log(`Building id map for: ${tree.location}`);
+    
+        // recursion
+        for (const subdirectory of tree.subdirectories) {
+            Object.assign(maps, buildIdMap(subdirectory, tree.id, maps));
+        }
+    
+        // add the files
+        for (const file of tree.files) {
+            maps["files"][file.id] = Object.assign({}, file, { directoryId: parentId });
+        }
+    
+        // add the dir
+        const dir = Object.assign({}, tree);
+        delete dir.files;
+        delete dir.subdirectories;
+        maps["directories"][tree.id] = dir;
+        
+        return maps;
+    }
+    const data = JSON.stringify(buildIdMap(rootTree, rootTree.id), null, "  ");
+    fs.writeFileSync(path.resolve(rootTree.location, "id_map.json"), data);
+}
+
 function main() {
     // Get main config argument, exit with error code otherwise
     try {
@@ -208,6 +259,7 @@ function main() {
                 processDirectoryTree(tree, outputLocation);
                 log(`Processed directory tree: \n${JSON.stringify(tree, null, "  ")}`);
                 outputDirectoryTree(tree);
+                outputIdMap(tree);
                 log(`Build successful!`);
             } else throw new Error(`Invalid config path supplied.`);
         }

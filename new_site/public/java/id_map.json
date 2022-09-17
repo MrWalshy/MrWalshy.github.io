@@ -1,0 +1,69 @@
+{
+  "directories": {
+    "java_1663278517020_62_282": {
+      "dir": "java",
+      "alias": "The Java section",
+      "createdAt": "2022-09-15",
+      "subdirectories": [
+        {
+          "dir": "beginner",
+          "alias": "The Java beginner section",
+          "createdAt": "2022-09-15",
+          "subdirectories": [],
+          "files": [
+            {
+              "filename": "hello_world",
+              "createdAt": "2022-09-15",
+              "alias": "Your first Java program",
+              "filetype": "md",
+              "id": "beginner_9070_1663278517027_71",
+              "href": "/java/beginner/hello_world.md"
+            },
+            {
+              "filename": "what_is_jshell",
+              "createdAt": "2022-09-15",
+              "alias": "An introduction to interactive programming with JShell",
+              "filetype": "md",
+              "id": "beginner_161_1663278517106_71",
+              "href": "/java/beginner/what_is_jshell.md"
+            },
+            {
+              "filename": "operators",
+              "createdAt": "2022-09-15",
+              "alias": "The built-in operators",
+              "filetype": "md",
+              "id": "beginner_3102_1663278517146_71",
+              "href": "/java/beginner/operators.md"
+            }
+          ],
+          "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\java\\beginner",
+          "id": "beginner_1663278517023_71_5241",
+          "href": "/java/beginner"
+        }
+      ],
+      "files": [
+        {
+          "filename": "what_is_java",
+          "createdAt": "2022-09-14",
+          "alias": "What is the Java programming language?",
+          "filetype": "md",
+          "id": "java_5415_1663278517251_62",
+          "href": "/java/what_is_java.md"
+        }
+      ],
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\new_site\\public\\java",
+      "id": "java_1663278517020_62_282",
+      "href": "/java"
+    }
+  },
+  "files": {
+    "java_5415_1663278517251_62": {
+      "filename": "what_is_java",
+      "createdAt": "2022-09-14",
+      "alias": "What is the Java programming language?",
+      "filetype": "md",
+      "id": "java_5415_1663278517251_62",
+      "href": "/java/what_is_java.md"
+    }
+  }
+}

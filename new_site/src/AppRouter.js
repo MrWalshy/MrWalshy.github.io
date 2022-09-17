@@ -24,8 +24,8 @@ function AppRouter() {
                             - BlogPost will be markdown pulled from an MD file with fetch() statements
                             - Uses an internal FileTree representation
                         */}
-                        <Route path=":dirId" element={<BlogBoard />} />
-                        <Route path=":dirId/:fileId" element={<BlogPost />} />
+                        <Route path="board/:dirId" element={<BlogBoard />} />
+                        <Route path="post/:id" element={<BlogPost />} />
                         <Route path=":dirId/posts" element={<BlogPostBoard />} />
                     </Route>
                 </Route>
