@@ -19,11 +19,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "node ./tool/blogger.js ./blog/config.json && react-scripts build",
+    "build": "node ./tool/blogger.js ./blog/config.json && react-scripts build && cp ../CNAME ./build/CNAME",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages-d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
