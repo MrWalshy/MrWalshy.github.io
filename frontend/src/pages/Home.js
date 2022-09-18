@@ -60,7 +60,8 @@ export default function Home() {
         <main>
             <PageHeader value={headerGreeting} lead={lead} />
             {/* {!idMapLoaded && <h2 className="centre">Loading highlights...</h2>} */}
-            <Highlights posts={getRecentlyCreatedPosts()} />
+            <Highlights posts={getRecentlyCreatedPosts(3)} />
+            <div style={{padding: "32px"}}></div>
         </main>
     );
 }

@@ -18,7 +18,7 @@ export default function BlogHome(props) {
         <div className="centre">
             <h2>Recently posted...</h2>
             <Grid>
-                {idMapLoaded && getRecentlyCreatedPosts().map(post => <LinkCard to={`/blog/post/${post.id}`} key={post.id + "bhome"}>
+                {idMapLoaded && getRecentlyCreatedPosts(3).map(post => <LinkCard to={`/blog/post/${post.id}`} key={post.id + "bhome"}>
                     <CardImageHeader src="https://via.placeholder.com/500x300" alt="" text={post.alias} />
                     {/* <CardTextBody text={shortLead} /> */}
                 </LinkCard>
