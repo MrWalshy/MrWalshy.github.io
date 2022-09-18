@@ -124,12 +124,30 @@ pre {
 }
 
 code {
-  font-family: "Courier New", monospace;
+  font-family: monospace;
   background-color: #333;
   padding: 0.2rem 0.6rem;
   border-radius: 0.5rem;
-  font-size: 1.6rem;
+  font-size: inherit;
   color: #EEE;
+}
+
+/* Code embedded in text */
+p > code,
+li > code {
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.2rem;
+}
+
+/* Code in block */
+pre code {
+  display: block;
+  white-space: pre;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100%;
 }
 
 /* Blockquotes */
