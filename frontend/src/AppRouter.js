@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
@@ -12,7 +12,7 @@ import BlogPostBoard from "./components/blog/BlogPostBoard";
 function AppRouter() {
 
     return (
-        <BrowserRouter>
+        <Router>
             <Routes>
                 <Route path='/' element={<App />}>
                     <Route index element={<Home />} />
@@ -31,7 +31,7 @@ function AppRouter() {
                 </Route>
                 <Route path="*" element={<Error />} />
             </Routes>
-        </BrowserRouter>
+        </Router>
     );
 }
 
