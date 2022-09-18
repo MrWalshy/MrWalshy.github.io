@@ -1,0 +1,157 @@
+{
+    "directories": [
+        {
+            "id": "root",
+            "path": "",
+            "name": "Root directory",
+            "subDirectories": [
+                "blog"
+            ]
+        },
+        {
+            "id": "blog",
+            "path": "/blog",
+            "name": "Blog posts",
+            "subDirectories": [
+                "markdown",
+                "react",
+                "java"
+            ]
+        },
+        {
+            "id": "markdown",
+            "path": "/blog/markdown",
+            "name": "Markdown posts",
+            "subDirectories": ["beginnerMd"],
+            "files": [
+                "post1",
+                "post2"
+            ]
+        },
+        {
+            "id": "beginnerMd",
+            "path": "/blog/markdown/beginner",
+            "name": "Markdown beginner posts",
+            "subDirectories": [],
+            "files": [
+                "post1"
+            ]
+        },
+        {
+            "id": "react",
+            "path": "/blog/react",
+            "name": "React posts",
+            "subDirectories": [],
+            "files": [
+                "post1",
+                "post2"
+            ]
+        },
+        {
+            "id": "java",
+            "path": "/blog/java",
+            "name": "All about Java",
+            "subDirectories": [
+                "java_beginner"
+            ],
+            "files": [
+                "what_is_java"
+            ]
+        },
+        {
+            "id": "java_beginner",
+            "path": "/blog/java/beginner",
+            "name": "Java for Beginners",
+            "subDirectories": [],
+            "files": [
+                "hello_world",
+                "operators",
+                "what_is_jshell"
+            ]
+        }
+    ],
+    "directoryFiles": {
+        "java_beginner": [
+            {
+                "id": "hello_world",
+                "alias": "The canonical Hello World",
+                "filename": "hello_world.md",
+                "filetype": "md",
+                "createdAt": "2022-04-30",
+                "lastUpdated": "2022-09-14"
+            },
+            {
+                "id": "operators",
+                "alias": "Operators in Java",
+                "filename": "operators.md",
+                "filetype": "md",
+                "createdAt": "2022-05-13",
+                "lastUpdated": "2022-09-14"
+            },
+            {
+                "id": "what_is_jshell",
+                "alias": "What is JShell...",
+                "filename": "what_is_jshell.md",
+                "filetype": "md",
+                "createdAt": "2022-05-13",
+                "lastUpdated": "2022-09-14"
+            }
+        ],
+        "java": [
+            {
+                "id": "what_is_java",
+                "alias": "What is Java?",
+                "filename": "what_is_java.md",
+                "filetype": "md",
+                "createdAt": "2022-04-30",
+                "lastUpdated": "2022-09-14"
+            }
+        ],
+        "markdown": [
+            {
+                "id": "post1",
+                "alias": "Markdown for beginners",
+                "filename": "post1.md",
+                "filetype": "md",
+                "createdAt": "2022-09-14",
+                "lastUpdated": "2022-09-14"
+            },
+            {
+                "id": "post2",
+                "alias": "Markdown intermediate",
+                "filename": "post2.md",
+                "filetype": "md",
+                "createdAt": "2022-09-14",
+                "lastUpdated": "2022-09-14"
+            }
+        ],
+        "beginnerMd": [
+            {
+                "id": "post1",
+                "alias": "Markdown for real beginners",
+                "filename": "post1.md",
+                "filetype": "md",
+                "createdAt": "2022-09-14",
+                "lastUpdated": "2022-09-14"
+            }
+        ],
+        "react": [
+            {
+                "id": "post1",
+                "alias": "React for beginners",
+                "filename": "post1.md",
+                "filetype": "md",
+                "createdAt": "2022-09-14",
+                "lastUpdated": "2022-09-14"
+            },
+            {
+                "id": "post2",
+                "alias": "React intermediate",
+                "filename": "post2.md",
+                "filetype": "md",
+                "createdAt": "2022-09-14",
+                "lastUpdated": "2022-09-14"
+            }
+        ]
+    }
+}

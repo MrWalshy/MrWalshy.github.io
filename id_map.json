@@ -1,0 +1,273 @@
+{
+  "directories": {
+    "java_The_Java_image_section": {
+      "dir": "java",
+      "alias": "The Java image section",
+      "createdAt": "2022-09-15",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\img\\java",
+      "id": "java_The_Java_image_section",
+      "href": "/img/java"
+    },
+    "reactjs_ReactJS_images": {
+      "dir": "reactjs",
+      "alias": "ReactJS images",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\img\\javascript\\reactjs",
+      "id": "reactjs_ReactJS_images",
+      "href": "/img/javascript/reactjs"
+    },
+    "javascript_JavaScript_images": {
+      "dir": "javascript",
+      "alias": "JavaScript images",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\img\\javascript",
+      "id": "javascript_JavaScript_images",
+      "href": "/img/javascript"
+    },
+    "img_The_image_section": {
+      "dir": "img",
+      "alias": "The image section",
+      "createdAt": "2022-09-15",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\img",
+      "id": "img_The_image_section",
+      "href": "/img"
+    },
+    "beginner_The_Java_beginner_section": {
+      "dir": "beginner",
+      "alias": "The Java beginner section",
+      "createdAt": "2022-09-15",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\java\\beginner",
+      "id": "beginner_The_Java_beginner_section",
+      "href": "/java/beginner"
+    },
+    "java_The_Java_section": {
+      "dir": "java",
+      "alias": "The Java section",
+      "createdAt": "2022-09-15",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\java",
+      "id": "java_The_Java_section",
+      "href": "/java"
+    },
+    "expressjs_ExpressJS": {
+      "dir": "expressjs",
+      "alias": "ExpressJS",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\javascript\\expressjs",
+      "id": "expressjs_ExpressJS",
+      "href": "/javascript/expressjs"
+    },
+    "npm_Node_Package_Manager_(NPM)": {
+      "dir": "npm",
+      "alias": "Node Package Manager (NPM)",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\javascript\\nodejs\\npm",
+      "id": "npm_Node_Package_Manager_(NPM)",
+      "href": "/javascript/nodejs/npm"
+    },
+    "nodejs_NodeJS": {
+      "dir": "nodejs",
+      "alias": "NodeJS",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\javascript\\nodejs",
+      "id": "nodejs_NodeJS",
+      "href": "/javascript/nodejs"
+    },
+    "reactjs_ReactJS": {
+      "dir": "reactjs",
+      "alias": "ReactJS",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\javascript\\reactjs",
+      "id": "reactjs_ReactJS",
+      "href": "/javascript/reactjs"
+    },
+    "javascript_Everything_JavaScript": {
+      "dir": "javascript",
+      "alias": "Everything JavaScript",
+      "createdAt": "2022-09-18",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public\\javascript",
+      "id": "javascript_Everything_JavaScript",
+      "href": "/javascript"
+    },
+    "root_Root_of_tree": {
+      "dir": "",
+      "alias": "Root of tree",
+      "createdAt": "2022-09-14",
+      "location": "C:\\Users\\morga\\c_notes\\MrWalshy.github.io\\frontend\\public",
+      "id": "root_Root_of_tree",
+      "href": "/"
+    }
+  },
+  "files": {
+    "java_Compiling_Java_source_code_process": {
+      "filename": "compiling-java-src-code",
+      "createdAt": "2022-09-15",
+      "alias": "Compiling Java source code process",
+      "filetype": "png",
+      "id": "java_Compiling_Java_source_code_process",
+      "href": "/img/java/compiling-java-src-code.png",
+      "directoryId": "img_The_image_section"
+    },
+    "java_A_simplified_generic_compilation_model": {
+      "filename": "cross-platform-compilation-simple",
+      "createdAt": "2022-09-15",
+      "alias": "A simplified generic compilation model",
+      "filetype": "png",
+      "id": "java_A_simplified_generic_compilation_model",
+      "href": "/img/java/cross-platform-compilation-simple.png",
+      "directoryId": "img_The_image_section"
+    },
+    "java_Full_compilation_model_of_Java": {
+      "filename": "full-compilation-model",
+      "createdAt": "2022-09-15",
+      "alias": "Full compilation model of Java",
+      "filetype": "png",
+      "id": "java_Full_compilation_model_of_Java",
+      "href": "/img/java/full-compilation-model.png",
+      "directoryId": "img_The_image_section"
+    },
+    "java_Simplified_compilation_model": {
+      "filename": "simplified-compilation-model",
+      "createdAt": "2022-09-15",
+      "alias": "Simplified compilation model",
+      "filetype": "png",
+      "id": "java_Simplified_compilation_model",
+      "href": "/img/java/simplified-compilation-model.png",
+      "directoryId": "img_The_image_section"
+    },
+    "java_Simplified_interpretation_model": {
+      "filename": "simplified-interpretation-model",
+      "createdAt": "2022-09-15",
+      "alias": "Simplified interpretation model",
+      "filetype": "png",
+      "id": "java_Simplified_interpretation_model",
+      "href": "/img/java/simplified-interpretation-model.png",
+      "directoryId": "img_The_image_section"
+    },
+    "reactjs_Create_React_App_default_App_component": {
+      "filename": "react-app-default-browser",
+      "createdAt": "2022-09-18",
+      "alias": "Create React App default App component",
+      "filetype": "png",
+      "id": "reactjs_Create_React_App_default_App_component",
+      "href": "/img/javascript/reactjs/react-app-default-browser.png",
+      "directoryId": "javascript_JavaScript_images"
+    },
+    "reactjs_Structure_of_a_React_project": {
+      "filename": "react-project-structure-example",
+      "createdAt": "2022-09-18",
+      "alias": "Structure of a React project",
+      "filetype": "png",
+      "id": "reactjs_Structure_of_a_React_project",
+      "href": "/img/javascript/reactjs/react-project-structure-example.png",
+      "directoryId": "javascript_JavaScript_images"
+    },
+    "reactjs_Example_console_output_of_compiling_React_successfully_in_development": {
+      "filename": "successful-react-compilation-example",
+      "createdAt": "2022-09-18",
+      "alias": "Example console output of compiling React successfully in development",
+      "filetype": "png",
+      "id": "reactjs_Example_console_output_of_compiling_React_successfully_in_development",
+      "href": "/img/javascript/reactjs/successful-react-compilation-example.png",
+      "directoryId": "javascript_JavaScript_images"
+    },
+    "beginner_Your_first_Java_program": {
+      "filename": "hello_world",
+      "createdAt": "2022-09-15",
+      "alias": "Your first Java program",
+      "filetype": "html",
+      "id": "beginner_Your_first_Java_program",
+      "href": "/java/beginner/hello_world.html",
+      "directoryId": "java_The_Java_section"
+    },
+    "beginner_An_introduction_to_interactive_programming_with_JShell": {
+      "filename": "what_is_jshell",
+      "createdAt": "2022-09-15",
+      "alias": "An introduction to interactive programming with JShell",
+      "filetype": "html",
+      "id": "beginner_An_introduction_to_interactive_programming_with_JShell",
+      "href": "/java/beginner/what_is_jshell.html",
+      "directoryId": "java_The_Java_section"
+    },
+    "beginner_The_built-in_operators": {
+      "filename": "operators",
+      "createdAt": "2022-09-15",
+      "alias": "The built-in operators",
+      "filetype": "html",
+      "id": "beginner_The_built-in_operators",
+      "href": "/java/beginner/operators.html",
+      "directoryId": "java_The_Java_section"
+    },
+    "java_What_is_the_Java_programming_language?": {
+      "filename": "what_is_java",
+      "createdAt": "2022-09-14",
+      "alias": "What is the Java programming language?",
+      "filetype": "html",
+      "id": "java_What_is_the_Java_programming_language?",
+      "href": "/java/what_is_java.html",
+      "directoryId": "root_Root_of_tree"
+    },
+    "expressjs_What_is_the_ExpressJS_framework?": {
+      "filename": "introduction",
+      "createdAt": "2022-05-26",
+      "alias": "What is the ExpressJS framework?",
+      "filetype": "html",
+      "id": "expressjs_What_is_the_ExpressJS_framework?",
+      "href": "/javascript/expressjs/introduction.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    },
+    "expressjs_Intro_to_Middleware_in_Express_4": {
+      "filename": "middleware",
+      "createdAt": "2022-05-26",
+      "alias": "Intro to Middleware in Express 4",
+      "filetype": "html",
+      "id": "expressjs_Intro_to_Middleware_in_Express_4",
+      "href": "/javascript/expressjs/middleware.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    },
+    "expressjs_Intro_to_Routing_in_Express_4": {
+      "filename": "routing",
+      "createdAt": "2022-05-26",
+      "alias": "Intro to Routing in Express 4",
+      "filetype": "html",
+      "id": "expressjs_Intro_to_Routing_in_Express_4",
+      "href": "/javascript/expressjs/routing.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    },
+    "npm_Introduction_to_NPM": {
+      "filename": "basics",
+      "createdAt": "2022-05-19",
+      "alias": "Introduction to NPM",
+      "filetype": "html",
+      "id": "npm_Introduction_to_NPM",
+      "href": "/javascript/nodejs/npm/basics.html",
+      "directoryId": "nodejs_NodeJS"
+    },
+    "reactjs_An_intro_to_components_and_JSX_in_React_18": {
+      "filename": "intro_to_jsx_and_components",
+      "createdAt": "2022-05-17",
+      "alias": "An intro to components and JSX in React 18",
+      "filetype": "html",
+      "id": "reactjs_An_intro_to_components_and_JSX_in_React_18",
+      "href": "/javascript/reactjs/intro_to_jsx_and_components.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    },
+    "reactjs_Component_state_with_React_hooks": {
+      "filename": "what_is_state",
+      "createdAt": "2022-05-18",
+      "alias": "Component state with React hooks",
+      "filetype": "html",
+      "id": "reactjs_Component_state_with_React_hooks",
+      "href": "/javascript/reactjs/what_is_state.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    },
+    "reactjs_What_is_React_and_why_is_it_used...": {
+      "filename": "what_is_react",
+      "createdAt": "2022-05-14",
+      "alias": "What is React and why is it used...",
+      "filetype": "html",
+      "id": "reactjs_What_is_React_and_why_is_it_used...",
+      "href": "/javascript/reactjs/what_is_react.html",
+      "directoryId": "javascript_Everything_JavaScript"
+    }
+  }
+}
