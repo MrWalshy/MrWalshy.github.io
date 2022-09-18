@@ -9,7 +9,9 @@ html {
   font-size: 10px;
 }
 
-*, *:before, *::after {
+*,
+*:before,
+*::after {
   box-sizing: border-box;
   font-size: inherit;
   /* margin: 0;
@@ -36,26 +38,65 @@ hr {
 }
 
 ::selection {
-  background-color:  var(--secondary-color);
+  background-color: var(--secondary-color);
   color: var(--primary-color);
 }
 
-h1 { font-size: 4.8rem; }
-h2 { font-size: 4.0rem; }
-h1, h2 {
-  margin-top: 3.2rem; 
+h1 {
+  font-size: 4.8rem;
+}
+
+h2 {
+  font-size: 4.0rem;
+}
+
+h1,
+h2 {
+  margin-top: 3.2rem;
   line-height: 1.5;
 }
-h3 { font-size: 2.4rem; }
-h4 { font-size: 2.2rem; }
-h5 { font-size: 2.0rem; }
-h6 { font-size: 1.8rem; }
-h3, h4, h5, h6 { margin-top: 1.6rem; }
-p, a, li { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
 
-small { font-size: 1.2rem; }
+h3 {
+  font-size: 2.4rem;
+}
 
-pre, blockquote, ul, ol, p, table{
+h4 {
+  font-size: 2.2rem;
+}
+
+h5 {
+  font-size: 2.0rem;
+}
+
+h6 {
+  font-size: 1.8rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.6rem;
+}
+
+p,
+a,
+li {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+small {
+  font-size: 1.2rem;
+}
+
+pre,
+blockquote,
+ul,
+ol,
+p,
+table {
   margin: 1.6rem 0;
 }
 
@@ -64,7 +105,9 @@ pre, blockquote, ul, ol, p, table{
   text-decoration: underline;
 } */
 
-a:hover, a:focus, a:active {
+a:hover,
+a:focus,
+a:active {
   color: var(--secondary-color);
   text-decoration: none;
 }
@@ -100,12 +143,12 @@ li {
   list-style-position: initial;
 }
 
-li > ul {
+li>ul {
   /* sitemap style */
   padding-left: 24px;
 }
 
-img{
+img {
   max-width: 100%;
   height: auto;
 }
@@ -113,7 +156,7 @@ img{
 /* Scrollbar */
 div::-webkit-scrollbar {
   /* width: 5px; */
-  height: 12px; 
+  height: 12px;
 }
 
 div::-webkit-scrollbar-track {
@@ -144,7 +187,8 @@ div {
   /* padding-left: calc(100% - 90%); */
 }
 
-.nav-link, #toggle {
+.nav-link,
+#toggle {
   color: whitesmoke;
   padding: 16px;
   text-align: center;
@@ -152,7 +196,8 @@ div {
   display: inherit;
 }
 
-.nav-link:hover, #toggle:hover {
+.nav-link:hover,
+#toggle:hover {
   background-color: whitesmoke;
   color: rgb(72, 72, 73);
 }
@@ -170,7 +215,7 @@ div {
   padding: 0;
 }
 
-.submenu > ul {
+.submenu>ul {
   position: absolute;
   display: none;
   margin: 0;
@@ -179,8 +224,8 @@ div {
   /* top: 50px; */
   min-width: 100%;
 }
- 
-.submenu > button {
+
+.submenu>button {
   outline: none;
   border: none;
   background-color: var(--primary-color);
@@ -188,12 +233,12 @@ div {
   padding: 16px;
 }
 
-.submenu > button:focus {
+.submenu>button:focus {
   outline: auto;
   color: var(--secondary-color);
 }
 
-.submenu:hover > ul {
+.submenu:hover>ul {
   display: block;
 }
 
@@ -217,7 +262,7 @@ div {
   color: var(--white);
 }
 
-.menu-btn > a {
+.menu-btn>a {
   text-decoration: none;
   /* text-align: center; */
   color: inherit;
@@ -240,20 +285,20 @@ div {
   background-color: rgb(72, 72, 73);
 }
 
-#top-header > h1 {
+#top-header>h1 {
   margin: 32px 0 16px 0;
   padding: 0;
   color: var(--secondary-color);
 }
 
-main > #page-header {
+main>#page-header {
   background-color: var(--white);
   /* padding: calc(100vh / 6) 0 calc(100vh / 12) 0; */
   padding: calc(100vh / 6) 0 8px 0;
 }
 
-main > #page-header > h2, 
-main > #page-header > p {
+main>#page-header>h2,
+main>#page-header>p {
   width: 80%;
   margin: 0 auto;
   padding: 0;
@@ -264,7 +309,7 @@ main > #page-header > p {
   font-size: 4rem;
 } */
 
-main > #highlights {
+main>#highlights {
   color: black;
   border-top: solid black 1px;
 }
@@ -282,46 +327,47 @@ main > #highlights {
   gap: 16px;
 }
 
-.card, .link-card > a {
+.card,
+.link-card>a {
   display: flex;
   flex-direction: column;
   height: fit-content;
   margin-bottom: 8px;
 }
 
-.link-card > a {
+.link-card>a {
   text-decoration: none;
   color: var(--primary-color);
 }
 
-.link-card > a:hover > .card-image-header,
-.link-card > a:hover > .card-header {
+.link-card>a:hover>.card-image-header,
+.link-card>a:hover>.card-header {
   color: var(--secondary-color);
 }
 
-.card > .card-image-header > h5, 
-.link-card > a > .card-image-header > h5 {
+.card>.card-image-header>h5,
+.link-card>a>.card-image-header>h5 {
   height: 56px;
   overflow: hidden;
 }
 
 /* just a text card style */
-.link-card > a > .card-header > h5::before {
+.link-card>a>.card-header>h5::before {
   content: "> ";
 }
 
-.card > .card-image-header > .thumbnail, 
-.link-card > a > .card-image-header > .thumbnail {
+.card>.card-image-header>.thumbnail,
+.link-card>a>.card-image-header>.thumbnail {
   width: 100%;
 }
 
-.card > .card-content,
-.link-card > a > .card-content {
+.card>.card-content,
+.link-card>a>.card-content {
   height: 70%;
 }
 
-.card > .card-content > p,
-.link-card > a > .card-content > p {
+.card>.card-content>p,
+.link-card>a>.card-content>p {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -425,11 +471,11 @@ Media queries always start with `@media target and (properties) {
 */
 @media screen and (max-width: 1024px) {
   aside {
-      flex: 25%;
+    flex: 25%;
   }
 
   main {
-      flex: 75%;
+    flex: 75%;
   }
 
   .tile {
@@ -438,29 +484,68 @@ Media queries always start with `@media target and (properties) {
 }
 
 @media screen and (max-width: 768px) {
+
+  /* General html element styles */
+  #root {
+    width: 100%;
+    margin: 0;
+  }
+
+  #top-header {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  #toggle, .nav-link {
+    width: 80%;
+    margin: 0 auto;
+    padding: 16px 0;
+    text-align: left;
+  }
+
+  #toggle:active, #toggle:hover, .nav-link:active, .nav-link:hover {
+    padding-left: 16px;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  h1,
+  h2 {
+    margin-top: 2.6rem;
+    line-height: 1.4;
+  }
+
   .tile {
     flex: 1 0 calc(100% - 2em);
   }
 
   aside {
-      display: none;
+    display: none;
   }
 
-  nav, .container, .row {
-      flex-direction: column;
+  nav,
+  .container,
+  .row {
+    flex-direction: column;
   }
 
   nav {
-      padding-left: 0px;
+    padding-left: 0px;
   }
 
   .nav-link {
-      display: none;
+    display: none;
   }
 
   #toggle {
-      display: block;
-      cursor: pointer;
+    display: block;
+    cursor: pointer;
   }
 }
 
