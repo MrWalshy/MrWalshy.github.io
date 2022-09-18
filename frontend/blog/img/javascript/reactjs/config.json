@@ -1,0 +1,27 @@
+{
+    "dir": "reactjs",
+    "alias": "ReactJS images",
+    "createdAt": "2022-09-18",
+    "include": [],
+    "exclude": [],
+    "files": [
+        {
+            "filename": "react-app-default-browser",
+            "createdAt": "2022-09-18",
+            "alias": "Create React App default App component",
+            "filetype": "png"
+        },
+        {
+            "filename": "react-project-structure-example",
+            "createdAt": "2022-09-18",
+            "alias": "Structure of a React project",
+            "filetype": "png"
+        },
+        {
+            "filename": "successful-react-compilation-example",
+            "createdAt": "2022-09-18",
+            "alias": "Example console output of compiling React successfully in development",
+            "filetype": "png"
+        }
+    ]
+}

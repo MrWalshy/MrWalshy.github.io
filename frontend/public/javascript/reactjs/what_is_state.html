@@ -1,0 +1,124 @@
+
+<h1>State with React hooks</h1>
+<p>In React, we often want to create dynamic components where the data inside them could change. Using props, we cannot do this unless we re-render the whole component manually. React components have a built-in <code>state</code> object for managing data that is subject to change, when this object changes the component will be re-rendered.</p>
+<h2>Adding state to a component</h2>
+<p>Hooks were added to React in version 16.8, these allow function components to access their state and lifecycle.</p>
+<blockquote>
+  <p>Class components are generally not needed anymore due to this.</p>
+</blockquote>
+<p>There are multiple hooks available in React that can be imported from <code>react</code>:</p>
+<ul>
+  <li><code>useState()</code></li>
+  <li><code>useEffect()</code></li>
+  <li><code>useContext()</code></li>
+  <li><code>useRef()</code></li>
+  <li><code>useMemo()</code></li>
+</ul>
+<p>There are 3 rules with React hooks:</p>
+<ol>
+  <li>Hooks can only be called inside function components</li>
+  <li>Hooks can only be called at the top level of a component</li>
+  <li>Hooks cannot be conditional</li>
+</ol>
+<p>The <code>useState</code> hook is for tracking state in a function component, the data that is subject to change.</p>
+<p>The first step is to import the <code>useState</code> hook:</p>
+<pre><code class="language-js">import { useState } from 'react';
+</code></pre>
+<p>Once we have imported the function, we can initialise state in components using it. <code>useState</code> accepts the initial state and returns two values:</p>
+<ol>
+  <li>The current state</li>
+  <li>A function for updating said state</li>
+</ol>
+<pre><code class="language-js">const UserEditForm = (props) => {
+
+    const [age, setAge] = useState(props.age);
+
+    return (
+        &#x3C;form>
+        &#x3C;h3>{props.user.username} | Edit profile&#x3C;/h3>
+        {/*
+            The input is data that changes during the lifecycle of the component, this represents state and will be explored in a different article.
+            ,*/}
+            &#x3C;label htmlFor="age">Age: &#x3C;/label>
+            &#x3C;input type="number"
+                id="age"
+                defaultValue={age} />
+        &#x3C;/form>
+    );
+}
+</code></pre>
+<p>Once the state is initialised, it can be used anywhere in the component.</p>
+<h2>Updating state</h2>
+<p>To update state, we must not access the variable directly. Instead, we should use the mutator function provided by the <code>useState</code> hook.</p>
+<pre><code class="language-js">  const UserEditForm = (props) => {
+
+    const [age, setAge] = useState(props.user.age);
+
+    const updateAge = (event) => setAge(event.target.value);
+
+    return (
+      &#x3C;form>
+        &#x3C;h3>{props.user.username} | Edit profile&#x3C;/h3>
+        {/*
+           The input is data that changes during the lifecycle of the component, this represents state and will be explored in a different article.
+         ,*/}
+         &#x3C;label htmlFor="age">Age: &#x3C;/label>
+         &#x3C;input type="number"
+                id="age"
+                defaultValue={age}
+                onChange={this.updateAge} />
+       &#x3C;/form>
+    );
+  }
+</code></pre>
+<p>
+  If we then pass a prop named <code>user</code>, with the username and age properties, to the component - <code>&#x3C;UserEditForm user={user} /></code> - it will render a form for us
+  with the ability to modify the value of age. Given the following object:
+</p>
+<pre><code class="language-js">const user = {
+    username: "Fred",
+    age: 32
+};
+</code></pre>
+<p>was passed as a prop to the edit form component, it would render the following HTML:</p>
+<pre><code class="language-html">&#x3C;form>
+    &#x3C;h3>Fred | Edit profile&#x3C;/h3>
+    &#x3C;label for="age">Age:&#x3C;/label>
+    &#x3C;input type="number" id="age" value="32" />
+&#x3C;/form>
+</code></pre>
+<p>Using ReactDOMServer to render JSX as static markup:</p>
+<pre><code class="language-js">const React = require('react');
+const useState = React.useState;
+const ReactDOMServer = require('react-dom/server');
+const renderToStaticMarkup = ReactDOMServer.renderToStaticMarkup;
+const beautify = require('simply-beautiful');
+
+const UserEditForm = (props) => {
+
+    const [age, setAge] = useState(props.user.age);
+
+    const updateAge = (event) => setAge(event.target.value);
+
+    return (
+      &#x3C;form>
+        &#x3C;h3>{props.user.username} | Edit profile&#x3C;/h3>
+        {/*
+           The input is data that changes during the lifecycle of the component, this represents state and will be explored in a different article.
+         ,*/}
+         &#x3C;label htmlFor="age">Age: &#x3C;/label>
+         &#x3C;input type="number"
+                id="age"
+                defaultValue={age}
+                onChange={this.updateAge} />
+       &#x3C;/form>
+    );
+}
+
+const user = {
+    username: "Fred",
+    age: 32
+};
+let markup = renderToStaticMarkup(&#x3C;UserEditForm user={user} />);
+console.log(beautify.html(markup));
+</code></pre>

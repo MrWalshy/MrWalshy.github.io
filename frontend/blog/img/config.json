@@ -1,0 +1,11 @@
+{
+    "dir": "img",
+    "alias": "The image section",
+    "createdAt": "2022-09-15",
+    "include": [
+        "java",
+        "javascript"
+    ],
+    "exclude": [],
+    "files": []
+}

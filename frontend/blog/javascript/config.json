@@ -1,0 +1,12 @@
+{
+    "dir": "javascript",
+    "alias": "Everything JavaScript",
+    "createdAt": "2022-09-18",
+    "include": [
+        "expressjs",
+        "nodejs",
+        "reactjs"
+    ],
+    "exclude": [],
+    "files": []
+}

@@ -1,0 +1,441 @@
+# An introduction to components and JSX in React 18
+
+-------------------------------------------
+
+React is a user-interface (UI) library for building components, these components represent the markup rendered to the browser display and the logic applied to said markup.
+
+> User interfaces can be **composed** of many reusable components for presenting data which changes over time.
+
+There are two ways of creating components in React:
+
+- Class based ES6 components
+- Function components (this article focuses on function components)
+
+## [Thinking in React](https://reactjs.org/docs/thinking-in-react.html)
+
+React is known for its abilities to create dynamic websites, but it requires us to consider how we build web applications a little differently. The React team, as of writing, recommend we follow these steps:
+
+1. Start with a mock
+
+   A **mock** is a design (often a wireframe), possibly with accompanying data for an existing or planned API. Usually, this will be created by designers but if it is a solo project you will be responsible for creating the mocks.
+
+   ------------------
+
+2. Break the UI into a component hierarchy
+
+   In React, we should identify the different components in our design. Take a todo list for example:
+
+   ```
+    ----------------------------------------------+----------
+   | Todo                                         | Priority |
+    ----------------------------------------------+----------
+   | Buy dog food                                 | HIGH     |
+   | Write Thinking in React blog post            | MEDIUM   |
+   ```
+
+   There are multiple components in this todo list, the list itself can also be considered a component - it is the parent in this hierarchy.
+
+   The header row is a component in the todo list:
+
+   ```
+    ----------------------------------------------+----------
+   | Todo                                         | Priority |
+    ----------------------------------------------+----------
+   ```
+
+   Each todo item can also be considered a component:
+
+   ```
+   | Buy dog food                                 | HIGH     |
+   ```
+
+   A simple way of identifying components is to draw boxes around them on your design, this takes practice and is not mastered overnight but can be understood in an hour.
+
+   > The single-responsibility principle can be used to great effect in component based design, each component should do one thing and do it well... If the component has more than one responsibility, decompose it into subcomponents.
+
+   The hierarchy identified looks as follows:
+
+   - TodoList
+
+     - TodoHeader
+
+     - TodoItem
+
+   --------------------
+
+3. Build a **static version** in React
+
+   Once the component hierarchy is identified, a **static version** of the web application can be created which takes a data model and renders the UI but does not have any dynamic interactivity... yet!
+
+   - Static versions don't require much thinking but do require lots of typing according to the React team, the reasoning here is that you are merely building some HTML templates and as we all should know, mark up can become very verbose very quickly. The interactivity of our pages is the inverse.
+
+   React has a concept of props and state, **props** are used to pass data /down/ the component hierarchy - from parent to child. ##State## is reserved for interactivity (the dynamic parts of our websites) which are subject to change over time.
+
+   > React uses a **one-way data flow** / **one-way binding** with components, the data passed between components is passed from parent to child - unidirectionally.
+
+   There are two ways to approach building the static version:
+
+   - Top-down approach: Start with the components higher up in the hierarchy and work your way down.
+
+   - Bottom-up approach: Start the the components lower in the hierarchy and work your way up.
+
+   -------------------------------------------------------------
+
+4. Identify the minimal (but complete) representation of UI state
+
+   To make UI's interactive, React uses **state**. State is used to manage the data that changes in our components. There are three questions you can ask about some data to identify whether it is state or not:
+
+   1. Is it passed in from a parent via props? (probably not state if so)
+
+   2. Does it remain unchanged over time? (probably not state if so)
+
+   3. Can you compute it based on any other state or props in your component? (probably not state if so)
+
+   In the todo list example, the only data is the original list of todo items on which no modifications are made. This would not be stateful in its current form, but would be if we required the ability to add or remove todos from the list.
+
+   -------------------------------------
+
+5. Identify where state should live
+
+   This step is about identifying which component should own the state, this component should then pass the data as props to those child components which require it.
+
+   React recommends the following steps for beginners to be applied to each piece of state in the app:
+
+   - Identify every component which renders something based on the piece of state.
+
+   - Find a common owner component, the highest component in the hierarchy which requires the state.
+
+   - Either the common owner or another higher up component should own the state.
+
+   - If none of the current components make sense holding the piece of state, create a new component for holding the state and add it in the hierarchy above the commmon owner component.
+
+   ---------------------------------------
+
+6. Add inverse data flow
+
+   Sometimes, data is required to flow /up/ the hierarchy... React offers a way to perform **two-way data binding** with the `bind()` method.
+
+## Function components
+
+A **function component** in React is a function which returns a React element using a special syntax known as JSX. **JSX**, created by the React team, allows for both markup and JavaScript to be specified in the same file.
+
+A function component **must** return one of the following:
+
+- a single element, whether part of the native DOM (`<div>`, `<main>`, etc...) or a custom component defined in React (`<TodoList />`)
+- `null` or `false` to indicate the component should not be rendered
+
+In a new React app, created with `npx create-react-app components`, add a file called `src/todo-list-table.js` and enter the following JSX:
+
+```js
+import React from 'react';
+
+const TodoListTable = function() {
+    return (
+        <table>
+            <thead>
+                <tr>
+                    <th>Todo</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Buy dog food</td>
+                    <td>HIGH</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total todo items:</td>
+                    <td>1</td>
+                </tr>
+            </tfoot>
+        </table>
+    );
+}
+
+export default TodoListTable;
+```
+
+The import statement brings in React, allowing us to create instances of `React.Component`. The `TodoListTable` function returns JSX, a combination of HTML and JavaScript - currently, this is just plain old HTML being returned with some data. Finally, we export the function component so it can be accessed in other modules.
+
+Alternatively, we could also have used an arrow function instead of a standard function declaration:
+
+```js
+const TodoListTable = () => (
+    <table>
+        ...    
+    </table>
+);
+```
+
+In `App.js`, you can then import and render the component inside the return value of the `App` function:
+
+```js
+import React from 'react';
+import TodoListTable from './src/todo-list-table';
+
+function App() {
+    return (
+        <TodoListTable />
+    );
+}
+
+export default App;
+```
+
+Take note of how the component was specified, there is no closing tag - JSX components are used like HTML, the major difference is that they are self-closing and require a `/` before the closing bracket.
+
+## JSX
+
+**JSX** is an extended version of JavaScript developed by the React team for working with React components, JSX allows for HTML markup and JS expressions to be written together.
+
+A simple example would be as follows:
+
+```js
+const DateDisplay = function() {
+    const date = new Date().toLocalString();
+
+    return (
+        <div>
+            <p>Date: {date}</p>
+        </div>
+    );
+}
+```
+
+The key part to remember here is that functions are objects in JavaScript, we create a function object called `DateDisplay` which creates a `date` constant to then be inserted in the returned HTML. We then use a set of curly braces, `{}` in the returned HTML to write a JS expression - in this case, the expression is `{date}` which will evaluate the `date` constant declared earlier and insert its value.
+
+### Conditional rendering
+
+In React, we can conditionally choose what HTML should be returned from a component. There are key points to remember here:
+
+- We **can not** use if statements inside JSX as it is not an expression.
+- We **can** use ternary expressions inside JSX.
+
+To conditionally render a component with a ternary expression, we include the ternary expression in the return value of the component - the ternary expression itself could also return further JSX/HTML components. For example:
+
+```js
+const IsReadyDisplay = () => {
+
+const isReady = true;
+
+return (
+    <>
+        { isReady ?
+            <p>Is ready to render content.</p>
+            :
+            <p>Is not ready to render content</p>
+        }
+    </>
+);
+}
+```
+
+Change the value of `isReady` to `false` to change the content rendered to the browser window.
+
+We can also conditionally render HTML using logical conditions, for example:
+
+```js
+const IsReadyDisplay = () => {
+
+    const isReady = false;
+
+    return (
+        <>
+            {/** display only when isReady is true **/}
+            {(isReady) && <p>Is ready!</p>}
+
+            {/** display only when isReady is false **/}
+            {(!isReady) && <p>Is not ready!</p>}
+        </>
+    );
+}
+```
+
+Essentially, we are saying both the condition and the HTML must be truthy that has been supplied in the expression for the HTML to be rendered.
+
+Another way is to offer multiple branches that return values in the function itself rather than the return value, for example:
+
+```js
+const ConditionComponent = () => {
+
+    const isReady = false;
+    const preventRender = false;
+
+    // if statement can't be used inside the JSX, but a ternary can
+    if (isReady && !preventRender) return <p>Is ready to render.</p>;
+    else if (!isReady) return <p>Is not ready to render.</p>;
+    else return <p>Render prevented</p>;
+}
+```
+
+As a function is a function object, we could also create nested functions to return JSX.
+
+### Rendering arrays of data
+
+React makes use of ES6 functionality to offer us the ability to easily map data to HTML using JSX. The following example demonstrates rendering a list of user data:
+
+```js
+const UsernameList = () => {
+
+    const users = [
+        { username: "Fred", age: 22 },
+        { username: "Bob", age: 25 },
+        { username: "Sarah", age: 23 }
+    ]
+
+    // each user is mapped
+    const usernameList = users.map((user, index) => <li key={index}>{user.username}</li>);
+
+    return (
+        <div>
+            <h2>Usernames</h2>
+            <ul>
+                {usernameList}
+            </ul> 
+        </div>
+    );
+}
+```
+
+Each element in a list in React requires a unique key property to help React differentiate and reconciliate the React virtual DOM and the actual DOM.
+
+> **IMPORTANT**: It is the JavaScript list that is requiring us to specify a key to the elements we map to.
+
+We could map the username list to different elements if we wanted as well:
+
+```js
+const EditUserForms = () => {
+
+    const users = [
+        { username: "Fred", age: 22 },
+        { username: "Bob", age: 25 },
+        { username: "Sarah", age: 23 }
+    ]
+
+    {/** Each user is mapped to a form element **/}
+    const userEditForms = users.map(user => 
+                                    <form key={user.username}>
+                                        <h3>{user.username} | Edit profile</h3>
+                                        <label htmlFor="age">Age: </label>
+                                        <input type="number" id="age" defaultValue={user.age} />
+                                    </form>
+    );
+
+    return (
+        <div>
+            {userEditForms}
+        </div>
+    )
+}
+```
+
+## Props
+
+React uses a unidirectional data flow where data only flows from parent components to child components. React uses **props** to enable this, a unique object that every React component has to represent passed-in attributes.
+
+- Data that does not change over a components lifecycle should be passed as props to it
+- Data that does change over a components lifecycle should be considered as state
+
+> React has a common saying, "**State** should be the single source of truth for changing data". The state can then be passed as props to components which require it.
+
+### Applying props
+
+Props are easy to get started with, each prop represents an immutable piece of data passed to a component as an attribute.
+
+We will use the form from the previous rendering arrays example to illustrate how props can be used:
+
+```js
+const EditUserForm = function(props) => (
+        <form>
+            <h3>{props.user.username} | Edit profile</h3>
+
+            {/**
+                The input is data that changes during the lifecycle of the component, this represents state and will be explored in a different article.
+            **/}
+            <label htmlFor="age">Age: </label>
+            <input type="number" id="age" defaultValue={props.user.age} />
+        </form>
+);
+```
+
+- Take note of how we access data using the passed in props object, `{props.property}`...
+
+Now, the component using props can be used to render a list of users more concisely:
+
+```js
+const EditUserForms = (props) => {
+
+    const users = [
+        { username: "Fred", age: 22 },
+        { username: "Bob", age: 25 },
+        { username: "Sarah", age: 23 }
+    ]
+
+    {/** Each user is mapped to a form element **/}
+    const userEditForms = users.map(user => <EditUserForm key={user.username} user={user} />);
+
+    return (
+        <div>
+            {userEditForms}
+        </div>
+    );
+}
+```
+
+The key part in this example is when we map the array, we pass a `user` attribute to the `EditUserForm` elements props so that it can be accessed in the child component.
+
+### Default properties
+
+We can also apply default properties to a component using the `Component.defaultProps` property:
+
+```js
+const BlogPost = (props) => (
+    <article>
+        <div id="blog-head">
+            <h1>{props.title}</h1>
+            <p>{props.subtitle}</p>
+        </div>
+        <div id="blog-content">
+            {props.content}
+        </div>
+    </article>
+);
+
+BlogPost.defaultProps = {
+    title: "404 - Post not found",
+    subtitle: "",
+    content: "Something went wrong, please try again later or report an issue with the service..."
+}
+```
+
+We could improve this example by splitting up the blog into its constituent components:
+
+```js
+const BlogHead = (props) => (
+    <div id="blog-head">
+        <h1>{props.title}</h1>
+        <p>{props.subtitle}</p>
+    </div>
+);
+
+const BlogBody = (props) => (
+    <div id="blog-content">
+        {props.content}
+    </div>
+);
+
+const BlogPost = (props) => (
+    <article>
+        <BlogHead title={props.post.title} subtitle={props.post.subtitle} />
+        <BlogBody content={props.post.content} />
+    </article>
+);
+
+BlogPost.defaultProps = {
+    title: "404 - Post not found",
+    subtitle: "",
+    content: "Something went wrong, please try again later or report an issue with the service..."
+}
+```

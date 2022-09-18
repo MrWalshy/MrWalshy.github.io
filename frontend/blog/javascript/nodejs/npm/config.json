@@ -1,0 +1,15 @@
+{
+    "dir": "npm",
+    "alias": "Node Package Manager (NPM)",
+    "createdAt": "2022-09-18",
+    "include": [],
+    "exclude": [],
+    "files": [
+        {
+            "filename": "basics",
+            "createdAt": "2022-05-19",
+            "alias": "Introduction to NPM",
+            "filetype": "md"
+        }
+    ]
+}

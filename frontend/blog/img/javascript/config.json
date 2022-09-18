@@ -1,0 +1,10 @@
+{
+    "dir": "javascript",
+    "alias": "JavaScript images",
+    "createdAt": "2022-09-18",
+    "include": [
+        "reactjs"
+    ],
+    "exclude": [],
+    "files": []
+}

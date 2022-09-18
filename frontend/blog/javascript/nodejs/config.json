@@ -1,0 +1,10 @@
+{
+    "dir": "nodejs",
+    "alias": "NodeJS",
+    "createdAt": "2022-09-18",
+    "include": [
+        "npm"
+    ],
+    "exclude": [],
+    "files": []
+}

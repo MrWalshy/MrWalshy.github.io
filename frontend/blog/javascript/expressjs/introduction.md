@@ -1,0 +1,63 @@
+# What is the ExpressJS framework?
+
+Express is a small, unopinionated framework for handling web functionality in Node.js applications. One of the main reasons to use the Express framework is the abstractions it offers in terms of built-in functionality...
+
+In a pure Node.js app using the http module, a web application will require a web server to be manually built, including the ability to route requests to different URLs with different request methods, and potentially parameters or bodies of data. This is a rather cumbersome process that has been done many times before, instead of reinventing the wheel we can use Express to provide this core functionality.
+
+--------------------------
+
+## Creating a simple Express app
+
+To create an Express app, first initialise an npm project and then run `npm i express` in the project root.
+
+Then, inside your index.js file (or other file if main is set differently), type the following:
+
+```js
+const express = require('express');
+
+const port = 3000;
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello world');
+});
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+```
+
+- The first line imports the `express` module.
+- Line 3 creates a variable for the port number whilst line 4 creates an instance of `Express` using the `express()` top-level function.
+- Line 6 uses the `get()` method to register a HTTP GET route to the URL path `'/'`, it takes a callback as the second parameter that accepts the request and response objects used in the node.js http module.
+- Line 7 is the response to send when a request is sent to `http://localhost:3000/` 
+- Line 10 then tells the express application to start listening for requests on the specified port (random if omitted), the supplied callback to `app.listen()` runs when the server has started. `app.listen()` returns an instance of `http.Server`
+  
+It is important to note that if a method that accepts a request does not terminate the request-response cycle through the use of a method like `res.send()`, the cycle hangs...
+
+## Apply the morgan logging middleware
+
+The `morgan` logger can be passed as middleware to Express for logging the requests automatically. Add the dependency to your project with `npm i morgan` and then do the following to add it as middleware to your express app:
+
+```js
+const express = require('express');
+const morgan = require('morgan');
+
+const port = 3000;
+const app = express();
+
+app.use(morgan('dev'));
+
+app.get('/', (req, res) => {
+    res.send('Hello world');
+});
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+```
+
+The most important lines are lines 2 and 7:
+
+- Line 2 imports the `morgan` module
+- Line 7 specifies the `morgan()` function to pass a logger as middleware to the `use()` method of the Express instance
