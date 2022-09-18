@@ -100,6 +100,12 @@ table {
   margin: 1.6rem 0;
 }
 
+table {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+}
+
 /* a, a:visited {
   color: #01ff70;
   text-decoration: underline;
