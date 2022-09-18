@@ -1,2 +1,3 @@
 #!/bin/sh
-emacs -Q --script ./publish.el
+node ./frontend/tool/blogger.js  ./frontend/blog/config.json
+cd frontend && npm run build && cd ..
