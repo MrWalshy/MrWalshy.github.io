@@ -16,6 +16,8 @@ import rehypeFormat from 'rehype-format';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { launchCms } from './cms.js';
+import log from './util/logging.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,18 +31,6 @@ const processor = unified()
     .use(rehypeKatex)
     .use(rehypeFormat)
     .use(rehypeStringify); // parse HTML AST to HTML
-
-let logNumber = 1;
-function log(message) {
-    const date = new Date();
-    let [year,month,day,hour,min,sec] = [
-        date.getFullYear(), date.getMonth() + 1,
-        date.getDate(), date.getHours(),
-        date.getMinutes(), date.getSeconds()
-    ];
-    const dateString = `${year}-${month < 10 ? "0" + month : month}-${day} ${hour}:${min}:${sec}`;
-    console.log(`[[${logNumber++}]:${dateString}]: ${message}`);
-}
 
 class Directory {
 
@@ -82,7 +72,7 @@ function discoverSubDirectories(config, location) {
 function executeConfiguration(config, location) {
     config.location = location;
     log(`Executing configuration from: ${location}\n${JSON.stringify(config, null, "  ")}`);
-    
+
     try {
         let subdirectories = discoverSubDirectories(config, location);
         let dir = new Directory(config.dir || "", config.alias, config.createdAt, subdirectories, config.files, location);
@@ -178,7 +168,7 @@ function processFiles(tree, location) {
 */
 function processDirectoryTree(tree, location) {
     log(`Received directory tree for output location: ${location}`);
-    
+
     try {
         // assign unique identifier
         tree.id = `${tree.dir || "root"}_${tree.alias.replaceAll(" ", "_")}`;
@@ -214,54 +204,62 @@ function outputDirectoryTree(tree) {
 
 function outputIdMap(rootTree) {
     log(`Preparing to output directory tree id map for: ${rootTree.location}`);
-    function buildIdMap(tree, parentId, maps={"directories": {}, "files": {}}) {
+    function buildIdMap(tree, parentId, maps = { "directories": {}, "files": {} }) {
         log(`Building id map for: ${tree.location}`);
-    
+
         // recursion
         for (const subdirectory of tree.subdirectories) {
             Object.assign(maps, buildIdMap(subdirectory, tree.id, maps));
         }
-    
+
         // add the files
         for (const file of tree.files) {
             maps["files"][file.id] = Object.assign({}, file, { directoryId: parentId });
         }
-    
+
         // add the dir
         const dir = Object.assign({}, tree);
         delete dir.files;
         delete dir.subdirectories;
         maps["directories"][tree.id] = dir;
-        
+
         return maps;
     }
     const data = JSON.stringify(buildIdMap(rootTree, rootTree.id), null, "  ");
     fs.writeFileSync(path.resolve(rootTree.location, "id_map.json"), data);
 }
 
+function build() {
+    const configPath = path.resolve(process.argv[2]);
+
+    if (!path.extname(configPath) === ".json") throw new Error(`Invalid file type supplied. Must be a JSON file.`);
+
+    if (fs.existsSync(configPath)) {
+        log("Seemingly valid config supplied.");
+        const config = loadConfig(configPath);
+        const tree = executeConfiguration(config, path.dirname(configPath));
+        log(`Built directory tree:\n${JSON.stringify(tree, null, "  ")}`);
+        const outputLocation = path.resolve(path.dirname(configPath), config.outputLocation);
+        log(`Preparing to output build to: ${outputLocation}`);
+        processDirectoryTree(tree, outputLocation);
+        log(`Processed directory tree: \n${JSON.stringify(tree, null, "  ")}`);
+        outputDirectoryTree(tree);
+        outputIdMap(tree);
+        log(`Build successful!`);
+    } else throw new Error(`Invalid config path supplied.`);
+}
+
 function main() {
     // Get main config argument, exit with error code otherwise
     try {
         if (process.argv.length === 2 || process.argv.length > 3) {
-            throw new Error("Too few or too many arguments...\n\n\tUsage: node blogger.js ./config.json")
+            throw new Error("Too few or too many arguments...\n\n\tUsage: node blogger.js [./config.json | -cms]")
+        } else if (process.argv[2] === "-cms") {
+            log("Launching CMS...");
+            launchCms();
         } else {
-            const configPath = path.resolve(process.argv[2]);
-
-            if (!path.extname(configPath) === ".json") throw new Error(`Invalid file type supplied. Must be a JSON file.`);
-            
-            if (fs.existsSync(configPath)) {
-                log("Seemingly valid config supplied.");
-                const config = loadConfig(configPath);
-                const tree = executeConfiguration(config, path.dirname(configPath));
-                log(`Built directory tree:\n${JSON.stringify(tree, null, "  ")}`);
-                const outputLocation = path.resolve(path.dirname(configPath), config.outputLocation);
-                log(`Preparing to output build to: ${outputLocation}`);
-                processDirectoryTree(tree, outputLocation);
-                log(`Processed directory tree: \n${JSON.stringify(tree, null, "  ")}`);
-                outputDirectoryTree(tree);
-                outputIdMap(tree);
-                log(`Build successful!`);
-            } else throw new Error(`Invalid config path supplied.`);
+            log(`Attempting build...`);
+            build();
         }
     } catch (error) {
         console.error(error.message);

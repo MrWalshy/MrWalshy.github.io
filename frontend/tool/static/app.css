@@ -1,0 +1,57 @@
+body {
+    height: 100vh;
+}
+
+.editor {
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    line-height: 16px;
+    background-color: rgba(200, 140, 50, 0.9);
+    border-radius: 4px;
+    font-family: monospace;
+    margin: 0;
+    padding: 8px;
+}
+
+.editor>.editor-content {
+    background-color: white;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    outline: none;
+    resize: none;
+}
+
+.line-numbers {
+    overflow: scroll;
+    width: 16px;
+    text-align: right;
+}
+
+.line-numbers>span {
+    counter-increment: line;
+}
+
+.line-numbers>span::before {
+    display: block;
+    content: counter(line);
+}
+
+/* https://stackoverflow.com/questions/43186015/css-hide-scroll-bar-but-have-element-scrollable */
+.disable-scrollbars::-webkit-scrollbar {
+    background: transparent;
+    /* Chrome/Safari/Webkit */
+    width: 0px;
+}
+
+.disable-scrollbars {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+}
