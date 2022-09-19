@@ -5,17 +5,6 @@ import glob from 'glob';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// deps for parsing markdown to HTML
-import { stream } from 'unified-stream';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
-import remarkToc from 'remark-toc';
-import rehypeFormat from 'rehype-format';
-import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
 import { launchCms } from './cms.js';
 import log from './util/logging.js';
 import { executeConfiguration, loadConfig, outputDirectoryTree, outputIdMap, processDirectoryTree } from './util/dir_utils.js';
@@ -46,15 +35,17 @@ function build() {
 function main() {
     // Get main config argument, exit with error code otherwise
     try {
-        if (process.argv.length === 2 || process.argv.length > 3) {
-            throw new Error("Too few or too many arguments...\n\n\tUsage: node blogger.js [./config.json | -cms]")
-        } else if (process.argv[2] === "-cms") {
+        if (process.argv.length === 2 || process.argv.length > 4) {
+            throw new Error("Too few or too many arguments...\n\n\tUsage: node blogger.js [./config.json | -cms ./config.json]")
+        } else if (process.argv[2] === "-cms" && process.argv[3]) {
+            const configPath = path.resolve(process.argv[3]);
+            if (!path.extname(configPath) === ".json") throw new Error(`Invalid file type supplied. Must be a JSON file.`);
             log("Launching CMS...");
-            launchCms();
-        } else {
+            launchCms(configPath);
+        } else if (process.argv[2] !== "-cms") {
             log(`Attempting build...`);
             build();
-        }
+        } else throw new Error("Invalid arguments supplied...\n\n\tUsage: node blogger.js [./config.json | -cms ./config.json]")
     } catch (error) {
         console.error(error.message);
         process.exit(1);

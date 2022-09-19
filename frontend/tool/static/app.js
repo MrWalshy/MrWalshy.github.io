@@ -46,7 +46,9 @@ textarea.addEventListener("keydown", event => {
             // textarea.innerText = textarea.innerText.substring(0, cursorPosition) +
             //     "    " + textarea.innerText.substring(cursorPosition);
 
-            // event.preventDefault();
+            event.preventDefault();
+            break;
+        default:
             break;
     }
 });
@@ -102,3 +104,125 @@ function getCaretIndex(element) {
     }
     return position;
 }
+
+// DIR TREE CODE (NEEDS TO GO IN SEPARATE FILE)
+function getDirTree(cb) {
+    fetch("/directorytree")
+        .then(response => response.json())
+        .then(data => cb(data))
+        .catch(error => console.error(error));
+}
+
+function deleteDirectory(tree) {
+    console.log(`Deleting directory: ${tree.location}`);
+    // send fetch request to express server
+}
+
+function openDirectory(tree) {
+    // const dir = tree.subdirectories.find(directory => directory.alias === alias);
+    console.log(`Opening '${tree.alias}', location: ${tree.location}`);
+    replaceDirView(getListFromTree(tree));
+}
+
+function createDirectoryLi(tree) {
+    // create li, clicking the dir alias opens the relevant directory
+    const dirLi = document.createElement("li");
+    const dirAliasSpan = document.createElement("span");
+    dirAliasSpan.appendChild(document.createTextNode(tree.alias));
+    dirAliasSpan.className = "dir-alias";
+    dirAliasSpan.addEventListener("click", event => openDirectory(tree));
+    dirLi.appendChild(dirAliasSpan);
+    dirLi.className = "directory";
+
+    // add the delete directory button to the li, clicking
+    // triggers the deletion of the relevant directory
+    const deleteBtn = document.createElement("span");
+    deleteBtn.className = "delete-x"
+    deleteBtn.textContent = "X";
+    deleteBtn.addEventListener("click", event => deleteDirectory(tree));
+    dirLi.appendChild(deleteBtn);
+
+    return dirLi;
+}
+
+function deleteFile(tree, file) {
+    console.log(`Deleting '${file.alias}' from directory: ${tree.location}`);
+    // send fetch request to express server
+}
+
+function createFileLi(tree, file) {
+    const fileLi = document.createElement("li");
+    const fileAliasSpan = document.createElement("span");
+    fileAliasSpan.appendChild(document.createTextNode(file.alias));
+    fileAliasSpan.className = "file-alias";
+    fileLi.appendChild(fileAliasSpan);
+    fileLi.className = "file";
+
+    const deleteBtn = document.createElement("span");
+    deleteBtn.className = "delete-x"
+    deleteBtn.textContent = "X";
+    deleteBtn.addEventListener("click", event => deleteFile(tree, file));
+    fileLi.appendChild(deleteBtn);
+
+    return fileLi;
+}
+
+function replaceDirView(element) {
+    dirView.replaceChildren(element);
+}
+
+function getListFromTree(tree) {
+    const ul = document.createElement("ul");
+    ul.className = "directory-list"
+    const currentDir = document.createElement("li");
+    currentDir.className = "directory current-dir";
+    currentDir.appendChild(document.createTextNode(tree.alias));
+    ul.appendChild(currentDir);
+
+    // append dirs
+    for (const dir of tree.subdirectories) {
+        ul.appendChild(createDirectoryLi(dir));
+    }
+
+    // append files
+    for (const file of tree.files) {
+        ul.appendChild(createFileLi(tree, file));
+    }
+    return ul;
+}
+
+function renderDirTree() {
+    // function getListFromTree(tree) {
+    //     // the current tree being processed
+    //     const ul = document.createElement("ul");
+    //     const currentDir = document.createElement("li");
+    //     currentDir.className = "directory";
+    //     currentDir.appendChild(document.createTextNode(tree.alias));
+    //     currentDir.appendChild(ul);
+
+    //     // files of the current tree
+    //     for (const file of tree.files) {
+    //         const fileLi = document.createElement("li");
+    //         fileLi.appendChild(document.createTextNode(file.alias));
+    //         fileLi.className = "file";
+    //         ul.appendChild(fileLi);
+    //     }
+
+    //     // subdirectories of the current tree
+    //     for (const subtree of tree.subdirectories) {
+    //         ul.appendChild(getListFromTree(subtree));
+    //     }
+
+    //     return currentDir;
+    // }
+    getDirTree(dirTree => {
+        console.log(`Building list for ${JSON.stringify(dirTree, null, "  ")}`);
+        const dirList = getListFromTree(dirTree);
+        console.log(dirList);
+        // const ul = document.createElement("ul");
+        // ul.appendChild(dirList);
+        replaceDirView(dirList);
+    });
+}
+
+renderDirTree();

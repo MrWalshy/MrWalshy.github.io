@@ -55,3 +55,78 @@ body {
     -ms-overflow-style: none;
     /* IE 10+ */
 }
+
+/* Directory viewer styling */
+.directory-list {
+    margin: 0;
+    padding: 0;
+}
+
+.directory::before {
+    /* text-align: center; */
+    padding: 8px 0 8px 8px;
+    content: "> ";
+    width: 5%;
+    background-color: rgba(154, 16, 172, 0.24);
+}
+
+.directory:hover::before, .file:hover::before {
+    content: "* ";
+    background-color: rgba(154, 16, 172, 0.8);
+}
+
+.directory, .file {
+    list-style-type: none;
+    display: flex;
+}
+
+.directory > .dir-alias, .file > .file-alias {
+    width: 80%;
+    padding: 8px;
+    border-left: solid 1px black;
+}
+
+.directory > .dir-alias:hover, .file > .file-alias:hover {
+    cursor: pointer;
+}
+
+.directory > .delete-x, .file > .delete-x {
+    width: fit-content;
+    color: red;
+    padding: 8px;
+    border-left: solid 1px black;
+}
+
+.directory > .delete-x:hover, .file > .delete-x:hover {
+    cursor: pointer;
+}
+
+.current-dir::before {
+    background-color: white;
+    content: "";
+}
+
+.current-dir:hover::before {
+    content: "";
+    background-color: white;
+    cursor: default;
+}
+
+.file::before {
+    padding: 8px 0 8px 8px;
+    content: "| ";
+    width: 5%;
+    background-color: rgba(154, 16, 172, 0.24);
+}
+
+.file {
+    list-style-type: none;
+}
+
+.directory > ul > .directory {
+    display: none;
+}
+
+.directory > .file {
+    display: none;
+}
