@@ -226,3 +226,55 @@ function renderDirTree() {
 }
 
 renderDirTree();
+
+
+const editorV2 = document.querySelector("#editor-v2");
+const editorV2Content = document.querySelector("#editor-v2 > #editor-content-v2");
+const editorDisplay = document.querySelector("#editor-display");
+const editorDisplayContent = document.querySelector("#editor-display > #editor-display-content");
+
+function updateDisplayContent(text) {
+    // Does not support newlines in innerText
+    // editorDisplayContent.innerText = text;
+    if (text[text.length - 1] === "\n") text += " "; // prevent collapse of empty last line
+    const filteredText = text.replaceAll("&", "&amp;")
+                             .replaceAll("<", "&lt;")
+                             .replaceAll(">", "&gt;")
+                             .replaceAll("\n", "<br>")
+                             .replaceAll("\t", "    ");
+    editorDisplayContent.innerHTML = filteredText;
+    syncScroll(editorV2Content);
+}
+
+function syncScroll(element) {
+    editorDisplay.scrollTop = element.scrollTop;
+    editorDisplay.scrollLeft = element.scrollLeft;
+}
+
+function checkTab(event) {
+    const content = editorV2Content.value;
+
+    if (event.key === "Tab") {
+        event.preventDefault();
+        const start = content.slice(0, editorV2Content.selectionStart);
+        const end = content.slice(editorV2Content.selectionEnd, editorV2Content.value.length);
+        const cursorPosition = editorV2Content.selectionEnd;
+        editorV2Content.value = start + "\t" + end;
+
+        // move cursor
+        editorV2Content.selectionStart = cursorPosition;
+        editorV2Content.selectionEnd = cursorPosition;
+        updateDisplayContent(editorV2Content.value);
+    }
+}
+
+editorV2Content.addEventListener("input", event => {
+    updateDisplayContent(event.target.value);
+});
+
+editorV2Content.addEventListener("scroll", event => syncScroll(event.target));
+
+editorV2Content.addEventListener("keydown", event => checkTab(event));
+
+// first render
+updateDisplayContent(editorV2Content.value);

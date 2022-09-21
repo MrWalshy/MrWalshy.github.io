@@ -130,3 +130,53 @@ body {
 .directory > .file {
     display: none;
 }
+
+/* editor v2 */
+#editor-v2 {
+    position: relative;
+    z-index: 0;
+}
+
+#editor-content-v2, #editor-display {
+    margin: 0;
+    padding: 16px;
+    border: 0;
+    width: 80%;
+    height: 250px;
+
+    /* place on top of each other */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* scroll support */
+    overflow: scroll;
+    white-space: nowrap; /* allows textarea to horizontally scroll */
+}
+
+#editor-content-v2, #editor-display, #editor-display * {
+    font-size: 16px;
+    font-family: monospace;
+    line-height: 20px;
+
+    tab-size: 4;
+}
+
+/* place text area in front of pre */
+#editor-content-v2 {
+    z-index: 1;
+
+    /* make textarea transparent, except cursor, to allow seeing
+       any styles applied to the text
+    */
+    color: transparent;
+    background: transparent;
+    caret-color: black;
+
+    /* prevent resize of textarea */
+    resize: none;
+}
+
+#editor-display {
+    z-index: 0;
+}
