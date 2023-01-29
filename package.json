@@ -1,0 +1,25 @@
+{
+  "name": "mrwalshy.github.io",
+  "version": "1.0.0",
+  "description": "Personal website",
+  "scripts": {
+    "start": "npm run build&& ws --directory ./build",
+    "build": "npx emdd site --config=./frontend/site_config.json",
+    "deploy": "npm run build&& cp CNAME ./build/CNAME&& gh-pages -d build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrWalshy/MrWalshy.github.io.git"
+  },
+  "author": "Morgan Walsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrWalshy/MrWalshy.github.io/issues"
+  },
+  "homepage": "https://github.com/MrWalshy/MrWalshy.github.io#readme",
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "local-web-server": "^5.2.1"
+  }
+}
