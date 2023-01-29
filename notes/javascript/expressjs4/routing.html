@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Routing? | morganwalsh.dev</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/notes">Notes</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"><div class="col-12"><main class="w-100">
+    <div class="p-16 w-80 w-md-100 ml-auto mr-auto">
+<h1>An introduction to routing middleware in Express 4</h1>
+<p><strong>Routing</strong> refers to how an application responds to incoming client requests to a particular endpoint, this endpoint consisting of a URI/path and a HTTP method indicating the type of the request.</p>
+<hr>
+<h2>Routing requests</h2>
+<p>Incoming requests can be routed using a variety of methods available on the <code>Express</code> instance that we create, these methods take the form: <code>app.HTTP_METHOD(PATH, HANDLER)</code></p>
+<ul>
+  <li><code>HTTP_METHOD</code> is some HTTP request method in lowercase</li>
+  <li><code>PATH</code> is a path on the server to handle</li>
+  <li><code>HANDLER</code> is the callback function to execute when the route is matched</li>
+</ul>
+<h3>Routing requests</h3>
+<p>The following examples demonstrate creating simple endpoints for the GET, POST, PUT, PATCH and DELETE HTTP methods.</p>
+<h4>GET requests</h4>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('GET');
+});
+
+app.get('/alternative', (req, res) => {
+    res.send('The other GET');
+});
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>The example above demonstrates two available endpoints using the <code>HTTP GET</code> method, the first being the sites root (<code>http://localhost:3000/</code>) and the second having a different route (<code>http://localhost:3000/alternative</code>).</p>
+<p>Sending requests with <code>curl</code> to these looks as follows:</p>
+<pre><code class="language-sh">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/
+GET
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/alternative
+The other GET
+</code></pre>
+<p>Each endpoint returns a unique message.</p>
+<h4>Other request methods</h4>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+app.get('/', (req, res) => res.send('GET'));
+
+app.get('/alternative', (req, res) => res.send('The other GET'))
+
+app.post('/', (req, res) => res.send('POST'));
+
+app.put('/', (req, res) => res.send('PUT'));
+
+app.patch('/', (req, res) => res.send('PATCH'));
+
+app.delete('/', (req, res) => res.send('DELETE'));
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>As can be seen, each HTTP method has an associated method on the <code>express</code> object that can be called to register a route.</p>
+<blockquote>
+  <p>Endpoints can share the same path as long as they have a different HTTP method.</p>
+</blockquote>
+<p>The following examples demonstrate using <code>curl</code> to send requests to the different endpoints:</p>
+<pre><code class="language-sh">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/
+GET
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/ -X POST
+POST
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/ -X PUT
+PUT
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/ -X PATCH
+PATCH
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl http://localhost:3000/ -X DELETE
+DELETE
+</code></pre>
+<h3>Setting the response code</h3>
+<p>The response object has a method <code>status()</code> which can be used to set the status code of the response. By default, a <code>200</code> is applied to signify a HTTP OK response.</p>
+<p>A HTTP Created (201) is used for signifying that a resource was created by a server, use the <code>.status()</code> method to change this. The following POST endpoint demonstrates this:</p>
+<pre><code class="language-js">app.post('/', (req, res) => res.status(201).send('POST'));
+</code></pre>
+<blockquote>
+  <p>The <code>status()</code> method is non-terminal, meaning if <code>send()</code> is not specified the request-response cycle will hang.</p>
+</blockquote>
+<h2>URL and Query parameters</h2>
+<p>Often, we will want to submit data to a server as part of the API design of an endpoint. This could be the id of an entity, or even pagination numbers... URL and query parameters are not considered safe for transporting confidential or private information, or information which should be kept secure - the body of a HTTP message is more appropriate for this.</p>
+<hr>
+<h3>URL parameters</h3>
+<p>A <strong>URL parameter</strong> is data sent as part of the URL itself, for example a request might be sent to <code>http://localhost:3000/user/32</code> as a HTTP GET request to retrieve the <code>user</code> entity with the id of <code>32</code>.</p>
+<p>Declare URL parameters in the path using a colon, <code>:</code>, followed by the name of the parameter. The parameter can then be accessed via the <code>req.params</code> object on the request object:</p>
+<pre><code class="language-js">app.get('/user/:id', (req, res) => {
+    const id = req.params.id;
+    console.log(`READ BY ID: ${id}`);
+    res.send(`READ USER: ${id}`);
+});
+</code></pre>
+<h3>Query parameters</h3>
+<p>A <strong>query parameter</strong> acts similarly to a URL parameter, it is used for passing data to the server. The difference is that query parameters are specified at the end of the URL, after the path and any URL parameters. Query parameters always begin with a question mark, and take a <code>key=value</code> format with each parameter separated by an ampersand:</p>
+<pre><code class="language-js">app.get('/user', (req, res) => {
+    const page = req.query.page;
+    const pageSize = req.query.pageSize;
+    const output = `Returning page ${page} consisting of ${pageSize} users`;
+    console.log(output);
+    res.send(output);
+});
+</code></pre>
+<p>The query parameters passed through are accessed via the <code>req.query</code> object, these are automatically bound just like url parameters.</p>
+<p>Sending a request to the above endpoint with <code>curl</code> would look like:</p>
+<pre><code class="language-sh">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl "http://localhost:3000/user?page=3&#x26;pageSize=10"
+Return 3 of 10 users
+</code></pre>
+<p>The first query parameter supplied is <code>page=3</code> indicating that the request wants page <code>3</code> of the results back using a <code>pageSize=10</code>, that is it returns 10 entities.</p>
+<h2>Body data</h2>
+<p>When data is returned from an endpoint, we can easily return it in the format we want by specifying the <code>Content-Type</code> header and returning the relevant data as such. This is returned in the <strong>HTTP Response Body</strong>, an area of a HTTP message for transferring large amounts of data in a secure manner (when sent over HTTPS and secured from XSS vulnerabilities that is at the least). The following example demonstrates a typical Express function with a JSON response:</p>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+
+const users = [{"id": 1, "name": "fred123"}, {"id": 2, "name": "fred234"}];
+
+app.get('/user', (req, res) => {
+    res.contentType('application/json')
+        .status(200)
+        .send(JSON.stringify(users));
+});
+</code></pre>
+<p>On line 10, the correct media type is set for returning JSON as a header in the HTTP response, the status is accordingly set to 200 for a HTTP OK response code on line 11. Line 12 binds the <code>users</code> array as a JSON string to the HTTP response body.</p>
+<h3>Accepting body data in a request</h3>
+<p>Body data doesn't just exist for HTTP responses, it can also be attached to HTTP requests sent to the server. The first thing to do to start accepting body data in the JSON format is to apply the built-in middleware in Express to handle this (middleware is explored in the next section).</p>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+
+// use built-in json middleware
+app.use(express.json());
+
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>Line 8, <code>app.use(express.json())</code> adds the built-in middleware to the middleware stack, it must be added before any router bindings that require it as it is used for converting in-bound data into JSON format.</p>
+<p>Once this is setup, lets add in some endpoints for reading an array of users (posing as a database of sorts):</p>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+const users = [{"id": 1, "name": "fred123"}, {"id": 2, "name": "fred234"}];
+
+function logger(req, res, next) {
+    console.log(`${Date()} - ${req.method} ${req.path}`);
+    next();
+}
+
+// no mount path, executed on every request to the router
+app.use(logger);
+
+app.get('/user', (req, res) => res.contentType('application/json').status(200).send(JSON.stringify(users)));
+
+app.get('/user/:id', (req, res) => {
+    const id = req.params.id;
+    const user = users.find(user => user.id == id);
+    if (user) {
+        res.contentType('application/json').status(200).send(JSON.stringify(user));
+        return;
+    }
+    res.contentType('text/plain').status(404).send(`User with id ${id} not found.`);
+});
+
+app.use(express.json());
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>This example allows us to read all users or read one by their ID in JSON format:</p>
+<pre><code class="language-sh">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl "http://localhost:3000/user"
+[{"id":1,"name":"fred123"},{"id":2,"name":"fred234"}]
+
+Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl "http://localhost:3000/user/2"
+{"id":2,"name":"fred234"}
+</code></pre>
+<p>To allow requests to create users, a HTTP POST endpoint will be added that accesses JSON body data using <code>req.body</code>:</p>
+<pre><code class="language-js">app.post('/user', (req, res) => {
+    const username = req.body.username;
+    if (username) {
+        const newUser = {id: idCounter++, username};
+        users.push(newUser);
+        return response(res, JSON.stringify(newUser));
+    }
+    response(res, `Bad request data.`, 400, 'text/plain');
+});
+</code></pre>
+<p>The <code>response</code> function is a user-defined function created for the following complete example, also take note of how <code>name</code> has been changed to <code>username</code>:</p>
+<pre><code class="language-js">const express = require('express');
+
+const port = 3000;
+const app = express();
+
+
+let idCounter = 3;
+const users = [{id: 1, username: "fred123"}, {id: 2, username: "fred234"}];
+
+function logger(req, res, next) {
+    console.log(`${Date()} - ${req.method} ${req.path}`);
+    next();
+}
+
+function response(res, data, status = 200, contentType = 'application/json') {
+    res.contentType(contentType).status(status).send(data);
+}
+
+// no mount path, executed on every request to the router
+app.use(logger);
+
+app.get('/user', (req, res) => response(res, JSON.stringify(users)));
+
+app.get('/user/:id', (req, res) => {
+    const id = req.params.id;
+    const user = users.find(user => user.id == id);
+    if (user) {
+        return response(res, JSON.stringify(user));
+    }
+    response(res, `User with id ${id} not found.`, 404, 'text/plain');
+});
+
+app.post('/user', (req, res) => {
+    const username = req.body.username;
+    if (username) {
+        const newUser = {id: idCounter++, username};
+        users.push(newUser);
+        return response(res, JSON.stringify(newUser));
+    }
+    response(res, `Bad request data.`, 400, 'text/plain');
+});
+
+app.use(express.json());
+
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>The important changes are:</p>
+<ul>
+  <li>line 7: declares an idCounter variable</li>
+  <li>line 15 - 17: auxilliary response() function created to simplify creating a http response</li>
+  <li>line 33 - 41: defines the post functionality for the /user path, allowing a new user to be created using body data</li>
+</ul>
+<p>To send a request to this API using <code>curl</code>, the content type of the request data must be set and the JSON supplied - Express handles converting the inbound JSON string into a JS object:</p>
+<pre><code class="language-sh">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/test
+$ curl 'http://localhost:3000/user' -X POST -H 'Content-Type: application/json' -d '{"username": "fred345"}'
+{"id":3,"username":"fred345"}
+</code></pre>
+<h2>Response methods</h2>
+<p>Response methods exist on the response object, <code>res</code>, and are used to terminate the request-response cycle by sending a response to the client. If a route handler does not call a terminating method, the client request hangs:</p>
+<ul>
+  <li><code>res.download()</code>: Prompt a file to be downloaded</li>
+  <li><code>res.end()</code>: End the response process</li>
+  <li><code>res.json()</code>: Send a JSON response</li>
+  <li><code>res.redirect()</code>: Redirect a request</li>
+  <li><code>res.render()</code>: Render a view template</li>
+  <li><code>res.send()</code>: Send response of various types.</li>
+  <li><code>res.sendStatus()</code>: Set response status code and send string representation of it in the response body.</li>
+</ul>
+<h2>Modular routes</h2>
+<p>Chainable route handlers can be created using <code>app.route()</code>, the path for a group of routes then only has to be specified once. For example:</p>
+<pre><code class="language-js">  app.route('/user')
+    .get((req, res) => res.send('users'))
+    .post((req, res) => res.send('new user'))
+    .put((req, res) => res.send('user updated'))
+    .delete((req, res) => res.send('user deleted'));
+</code></pre>
+<p>Each of the methods specified, chained as calls onto <code>route()</code>, will only apply for the <code>/user</code> route. This can aid in increasing maintainability and reducing typos.</p>
+<h2>The Express Router</h2>
+<p>The <code>express.Router</code> class is used to create modular route handlers that can be mounted onto an Express app as middleware.</p>
+<blockquote>
+  <p>A router is a self-contained middleware and routing system, it is a sub-system of the overall system.</p>
+</blockquote>
+<p>The previous examples have tightly coupled the routing functionality to the creation of the server by being declared directly on the Express instance. The following examples will improve the design of the previous user example. First, create a file called <code>users.js</code> in an express project:</p>
+<pre><code class="language-js">const express = require('express');
+
+const router = express.Router();
+
+let idCounter = 3;
+const users = [{id: 1, username: "fred123"}, {id: 2, username: "fred234"}];
+
+function logger(req, res, next) {
+    console.log(`${Date()} - ${req.method} ${req.path}`);
+    next();
+}
+
+function response(res, data, status = 200, contentType = 'application/json') {
+    res.contentType(contentType).status(status).send(data);
+}
+
+// no mount path, executed on every request to the router
+router.use(logger);
+
+router.get('/', (req, res) => response(res, JSON.stringify(users)));
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    const user = users.find(user => user.id == id);
+    if (user) {
+        return response(res, JSON.stringify(user));
+    }
+    response(res, `User with id ${id} not found.`, 404, 'text/plain');
+});
+
+router.post('/', (req, res) => {
+    const username = req.body.username;
+    if (username) {
+        const newUser = {id: idCounter++, username};
+        users.push(newUser);
+        return response(res, JSON.stringify(newUser));
+    }
+    response(res, `Bad request data.`, 400, 'text/plain');
+});
+
+router.delete('/:id', (req, res) => {
+    const user = users.find(user => user.id == req.params.id);
+    const index = users.indexOf(user);
+
+    if (index > -1) {
+        users.splice(index, 1);
+        delete user.id;
+        return response(res, JSON.stringify(user));
+    }
+    response(res, `User with id ${id} not found.`, 404, 'text/plain');
+});
+
+module.exports = router;
+</code></pre>
+<p>This creates an instance of <code>Router</code> on line 3, then <code>router.use()</code> and <code>router.METHOD()</code> methods are used to register endpoints. The <code>router</code> object is then exported on line 53.</p>
+<p>Then, load the new router module in the express app to use it:</p>
+<pre><code class="language-js">const express = require('express');
+const userRouter = require('./app/users');
+
+const port = 3000;
+const app = express();
+
+app.use(express.json());
+app.use('/user', userRouter);
+
+const server = app.listen(port, () => {
+    console.log(`Server up on ${server.address().address}:${port}`);
+});
+</code></pre>
+<p>Line 2 imports the user router, line 8 then adds the router to the middleware stack, binding to the <code>'/user'</code> path.</p></div>
+    <footer class="bg-primary fg-light p-16">
+    <small>Extensible Markdown (.emdd) - &copy; 2023</small>
+    <br />
+    <small>This site was generated by .emdd</small>
+</footer>
+</main></div></div>
+    <script src="/scripts/common.js"></script>
+</body>
+</html>
