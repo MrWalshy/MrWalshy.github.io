@@ -18,18 +18,18 @@
     </div>
 
     <h2>File editor</h2>
-    <div class="editor">
-        <div class="line-numbers disable-scrollbars">
-            <span></span>
+    <div id="editor">
+        <div id="menu">
+            <button type="button" id="new-btn">New...</button>
+            <button type="button" id="open-btn">Open...</button>
+            <button type="button" id="save-btn" disabled>Save...</button>
+            <button type="button" id="save-as-btn">Save as...</button>
+            <button type="button" id="close-btn" disabled>Close...</button>
+            <button type="button" id="increment-font-size">Increase font size</button>
+            <button type="button" id="decrement-font-size">Decrease font size</button>
+            <button type="button" id="clear-display">Clear display</button>
         </div>
-        <pre class="editor-content" contenteditable="true"></pre>
-    </div>
-
-    <h2>File editor v2</h2>
-    <div id="editor-v2">
-        <textarea id="editor-content-v2" spellcheck="false">Some starting content.</textarea>
-
-        <pre id="editor-display" aria-hidden="true"><code id="editor-display-content"></code></pre>
+        <div id="display" contenteditable="true"></div>
     </div>
 
     <script type="module" src="/app.js"></script>

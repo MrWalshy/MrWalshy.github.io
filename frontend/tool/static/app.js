@@ -1,111 +1,197 @@
-const textarea = document.querySelector(".editor > .editor-content");
-const lineNumbers = document.querySelector(".editor > .line-numbers");
-const dirView = document.querySelector("#dir-view");
-let lineCount = 1;
+const editor = document.querySelector("#editor");
+const content = editor.querySelector("#content");
+const display = editor.querySelector("#display");
+const incrementFontSizeBtn = document.querySelector("#increment-font-size");
+const decrementFontSizeBtn = document.querySelector("#decrement-font-size");
+const clearDisplayBtn = document.querySelector("#clear-display");
+const newBtn = document.querySelector("#new-btn");
+const openBtn = document.querySelector("#open-btn");
+const saveBtn = document.querySelector("#save-btn");
+const saveAsBtn = document.querySelector("#save-as-btn");
+const closeBtn = document.querySelector("#close-btn");
 
-let src = "# This is the heading\n\nFollowed by some paragraph text";
-textarea.innerText = src;
-renderLineCount();
+// let file = {
+//     fileText: "Hello world\n\nThis is my document text"
+// };
+let file;
+let caretPosition = -1;
 
-function renderLineCount() {
-    // num of lines for a div comes from how many inner
-    // divs inserted
-    console.log(`Current inner text: ${textarea.innerText}`);
-    const fakeLines = textarea.innerHTML.split("<div><br></div>").length - 1;
-    const lineCount = textarea.innerText.split("\n").length;
-
-    console.log(`Num of fake lines: ${fakeLines}`);
-    console.log(`Num of lines: ${lineCount}`);
-    lineNumbers.innerHTML = new Array(lineCount - fakeLines)
-        .fill("<span></span>")
-        .join("");
+// util functions
+function setDisplayContents(str) {
+    display.innerText = str;
 }
 
-// add a new span to lineNumbers for every newline encountered
-// in the textArea
-textarea.addEventListener("keyup", event => {
-    renderLineCount();
+function getCaretPosition(node) {
+    // https://stackoverflow.com/questions/4767848/get-caret-cursor-position-in-contenteditable-area-containing-html-content
+    let range = window.getSelection().getRangeAt(0),
+        preCaretRange = range.cloneRange(),
+        caretPosition,
+        tmp = document.createElement("div");
+
+    preCaretRange.selectNodeContents(node);
+    preCaretRange.setEnd(range.endContainer, range.endOffset);
+    tmp.appendChild(preCaretRange.cloneContents());
+    caretPosition = tmp.innerHTML.length;
+    return caretPosition;
+}
+
+function updateFileText(htmlSrc) {
+    file.fileText = htmlSrc.replaceAll("&nbsp;", " ")
+        .replaceAll("<div><br>", "\n")
+        .replaceAll("<br>", "\n")
+        .replaceAll("<div>", "\n")
+        .replaceAll("</div>", "");
+}
+
+// app code //
+// set the initial display
+if (file) {
+    setDisplayContents(file.fileText);
+} else display.removeAttribute("contenteditable");
+
+display.addEventListener("keyup", event => {
+    if (file) {
+        caretPosition = getCaretPosition(display);
+        updateFileText(display.innerHTML); // update the file text stored in memory
+    }
+});
+
+display.addEventListener("click", event => {
+    if (file) {
+        caretPosition = getCaretPosition(display);
+        console.log(caretPosition);
+    }
+});
+
+// font behaviours
+incrementFontSizeBtn.addEventListener("click", event => {
+    if (file) {
+        event.preventDefault();
+        const fontSize = parseFloat(window.getComputedStyle(display, null).getPropertyValue("font-size") || "16px");
+        display.style.fontSize = (fontSize + 1) + "px";
+    }
+});
+
+decrementFontSizeBtn.addEventListener("click", event => {
+    if (file) {
+        event.preventDefault();
+        const fontSize = parseFloat(window.getComputedStyle(display, null).getPropertyValue("font-size") || "16px");
+        display.style.fontSize = (fontSize - 1) + "px";
+    }
+});
+
+// clear display button
+clearDisplayBtn.addEventListener("click", event => {
+    if (file) {
+        event.preventDefault();
+        file.fileText = "";
+        setDisplayContents(file.fileText);
+    }
+});
+
+function createFileFormFields() {
+    const dirId = document.createElement("input");
+    dirId.type = "hidden";
+    dirId.id = "dirId";
+    dirId.setAttribute("name", "dirId");
+    // dirId.style.display = "hidden";
+
+    const fileIdLabel = document.createElement("label");
+    fileIdLabel.setAttribute("for", "file-id");
+    const fileId = document.createElement("input");
+    fileId.type = "text";
+    fileId.id = "file-id";
+    fileId.setAttribute("name", "fileId");
+    fileIdLabel.append(document.createTextNode("ID:"), fileId);
+
+    const filenameLabel = document.createElement("label");
+    filenameLabel.setAttribute("for", "filename");
+    const filename = document.createElement("input");
+    filename.type = "text";
+    filename.id = "filename";
+    filename.setAttribute("name", "filename");
+    filenameLabel.append(document.createTextNode("Filename:"), filename);
+
+    const aliasLabel = document.createElement("label");
+    aliasLabel.setAttribute("for", "alias");
+    const alias = document.createElement("input");
+    alias.type = "text";
+    alias.id = "alias";
+    alias.setAttribute("name", "alias");
+    aliasLabel.append(document.createTextNode("Alias:"), alias);
+
+    const filetypeLabel = document.createElement("label");
+    filetypeLabel.setAttribute("for", "filetype");
+    const filetype = document.createElement("input");
+    filetype.type = "text";
+    filetype.id = "filetype";
+    filetype.setAttribute("name", "fileType")
+    filetypeLabel.append(document.createTextNode("Filetype:"), filetype);
+
+    return [dirId, fileIdLabel, filenameLabel, aliasLabel, filetypeLabel];
+}
+
+function handleCreateFile(event) {
     event.preventDefault();
-});
+    const formData = new FormData(event.target);
+    const formDataObject = Object.fromEntries(formData.entries()); // get flat object
+    console.log(formDataObject);
+    formDataObject.fileText = "";
+    file = formDataObject;
 
-// tab support (not implemented yet)
-textarea.addEventListener("keydown", event => {
-    switch (event.key) {
-        case "Tab":
-            const cursorPosition = getCaretIndex(textarea);
-            // const start = textarea.selectionStart;
-            // const end = textarea.selectionEnd;
-            // console.log(`Start: ${start}, End: ${end}`);
+    display.setAttribute("contenteditable", "true");
+    setDisplayContents(file.fileText);
 
-            // textarea.innerHTML = textarea.innerHTML.substring(0, start) +
-            //     "    " + textarea.innerHTML.substring(end);
-
-            // console.log(`Cursor at: ${cursorPosition}`);
-            // console.log(textarea)
-            // console.log(textarea.innerText)
-            // textarea.innerText = textarea.innerText.substring(0, cursorPosition) +
-            //     "    " + textarea.innerText.substring(cursorPosition);
-
-            event.preventDefault();
-            break;
-        default:
-            break;
-    }
-});
-
-// make line numbers scroll when textarea scrolls
-textarea.addEventListener("scroll", event => {
-    lineNumbers.scrollTop = textarea.scrollTop;
-    // lineNumbers.scrollLeft = textarea.scrollLeft;
-});
-
-// https://javascript.plainenglish.io/how-to-find-the-caret-inside-a-contenteditable-element-955a5ad9bf81
-function getCaretCoordinates() {
-    let x = 0,
-        y = 0;
-    const isSupported = typeof window.getSelection !== "undefined";
-    if (isSupported) {
-        // get selection from window object, has 
-        // info about the cursor
-        const selection = window.getSelection();
-        // check if a cursor is set
-        if (selection.rangeCount !== 0) {
-            // if cursor set, clone the selected Range
-            // - each Range represents the start and end of a
-            //   selection
-            const range = selection.getRangeAt(0).cloneRange();
-            // collapse range to start in case spanning multiple chars
-            range.collapse(true);
-            // get the positioning data
-            const rect = range.getClientRects()[0];
-            // x,y represent top left corner of the caret
-            if (rect) {
-                x = rect.left;
-                y = rect.top;
-            }
-        }
-    }
-    return { x, y };
-}
-// get carets index within a contenteditable element
-function getCaretIndex(element) {
-    let position = 0;
-    const isSupported = typeof window.getSelection !== "undefined";
-    if (isSupported) {
-        const selection = window.getSelection();
-        if (selection.rangeCount !== 0) {
-            const range = window.getSelection().getRangeAt(0);
-            const preCaretRange = range.cloneRange();
-            // get the selected text content
-            preCaretRange.selectNodeContents(element);
-            preCaretRange.setEnd(range.endContainer, range.endOffset);
-            position = preCaretRange.toString().length;
-        }
-    }
-    return position;
+    editor.removeChild(event.target);
 }
 
-// DIR TREE CODE (NEEDS TO GO IN SEPARATE FILE)
+function openCreateFileModal() {
+    const container = document.createElement("form");
+    container.id = "modal";
+    container.addEventListener("submit", handleCreateFile);
+
+    // form fields: dirId (hidden), id, filename, alias, filetype
+    const formFields = createFileFormFields();
+    const formFieldGroup = document.createElement("fieldset");
+    formFieldGroup.append(...formFields);
+    container.appendChild(formFieldGroup);
+
+    // create and close without create buttons
+    const createBtn = document.createElement("button");
+    createBtn.setAttribute("type", "submit");
+    createBtn.innerText = "Create";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.setAttribute("type", "button");
+    closeBtn.innerText = "Close";
+
+    // close button should remove the modal from the DOM without doing anything
+    closeBtn.addEventListener("click", event => editor.removeChild(container));
+
+    // attach buttons to bottom bar, then to container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.id = "modal-button-bar";
+    buttonContainer.append(createBtn, closeBtn);
+    container.appendChild(buttonContainer);
+
+    // attach to editor
+    editor.appendChild(container);
+}
+
+// create a new file
+newBtn.addEventListener("click", event => {
+    event.preventDefault();
+    console.log("Creating new file"); 
+
+    // open popup modal for gathering info
+    openCreateFileModal();
+});
+
+
+
+//////////////////////////////////////////////////
+// DIR TREE CODE (NEEDS TO GO IN SEPARATE FILE) //
+//////////////////////////////////////////////////
 function getDirTree(cb) {
     fetch("/directorytree")
         .then(response => response.json())
@@ -226,55 +312,3 @@ function renderDirTree() {
 }
 
 renderDirTree();
-
-
-const editorV2 = document.querySelector("#editor-v2");
-const editorV2Content = document.querySelector("#editor-v2 > #editor-content-v2");
-const editorDisplay = document.querySelector("#editor-display");
-const editorDisplayContent = document.querySelector("#editor-display > #editor-display-content");
-
-function updateDisplayContent(text) {
-    // Does not support newlines in innerText
-    // editorDisplayContent.innerText = text;
-    if (text[text.length - 1] === "\n") text += " "; // prevent collapse of empty last line
-    const filteredText = text.replaceAll("&", "&amp;")
-                             .replaceAll("<", "&lt;")
-                             .replaceAll(">", "&gt;")
-                             .replaceAll("\n", "<br>")
-                             .replaceAll("\t", "    ");
-    editorDisplayContent.innerHTML = filteredText;
-    syncScroll(editorV2Content);
-}
-
-function syncScroll(element) {
-    editorDisplay.scrollTop = element.scrollTop;
-    editorDisplay.scrollLeft = element.scrollLeft;
-}
-
-function checkTab(event) {
-    const content = editorV2Content.value;
-
-    if (event.key === "Tab") {
-        event.preventDefault();
-        const start = content.slice(0, editorV2Content.selectionStart);
-        const end = content.slice(editorV2Content.selectionEnd, editorV2Content.value.length);
-        const cursorPosition = editorV2Content.selectionEnd;
-        editorV2Content.value = start + "\t" + end;
-
-        // move cursor
-        editorV2Content.selectionStart = cursorPosition;
-        editorV2Content.selectionEnd = cursorPosition;
-        updateDisplayContent(editorV2Content.value);
-    }
-}
-
-editorV2Content.addEventListener("input", event => {
-    updateDisplayContent(event.target.value);
-});
-
-editorV2Content.addEventListener("scroll", event => syncScroll(event.target));
-
-editorV2Content.addEventListener("keydown", event => checkTab(event));
-
-// first render
-updateDisplayContent(editorV2Content.value);

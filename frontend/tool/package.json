@@ -2,7 +2,7 @@
     "name": "md_blogger",
     "version": "1.0.0",
     "description": "",
-    "exports": "./blogger.js",
+    "exports": "./app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
