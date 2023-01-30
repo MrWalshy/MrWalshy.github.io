@@ -5,6 +5,8 @@
 "scripts": ["/scripts/common.js"]
 ```
 
+<div class="p-16 w-80 w-md-100 ml-auto mr-auto">
+
 # Connecting to a server with SSH
 
 **SSH** (*Secure Shell*) is a network protocol used for remotely accessing a computer. 
@@ -144,3 +146,5 @@ PasswordAuthentication no
 ```sh
 sudo systemctl restart sshd.service
 ```
+
+</div>
