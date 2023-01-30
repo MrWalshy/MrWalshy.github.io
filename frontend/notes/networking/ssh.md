@@ -147,4 +147,79 @@ PasswordAuthentication no
 sudo systemctl restart sshd.service
 ```
 
+#### Configuring a new account with SSH
+
+The following steps will highlight how to create a new user account, enable SSH and give them sudo permissions.
+
+- In the following commands, replace `<user>` with the name of the user you want to create
+
+1. Access the server which you want to create a new account on and access the root user:
+
+```sh
+sudo su
+```
+
+2. Create a new user and the .ssh directory
+
+```sh
+adduser <user>
+mkdir /home/<user>/.ssh
+```
+
+3. Generate a key pair
+
+Set the file location as: `/home/<user>/.ssh/id_rsa` when prompted by the `ssh-keygen` command:
+
+```sh
+ssh-keygen -t rsa
+```
+
+4. Copy the public key into an authorized_keys file
+
+```sh
+cat /home/<user>/.ssh/id_rsa.pub > /home/<user>/.ssh/authorized_keys
+```
+
+5. Add the user to the users allowed to ssh
+
+Open the file `sshd_config` (Ubuntu):
+
+```sh
+nano /etc/ssh/sshd_config
+```
+
+Find the line beginning with `AllowUsers`, if it does not exist add it to the file. The line should look something like:
+
+```sh
+AllowUsers <user1> <user>
+```
+
+- if the line already exists, add your user after a space
+
+Save and close the file.
+
+6. Change the owner of the `.ssh` directory to the new user
+
+```sh
+chown -R <user>:<user> /home/<user>/.ssh
+```
+
+7. Restart `sshd`
+
+```sh
+systemctl restart sshd
+```
+
+8. (Optional): Give new user superuser permissions
+
+Run the `visudo` command to open the sudoers file. Add under user permissions, the following line:
+
+```sh
+%<user> ALL=(ALL) NOPASSWD: ALL
+```
+
+9. Download your private key
+
+Once you are setup, make a copy of the private key on a machine you want to use to access the server.
+
 </div>

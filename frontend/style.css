@@ -26,11 +26,18 @@ body {
 h1 { font-size: 3.2rem; }
 h2 { font-size: 2.4rem; }
 h3 { font-size: 2rem; }
-p, a, li, label, button, th, td, input, legend, code, small { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
+h4 { font-size: 1.8rem; }
+h5, h6 { font-size: 1.6rem; }
+p, a, li, label, button, th, td, input, legend, code, small, td, th { font-size: 1.6rem; line-height: 1.5; letter-spacing: 1px; }
 label { font-weight: 600; }
 legend { font-weight: 700; }
 code { font-family: 'Courier New', Courier, monospace; }
 pre { overflow: auto; }
+
+table {
+  width: 100%;
+  overflow-x: auto;
+}
 
 .header, .footer {
   width: 100%;
