@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH | morganwalsh.dev</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/notes">Notes</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row"><div class="col-12"><main class="w-100">
+    <h1>Connecting to a server with SSH</h1>
+<p><strong>SSH</strong> (<em>Secure Shell</em>) is a network protocol used for remotely accessing a computer.</p>
+<ul>
+  <li>Mac and Linux distributions normally come with <code>ssh</code> installed</li>
+  <li>Windows may require some work</li>
+</ul>
+<p>To <code>ssh</code> into a remote host, we use the <code>ssh</code> command followed by the remote host name (IP or domain):</p>
+<pre><code class="language-sh">ssh host
+</code></pre>
+<p>This method will assume your username on the remote system is the same as the system you are running the <code>ssh</code> command from. We can also specify a specific username:</p>
+<pre><code class="language-sh">ssh user@host
+</code></pre>
+<h2><code>sshd</code></h2>
+<p><code>sshd</code> is a daemon process, it is the server which listens for an <code>ssh</code> client connection. The <code>ssh</code> program is the client.</p>
+<p>We can control the <code>ssh</code> server on Ubuntu using the <code>systemctl</code> command for managing services:</p>
+<pre><code class="language-sh"># start ssh server
+sudo systemctl start ssh
+
+# enable ssh to run automatically at boot
+sudo systemctl enable ssh
+
+# stop ssh server
+sudo systemctl stop ssh
+
+# restart ssh server
+sudo systemctl restart ssh
+</code></pre>
+<h2>Configuring SSH</h2>
+<p>The configuration for the <code>sshd</code> server in Ubuntu is found at <code>/etc/ssh/sshd_config</code>. First, backup this file:</p>
+<pre><code class="language-sh">sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
+</code></pre>
+<p>Options that you may want to change in this file include:</p>
+<ul>
+  <li><code>Port 22</code>: Change the port number to change where the <code>sshd</code> server is listening for connections</li>
+  <li><code>HostKey /etc/ssh/ssh_host_xxx_xxx</code>: Specifies where to search for global host keys</li>
+  <li><code>SysLogFacility AUTH</code>: A logging level</li>
+  <li><code>LogLevel INFO</code>: A logging level</li>
+  <li><code>LoginGraceTime 120</code>: The number of seconds to keep a connection alive without successful login</li>
+  <li><code>PermitRootLogin yes</code>: Sets whether the root user can log in (should be changed to <code>no</code> once a user account with access to elevated priviledges is created)</li>
+  <li><code>StrictModes yes</code>: Refuses a login attempt if auth files are readable by everyone</li>
+  <li><code>X11Forwarding yes</code>: Allows viewing the GUI of the <code>sshd</code> host</li>
+  <li><code>X11DisplayOffset</code></li>
+</ul>
+<h3>Configuring a keypair</h3>
+<p>To create a keypair, use the <code>ssh-keygen</code> command:</p>
+<pre><code class="language-sh">ssh-keygen -t rsa
+</code></pre>
+<p>Accept the defaults, this will create two files:</p>
+<ul>
+  <li><code>id_rsa</code>: The private key file (keep this secure)</li>
+  <li><code>id_rsa.pub</code>: The public key file</li>
+</ul>
+<h4>Configuring from the server</h4>
+<p>If you ran <code>ssh-keygen</code> from the server, follow the next instructions.</p>
+<ol>
+  <li>Create the <code>.ssh</code> directory and <code>.ssh/authorized_keys</code> file if they don't already exist</li>
+</ol>
+<pre><code class="language-sh">mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+</code></pre>
+<ol start="2">
+  <li>Change the permissions of the directory and file if they didn't exist</li>
+</ol>
+<pre><code class="language-sh">chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+<ol start="3">
+  <li>Append the contents of the public key to the <code>authorized_keys</code> file</li>
+</ol>
+<pre><code class="language-sh">cat id_rsa.pub >> ~/.ssh/authorized_keys
+</code></pre>
+<ol start="4">
+  <li>Download the <code>id_rsa</code> private key file and use it to connect to your server:</li>
+</ol>
+<pre><code class="language-sh">ssh -i id_rsa user@server
+</code></pre>
+<h4>Disabling password authentication</h4>
+<p>After setting up SSH keys, disable password authentication to improve server security:</p>
+<ol>
+  <li>SSH into the host</li>
+</ol>
+<pre><code class="language-sh">ssh -i key user@host
+</code></pre>
+<ol start="2">
+  <li>Open the <code>sshd</code> configuration file</li>
+</ol>
+<pre><code class="language-sh">sudo nano /etc/ssh/sshd_config
+</code></pre>
+<ol start="3">
+  <li>Set the <code>PasswordAuthentication</code> line to <code>no</code></li>
+</ol>
+<p>Find the following line in <code>sshd_config</code>:</p>
+<pre><code class="language-sh">PasswordAuthentication yes
+</code></pre>
+<p>Change the value to <code>no</code>:</p>
+<pre><code class="language-sh">PasswordAuthentication no
+</code></pre>
+<ol start="4">
+  <li>
+    <p>Save and exit the editor</p>
+  </li>
+  <li>
+    <p>Enable changes by restarting the <code>sshd</code> service</p>
+  </li>
+</ol>
+<pre><code class="language-sh">sudo systemctl restart sshd.service
+</code></pre>
+    <footer class="bg-primary fg-light p-16">
+    <small>Extensible Markdown (.emdd) - &copy; 2023</small>
+    <br />
+    <small>This site was generated by .emdd</small>
+</footer>
+</main></div></div>
+    <script src="/scripts/common.js"></script>
+</body>
+</html>
