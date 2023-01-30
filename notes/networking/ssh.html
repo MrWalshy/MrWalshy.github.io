@@ -74,118 +74,132 @@ sudo systemctl restart ssh
 <h4>Configuring from the server</h4>
 <p>If you ran <code>ssh-keygen</code> from the server, follow the next instructions.</p>
 <ol>
-  <li>Create the <code>.ssh</code> directory and <code>.ssh/authorized_keys</code> file if they don't already exist</li>
-</ol>
-<pre><code class="language-sh">mkdir ~/.ssh
+  <li>
+    <p>Create the <code>.ssh</code> directory and <code>.ssh/authorized_keys</code> file if they don't already exist</p>
+    <pre><code class="language-sh">mkdir ~/.ssh
 touch ~/.ssh/authorized_keys
 </code></pre>
-<ol start="2">
-  <li>Change the permissions of the directory and file if they didn't exist</li>
-</ol>
-<pre><code class="language-sh">chmod 700 ~/.ssh
+  </li>
+  <li>
+    <p>Change the permissions of the directory and file if they didn't exist</p>
+    <pre><code class="language-sh">chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 </code></pre>
-<ol start="3">
-  <li>Append the contents of the public key to the <code>authorized_keys</code> file</li>
-</ol>
-<pre><code class="language-sh">cat id_rsa.pub >> ~/.ssh/authorized_keys
+  </li>
+  <li>
+    <p>Append the contents of the public key to the <code>authorized_keys</code> file</p>
+    <pre><code class="language-sh">cat id_rsa.pub >> ~/.ssh/authorized_keys
 </code></pre>
-<ol start="4">
-  <li>Download the <code>id_rsa</code> private key file and use it to connect to your server:</li>
-</ol>
-<pre><code class="language-sh">ssh -i id_rsa user@server
+  </li>
+  <li>
+    <p>Download the <code>id_rsa</code> private key file and use it to connect to your server:</p>
+    <pre><code class="language-sh">ssh -i id_rsa user@server
 </code></pre>
+  </li>
+</ol>
 <h4>Disabling password authentication</h4>
 <p>After setting up SSH keys, disable password authentication to improve server security:</p>
 <ol>
-  <li>SSH into the host</li>
-</ol>
-<pre><code class="language-sh">ssh -i key user@host
+  <li>
+    <p>SSH into the host</p>
+    <pre><code class="language-sh">ssh -i key user@host
 </code></pre>
-<ol start="2">
-  <li>Open the <code>sshd</code> configuration file</li>
-</ol>
-<pre><code class="language-sh">sudo nano /etc/ssh/sshd_config
+  </li>
+  <li>
+    <p>Open the <code>sshd</code> configuration file</p>
+    <pre><code class="language-sh">sudo nano /etc/ssh/sshd_config
 </code></pre>
-<ol start="3">
-  <li>Set the <code>PasswordAuthentication</code> line to <code>no</code></li>
-</ol>
-<p>Find the following line in <code>sshd_config</code>:</p>
-<pre><code class="language-sh">PasswordAuthentication yes
+  </li>
+  <li>
+    <p>
+      Set the <code>PasswordAuthentication</code> line to <code>no</code>
+      Find the following line in <code>sshd_config</code>:
+    </p>
+    <pre><code class="language-sh">PasswordAuthentication yes
 </code></pre>
-<p>Change the value to <code>no</code>:</p>
-<pre><code class="language-sh">PasswordAuthentication no
+    <p>Change the value to <code>no</code>:</p>
+    <pre><code class="language-sh">PasswordAuthentication no
 </code></pre>
-<ol start="4">
+  </li>
   <li>
     <p>Save and exit the editor</p>
   </li>
   <li>
     <p>Enable changes by restarting the <code>sshd</code> service</p>
+    <pre><code class="language-sh">sudo systemctl restart sshd.service
+</code></pre>
   </li>
 </ol>
-<pre><code class="language-sh">sudo systemctl restart sshd.service
-</code></pre>
 <h4>Configuring a new account with SSH</h4>
 <p>The following steps will highlight how to create a new user account, enable SSH and give them sudo permissions.</p>
 <ul>
   <li>In the following commands, replace <code>&#x3C;user></code> with the name of the user you want to create</li>
 </ul>
 <ol>
-  <li>Access the server which you want to create a new account on and access the root user:</li>
-</ol>
-<pre><code class="language-sh">sudo su
+  <li>
+    <p>Access the server which you want to create a new account on and access the root user:</p>
+    <pre><code class="language-sh">sudo su
 </code></pre>
-<ol start="2">
-  <li>Create a new user and the .ssh directory</li>
-</ol>
-<pre><code class="language-sh">adduser &#x3C;user>
+  </li>
+  <li>
+    <p>Create a new user and the .ssh directory</p>
+    <pre><code class="language-sh">adduser &#x3C;user>
 mkdir /home/&#x3C;user>/.ssh
 </code></pre>
-<ol start="3">
-  <li>Generate a key pair</li>
-</ol>
-<p>Set the file location as: <code>/home/&#x3C;user>/.ssh/id_rsa</code> when prompted by the <code>ssh-keygen</code> command:</p>
-<pre><code class="language-sh">ssh-keygen -t rsa
+  </li>
+  <li>
+    <p>
+      Generate a key pair
+      Set the file location as: <code>/home/&#x3C;user>/.ssh/id_rsa</code> when prompted by the <code>ssh-keygen</code> command:
+    </p>
+    <pre><code class="language-sh">ssh-keygen -t rsa
 </code></pre>
-<ol start="4">
-  <li>Copy the public key into an authorized_keys file</li>
-</ol>
-<pre><code class="language-sh">cat /home/&#x3C;user>/.ssh/id_rsa.pub > /home/&#x3C;user>/.ssh/authorized_keys
+  </li>
+  <li>
+    <p>Copy the public key into an authorized_keys file</p>
+    <pre><code class="language-sh">cat /home/&#x3C;user>/.ssh/id_rsa.pub > /home/&#x3C;user>/.ssh/authorized_keys
 </code></pre>
-<ol start="5">
-  <li>Add the user to the users allowed to ssh</li>
-</ol>
-<p>Open the file <code>sshd_config</code> (Ubuntu):</p>
-<pre><code class="language-sh">nano /etc/ssh/sshd_config
+  </li>
+  <li>
+    <p>
+      Add the user to the users allowed to ssh
+      Open the file <code>sshd_config</code> (Ubuntu):
+    </p>
+    <pre><code class="language-sh">nano /etc/ssh/sshd_config
 </code></pre>
-<p>Find the line beginning with <code>AllowUsers</code>, if it does not exist add it to the file. The line should look something like:</p>
-<pre><code class="language-sh">AllowUsers &#x3C;user1> &#x3C;user>
+    <p>Find the line beginning with <code>AllowUsers</code>, if it does not exist add it to the file. The line should look something like:</p>
+    <pre><code class="language-sh">AllowUsers &#x3C;user1> &#x3C;user>
 </code></pre>
-<ul>
-  <li>if the line already exists, add your user after a space</li>
-</ul>
-<p>Save and close the file.</p>
-<ol start="6">
-  <li>Change the owner of the <code>.ssh</code> directory to the new user</li>
-</ol>
-<pre><code class="language-sh">chown -R &#x3C;user>:&#x3C;user> /home/&#x3C;user>/.ssh
+    <ul>
+      <li>if the line already exists, add your user after a space</li>
+    </ul>
+    <p>Save and close the file.</p>
+  </li>
+  <li>
+    <p>Change the owner of the <code>.ssh</code> directory to the new user</p>
+    <pre><code class="language-sh">chown -R &#x3C;user>:&#x3C;user> /home/&#x3C;user>/.ssh
 </code></pre>
-<ol start="7">
-  <li>Restart <code>sshd</code></li>
-</ol>
-<pre><code class="language-sh">systemctl restart sshd
+  </li>
+  <li>
+    <p>Restart <code>sshd</code></p>
+    <pre><code class="language-sh">systemctl restart sshd
 </code></pre>
-<ol start="8">
-  <li>(Optional): Give new user superuser permissions</li>
-</ol>
-<p>Run the <code>visudo</code> command to open the sudoers file. Add under user permissions, the following line:</p>
-<pre><code class="language-sh">%&#x3C;user> ALL=(ALL) NOPASSWD: ALL
+  </li>
+  <li>
+    <p>
+      (Optional): Give new user superuser permissions
+      Run the <code>visudo</code> command to open the sudoers file. Add under user permissions, the following line:
+    </p>
+    <pre><code class="language-sh">%&#x3C;user> ALL=(ALL) NOPASSWD: ALL
 </code></pre>
-<ol start="9">
-  <li>Download your private key</li>
-</ol>
-<p>Once you are setup, make a copy of the private key on a machine you want to use to access the server.</p></div>
+  </li>
+  <li>
+    <p>
+      Download your private key
+      Once you are setup, make a copy of the private key on a machine you want to use to access the server.
+    </p>
+  </li>
+</ol></div>
     <footer class="bg-primary fg-light p-16">
     <small>Extensible Markdown (.emdd) - &copy; 2023</small>
     <br />
