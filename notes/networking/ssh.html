@@ -111,10 +111,8 @@ chmod 600 ~/.ssh/authorized_keys
 </code></pre>
   </li>
   <li>
-    <p>
-      Set the <code>PasswordAuthentication</code> line to <code>no</code>
-      Find the following line in <code>sshd_config</code>:
-    </p>
+    <p>Set the <code>PasswordAuthentication</code> line to <code>no</code></p>
+    <p>Find the following line in <code>sshd_config</code>:</p>
     <pre><code class="language-sh">PasswordAuthentication yes
 </code></pre>
     <p>Change the value to <code>no</code>:</p>
@@ -148,10 +146,8 @@ mkdir /home/&#x3C;user>/.ssh
 </code></pre>
   </li>
   <li>
-    <p>
-      Generate a key pair
-      Set the file location as: <code>/home/&#x3C;user>/.ssh/id_rsa</code> when prompted by the <code>ssh-keygen</code> command:
-    </p>
+    <p>Generate a key pair</p>
+    <p>Set the file location as: <code>/home/&#x3C;user>/.ssh/id_rsa</code> when prompted by the <code>ssh-keygen</code> command:</p>
     <pre><code class="language-sh">ssh-keygen -t rsa
 </code></pre>
   </li>
@@ -161,10 +157,8 @@ mkdir /home/&#x3C;user>/.ssh
 </code></pre>
   </li>
   <li>
-    <p>
-      Add the user to the users allowed to ssh
-      Open the file <code>sshd_config</code> (Ubuntu):
-    </p>
+    <p>Add the user to the users allowed to ssh</p>
+    <p>Open the file <code>sshd_config</code> (Ubuntu):</p>
     <pre><code class="language-sh">nano /etc/ssh/sshd_config
 </code></pre>
     <p>Find the line beginning with <code>AllowUsers</code>, if it does not exist add it to the file. The line should look something like:</p>
@@ -186,18 +180,14 @@ mkdir /home/&#x3C;user>/.ssh
 </code></pre>
   </li>
   <li>
-    <p>
-      (Optional): Give new user superuser permissions
-      Run the <code>visudo</code> command to open the sudoers file. Add under user permissions, the following line:
-    </p>
+    <p>(Optional): Give new user superuser permissions</p>
+    <p>Run the <code>visudo</code> command to open the sudoers file. Add under user permissions, the following line:</p>
     <pre><code class="language-sh">%&#x3C;user> ALL=(ALL) NOPASSWD: ALL
 </code></pre>
   </li>
   <li>
-    <p>
-      Download your private key
-      Once you are setup, make a copy of the private key on a machine you want to use to access the server.
-    </p>
+    <p>Download your private key</p>
+    <p>Once you are setup, make a copy of the private key on a machine you want to use to access the server.</p>
   </li>
 </ol></div>
     <footer class="bg-primary fg-light p-16">
