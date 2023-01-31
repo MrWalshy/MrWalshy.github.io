@@ -1,6 +1,6 @@
 # What is Jenkins?
 
-Jenkins is a build tool.
+Jenkins is a build server, a piece of software used in continuous integration and deployment.
 
 ## Creating a freestyle project
 
@@ -19,3 +19,7 @@ If you save the project, and then press **Build Now**, it will trigger a build o
 ![image](https://user-images.githubusercontent.com/29315632/215789030-24e42ae2-4cdd-442f-a51e-3031ff125fc0.png)
  
  The builds show under the sidemenu on the project desktop. A green tick indicates the build was successful, a red cross indicates a failure.
+
+### Dependencies
+
+If your freestyle project requires dependencies, you should install these either on the build servers host or using a plugin in Jenkins.
