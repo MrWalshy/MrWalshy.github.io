@@ -2,5 +2,13 @@
     {
         "name": "Basics of containers",
         "file": "container_basics.html"
+    },
+    {
+        "name": "Bind mounting basics",
+        "file": "bind_mount_basic.html"
+    },
+    {
+        "name": "Images",
+        "file": "docker_images.html"
     }
 ]
