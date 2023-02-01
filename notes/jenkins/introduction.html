@@ -37,6 +37,16 @@
 <p>The builds show under the sidemenu on the project desktop. A green tick indicates the build was successful, a red cross indicates a failure.</p>
 <h3>Dependencies</h3>
 <p>If your freestyle project requires dependencies, you should install these either on the build servers host or using a plugin in Jenkins.</p>
+<h2>Adding build steps</h2>
+<p>A build step is some set of commands to execute when a build is triggered:</p>
+<p>
+  <img src="https://user-images.githubusercontent.com/29315632/216031105-38782b02-a04b-49ea-9d90-c4f1e624da2f.png" alt="image">
+</p>
+<p>If we select <strong>Execute shell</strong>, this will execute a Linux shell command on the host system. For example, this can be used to access global installations of Maven for Java projects:</p>
+<p>
+  <img src="https://user-images.githubusercontent.com/29315632/216031542-7ea714f9-0577-4406-9fa5-507ed9d8e361.png" alt="image">
+</p>
+<p>In my example, I have set the shebang to use <code>bash</code> and added the <code>mvn clean package</code> command to package a Java application which has been cloned from GitHub during the build process.</p>
     <footer class="bg-primary fg-light p-16">
     <small>Extensible Markdown (.emdd) - &copy; 2023</small>
     <br />
