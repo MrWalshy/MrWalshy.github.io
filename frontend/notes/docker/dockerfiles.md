@@ -12,6 +12,16 @@
   
 As discussed in [Docker images](/notes/docker/docker_images.html), an image can be created from a Dockerfile. This allows images to have layers built upon them, each layer being some command in the `Dockerfile`.
 
+## Dockerfile gubbins
+
+A Dockerfile contains a variety of commands, here are some of them:
+
+- `FROM <BASE_IMAGE>`: Specifies the base image to build on top of
+- `EXPOSE <PORT>`: Specifies a port to be exposed by the container
+- `COPY <HOST_PATH> <CONTAINER_PATH>`: Copies the specified content from the host into the container
+- `WORKDIR <DIRECTORY>`: Sets the current working directory in the container, akin to doing `cd <DIR>`
+- `CMD [<FRAGMENT>, <FRAGMENT>, ...]`: Runs the specified command when a container is created from the built image
+
 ## Dockerising a JAR file
 
 In this example, we will dockerise a Spring Boot web server which serves a static website. Let's first create a directory 
@@ -30,7 +40,7 @@ Open the `Dockerfile` and enter the following:
 # Base image of Java version 17
 FROM openjdk:17
 # Expose port app is served on in the container
-EXPOSE 8080
+EXPOSE 3000
 # Copy JAR into container (COPY HOST_PATH CONTAINER_PATH)
 COPY . /usr/src/app
 # Set the working directory in the container
@@ -38,5 +48,29 @@ WORKDIR /usr/src/app
 # Run the JAR file
 CMD ["java", "-jar", "test_shopping_site.jar"]
 ```
+
+Now that we have a `Dockerfile`, we can build an image:
   
+```sh
+docker build -t shopping_site .
+```
+
+```sh
+docker run -dp 8080:3000 --name my_website shopping_site
+```
+
+Now, open `localhost:8080` in your browser to open the website served by the Dockerised Java application. We can then 
+clean up once we are done:
+
+```sh
+docker stop my_website
+docker rm my_website
+```
+
+We can then remove the image if we no longer need it as well:
+
+```sh
+docker rmi shopping_site
+```
+
 </div>
