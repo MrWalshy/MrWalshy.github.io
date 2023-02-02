@@ -10,5 +10,9 @@
     {
         "name": "Images",
         "file": "docker_images.html"
+    },
+    {
+        "name": "Dockerfiles",
+        "file": "dockerfiles.html"
     }
 ]
