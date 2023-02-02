@@ -1,4 +1,4 @@
- @docArgs()
+@docArgs()
 ```
 "title": "Sharing Docker Images | morganwalsh.dev", 
 "links": ["/style.css"],
