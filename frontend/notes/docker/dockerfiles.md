@@ -55,12 +55,17 @@ Now that we have a `Dockerfile`, we can build an image:
 docker build -t shopping_site .
 ```
 
+We can then create a container from the built image:
+  
 ```sh
 docker run -dp 8080:3000 --name my_website shopping_site
 ```
 
-Now, open `localhost:8080` in your browser to open the website served by the Dockerised Java application. We can then 
-clean up once we are done:
+Now, open `localhost:8080` in your browser to open the website served by the Dockerised Java application. If all went well, you should see the following in your browser:
+
+![image](https://user-images.githubusercontent.com/29315632/216304156-4720fb84-3fa3-401e-b595-a516684129ba.png)
+  
+We can then clean up once we are done:
 
 ```sh
 docker stop my_website
