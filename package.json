@@ -1,11 +1,11 @@
 {
   "name": "mrwalshy.github.io",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Personal website",
   "type": "module",
   "scripts": {
     "start": "npm run build&& ws --directory ./build",
-    "build": "npx emdd site --config=./frontend/site_config.json",
+    "build": "node ./build.js",
     "deploy": "npm run build&& cp CNAME ./build/CNAME&& gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
