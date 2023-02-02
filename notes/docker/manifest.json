@@ -14,5 +14,9 @@
     {
         "name": "Dockerfiles",
         "file": "dockerfiles.html"
+    },
+    {
+        "name": "Uploading images to Docker Hub",
+        "file": "sharing_images.html"
     }
 ]
