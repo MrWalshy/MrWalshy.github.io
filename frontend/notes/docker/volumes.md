@@ -160,6 +160,8 @@ docker run -dit \
            bash:latest bash
 ```
   
+> If the specified volume does not exist, Docker will create it on the host for you
+  
 If we `docker ps`, we will see the running container:
   
 ```sh
@@ -208,4 +210,36 @@ This will output the contents of `readme.txt` stored on the volume called `my_vo
 Hello world
 ```
   
+### `--mount`
+  
+The `--mount` flag is a more verbose way of mounting a volume, it has the following format:
+  
+```sh
+docker run --mount \
+  'type=<TYPE>, \
+   src=<SOURCE>, \
+   dst=<DESTINATION>, \
+   volume-driver=<DRIVER>, \
+   <OPTIONS>'
+```
+     
+The `--mount` flag accepts a comma-separated string of `key=value` pairs:
+     
+- `type`: The type of the volume being mounted
+- `src`: The name of the volume, or directory if a bind mount
+- `dst`: The mount point in the container for the volume
+- `volume-driver`: Where the volume is located
+- `options`: These include things like `readonly` and `rw` for read/write
+  
+We can print the contents of the file from the earlier example to demonstrate using `--mount`:
+     
+```sh
+docker run --mount \ 
+     'type=volume,\
+     src=bash_volume,\
+     dst=/var/opt/my_volume,\
+     volume-driver=local' \
+     bash -c "cat /var/opt/my_volume/readme.txt"
+```
+     
 </div>
