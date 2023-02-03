@@ -3,7 +3,7 @@
 "title": "Docker Images (basics) | morganwalsh.dev", 
 "links": ["/style.css"],
 "scripts": ["/scripts/common.js"],
-"date": "01/02/2023"
+"date": "03/02/2023"
 ```
 
 <div class="p-16 w-80 w-md-100 ml-auto mr-auto">
@@ -57,7 +57,7 @@ Docker exposes the `docker volume` command for managing volumes, this can be use
   
 To create a volume, use `docker volume create <VOLUME_NAME>`:
   
-```
+```sh
 docker volume create my_volume
 ```
   
@@ -67,7 +67,7 @@ If the volume name is omitted, a random name will be generated and assigned to t
   
 Use the `docker volume ls` command to list out any local Docker volumes that your Docker host is aware of:
   
-```
+```sh
 morgan@morgan-server:~$ docker volume ls
 DRIVER    VOLUME NAME
 local     my_volume
@@ -91,7 +91,7 @@ The `docker volume inspect <VOLUME_NAME>` command allows us to display informati
 - **Mountpoint**: Where on the host the volume is stored
 - **Name**: The unique name for the volume
   
-```
+```sh
 morgan@morgan-server:~$ docker volume inspect my_volume
 [
     {
@@ -104,6 +104,108 @@ morgan@morgan-server:~$ docker volume inspect my_volume
         "Scope": "local"
     }
 ]
+```
+  
+### Deleting volumes
+  
+A volume is deleted using the `docker volume rm <VOLUME_NAME>` command, this is a dangerous operation as it permanently 
+deletes the data a volume holds:
+  
+```sh
+docker volume rm my_volume
+```
+  
+### Pruning volumes
+  
+The `docker volume prune` command is used to remove unused containers, that is it will remove all containers which are not in 
+use by at least one container:
+  
+```sh
+morgan@morgan-server:~$ docker volume prune
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+my_volume
+
+Total reclaimed space: 0B
+```
+  
+As `my_volume` was empty, there was `0B` (0 Bytes) of memory reclaimed. This will differ dependant on your volumes size.
+  
+## Attaching a volume to a container
+  
+There are two main ways to attach a volume to a container when it is ran with `docker run`:
+  
+- Using the `-v`/`--volume` flag
+- Using the `--mount` flag
+  
+### `--volume`
+  
+To mount a volume, we follow the format:
+  
+```sh
+docker run -v VOLUME:MOUNT_POINT:OPTIONS
+```
+  
+The `VOLUME` is the volumes name, this could also be a bind-mount directory if bind-mounting. The `MOUNT_POINT` is exactly that, 
+where to mount the volume in the container. The `OPTIONS` are optional, and can be used to change the behaviour of the volume; `ro` would make the volume read-only for example.
+  
+Let's create a volume and attach it to a container:
+  
+```sh
+docker volume create bash_volume
+docker run -dit \
+           --volume bash_volume:/var/opt/my_volume \
+           --name my_bash \
+           bash:latest bash
+```
+  
+If we `docker ps`, we will see the running container:
+  
+```sh
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS        PORTS     NAMES
+8f173439748b   bash:latest   "docker-entrypoint.s…"   2 seconds ago   Up 1 second             my_bash
+```
+  
+We will then attach to the container:
+  
+```sh
+docker attach my_bash
+```
+  
+If we list the contents of `/var/opt`, we will see the `my_volume` that we attached earlier:
+  
+```sh
+bash-5.2# ls /var/opt/
+my_volume
+```
+  
+Let's add some content to the volume:
+  
+```sh
+echo "Hello world" > /var/opt/my_volume/readme.txt
+```
+  
+Now, let's stop and delete the container that the volume is attached to. The aim is to attach the volume to a new container to 
+prove that the data persists between uses:
+  
+```sh
+docker stop my_bash
+docker rm my_bash
+```
+  
+We can now launch a new container, this time we will just have it print the contents of the file created earlier to standard output:
+  
+```sh
+docker run --volume bash_volume:/var/opt/my_volume \
+           --name my_new_bash \
+           bash:latest bash -c "cat /var/opt/my_volume/readme.txt"
+```
+  
+This will output the contents of `readme.txt` stored on the volume called `my_volume`:
+  
+```sh
+Hello world
 ```
   
 </div>
