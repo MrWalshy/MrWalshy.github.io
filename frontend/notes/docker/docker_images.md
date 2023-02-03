@@ -44,6 +44,29 @@ images completely from scratch when creating our own, but the preferred route is
 
 We create our custom image using a special file called a `Dockerfile`, this specifies the base image and additional 
 layers.
+ 
+Each layer in an image is read-only, meaning modifications cannot be made; this is so they can take part in the **Union File System**. When you start a container, Docker will add a read-write layer on top of the image layers; this allows the container to run as if with a normal Linux file system:
+ 
+
+```
+ -----------------------             -----------------------
+|   READ/WRITE LAYER    |           | Container layer (RW)  |
+ -----------------------             -----------------------
+ -----------------------             -----------------------
+|    CUSTOM_LAYER 3     |           |                       |
+ -----------------------            |                       |
+|    CUSTOM_LAYER 2     |           |                       |
+ -----------------------            |                       |
+|    CUSTOM_LAYER 1     |           |     Image layer       |
+ -----------------------            |     (READ ONLY)       |
+           ^                        |                       |
+           |                        |                       |
+ -----------------------            |                       |
+|      BASE_IMAGE       |           |                       |
+ -----------------------             -----------------------
+```
+ 
+> When you stop or delete a container, the additional read/write layer is deleted; by default, it is an ephemeral layer.
 
 ## Creating an Nginx image from a `Dockerfile`
 
