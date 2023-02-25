@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Personal website",
   "scripts": {
-    "start": "npm eleventy --serve",
-    "build": "npm eleventy",
+    "start": "npx eleventy --serve",
+    "build": "npx eleventy",
     "deploy": "npm run build&& cp CNAME ./_site/CNAME&& gh-pages -d _site",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,0 +1,43 @@
+---
+layout: "layouts/base.njk"
+title: "Blog"
+---
+
+<header class="bg-primary fg-light p-16">
+    <h1>{{ title }}</h1>
+</header>
+
+<div class="w-90 ml-auto mr-auto">
+    <article>
+        <h2>Recently posted...</h2>
+        <div class="cards">
+            {% for post in collections.posts | reverse %}
+                    {% if (loop.index <= 4) %}
+                        {% Card title=post.data.title, link=post.url, description=post.data.description %}
+                    {% endif %}
+            {% endfor %}
+        </div>
+    </article>
+
+    <article>
+        <h2>Recent DevOps tutorials...</h2>
+        <div class="cards">
+            {% for post in collections.posts | reverse %}
+                {% if (loop.index <= 4) and ("DevOps" in post.data.categories) and ("Tutorial" in post.data.categories) %}
+                    {% Card title=post.data.title, link=post.url, description=post.data.description %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </article>
+
+    <article>
+        <h2>Recent Programming tutorials...</h2>
+        <ul>
+            {% for post in collections.posts | reverse %}
+                {% if (loop.index <= 4) and ("Programming" in post.data.categories) and ("Tutorial" in post.data.categories) %}
+                    {% Card title=post.data.title, link=post.url, description=post.data.description %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </article>
+</div>
