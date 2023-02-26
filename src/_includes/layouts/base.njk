@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+{# This is a shortcode to include the head.njk file contents, basically a swap and replace with the file #}
+<head>
+    {% include "fragments/head.njk" %}
+    {% include "fragments/nav.njk" %}
+    {# This short code allows us to insert additional contact using other templates
+        - see layouts/contact.njk for an example
+     #}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {# wrap content in a content block so we can override it in other layout files #}
+    {% block content %}
+        <!-- Whatever is using the page layout, pass the content into this body -->
+        {# Basically, if this is the template for a file, it shows the content otherwise its the overridden version #}
+        {{ content | safe }}
+    {% endblock %}
+
+    {% block footer %}
+        <script src="/scripts/nav.js"></script>
+    {% endblock %}
+</body>
+</html>

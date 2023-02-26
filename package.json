@@ -1,11 +1,11 @@
 {
   "name": "mrwalshy.github.io",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Personal website",
   "scripts": {
-    "start": "npm run build&& ws --directory ./build",
-    "build": "npx emdd site --config=./frontend/site_config.json",
-    "deploy": "npm run build&& cp CNAME ./build/CNAME&& gh-pages -d build",
+    "start": "npx eleventy --serve",
+    "build": "npx eleventy",
+    "deploy": "npm run build&& cp CNAME ./_site/CNAME&& gh-pages -d _site",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/MrWalshy/MrWalshy.github.io#readme",
   "devDependencies": {
-    "gh-pages": "^5.0.0",
-    "local-web-server": "^5.2.1"
+    "@11ty/eleventy": "^2.0.0",
+    "gh-pages": "^5.0.0"
   }
 }

@@ -1,3 +1,15 @@
+---
+layout: layouts/post.njk
+title: What is Jenkins?
+thumbnail: /assets/images/devops/jenkins-butler.png
+description: This post highlights what Jenkins is
+date: 2023-02-01
+author: Morgan Walsh
+tags:
+  - Jenkins
+  - DevOps
+---
+
 # What is Jenkins?
 
 Jenkins is a build server, a piece of software used in continuous integration and deployment.

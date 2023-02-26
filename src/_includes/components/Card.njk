@@ -1,0 +1,33 @@
+{% macro Card(post) %}
+
+<article class="w-100 mb-16 p-16">
+    {% if (post.data.thumbnail) %}
+
+        <div class="row">
+            <div class="col-2 col-md-3 col-sm-5">
+                <a href="{{ post.url }}">
+                    <img class="w-100" src="{{ post.data.thumbnail }}" />
+                </a>
+            </div>
+            <div class="col-10 col-md-9 col-sm-7">
+                <a href="{{ post.url }}">
+                    <h3>{{ post.data.title }}</h3>
+                </a>
+                <p><b>Published on: </b>{{ post.date.toUTCString() }}</p>
+
+                <p>{{ post.data.description }}</p>
+            </div>
+        </div>
+
+    {% else %}
+
+        <a href="{{ post.url }}">
+        <h3>{{ post.data.title }}</h3>
+        </a>
+        <p><b>Published on: </b>{{ post.date.toUTCString() }}</p>
+
+        <p>{{ post.data.description }}</p>
+
+    {% endif %}
+</article>
+{% endmacro %}

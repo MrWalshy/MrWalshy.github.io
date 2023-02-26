@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker images</title>
+<link rel="stylesheet" href="/css/style.css">
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/Blog">Blog</a></li>
+        </ul>
+    </div>
+</nav>
+    
+    
+    
+
+</head>
+<body>
+    
+    
+    <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
+        <h1>Docker images</h1>
+        <p><b>Created on</b>: <time>Mon, 02 Jan 2023 00:00:00 GMT</time></p>
+        
+        <h2>Tags</h2>
+        <ul>
+            
+                <li>
+                    <a href="/blog/tag/docker">Docker</a>
+                </li>
+            
+        </ul>
+        <h1>Docker images</h1>
+<p>A Docker container is an instance of a Docker image that may be in the <code>Up</code> or <code>Exited</code> status, the main difference between
+a container and an image is that the container has a writable layer. Images are built-up of reusable layers which
+make them more efficient and performant with system resources:</p>
+<pre><code> -----------------------
+|        LAYER 3        |
+ -----------------------
+|        LAYER 2        |
+ -----------------------
+|        LAYER 1        |
+ -----------------------
+</code></pre>
+<p>Each layer of the image builds upon the previous layer, adding more to it; this could be a configuration, a set of applications, etc... We can build
+images completely from scratch when creating our own, but the preferred route is to use a base image to build ours on top of:</p>
+<pre><code> -----------------------
+|    CUSTOM_LAYER 3     |
+ -----------------------
+|    CUSTOM_LAYER 2     |
+ -----------------------
+|    CUSTOM_LAYER 1     |
+ -----------------------
+           ^
+           |
+ -----------------------
+|      BASE_IMAGE       |
+ -----------------------
+</code></pre>
+<p>We create our custom image using a special file called a <code>Dockerfile</code>, this specifies the base image and additional
+layers.</p>
+<p>Each layer in an image is read-only, meaning modifications cannot be made; this is so they can take part in the <strong>Union File System</strong>. When you start a container, Docker will add a read-write layer on top of the image layers; this allows the container to run as if with a normal Linux file system:</p>
+<pre><code> -----------------------             -----------------------
+|   READ/WRITE LAYER    |           | Container layer (RW)  |
+ -----------------------             -----------------------
+ -----------------------             -----------------------
+|    CUSTOM_LAYER 3     |           |                       |
+ -----------------------            |                       |
+|    CUSTOM_LAYER 2     |           |                       |
+ -----------------------            |                       |
+|    CUSTOM_LAYER 1     |           |     Image layer       |
+ -----------------------            |     (READ ONLY)       |
+           ^                        |                       |
+           |                        |                       |
+ -----------------------            |                       |
+|      BASE_IMAGE       |           |                       |
+ -----------------------             -----------------------
+</code></pre>
+<blockquote>
+<p>When you stop or delete a container, the additional read/write layer is deleted; by default, it is an ephemeral layer.</p>
+</blockquote>
+<h2>Creating an Nginx image from a <code>Dockerfile</code></h2>
+<p>First, create a directory and a file called <code>Dockerfile</code> inside of it:</p>
+<pre><code class="language-sh">mkdir ~/nginx-image
+mkdir ~/nginx-image/site
+touch ~/nginx-image/Dockerfile
+echo &quot;&lt;h1&gt;Hello world&lt;/h1&gt;&quot; &gt; ~/nginx-image/site/index.html
+</code></pre>
+<p>Open the <code>Dockerfile</code> and enter the following:</p>
+<pre><code>FROM nginx
+COPY ./site /usr/share/nginx/html
+</code></pre>
+<p>The first instruction, <code>FROM</code> indicates what the base image we are creating our own from is. It is required by all
+Dockerfiles. The following instructions are then layers added to the base image. In this case, the second instruction is
+<code>COPY</code> which copies the specified file into a destination:</p>
+<pre><code>FROM &lt;BASE_IMAGE&gt;
+COPY HOST_SOURCE CONTAINER_DESTINATION
+</code></pre>
+<h3>Building the image</h3>
+<p>Currently, we have a <code>Dockerfile</code> but no image. We will use the <code>docker build</code> command to build an image from a
+<code>Dockerfile</code>. Our custom images layers will look like:</p>
+<pre><code> -----------------------
+|       COPY ...        |
+ -----------------------
+           ^
+           |
+ -----------------------
+|        NGINX          |
+ -----------------------
+</code></pre>
+<p>Let's change into the directory where our <code>Dockerfile</code> is and build it to an image locally:</p>
+<pre><code class="language-sh">cd ~/nginx-image
+docker build -t custom_nginx .
+</code></pre>
+<p>The <code>-t</code> flag indicates we want to tag the image with the name <code>custom_nginx</code>, as we don't specify a release it defaults to
+<code>custom_nginx:latest</code>. The <code>.</code> indicates to look in the current directory for the <code>Dockerfile</code>:</p>
+<pre><code class="language-sh">morgan@morgan-server:~/nginx-image$ docker build -t custom_nginx .
+Sending build context to Docker daemon  3.584kB
+Step 1/2 : FROM nginx
+ ---&gt; a99a39d070bf
+Step 2/2 : COPY ./site /usr/share/nginx/html
+ ---&gt; 9b517cdb308d
+Successfully built 9b517cdb308d
+Successfully tagged custom_nginx:latest
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+</code></pre>
+<p>The output show Docker pulling the <code>nginx</code> image and then applying the custom <code>COPY</code> step. If we run the <code>docker images</code>
+command, or <code>docker image ls</code>, we will see the <code>custom_nginx</code> image we created and the <code>nginx</code> image that was pulled down:</p>
+<pre><code class="language-sh">REPOSITORY                 TAG       IMAGE ID       CREATED         SIZE
+custom_nginx               latest    9b517cdb308d   2 minutes ago   142MB
+nginx                      latest    a99a39d070bf   3 weeks ago     142MB
+</code></pre>
+<p>We can then run this local image with <code>docker run</code>:</p>
+<pre><code class="language-sh">docker run --name nginxy_container -dp 8080:80 custom_nginx
+</code></pre>
+<p>Running <code>docker ps</code> will reveal our running container with the image built using our <code>Dockerfile</code>:</p>
+<pre><code class="language-sh">CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                   NAMES
+9cb30038b9c0   custom_nginx   &quot;/docker-entrypoint.…&quot;   2 seconds ago   Up 2 seconds   0.0.0.0:8080-&gt;80/tcp, :::8080-&gt;80/tcp   nginxy_container
+</code></pre>
+<p>We can then <code>curl localhost:8080</code> to query the nginx web server, which should return the HTML we placed in the
+<code>index.html</code> file earlier:</p>
+<pre><code class="language-sh">&lt;h1&gt;Hello world&lt;/h1&gt;
+</code></pre>
+<p>Now that we have verified this, lets stop and remove the container:</p>
+<pre><code class="language-sh">morgan@morgan-server:~/nginx-image$ docker stop nginxy_container
+dnginxy_container
+morgan@morgan-server:~/nginx-image$ docker rm nginxy_container
+nginxy_container
+</code></pre>
+<h2>Deleting an image</h2>
+<p>To delete an image, list the available images with <code>docker images</code>:</p>
+<pre><code class="language-sh">REPOSITORY                 TAG       IMAGE ID       CREATED          SIZE
+custom_nginx               latest    9b517cdb308d   10 minutes ago   142MB
+nginx                      latest    a99a39d070bf   3 weeks ago      142MB
+</code></pre>
+<p>Then use <code>docker rmi</code> or <code>docker image rm</code> to remove specified images:</p>
+<pre><code class="language-sh">docker rmi custom_nginx:latest nginx:latest
+</code></pre>
+<p>Running <code>docker images</code> again will verify the image was deleted:</p>
+<pre><code class="language-sh">REPOSITORY                 TAG       IMAGE ID       CREATED         SIZE
+</code></pre>
+<blockquote>
+<p>Did you get an error when trying to remove the image? If you did, it is likely that your image is being used by a
+container. Stop and delete the container(s) using the image first.</p>
+</blockquote>
+
+    </div>
+
+
+    
+    <script src="/scripts/nav.js"></script>
+
+</body>
+</html>

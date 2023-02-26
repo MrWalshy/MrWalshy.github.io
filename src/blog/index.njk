@@ -1,0 +1,46 @@
+---
+layout: "layouts/base.njk"
+title: "Blog"
+---
+
+{# Import the Card macro #}
+{% from 'components/Card.njk' import Card %}
+
+{# Layout: 2 column
+   - Left column: Only on tablet or bigger, category selector
+        - What to do on mobile?
+    - Right column: Recently posted, etc...
+#}
+
+<div class="row w-100">
+    {# hide categories on smaller screens for now #}
+    <div class="col-md-12 col-3">
+        <aside>
+            <header class="bg-dark fg-light w-100 p-16 mb-16">
+                <h2>Categories</h2>
+            </header>
+            <ul>
+                {% for tag in collections.blogTags %}
+                    <li><b><a style="text-decoration: none" href="/blog/tag/{{ tag }}">{{ tag }}</a></b></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </div>
+
+    <div class="col-md-12 col-9">
+        <article>
+            <header class="bg-primary fg-light w-100 p-16 mb-16">
+                <h2>Recently posted...</h2>
+            </header>
+            {% for post in collections.posts | reverse %}
+                    {% if (loop.index <= 5) %}
+                        {{ Card(post) }}
+                        {# {% Card title=post.data.title, link=post.url, description=post.data.description, imageSrc=post.data.imageSrc %} #}
+                        {% if (loop.index != 5) %}
+                            <hr />
+                        {% endif %}
+                    {% endif %}
+            {% endfor %}
+        </article>
+    </div>
+</div>

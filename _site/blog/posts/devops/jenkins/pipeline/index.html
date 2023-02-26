@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is a Jenkins Pipeline project?</title>
+<link rel="stylesheet" href="/css/style.css">
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/Blog">Blog</a></li>
+        </ul>
+    </div>
+</nav>
+    
+    
+    
+
+</head>
+<body>
+    
+    
+    <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
+        <h1>What is a Jenkins Pipeline project?</h1>
+        <p><b>Created on</b>: <time>Wed, 01 Feb 2023 00:00:00 GMT</time></p>
+        
+        <h2>Tags</h2>
+        <ul>
+            
+                <li>
+                    <a href="/blog/tag/jenkins">Jenkins</a>
+                </li>
+            
+                <li>
+                    <a href="/blog/tag/devops">DevOps</a>
+                </li>
+            
+        </ul>
+        <h1>Pipeline projects</h1>
+<p>A pipeline project in Jenkins allows us to specify <em>stages</em> to our build process, this allows us to execute specific commands in a specific
+order, such as running unit tests before then packaging the application to a file.</p>
+<h2>Creating a Pipeline project</h2>
+<p>When creating a new project, select the <strong>Pipeline</strong> option:</p>
+<p><img src="https://user-images.githubusercontent.com/29315632/216035689-df67e533-6019-43a4-b47b-0320f38049b6.png" alt="image"></p>
+<p>Once you have created the project, under <strong>Configure</strong>, set the <strong>Definition</strong> to <em>Pipeline script from SCM</em>. This will allow you to configure a SCM repository to pull the project from, it is expected that a <code>Jenkinsfile</code> exists in the root of the repository.</p>
+<p><img src="https://user-images.githubusercontent.com/29315632/216044390-d35313c1-23e4-4816-8216-9cf1f24ffde0.png" alt="image"></p>
+<p>At the bottom of the <strong>Pipeline</strong> section, deselect <strong>Lightweight checkout</strong> if you are using web hooks in your project. This option may interfere with the hook when an event is received on the <code>host/github-webhook/</code> endpoint:</p>
+<p><img src="https://user-images.githubusercontent.com/29315632/216044903-229c1230-033b-48eb-83ab-a9c883cd6236.png" alt="image"></p>
+<h3>Jenkinsfile</h3>
+<p>The <code>Jenkinsfile</code> is a special file that a pipeline Jenkins project will automatically look for in your repository, it contains a Groovy script instructing Jenkins what stages exist in the pipeline, and the steps to carry out in those stages.</p>
+<blockquote>
+<p>There are two possible syntaxes to use, declarative and script. We are using the declarative approach here.</p>
+</blockquote>
+<p>First, we create the <code>pipeline</code> block:</p>
+<pre><code class="language-groovy">pipeline{
+
+}
+</code></pre>
+<p>This defines a pipeline to be executed by Jenkins, a mandatory <code>agent</code> must be specified:</p>
+<pre><code class="language-groovy">pipeline{
+  agent any
+}
+</code></pre>
+<p>This <code>agent</code> will set up the executor for the pipeline and clone down the registered SCM repository. Each pipeline then has some <code>stages</code>:</p>
+<pre><code class="language-groovy">pipeline{
+  agent any
+  stages{
+    stage(&quot;Build&quot;){
+    
+    }
+    stage(&quot;Deploy&quot;){
+    
+    }
+  }
+}
+</code></pre>
+<p>A <code>stage</code> represents a sequence of commands to execute, we can pass shell commands to the <code>sh</code> command:</p>
+<pre><code class="language-groovy">pipeline{
+  agent any
+  stages{
+    stage(&quot;Build&quot;){
+      steps{
+        sh &quot;echo Building&quot;
+      }
+    }
+    stage(&quot;Deploy&quot;){
+      steps{
+        sh &quot;echo Deploying&quot;
+      }
+    }
+  }
+}
+</code></pre>
+
+    </div>
+
+
+    
+    <script src="/scripts/nav.js"></script>
+
+</body>
+</html>

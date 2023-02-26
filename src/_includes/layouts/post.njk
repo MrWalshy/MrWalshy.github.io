@@ -1,0 +1,27 @@
+{% extends "layouts/base.njk" %}
+{# We inherit blocks from base.njk that we can override :D to create new layout types while reusing boilerplate #}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block content %}
+    <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
+        <h1>{{ title }}</h1>
+        <p><b>Created on</b>: <time>{{ page.date.toUTCString() }}</time></p>
+        
+        <h2>Tags</h2>
+        <ul>
+            {% for tag in tags %}
+                <li>
+                    <a href="/blog/tag/{{ tag | slugify }}">{{ tag }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {{ content | safe }}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script src="/scripts/nav.js"></script>
+{% endblock %}
