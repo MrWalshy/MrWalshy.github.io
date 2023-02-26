@@ -1,7 +1,11 @@
 const lodashChunk = require("lodash").chunk;
 const Card = require('./src/_includes/components/Card');
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
+    // add plugins
+    eleventyConfig.addPlugin(syntaxHighlight);
+    
     // add passthrough for assets folder, allows it to be copied to _site
     eleventyConfig.addPassthroughCopy("src/assets/");
     eleventyConfig.addPassthroughCopy("src/css/");
