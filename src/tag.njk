@@ -10,10 +10,36 @@ eleventyComputed:
   title: Posts tagged with {{ tag }}
 ---
 
-<h1>Posts tagged with {{ tag }}</h1>
+{# Import the Card macro #}
+{% from 'components/Card.njk' import Card %}
 
-{% for post in collections[tag] %}
-    <li>
-        <a href="{{ post.url }}">{{ post.data.title }}</a>
-    </li>
-{% endfor %}
+<div class="row w-100">
+  {# Categories selector #}
+  <div class="col-md-12 col-3">
+    <aside>
+      <header class="bg-dark fg-light w-100 p-16 mb-16">
+        <h2>Categories</h2>
+      </header>
+      <ul>
+        {% for tag in collections.blogTags %}
+          <li><b><a style="text-decoration: none" href="/blog/tag/{{ tag | slugify }}">{{ tag }}</a></b></li>
+        {% endfor %}
+      </ul>
+    </aside>
+  </div>
+
+  {# List of posts with given tag #}
+  <div class="col-md-12 col-9">
+    <header class="bg-primary fg-light w-100 p-16 mb-16">
+      <h2>Posts tagged with {{ tag }}</h2>
+    </header>
+    <div class="w-100">
+      {% for post in collections[tag] | reverse %}
+        {{ Card(post) }}
+        {% if (loop.index != collections[tag].length) %}
+            <hr />
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

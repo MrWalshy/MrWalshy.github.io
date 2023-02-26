@@ -1,3 +1,4 @@
+const lodashChunk = require("lodash").chunk;
 const Card = require('./src/_includes/components/Card');
 
 module.exports = function(eleventyConfig) {
@@ -25,6 +26,31 @@ module.exports = function(eleventyConfig) {
         });
         return tagsSet;
     });
+
+    // add collection for double pagination
+    // - https://github.com/11ty/eleventy/issues/332#issuecomment-445236776
+    // eleventyConfig.addCollection("doublePaginatedPosts", collectionApi => {
+    //     const tagsSet = new Set();
+    //     collectionApi.getFilteredByGlob("src/blog/posts/**/*.md").forEach(post => {
+    //         if (!post.data.tags) return;
+    //         post.data.tags.forEach(tag => tagsSet.add(tag));
+    //     });
+
+    //     const paginationSize = 3, tagMap = [], tagArray = [...tagsSet];
+    //     tagArray.forEach(tagName => {
+    //         const tagItems = collectionApi.getFilteredByTag(tagName);
+    //         const pagedItems = lodashChunk(tagItems, paginationSize);
+
+    //         for (let pageNum = 0, max = pagedItems.length; pageNum < max; pageNum++) {
+    //             tagMap.push({
+    //                 tagName,
+    //                 pageNumber: pageNum,
+    //                 pageData: pagedItems[pageNum]
+    //             });
+    //         }
+    //     });
+    //     return tagMap;
+    // });
 
     return {
         dir: {
