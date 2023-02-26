@@ -18,7 +18,7 @@
 </nav>
     
     
-    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
 
 </head>
 <body>
@@ -41,31 +41,7 @@
 <p>By default, a Docker container is isolated when it runs; any data changed within the read-write layer during the containers runtime is lost
 after the container stops or is deleted. Volumes can be used to persist data, even if a container stops; they can also be attached
 to other containers if wanted.</p>
-<pre><code class="language-sh">                         -----------------------             
-                        |        VOLUME         |           
-                         ----------------------- 
-                                   ^
-                                   |
-                                   ∨
- ------------------------------------------------------------------------
-|                                 CONTAINER                              |
-|  -----------------------             -----------------------           |
-| |   READ/WRITE LAYER    |   &lt;----   | Container layer (RW)  |          |
-|  -----------------------             -----------------------           |
-|  -----------------------             -----------------------           |
-| |    CUSTOM_LAYER 3     |           |                       |          |
-|  -----------------------            |                       |          |
-| |    CUSTOM_LAYER 2     |           |                       |          |
-|  -----------------------    &lt;----   |                       |          |
-| |    CUSTOM_LAYER 1     |           |     Image layer       |          |
-|  -----------------------            |     (READ ONLY)       |          |
-|            ^                        |                       |          |
-|            |                        |                       |          |
-|  -----------------------            |                       |          |
-| |      BASE_IMAGE       |           |                       |          |
-|  -----------------------             -----------------------           |
- ------------------------------------------------------------------------
-</code></pre>
+<pre class="language-sh"><code class="language-sh">                         -----------------------             <br>                        <span class="token operator">|</span>        VOLUME         <span class="token operator">|</span>           <br>                         ----------------------- <br>                                   ^<br>                                   <span class="token operator">|</span><br>                                   ∨<br> ------------------------------------------------------------------------<br><span class="token operator">|</span>                                 CONTAINER                              <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------             -----------------------           <span class="token operator">|</span><br><span class="token operator">|</span> <span class="token operator">|</span>   READ/WRITE LAYER    <span class="token operator">|</span>   <span class="token operator">&lt;</span>----   <span class="token operator">|</span> Container layer <span class="token punctuation">(</span>RW<span class="token punctuation">)</span>  <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------             -----------------------           <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------             -----------------------           <span class="token operator">|</span><br><span class="token operator">|</span> <span class="token operator">|</span>    CUSTOM_LAYER <span class="token number">3</span>     <span class="token operator">|</span>           <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------            <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span> <span class="token operator">|</span>    CUSTOM_LAYER <span class="token number">2</span>     <span class="token operator">|</span>           <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------    <span class="token operator">&lt;</span>----   <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span> <span class="token operator">|</span>    CUSTOM_LAYER <span class="token number">1</span>     <span class="token operator">|</span>           <span class="token operator">|</span>     Image layer       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------            <span class="token operator">|</span>     <span class="token punctuation">(</span>READ ONLY<span class="token punctuation">)</span>       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>            ^                        <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>            <span class="token operator">|</span>                        <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------            <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span> <span class="token operator">|</span>      BASE_IMAGE       <span class="token operator">|</span>           <span class="token operator">|</span>                       <span class="token operator">|</span>          <span class="token operator">|</span><br><span class="token operator">|</span>  -----------------------             -----------------------           <span class="token operator">|</span><br> ------------------------------------------------------------------------</code></pre>
 <p>As demonstrated in the above diagram, a volume is external to the container.</p>
 <blockquote>
 <p>A volume differs from a bind mount, although a bind mount can be mounted using the <code>--volume</code> flag to <code>docker run</code>. Volumes basically represent
@@ -76,15 +52,11 @@ communication with the hosts file system instead.</p>
 <p>Docker exposes the <code>docker volume</code> command for managing volumes, this can be used for creating, reading, updating and deleting volumes.</p>
 <h3>Creating a volume</h3>
 <p>To create a volume, use <code>docker volume create &lt;VOLUME_NAME&gt;</code>:</p>
-<pre><code class="language-sh">docker volume create my_volume
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> volume create my_volume</code></pre>
 <p>If the volume name is omitted, a random name will be generated and assigned to the volume.</p>
 <h3>Listing volumes</h3>
 <p>Use the <code>docker volume ls</code> command to list out any local Docker volumes that your Docker host is aware of:</p>
-<pre><code class="language-sh">morgan@morgan-server:~$ docker volume ls
-DRIVER    VOLUME NAME
-local     my_volume
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">docker</span> volume <span class="token function">ls</span><br>DRIVER    VOLUME NAME<br><span class="token builtin class-name">local</span>     my_volume</code></pre>
 <p>As output, we get the <code>DRIVER</code> and <code>VOLUME NAME</code> of our volumes. The <code>DRIVER</code> states how and where the volume is stored, in this case
 locally. This tells the Docker host how to locate the volume.</p>
 <p>If we only wanted to see <code>local</code> volumes, we could specify this using the <code>--filter</code>/<code>-f</code> flag:</p>
@@ -98,35 +70,15 @@ locally. This tells the Docker host how to locate the volume.</p>
 <li><strong>Mountpoint</strong>: Where on the host the volume is stored</li>
 <li><strong>Name</strong>: The unique name for the volume</li>
 </ul>
-<pre><code class="language-sh">morgan@morgan-server:~$ docker volume inspect my_volume
-[
-    {
-        &quot;CreatedAt&quot;: &quot;2023-02-03T11:05:38Z&quot;,
-        &quot;Driver&quot;: &quot;local&quot;,
-        &quot;Labels&quot;: {},
-        &quot;Mountpoint&quot;: &quot;/var/lib/docker/volumes/my_volume/_data&quot;,
-        &quot;Name&quot;: &quot;my_volume&quot;,
-        &quot;Options&quot;: {},
-        &quot;Scope&quot;: &quot;local&quot;
-    }
-]
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">docker</span> volume inspect my_volume<br><span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>        <span class="token string">"CreatedAt"</span><span class="token builtin class-name">:</span> <span class="token string">"2023-02-03T11:05:38Z"</span>,<br>        <span class="token string">"Driver"</span><span class="token builtin class-name">:</span> <span class="token string">"local"</span>,<br>        <span class="token string">"Labels"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>,<br>        <span class="token string">"Mountpoint"</span><span class="token builtin class-name">:</span> <span class="token string">"/var/lib/docker/volumes/my_volume/_data"</span>,<br>        <span class="token string">"Name"</span><span class="token builtin class-name">:</span> <span class="token string">"my_volume"</span>,<br>        <span class="token string">"Options"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>,<br>        <span class="token string">"Scope"</span><span class="token builtin class-name">:</span> <span class="token string">"local"</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">]</span></code></pre>
 <h3>Deleting volumes</h3>
 <p>A volume is deleted using the <code>docker volume rm &lt;VOLUME_NAME&gt;</code> command, this is a dangerous operation as it permanently
 deletes the data a volume holds:</p>
-<pre><code class="language-sh">docker volume rm my_volume
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> volume <span class="token function">rm</span> my_volume</code></pre>
 <h3>Pruning volumes</h3>
 <p>The <code>docker volume prune</code> command is used to remove unused containers, that is it will remove all containers which are not in
 use by at least one container:</p>
-<pre><code class="language-sh">morgan@morgan-server:~$ docker volume prune
-WARNING! This will remove all local volumes not used by at least one container.
-Are you sure you want to continue? [y/N] y
-Deleted Volumes:
-my_volume
-
-Total reclaimed space: 0B
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">docker</span> volume prune<br>WARNING<span class="token operator">!</span> This will remove all <span class="token builtin class-name">local</span> volumes not used by at least one container.<br>Are you sure you want to continue? <span class="token punctuation">[</span>y/N<span class="token punctuation">]</span> y<br>Deleted Volumes:<br>my_volume<br><br>Total reclaimed space: 0B</code></pre>
 <p>As <code>my_volume</code> was empty, there was <code>0B</code> (0 Bytes) of memory reclaimed. This will differ dependant on your volumes size.</p>
 <h2>Attaching a volume to a container</h2>
 <p>There are two main ways to attach a volume to a container when it is ran with <code>docker run</code>:</p>
@@ -136,56 +88,32 @@ Total reclaimed space: 0B
 </ul>
 <h3><code>--volume</code></h3>
 <p>To mount a volume, we follow the format:</p>
-<pre><code class="language-sh">docker run -v VOLUME:MOUNT_POINT:OPTIONS
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">-v</span> VOLUME:MOUNT_POINT:OPTIONS</code></pre>
 <p>The <code>VOLUME</code> is the volumes name, this could also be a bind-mount directory if bind-mounting. The <code>MOUNT_POINT</code> is exactly that,
 where to mount the volume in the container. The <code>OPTIONS</code> are optional, and can be used to change the behaviour of the volume; <code>ro</code> would make the volume read-only for example.</p>
 <p>Let's create a volume and attach it to a container:</p>
-<pre><code class="language-sh">docker volume create bash_volume
-docker run -dit \
-           --volume bash_volume:/var/opt/my_volume \
-           --name my_bash \
-           bash:latest bash
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> volume create bash_volume<br><span class="token function">docker</span> run <span class="token parameter variable">-dit</span> <span class="token punctuation">\</span><br>           <span class="token parameter variable">--volume</span> bash_volume:/var/opt/my_volume <span class="token punctuation">\</span><br>           <span class="token parameter variable">--name</span> my_bash <span class="token punctuation">\</span><br>           bash:latest <span class="token function">bash</span></code></pre>
 <blockquote>
 <p>If the specified volume does not exist, Docker will create it on the host for you</p>
 </blockquote>
 <p>If we <code>docker ps</code>, we will see the running container:</p>
-<pre><code class="language-sh">CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS        PORTS     NAMES
-8f173439748b   bash:latest   &quot;docker-entrypoint.s…&quot;   2 seconds ago   Up 1 second             my_bash
-</code></pre>
+<pre class="language-sh"><code class="language-sh">CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS        PORTS     NAMES<br>8f173439748b   bash:latest   <span class="token string">"docker-entrypoint.s…"</span>   <span class="token number">2</span> seconds ago   Up <span class="token number">1</span> second             my_bash</code></pre>
 <p>We will then attach to the container:</p>
-<pre><code class="language-sh">docker attach my_bash
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> attach my_bash</code></pre>
 <p>If we list the contents of <code>/var/opt</code>, we will see the <code>my_volume</code> that we attached earlier:</p>
-<pre><code class="language-sh">bash-5.2# ls /var/opt/
-my_volume
-</code></pre>
+<pre class="language-sh"><code class="language-sh">bash-5.2<span class="token comment"># ls /var/opt/</span><br>my_volume</code></pre>
 <p>Let's add some content to the volume:</p>
-<pre><code class="language-sh">echo &quot;Hello world&quot; &gt; /var/opt/my_volume/readme.txt
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">echo</span> <span class="token string">"Hello world"</span> <span class="token operator">></span> /var/opt/my_volume/readme.txt</code></pre>
 <p>Now, let's stop and delete the container that the volume is attached to. The aim is to attach the volume to a new container to
 prove that the data persists between uses:</p>
-<pre><code class="language-sh">docker stop my_bash
-docker rm my_bash
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> stop my_bash<br><span class="token function">docker</span> <span class="token function">rm</span> my_bash</code></pre>
 <p>We can now launch a new container, this time we will just have it print the contents of the file created earlier to standard output:</p>
-<pre><code class="language-sh">docker run --volume bash_volume:/var/opt/my_volume \
-           --name my_new_bash \
-           bash:latest bash -c &quot;cat /var/opt/my_volume/readme.txt&quot;
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">--volume</span> bash_volume:/var/opt/my_volume <span class="token punctuation">\</span><br>           <span class="token parameter variable">--name</span> my_new_bash <span class="token punctuation">\</span><br>           bash:latest <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"cat /var/opt/my_volume/readme.txt"</span></code></pre>
 <p>This will output the contents of <code>readme.txt</code> stored on the volume called <code>my_volume</code>:</p>
-<pre><code class="language-sh">Hello world
-</code></pre>
+<pre class="language-sh"><code class="language-sh">Hello world</code></pre>
 <h3><code>--mount</code></h3>
 <p>The <code>--mount</code> flag is a more verbose way of mounting a volume, it has the following format:</p>
-<pre><code class="language-sh">docker run --mount \
-  'type=&lt;TYPE&gt;, \
-   src=&lt;SOURCE&gt;, \
-   dst=&lt;DESTINATION&gt;, \
-   volume-driver=&lt;DRIVER&gt;, \
-   &lt;OPTIONS&gt;'
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">--mount</span> <span class="token punctuation">\</span><br>  <span class="token string">'type=&lt;TYPE>, \<br>   src=&lt;SOURCE>, \<br>   dst=&lt;DESTINATION>, \<br>   volume-driver=&lt;DRIVER>, \<br>   &lt;OPTIONS>'</span></code></pre>
 <p>The <code>--mount</code> flag accepts a comma-separated string of <code>key=value</code> pairs:</p>
 <ul>
 <li><code>type</code>: The type of the volume being mounted</li>
@@ -195,13 +123,7 @@ docker rm my_bash
 <li><code>options</code>: These include things like <code>readonly</code> and <code>rw</code> for read/write</li>
 </ul>
 <p>We can print the contents of the file from the earlier example to demonstrate using <code>--mount</code>:</p>
-<pre><code class="language-sh">docker run --mount \ 
-     'type=volume,\
-     src=bash_volume,\
-     dst=/var/opt/my_volume,\
-     volume-driver=local' \
-     bash -c &quot;cat /var/opt/my_volume/readme.txt&quot;
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">--mount</span> <span class="token punctuation">\</span> <br>     <span class="token string">'type=volume,\<br>     src=bash_volume,\<br>     dst=/var/opt/my_volume,\<br>     volume-driver=local'</span> <span class="token punctuation">\</span><br>     <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"cat /var/opt/my_volume/readme.txt"</span></code></pre>
 
     </div>
 

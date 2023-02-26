@@ -18,7 +18,7 @@
 </nav>
     
     
-    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
 
 </head>
 <body>
@@ -50,11 +50,7 @@
 <h2>Dockerising a JAR file</h2>
 <p>In this example, we will dockerise a Spring Boot web server which serves a static website. Let's first create a directory
 for the project and download the JAR file:</p>
-<pre><code class="language-sh">mkdir dockerised_jar
-cd dockerised_jar/
-wget https://github.com/MrWalshyType2/SeleniumShoppingTestSite/releases/download/v1.0.0/test_shopping_site.jar
-touch Dockerfile
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">mkdir</span> dockerised_jar<br><span class="token builtin class-name">cd</span> dockerised_jar/<br><span class="token function">wget</span> https://github.com/MrWalshyType2/SeleniumShoppingTestSite/releases/download/v1.0.0/test_shopping_site.jar<br><span class="token function">touch</span> Dockerfile</code></pre>
 <p>Open the <code>Dockerfile</code> and enter the following:</p>
 <pre><code># Base image of Java version 17
 FROM openjdk:17
@@ -68,20 +64,15 @@ WORKDIR /usr/src/app
 CMD [&quot;java&quot;, &quot;-jar&quot;, &quot;test_shopping_site.jar&quot;]
 </code></pre>
 <p>Now that we have a <code>Dockerfile</code>, we can build an image:</p>
-<pre><code class="language-sh">docker build -t shopping_site .
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> build <span class="token parameter variable">-t</span> shopping_site <span class="token builtin class-name">.</span></code></pre>
 <p>We can then create a container from the built image:</p>
-<pre><code class="language-sh">docker run -dp 8080:3000 --name my_website shopping_site
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">-dp</span> <span class="token number">8080</span>:3000 <span class="token parameter variable">--name</span> my_website shopping_site</code></pre>
 <p>Now, open <code>localhost:8080</code> in your browser to open the website served by the Dockerised Java application. If all went well, you should see the following in your browser:</p>
 <p><img src="https://user-images.githubusercontent.com/29315632/216304156-4720fb84-3fa3-401e-b595-a516684129ba.png" alt="image"></p>
 <p>We can then clean up once we are done:</p>
-<pre><code class="language-sh">docker stop my_website
-docker rm my_website
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> stop my_website<br><span class="token function">docker</span> <span class="token function">rm</span> my_website</code></pre>
 <p>We can then remove the image if we no longer need it as well:</p>
-<pre><code class="language-sh">docker rmi shopping_site
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> rmi shopping_site</code></pre>
 
     </div>
 

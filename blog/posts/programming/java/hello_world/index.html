@@ -18,7 +18,7 @@
 </nav>
     
     
-    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
 
 </head>
 <body>
@@ -43,36 +43,17 @@
         <p>A commonality amongst programmers is that in any new language we meet, we write a <code>“Hello World!”</code> program – a simple application which will output those exact words to the screen.</p>
 <hr>
 <p>To follow along, first create a new file called <code>Runner.java</code> in a directory of your choice:</p>
-<pre><code class="language-bash">mkdir hello-world 
-cd hello-world 
-touch Runner.java 
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> hello-world <br><span class="token builtin class-name">cd</span> hello-world <br><span class="token function">touch</span> Runner.java </code></pre>
 <p>The above <code>touch</code> command is not available on WIndows by default, please ensure if on Windows you are using Git Bash or the Windows Subsystem for Linux (WSL)... Or you could just use <code>echo</code> with the redirection operator like so: <code>echo &gt; Runner.java</code> :)</p>
 <p>Once we have created the file, type <code>notepad Runner.java</code> to open the file in the Notepad application on Windows or use <code>nano Runner.java</code> to use the nano text editor in the console (Git Bash on Windows only, usually preinstalled on Linux/GNU based systems). Then type in the following code:</p>
-<pre><code class="language-java">public class Runner { 
-
-    public static void main(String[] args) { 
-        System.out.println(“Hello world”); 
-    } 
-}
-</code></pre>
+<pre class="language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Runner</span> <span class="token punctuation">{</span> <br><br>    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> <br>        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>“<span class="token class-name">Hello</span> world”<span class="token punctuation">)</span><span class="token punctuation">;</span> <br>    <span class="token punctuation">}</span> <br><span class="token punctuation">}</span></code></pre>
 <p>Once you have entered the code, save, and exit back to the console. Then type the following commands (except comments starting with a hash symbol) to compile and run our code:</p>
-<pre><code class="language-bash"># compile the Runner.java file as a class file using the javac tool 
-javac Runner.java 
-# run the compiled class file (which is in the same directory) using the java tool 
-# - do not specify .class or the compiled file will not be executed 
-java Runner
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># compile the Runner.java file as a class file using the javac tool </span><br>javac Runner.java <br><span class="token comment"># run the compiled class file (which is in the same directory) using the java tool </span><br><span class="token comment"># - do not specify .class or the compiled file will not be executed </span><br><span class="token function">java</span> Runner</code></pre>
 <ul>
 <li>Adding <code>.class</code> to the java Runner command will produce a class loader error, where the JVM was not able to load the specified class file.</li>
 </ul>
 <p>If done correctly, you will see something like the following outputted in the console window:</p>
-<pre><code class="language-bash">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
-$ javac Runner.java
-
-Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world 
-$ java Runner Hello world
-</code></pre>
+<pre class="language-bash"><code class="language-bash">Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world <br>$ javac Runner.java<br><br>Morgan Walsh@DESKTOP-LT9E09K MINGW64 ~/hello-world <br>$ <span class="token function">java</span> Runner Hello world</code></pre>
 <h2>Program breakdown</h2>
 <p>A lot is going on in the background to make our program run, we are already aware of this; now it is time to investigate the structure of how we write our programs.</p>
 <hr>
@@ -81,10 +62,7 @@ $ java Runner Hello world
 <li>A class is a blueprint which defines the data and behaviours that describe some object.</li>
 </ul>
 <p>In the Hello World example, we create a class called <code>Runner</code>:</p>
-<pre><code class="language-java">public class Runner {
-
-}
-</code></pre>
+<pre class="language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Runner</span> <span class="token punctuation">{</span><br><br><span class="token punctuation">}</span></code></pre>
 <ul>
 <li>The first line declaring the class, <code>public class Runner</code>, is known as the class header.</li>
 <li><code>public</code> is a special Java keyword known as an access modifier, just know that for now it means that any other class can use the class called <code>Runner</code>.</li>
@@ -94,10 +72,7 @@ $ java Runner Hello world
 <li>Code outside of a class is an error in Java, Java code must live inside a class aside from package declarations, imports, and class declarations.</li>
 </ul>
 <p>Inside the class body, there is a special unit of code known as a method:</p>
-<pre><code class="language-java">public static void main(String[] args) { 
-    System.out.println(“Hello world”);
-}
-</code></pre>
+<pre class="language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> <br>    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>“<span class="token class-name">Hello</span> world”<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>A method is a self-contained, reusable block of code that can be called/invoked by another method. The main method shown above is a special type of method that indicates to the JVM that the program should start here.</p>
 <ul>
 <li><code>public static void main(String[] args)</code> is the method header, this identifies the methods accessibility, output, name, and inputs.</li>

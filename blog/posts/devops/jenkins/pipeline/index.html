@@ -18,7 +18,7 @@
 </nav>
     
     
-    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
 
 </head>
 <body>
@@ -56,45 +56,13 @@ order, such as running unit tests before then packaging the application to a fil
 <p>There are two possible syntaxes to use, declarative and script. We are using the declarative approach here.</p>
 </blockquote>
 <p>First, we create the <code>pipeline</code> block:</p>
-<pre><code class="language-groovy">pipeline{
-
-}
-</code></pre>
+<pre class="language-groovy"><code class="language-groovy">pipeline<span class="token punctuation">{</span><br><br><span class="token punctuation">}</span></code></pre>
 <p>This defines a pipeline to be executed by Jenkins, a mandatory <code>agent</code> must be specified:</p>
-<pre><code class="language-groovy">pipeline{
-  agent any
-}
-</code></pre>
+<pre class="language-groovy"><code class="language-groovy">pipeline<span class="token punctuation">{</span><br>  agent any<br><span class="token punctuation">}</span></code></pre>
 <p>This <code>agent</code> will set up the executor for the pipeline and clone down the registered SCM repository. Each pipeline then has some <code>stages</code>:</p>
-<pre><code class="language-groovy">pipeline{
-  agent any
-  stages{
-    stage(&quot;Build&quot;){
-    
-    }
-    stage(&quot;Deploy&quot;){
-    
-    }
-  }
-}
-</code></pre>
+<pre class="language-groovy"><code class="language-groovy">pipeline<span class="token punctuation">{</span><br>  agent any<br>  stages<span class="token punctuation">{</span><br>    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">"Build"</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><br>    <br>    <span class="token punctuation">}</span><br>    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">"Deploy"</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><br>    <br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
 <p>A <code>stage</code> represents a sequence of commands to execute, we can pass shell commands to the <code>sh</code> command:</p>
-<pre><code class="language-groovy">pipeline{
-  agent any
-  stages{
-    stage(&quot;Build&quot;){
-      steps{
-        sh &quot;echo Building&quot;
-      }
-    }
-    stage(&quot;Deploy&quot;){
-      steps{
-        sh &quot;echo Deploying&quot;
-      }
-    }
-  }
-}
-</code></pre>
+<pre class="language-groovy"><code class="language-groovy">pipeline<span class="token punctuation">{</span><br>  agent any<br>  stages<span class="token punctuation">{</span><br>    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">"Build"</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><br>      steps<span class="token punctuation">{</span><br>        sh <span class="token interpolation-string"><span class="token string">"echo Building"</span></span><br>      <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br>    <span class="token function">stage</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">"Deploy"</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span><br>      steps<span class="token punctuation">{</span><br>        sh <span class="token interpolation-string"><span class="token string">"echo Deploying"</span></span><br>      <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
 
     </div>
 

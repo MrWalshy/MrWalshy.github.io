@@ -18,7 +18,7 @@
 </nav>
     
     
-    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
 
 </head>
 <body>
@@ -41,10 +41,7 @@
 might not reside in the image your container is created from.</p>
 <p>In this example, we create a <strong>Nginx</strong> server to serve a website from the hosts file system. We do this by attaching a <strong>volume</strong>
 to the container when we start it. Let's create a location on the Docker host to contain our site:</p>
-<pre><code class="language-sh">sudo mkdir /srv/www
-echo &quot;&lt;h1&gt;Hello world&lt;/h1&gt;&quot; &gt; /srv/www/index.html
-sudo chmod -R 755 /srv/www
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">mkdir</span> /srv/www<br><span class="token builtin class-name">echo</span> <span class="token string">"&lt;h1>Hello world&lt;/h1>"</span> <span class="token operator">></span> /srv/www/index.html<br><span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">755</span> /srv/www</code></pre>
 <blockquote>
 <p><code>/srv</code> is the directory recommended by the <a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/srv.html">Unix File System Hierarchy spec</a>.</p>
 </blockquote>
@@ -53,32 +50,21 @@ sudo chmod -R 755 /srv/www
 flag to pass a volume to the container. A <strong>volume</strong> being a mechanism for persisting data generated and used by Docker containers, they
 are managed by Docker itself. Volumes can also be shared across multiple containers if needed.</p>
 <p>When passing the <code>-v</code> flag to <code>docker run</code>, there is a specific format expected:</p>
-<pre><code class="language-sh">docker run -v HOST_MOUNT_PATH:CONTAINER_MOUNT_PATH
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">-v</span> HOST_MOUNT_PATH:CONTAINER_MOUNT_PATH</code></pre>
 <p>When a single argument is passed to <code>-v</code>, like <code>-v /srv/www</code>, it allocates space and mounts the volume at the specified
 location in the container.</p>
 <p>When given two arguments, the directory on the host is mounted inside the container at the specified container path. This will
 expose any files on the host in the given directory to the container:</p>
-<pre><code class="language-sh">docker run -v /srv/www:/usr/share/nginx/html -p 8080:80 -d nginx
-</code></pre>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> run <span class="token parameter variable">-v</span> /srv/www:/usr/share/nginx/html <span class="token parameter variable">-p</span> <span class="token number">8080</span>:80 <span class="token parameter variable">-d</span> nginx</code></pre>
 <p>To ensure the container runs in the background, the <code>-d</code> flag for detaching a container was passed to <code>docker run</code>. The <code>-p</code>
 flag was used to expose port <code>80</code> in the container to <code>8080</code> on the host system, allowing you to run <code>curl localhost:8080</code>
 to query for the <code>index.html</code> file created earlier:</p>
-<pre><code class="language-sh">morgan@morgan-server:~$ curl localhost:8080
-&lt;h1&gt;Hello world&lt;/h1&gt;
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">curl</span> localhost:8080<br><span class="token operator">&lt;</span>h<span class="token operator"><span class="token file-descriptor important">1</span>></span>Hello world<span class="token operator">&lt;</span>/h<span class="token operator"><span class="token file-descriptor important">1</span>></span></code></pre>
 <p>If we run <code>docker ps</code>, we will see that port <code>8080</code> on the host is being forwarded to port <code>80</code> on the container:</p>
-<pre><code class="language-sh">morgan@morgan-server:~$ docker ps
-CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                   NAMES
-ecec582a24f3   nginx     &quot;/docker-entrypoint.…&quot;   2 minutes ago   Up 2 minutes   0.0.0.0:8080-&gt;80/tcp, :::8080-&gt;80/tcp   beautiful_mendeleev
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">docker</span> <span class="token function">ps</span><br>CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                   NAMES<br>ecec582a24f3   nginx     <span class="token string">"/docker-entrypoint.…"</span>   <span class="token number">2</span> minutes ago   Up <span class="token number">2</span> minutes   <span class="token number">0.0</span>.0.0:8080-<span class="token operator">></span><span class="token number">80</span>/tcp, :::8080-<span class="token operator">></span><span class="token number">80</span>/tcp   beautiful_mendeleev</code></pre>
 <p>We can then stop and delete our container if it is no longer needed, and the resources on the host shared as a volume
 will remain where they are:</p>
-<pre><code class="language-sh">morgan@morgan-server:~$ docker stop beautiful_mendeleev
-beautiful_mendeleev
-morgan@morgan-server:~$ docker rm beautiful_mendeleev
-beautiful_mendeleev
-</code></pre>
+<pre class="language-sh"><code class="language-sh">morgan@morgan-server:~$ <span class="token function">docker</span> stop beautiful_mendeleev<br>beautiful_mendeleev<br>morgan@morgan-server:~$ <span class="token function">docker</span> <span class="token function">rm</span> beautiful_mendeleev<br>beautiful_mendeleev</code></pre>
 <p>If we type <code>docker volume ls</code>, we will not have any volumes present. This is because the volume created before was a
 <strong>bind mount</strong>, this is an ephemeral volume which only exists while the container is bound to the directory
 on the host system; it is never given a name by default. When bind mounting, it is important to always specify an absolute path for the host machines directory
