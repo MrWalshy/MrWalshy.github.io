@@ -1,6 +1,7 @@
 ---
 layout: layouts/post.njk
 title: Dockerfiles
+thumbnail: /assets/images/devops/docker-whale.png
 description: This is an introduction to Dockerfiles
 date: 2023-02-02
 author: Morgan Walsh

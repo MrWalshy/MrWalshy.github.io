@@ -1,6 +1,7 @@
 ---
 layout: layouts/post.njk
 title: Docker intro
+thumbnail: /assets/images/devops/docker-whale.png
 description: This is an introduction to Docker
 date: 2023-01-31
 author: Morgan Walsh

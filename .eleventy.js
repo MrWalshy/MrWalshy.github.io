@@ -16,6 +16,16 @@ module.exports = function(eleventyConfig) {
     // add a new collection for the blog posts, all the markdown files in it
     eleventyConfig.addCollection("posts", collectionApi => collectionApi.getFilteredByGlob("src/blog/posts/**/*.md"));
 
+    // add a collection of all the tags in posts, used for category display on blog page
+    eleventyConfig.addCollection("blogTags", collectionApi => {
+        const tagsSet = new Set();
+        collectionApi.getFilteredByGlob("src/blog/posts/**/*.md").forEach(post => {
+            if (!post.data.tags) return;
+            post.data.tags.forEach(tag => tagsSet.add(tag));
+        });
+        return tagsSet;
+    });
+
     return {
         dir: {
             input: "src",

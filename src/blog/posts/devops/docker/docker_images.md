@@ -1,6 +1,7 @@
 ---
 layout: layouts/post.njk
 title: Docker images
+thumbnail: /assets/images/devops/docker-whale.png
 description: This is an introduction to Docker images
 date: 2023-01-02
 author: Morgan Walsh

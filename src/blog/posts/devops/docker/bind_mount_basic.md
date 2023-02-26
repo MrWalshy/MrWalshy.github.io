@@ -1,6 +1,7 @@
 ---
 layout: layouts/post.njk
 title: Docker Bind Mounting
+thumbnail: /assets/images/devops/docker-whale.png
 description: This is a tutorial on Bind Mounting in Docker
 date: 2023-02-01
 author: Morgan Walsh

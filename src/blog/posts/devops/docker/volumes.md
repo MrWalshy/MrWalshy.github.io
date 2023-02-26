@@ -1,7 +1,8 @@
 ---
 layout: layouts/post.njk
 title: Docker volumes
-description: This is an introduction to Docker
+thumbnail: /assets/images/devops/docker-whale.png
+description: This is an introduction to Docker Volumes, a way of persisting data outside of a containers lifecycle.
 date: 2023-02-03
 author: Morgan Walsh
 categories:
