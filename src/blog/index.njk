@@ -21,7 +21,7 @@ title: "Blog"
             </header>
             <ul>
                 {% for tag in collections.blogTags %}
-                    <li><b><a style="text-decoration: none" href="/blog/tag/{{ tag }}">{{ tag }}</a></b></li>
+                    <li><b><a style="text-decoration: none" href="/blog/tag/{{ tag | slugify }}">{{ tag }}</a></b></li>
                 {% endfor %}
             </ul>
         </aside>
