@@ -9,7 +9,18 @@
     <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
         <h1>{{ title }}</h1>
         <p><b>Created on</b>: <time>{{ page.date.toUTCString() }}</time></p>
+
+        {% if thumbnail %}
+            <div class="row w-100">
+                <div class="col-5 col-sm-12">
+                    <img 
+                        src="{{ thumbnail }}" 
+                        alt="thumbnail image" 
+                    />
+                </div>
+        {% endif %}
         
+        {% if thumbnail %}<div class="col-7 col-sm-12 pl-16 pl-sm-0">{% endif %}
         <h2>Tags</h2>
         <ul>
             {% for tag in tags %}
@@ -18,6 +29,10 @@
                 </li>
             {% endfor %}
         </ul>
+        {% if thumbnail %}</div></div>{% endif %}
+
+        <hr />
+
         {{ content | safe }}
     </div>
 {% endblock %}
