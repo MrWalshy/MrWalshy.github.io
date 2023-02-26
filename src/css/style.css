@@ -1091,6 +1091,18 @@ blockquote {
   .w-sm-100 {
     width: 100%;
   }
+
+  .pl-sm-0 {
+    padding-left: 0px;
+  }
+  
+  .pl-sm-8 {
+    padding-left: 8px;
+  }
+  
+  .pl-sm-16 {
+    padding-left: 16px;
+  }
 }
 
 @media screen and (max-width: 425px) {
