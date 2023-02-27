@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is a Data Stream?</title>
+<link rel="stylesheet" href="/css/style.css">
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/blog">Blog</a></li>
+        </ul>
+    </div>
+</nav>
+    
+    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
+
+</head>
+<body>
+    
+    
+    <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
+        <h1>What is a Data Stream?</h1>
+        <p><b>Created on</b>: <time>Mon, 27 Feb 2023 00:00:00 GMT</time></p>
+
+        
+            <div class="row w-100">
+                <div class="col-5 col-sm-12">
+                    <img 
+                        src="/assets/images/devops/editor-prompt.png" 
+                        alt="thumbnail image" 
+                    />
+                </div>
+        
+        
+        <div class="col-7 col-sm-12 pl-16 pl-sm-0">
+        <h2>Tags</h2>
+        <ul>
+            
+                <li>
+                    <a href="/blog/tag/linux">Linux</a>
+                </li>
+            
+        </ul>
+        </div></div>
+
+        <hr />
+
+        <p>A data stream is the fundamental data structure involved in making Linux terminals work, a <strong>data stream</strong> being some way of passing information between processes on the system. The fundamental data streams used by Linux include:</p>
+<ul>
+<li>Standard Input (stdin)</li>
+<li>Standard Output (stdout)</li>
+<li>Standard Error (stderr)</li>
+</ul>
+<h2>Standard Output</h2>
+<p><strong>Standard output</strong> is a file in Linux called <code>/dev/stdout</code>. All data sent to <code>stdout</code> goes to this file, this is then watched by the Linux shell application which will interpret and execute commands, display information, etc...</p>
+<h2>Standard Input</h2>
+<p><strong>Standard input</strong> is a file in Linux called <code>/dev/stdin</code>, this file listens for information just like <code>stdout</code> - the difference is that other applications or scripts can read from this file.</p>
+<p>We can manually get a line of input using the <code>read</code> command:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">read</span> line</code></pre>
+<p>This will then prompt us to enter a line of text and press enter, it is then stored in a variable called <code>line</code>. We can then output its content to standard output:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">echo</span> <span class="token variable">$line</span></code></pre>
+<h2>Standard Error</h2>
+<p><strong>Standard Error</strong> is a file in Linux called <code>/dev/stderr</code>, this file listens for information as well - specifically, information which indicates an error. This allows us to treat the error data in a separate manner to the non-error data, which could be redirecting errors to log files or printing it out in a different colour.</p>
+<h2>Piping a stream</h2>
+<p>We can pipe the <code>stdout</code> of one command to another command, converting it into <code>stdin</code>. We use the pipe symbol, <code>|</code>, for this. For example, we could feed the output of the <code>ls</code> command into the <code>grep</code> command to search for some specific file:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">ls</span> /dev <span class="token operator">|</span> <span class="token function">grep</span> sda</code></pre>
+<p>This takes the output of <code>ls /dev</code> and feeds it as standard input to the <code>grep sda</code> command. This might then give us output like:</p>
+<pre class="language-sh"><code class="language-sh">sda<br>sda1<br>sda2<br>sda3<br>sda4</code></pre>
+
+
+        
+        <script src="https://giscus.app/client.js"
+                data-repo="MrWalshy/MrWalshy.github.io"
+                data-repo-id="R_kgDOHQucNw"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOHQucN84CUeyo"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+
+
+    
+    <script src="/scripts/nav.js"></script>
+
+</body>
+</html>

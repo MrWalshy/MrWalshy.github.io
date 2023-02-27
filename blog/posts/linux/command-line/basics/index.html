@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The basics of the Linux Command Line</title>
+<link rel="stylesheet" href="/css/style.css">
+    <nav class="navbar row">
+    <button id="toggle" class="hamburger ml-auto"><span></span><span></span><span></span></button>
+    <div class="col-12">
+        <ul class="nav-content w-100 ml-auto mr-auto">
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/blog">Blog</a></li>
+        </ul>
+    </div>
+</nav>
+    
+    
+    <link rel="stylesheet" href="/css/theme/prism-atom-dark.css" />
+
+</head>
+<body>
+    
+    
+    <div class="p-16 w-60 w-md-80 w-sm-90 ml-auto mr-auto">
+        <h1>The basics of the Linux Command Line</h1>
+        <p><b>Created on</b>: <time>Mon, 27 Feb 2023 00:00:00 GMT</time></p>
+
+        
+            <div class="row w-100">
+                <div class="col-5 col-sm-12">
+                    <img 
+                        src="/assets/images/devops/editor-prompt.png" 
+                        alt="thumbnail image" 
+                    />
+                </div>
+        
+        
+        <div class="col-7 col-sm-12 pl-16 pl-sm-0">
+        <h2>Tags</h2>
+        <ul>
+            
+                <li>
+                    <a href="/blog/tag/linux">Linux</a>
+                </li>
+            
+        </ul>
+        </div></div>
+
+        <hr />
+
+        <p>In Linux distributions, we are given a shell which can interface with the operating system; this is a command-line shell. We normally access this through some kind of <strong>terminal</strong> application, a favourite of the Linux community is the <strong>Bash interpreter</strong>.</p>
+<p>When we first open a new terminal, we will see a prompt similar to the following:</p>
+<pre class="language-sh"><code class="language-sh">user@server:~$ </code></pre>
+<p>This is the command-prompt, it awaits us writing a command and pressing the Enter key to run it. Before the <code>@</code> is the name of the currently logged in user, after the <code>@</code> but before the colon is the host name of the server (computer) which the user is signed into. Following the colon is the current working directory (where we are in the file system), the tilde <code>~</code> represents the users home directory. After the current working directory is the prompt symbol, <code>$</code>, which is what the command we enter comes after:</p>
+<pre class="language-sh"><code class="language-sh">morgan@home-server:~$ <span class="token builtin class-name">echo</span> <span class="token string">"Hello world"</span></code></pre>
+<ul>
+<li><code>echo</code> is the name of a Linux command</li>
+<li>Commands are case-sensitive</li>
+</ul>
+<p>The <code>echo</code> command just displays the given output to wherever a thing called <em>standard out</em> is pointing, typically the console in which you enter the command. After running the command, we end up with a screen like the following:</p>
+<pre class="language-sh"><code class="language-sh">morgan@home-server:~$ <span class="token builtin class-name">echo</span> <span class="token string">"Hello world"</span><br>Hello world<br><br>morgan@home-server:~$ </code></pre>
+<p>Our command was executed and then the terminal returned to a prompt, waiting for us to input another command.</p>
+<p>If we then wanted to clear our terminal, so it appeared as if we had never typed anything into it, run the <code>clear</code> command:</p>
+<pre class="language-sh"><code class="language-sh">morgan@home-server:~$ <span class="token function">clear</span></code></pre>
+<h2>Multi-line commands</h2>
+<p>A command may span over multiple lines, in which case we need to somehow indicate this to the command prompt.</p>
+<p>If we enter a backslash at the end of a line, this will allow us to split the command over multiple lines:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">echo</span> <span class="token string">"Hello \<br>  world"</span></code></pre>
+<p>We can also use a <strong>HereDoc</strong> to indicate multiple-lines of input using the format:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token punctuation">[</span>COMMAND<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span><span class="token punctuation">[</span>-<span class="token punctuation">]</span> <span class="token string">'DELIMITER'</span><br>  HERE-DOC<br>DELIMITER</code></pre>
+<ul>
+<li>Line 1 has an optional command followed by the redirection operator <code>&lt;&lt;</code></li>
+<li>Any string can be used as the delimiter</li>
+<li>Using <code>&lt;&lt;-</code> strips leading tab characters, allowing indentation to be used - this does not strip whitespace characters.</li>
+<li>Whitespace is not allowed in front of the delimiter which indicates the end of the HereDoc</li>
+</ul>
+<p>Here is an example for writing multiple lines of text to a file:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">cat</span> <span class="token operator">&lt;&lt;-</span> <span class="token string">"EOF"<span class="token bash punctuation"> <span class="token operator">></span> file.txt</span><br>    This is my file<br>    with multiple lines of text.<br>EOF</span></code></pre>
+<p>We redirect the output of the <code>cat</code> command into <code>file.txt</code>, the <code>cat</code> command gets its input from the HereDoc.</p>
+<h2>Creating a directory</h2>
+<p>To create a new directory, use the <code>mkdir</code> command followed by the name(s) of the directory to create:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">mkdir</span> myDirectory1<br><span class="token function">mkdir</span> myDirectory2</code></pre>
+<h2>Creating a file</h2>
+<p>There are many ways to create a new file in Linux, the simplest is the <code>touch</code> command:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">touch</span> somefile.txt</code></pre>
+<p>This creates the file <code>somefile.txt</code>.</p>
+<p>We can also use the redirection operator for this purpose too:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token operator">></span> somefile.txt</code></pre>
+<p>We can provide input for the file before the redirection operator by specifying some command to run, but be aware this will overwrite any content in the file if it already exists:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">echo</span> <span class="token string">"Hello world"</span> <span class="token operator">></span> somefile.txt</code></pre>
+<p>What happens is the <code>echo</code> command takes in the string <code>&quot;Hello world&quot;</code> and outputs the text to standard output. It then feeds this as input (the <code>&gt;</code>) into a file called <code>somefile.txt</code>, which is created if it doesn't exist - or overwritten if it does exist.</p>
+<h2>Appending data to a file</h2>
+<p>We can use the redirection operator, <code>&gt;&gt;</code>, to append data to a file.</p>
+<p>For example, create the file:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token operator">></span> somefile.txt</code></pre>
+<p>We can then append text to this file multiple times:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token builtin class-name">echo</span> <span class="token number">1</span> <span class="token operator">>></span> somefile.txt<br><span class="token builtin class-name">echo</span> <span class="token number">2</span> <span class="token operator">>></span> somefile.txt</code></pre>
+<p>If we <code>cat somefile.txt</code> after running these commands, the following would be output to the console:</p>
+<pre class="language-sh"><code class="language-sh"><span class="token number">1</span><br><span class="token number">2</span></code></pre>
+
+
+        
+        <script src="https://giscus.app/client.js"
+                data-repo="MrWalshy/MrWalshy.github.io"
+                data-repo-id="R_kgDOHQucNw"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOHQucN84CUeyo"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+
+
+    
+    <script src="/scripts/nav.js"></script>
+
+</body>
+</html>
